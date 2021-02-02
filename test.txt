@@ -1,0 +1,20 @@
+class helloTest extends {
+    public static void main (String [])
+    {   
+        // .hahaha
+        int ;
+        boolean ;
+        if (true) {
+            while (false) {
+                &&<+-*.=,
+                !this
+            }
+        }
+        else {
+            555
+            new
+            System.out.println
+        }
+        return
+    }
+} 
