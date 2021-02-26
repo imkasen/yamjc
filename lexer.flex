@@ -1,72 +1,70 @@
 %top{
+    #include "node.h"
     #include "main.h"
-
-    #define YYSTYPE int
 }
-
-%option noyywrap
 
 %x COMMENT
 
+%option noyywrap nounput batch noinput stack
+
 %%
 
-"class"                    { cout << "Token class:              " << yytext << endl; }
-"public"                   { cout << "Token public:             " << yytext << endl; }
-"static"                   { cout << "Token static:             " << yytext << endl; }
-"void"                     { cout << "Token void:               " << yytext << endl; }
-"main"                     { cout << "Token main:               " << yytext << endl; }
-"String"                   { cout << "Token String:             " << yytext << endl; }
-"extends"                  { cout << "Token extends:            " << yytext << endl; }
-"length"                   { cout << "Token length:             " << yytext << endl; }
-"new"                      { cout << "Token new:                " << yytext << endl; }
-"this"                     { cout << "Token this:               " << yytext << endl; }
-"return"                   { cout << "Token return:             " << yytext << endl; }
+"class"                    { return yy::parser::make_CLASS(yytext); }
+"public"                   { return yy::parser::make_PUBLIC(yytext); }
+"static"                   { return yy::parser::make_STATIC(yytext); }
+"void"                     { return yy::parser::make_VOID(yytext); }
+"main"                     { return yy::parser::make_MAIN(yytext); }
+"String"                   { return yy::parser::make_STRING(yytext); }
+"extends"                  { return yy::parser::make_EXTENDS(yytext); }
+"length"                   { return yy::parser::make_LENGTH(yytext); }
+"new"                      { return yy::parser::make_NEW(yytext); }
+"this"                     { return yy::parser::make_THIS(yytext); }
+"return"                   { return yy::parser::make_RETURN(yytext); }
 
-"if"                       { cout << "Token if:                 " << yytext << endl; }
-"else"                     { cout << "Token else:               " << yytext << endl; }
-"while"                    { cout << "Token while:              " << yytext << endl; }
+"if"                       { return yy::parser::make_IF(yytext); }
+"else"                     { return yy::parser::make_ELSE(yytext); }
+"while"                    { return yy::parser::make_WHILE(yytext); }
 
-"System.out.println"       { cout << "Token System.out.println: " << yytext << endl; }
+"System.out.println"       { return yy::parser::make_SOPRINTLN(yytext); }
 
-"int"                      { cout << "Token int:                " << yytext << endl; }
-"boolean"                  { cout << "Token boolean:            " << yytext << endl; }
+"int"                      { return yy::parser::make_INT(yytext); }
+"boolean"                  { return yy::parser::make_BOOLEAN(yytext); }
 
-"&&"                       { cout << "Token and:                " << yytext << endl; }
-"||"                       { cout << "Token or:                 " << yytext << endl; }
-"!"                        { cout << "Token negation:           " << yytext << endl; }
+"&&"                       { return yy::parser::make_AND(yytext); }
+"||"                       { return yy::parser::make_OR(yytext); }
+"!"                        { return yy::parser::make_NOT(yytext); }
 
-"true"                     { cout << "Token true:               " << yytext << endl; }
-"false"                    { cout << "Token false:              " << yytext << endl; }
+"true"                     { return yy::parser::make_TRUE(yytext); }
+"false"                    { return yy::parser::make_FALSE(yytext); }
 
-"<"                        { cout << "Token lessthan:           " << yytext << endl; }
-">"                        { cout << "Token greatthan:          " << yytext << endl; }
+"<"                        { return yy::parser::make_LT(yytext); }
+">"                        { return yy::parser::make_GT(yytext); }
 
-"+"                        { cout << "Token add:                " << yytext << endl; }
-"-"                        { cout << "Token sub:                " << yytext << endl; }
-"*"                        { cout << "Token mul:                " << yytext << endl; }
-"/"                        { cout << "Token div:                " << yytext << endl; }
+"+"                        { return yy::parser::make_ADD(yytext); }
+"-"                        { return yy::parser::make_SUB(yytext); }
+"*"                        { return yy::parser::make_MUL(yytext); }
+"/"                        { return yy::parser::make_DIV(yytext); }
 
-"("                        { cout << "Token left parenthese:    " << yytext << endl; }
-")"                        { cout << "Token right parenthese:   " << yytext << endl; }
-"["                        { cout << "Token left bracket:       " << yytext << endl; }
-"]"                        { cout << "Token right bracket:      " << yytext << endl; }
-"{"                        { cout << "Token left brace:         " << yytext << endl; }
-"}"                        { cout << "Token right brace:        " << yytext << endl; }
+"("                        { return yy::parser::make_LPARENTHESE(yytext); }
+")"                        { return yy::parser::make_RPARENTHESE(yytext); }
+"["                        { return yy::parser::make_LBRACKET(yytext); }
+"]"                        { return yy::parser::make_RBRACKET(yytext); }
+"{"                        { return yy::parser::make_LBRACE(yytext); }
+"}"                        { return yy::parser::make_RBRACE(yytext); }
 
-[ \t]                      { /* space */ }
-\n                         { /* new line */ }
-";"                        { cout << "Token semicolon:          " << yytext << endl; }
-","                        { cout << "Token comma:              " << yytext << endl; }
-"="                        { cout << "Token assign:             " << yytext << endl; }
-"."                        { cout << "Token dot:                " << yytext << endl; }
+[ \t\n]+                   { /* space, new line */ }
+";"                        { return yy::parser::make_SEMI(yytext); }
+","                        { return yy::parser::make_COMMA(yytext); }
+"="                        { return yy::parser::make_ASSIGN(yytext); }
+"."                        { return yy::parser::make_DOT(yytext); }
 
 "//"                       { BEGIN(COMMENT); }
 <COMMENT>.*                { /* comment */ }
 <COMMENT>\n                { BEGIN(0); }
 
-[0-9]+                     { cout << "INTEGER_LITERAL:          " << yytext << endl; }
-[_a-zA-Z\$][_a-zA-Z0-9\$]* { cout << "IDENTIFIER:               " << yytext << endl; }
+0|[-]?[1-9][0-9]*          { return yy::parser::make_NUM(yytext); }
+[_a-zA-Z\$][_a-zA-Z0-9\$]* { return yy::parser::make_IDENTIFIER(yytext); }
 
-<<EOF>>                    { yyterminate(); }
+<<EOF>>                    { return yy::parser::make_END(); }
 
 %%
