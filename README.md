@@ -15,7 +15,8 @@ apt-get install build-essential graphviz flex bison
 
 ``` shell
 $ make
-$ ./compiler test/<file>
+$ ./compiler <file>
+$ make tree
 $ make clean
 ```
 

@@ -46,16 +46,22 @@
 
 %start Goal
 
-%type <Node *> Goal MainClass ClassDeclarations ClassDeclaration ClassExtendsDeclaration Declarations VarDeclaration MethodDeclaration
-%type <Node *> DeclarStates FormalParameterList Type Statement Expression ExpressionList PrimaryExpression Identifier
+%type <Node *> Goal MainClass 
+%type <Node *> ClassDeclarations ClassDeclaration ClassExtendsDeclaration Declarations VarDeclaration MethodDeclaration
+%type <Node *> Statements Statement
+%type <Node *> Expression ExpressionList PrimaryExpression
+%type <Node *> DeclarStates FormalParameterList Type Identifier
 
 %%
 
 Goal : MainClass              { $$ = new Node("Goal", ""); $$->children.push_back($1); root = $$; }
      | Goal ClassDeclarations { $$ = $1; $$->children.push_back($2); root = $$; }
+     | END                    { $$ = new Node("Goal", "EOF"); root = $$; }
      ;
 
-MainClass : CLASS Identifier LBRACE PUBLIC STATIC VOID MAIN LPARENTHESE STRING LBRACKET RBRACKET Identifier RPARENTHESE LBRACE Statement RBRACE RBRACE 
+MainClass : CLASS Identifier LBRACE PUBLIC STATIC VOID MAIN LPARENTHESE STRING LBRACKET RBRACKET Identifier RPARENTHESE LBRACE RBRACE RBRACE
+              { $$ = new Node("MainClass", ""); $$->children.push_back($2); $$->children.push_back($12); }
+          | CLASS Identifier LBRACE PUBLIC STATIC VOID MAIN LPARENTHESE STRING LBRACKET RBRACKET Identifier RPARENTHESE LBRACE DeclarStates RBRACE RBRACE 
               { $$ = new Node("MainClass", ""); $$->children.push_back($2); $$->children.push_back($12); $$->children.push_back($15); }
           ;
 
@@ -100,14 +106,18 @@ FormalParameterList : Type Identifier                           { $$ = new Node(
                     | FormalParameterList COMMA Type Identifier { $$ = $1; $$->children.push_back($3); $$->children.push_back($4); }
                     ;
 
-Type : INT LBRACKET RBRACKET { }
-     | BOOLEAN               { }
-     | INT                   { }
+Type : INT LBRACKET RBRACKET { $$ = new Node("Type", $1+$2+$3); }
+     | BOOLEAN               { $$ = new Node("Type", $1); }
+     | INT                   { $$ = new Node("Type", $1); }
      | Identifier            { $$ = new Node("Type", ""); $$->children.push_back($1); }
      ;
 
-Statement : LBRACE RBRACE                                                  { }
-          | LBRACE Statement RBRACE                                        { $$ = new Node("Statement", ""); $$->children.push_back($2); }
+Statements : Statement            { $$ = new Node("Statements", ""); $$->children.push_back($1); }
+           | Statements Statement { $$ = $1; $$->children.push_back($2); }
+           ;
+
+Statement : LBRACE RBRACE                                                  { $$ = new Node("Statement", "Empty"); }
+          | LBRACE Statements RBRACE                                       { $$ = new Node("Statement", ""); $$->children.push_back($2); }
           | Identifier ASSIGN Expression SEMI                              { $$ = new Node("Statement", ""); $$->children.push_back($1); $$->children.push_back($3); }
           | Identifier LBRACKET Expression RBRACKET ASSIGN Expression SEMI { $$ = new Node("Statement", ""); $$->children.push_back($1); $$->children.push_back($3); $$->children.push_back($6); }
           | IF LPARENTHESE Expression RPARENTHESE Statement ELSE Statement { $$ = new Node("Statement", ""); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($7); }
@@ -136,9 +146,9 @@ ExpressionList : Expression                      { $$->children.push_back($1); }
 
 PrimaryExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new Node("PrimaryExpression", ""); $$->children.push_back($4); }
                   | NEW Identifier LPARENTHESE RPARENTHESE { $$ = new Node("PrimaryExpression", ""); $$->children.push_back($2); }
-                  | NOT Expression                         { $$ = new Node("PrimaryExpression", ""); $$->children.push_back($2); }
                   | LPARENTHESE Expression RPARENTHESE     { $$ = new Node("PrimaryExpression", ""); $$->children.push_back($2); } 
                   | Identifier                             { $$ = new Node("PrimaryExpression", ""); $$->children.push_back($1); }
+                  | NOT Expression                         { $$ = new Node("PrimaryExpression", $1); $$->children.push_back($2); }
                   | NUM                                    { $$ = new Node("Number", $1); }
                   | TRUE                                   { $$ = new Node("Boolean", $1); }
                   | FALSE                                  { $$ = new Node("Boolean", $1); }
