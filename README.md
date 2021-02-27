@@ -1,7 +1,7 @@
-MiniJava Lexer
+MiniJava Compiler
 ======
 
-Mini Java Lexical Analysis
+Mini Java Compiler Practice.
 
 [BNF for MiniJava](https://www.cambridge.org/us/features/052182060X/grammar.html)
 
