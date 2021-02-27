@@ -140,7 +140,7 @@ Expression : PrimaryExpression                                                { 
            | Expression DOT Identifier LPARENTHESE ExpressionList RPARENTHESE { $$ = $1; $$->children.push_back($3); $$->children.push_back($5); }
            ;
 
-ExpressionList : Expression                      { $$->children.push_back($1); }
+ExpressionList : Expression                      { $$ = new Node("ExpressionList", ""); $$->children.push_back($1); }
                | ExpressionList COMMA Expression { $$ = $1; $$->children.push_back($3); }
                ;
 

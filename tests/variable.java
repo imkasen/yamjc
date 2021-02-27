@@ -28,6 +28,8 @@ class fuc {
     public int t3(int a, int b){
         int a;
         a = 1;
+        root = new Tree();
+	    ntb = root.Init(16);
 
         return a;
     }
