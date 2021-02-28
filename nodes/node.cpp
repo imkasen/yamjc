@@ -24,7 +24,7 @@ void Node::generate_tree(int &count, std::ofstream *outStream)
 
     for (auto i = children.begin(); i != children.end(); ++i)
     {
-        (*i) -> generate_tree(count, outStream);
-        *outStream << "n" << id << " -> n" << (*i) -> id << endl;
+        (*i)->generate_tree(count, outStream);
+        *outStream << "n" << id << " -> n" << (*i)->id << endl;
     }
 }

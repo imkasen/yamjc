@@ -1,5 +1,5 @@
 %top{
-    #include "node.h"
+    #include "nodes/node.h"
     #include "main.h"
 }
 

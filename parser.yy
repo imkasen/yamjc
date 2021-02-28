@@ -6,7 +6,7 @@
 %define api.token.constructor
 
 %code requires{
-  #include "node.h"
+  #include "nodes/nodes.h"
 }
 
 %code provides {
@@ -46,35 +46,41 @@
 
 %start Goal
 
-%type <Node *> Goal MainClass 
-%type <Node *> ClassDeclarations ClassDeclaration ClassExtendsDeclaration Declarations VarDeclaration MethodDeclaration
-%type <Node *> Statements Statement
-%type <Node *> Expression ExpressionList PrimaryExpression
-%type <Node *> DeclarStates FormalParameterList Type Identifier
+%type <Node*> ClassDeclarations Declarations DeclarStates Identifier
+
+%type <Goal*> Goal
+%type <MainClass*> MainClass 
+%type <ClassDeclaration*> ClassDeclaration ClassExtendsDeclaration 
+%type <VarDeclaration*> VarDeclaration
+%type <MethodDeclaration*> MethodDeclaration
+%type <FormalParameterList*> FormalParameterList
+%type <Type*> Type
+%type <Statement*> Statements Statement
+%type <Expression*> Expression ExpressionList PrimaryExpression
 
 %%
 
-Goal : MainClass              { $$ = new Node("Goal", ""); $$->children.push_back($1); root = $$; }
+Goal : MainClass              { $$ = new Goal("Goal", ""); $$->children.push_back($1); root = $$; }
      | Goal ClassDeclarations { $$ = $1; $$->children.push_back($2); root = $$; }
-     | END                    { $$ = new Node("Goal", "EOF"); root = $$; }
+     | END                    { $$ = new Goal("Goal", "EOF"); root = $$; }
      ;
 
 MainClass : CLASS Identifier LBRACE PUBLIC STATIC VOID MAIN LPARENTHESE STRING LBRACKET RBRACKET Identifier RPARENTHESE LBRACE RBRACE RBRACE
-              { $$ = new Node("MainClass", ""); $$->children.push_back($2); $$->children.push_back($12); }
+              { $$ = new MainClass("MainClass", ""); $$->children.push_back($2); $$->children.push_back($12); }
           | CLASS Identifier LBRACE PUBLIC STATIC VOID MAIN LPARENTHESE STRING LBRACKET RBRACKET Identifier RPARENTHESE LBRACE DeclarStates RBRACE RBRACE 
-              { $$ = new Node("MainClass", ""); $$->children.push_back($2); $$->children.push_back($12); $$->children.push_back($15); }
+              { $$ = new MainClass("MainClass", ""); $$->children.push_back($2); $$->children.push_back($12); $$->children.push_back($15); }
           ;
 
 ClassDeclarations : ClassDeclaration        { $$ = $1; }
                   | ClassExtendsDeclaration { $$ = $1; }
                   ;
 
-ClassDeclaration : CLASS Identifier LBRACE RBRACE              { $$ = new Node("ClassDeclaration", ""); $$->children.push_back($2); }
-                 | CLASS Identifier LBRACE Declarations RBRACE { $$ = new Node("ClassDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); }
+ClassDeclaration : CLASS Identifier LBRACE RBRACE              { $$ = new ClassDeclaration("ClassDeclaration", ""); $$->children.push_back($2); }
+                 | CLASS Identifier LBRACE Declarations RBRACE { $$ = new ClassDeclaration("ClassDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); }
                  ;
 
-ClassExtendsDeclaration : CLASS Identifier EXTENDS Identifier LBRACE RBRACE              { $$ = new Node("ClassDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); }
-                        | CLASS Identifier EXTENDS Identifier LBRACE Declarations RBRACE { $$ = new Node("ClassDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); $$->children.push_back($6); }
+ClassExtendsDeclaration : CLASS Identifier EXTENDS Identifier LBRACE RBRACE              { $$ = new ClassDeclaration("ClassDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); }
+                        | CLASS Identifier EXTENDS Identifier LBRACE Declarations RBRACE { $$ = new ClassDeclaration("ClassDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); $$->children.push_back($6); }
                         ;
 
 Declarations : VarDeclaration                 { $$ = new Node("Declarations", ""); $$->children.push_back($1); }
@@ -83,17 +89,17 @@ Declarations : VarDeclaration                 { $$ = new Node("Declarations", ""
              | Declarations MethodDeclaration { $$ = $1; $$->children.push_back($2); }
              ;
 
-VarDeclaration : Type Identifier SEMI { $$ = new Node("VarDeclaration", ""); $$->children.push_back($1); $$->children.push_back($2); }
+VarDeclaration : Type Identifier SEMI { $$ = new VarDeclaration("VarDeclaration", ""); $$->children.push_back($1); $$->children.push_back($2); }
                ;
 
 MethodDeclaration : PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE RETURN Expression SEMI RBRACE 
-                    { $$ = new Node("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($8); }
+                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($8); }
                   | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE RETURN Expression SEMI RBRACE
-                    { $$ = new Node("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($9); }
+                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($9); }
                   | PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE DeclarStates RETURN Expression SEMI RBRACE
-                    { $$ = new Node("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); $$->children.push_back($9); }
+                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); $$->children.push_back($9); }
                   | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE DeclarStates RETURN Expression SEMI RBRACE
-                    { $$ = new Node("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); $$->children.push_back($10); }
+                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); $$->children.push_back($10); }
                   ;
 
 DeclarStates : VarDeclaration              { $$ = new Node("DeclarStates", ""); $$->children.push_back($1); }
@@ -102,30 +108,30 @@ DeclarStates : VarDeclaration              { $$ = new Node("DeclarStates", ""); 
              | DeclarStates Statement      { $$ = $1; $$->children.push_back($2); }
              ;
 
-FormalParameterList : Type Identifier                           { $$ = new Node("FormalParameterList", ""); $$->children.push_back($1); $$->children.push_back($2); }
+FormalParameterList : Type Identifier                           { $$ = new FormalParameterList("FormalParameterList", ""); $$->children.push_back($1); $$->children.push_back($2); }
                     | FormalParameterList COMMA Type Identifier { $$ = $1; $$->children.push_back($3); $$->children.push_back($4); }
                     ;
 
-Type : INT LBRACKET RBRACKET { $$ = new Node("Type", $1+$2+$3); }
-     | BOOLEAN               { $$ = new Node("Type", $1); }
-     | INT                   { $$ = new Node("Type", $1); }
-     | Identifier            { $$ = new Node("Type", ""); $$->children.push_back($1); }
+Type : INT LBRACKET RBRACKET { $$ = new Type("Type", $1+$2+$3); }
+     | BOOLEAN               { $$ = new Type("Type", $1); }
+     | INT                   { $$ = new Type("Type", $1); }
+     | Identifier            { $$ = new Type("Type", ""); $$->children.push_back($1); }
      ;
 
-Statements : Statement            { $$ = new Node("Statements", ""); $$->children.push_back($1); }
+Statements : Statement            { $$ = new Statement("Statements", ""); $$->children.push_back($1); }
            | Statements Statement { $$ = $1; $$->children.push_back($2); }
            ;
 
-Statement : LBRACE RBRACE                                                  { $$ = new Node("Statement", "Empty"); }
-          | LBRACE Statements RBRACE                                       { $$ = new Node("Statement", ""); $$->children.push_back($2); }
-          | Identifier ASSIGN Expression SEMI                              { $$ = new Node("Statement", ""); $$->children.push_back($1); $$->children.push_back($3); }
-          | Identifier LBRACKET Expression RBRACKET ASSIGN Expression SEMI { $$ = new Node("Statement", ""); $$->children.push_back($1); $$->children.push_back($3); $$->children.push_back($6); }
-          | IF LPARENTHESE Expression RPARENTHESE Statement ELSE Statement { $$ = new Node("Statement", ""); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($7); }
-          | WHILE LPARENTHESE Expression RPARENTHESE Statement             { $$ = new Node("Statement", ""); $$->children.push_back($3); $$->children.push_back($5); }
-          | SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI              { $$ = new Node("Statement", ""); $$->children.push_back($3); }
+Statement : LBRACE RBRACE                                                  { $$ = new Statement("Statement", "Empty"); }
+          | LBRACE Statements RBRACE                                       { $$ = new Statement("Statement", ""); $$->children.push_back($2); }
+          | Identifier ASSIGN Expression SEMI                              { $$ = new Statement("Statement", ""); $$->children.push_back($1); $$->children.push_back($3); }
+          | Identifier LBRACKET Expression RBRACKET ASSIGN Expression SEMI { $$ = new Statement("Statement", ""); $$->children.push_back($1); $$->children.push_back($3); $$->children.push_back($6); }
+          | IF LPARENTHESE Expression RPARENTHESE Statement ELSE Statement { $$ = new Statement("Statement", ""); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($7); }
+          | WHILE LPARENTHESE Expression RPARENTHESE Statement             { $$ = new Statement("Statement", ""); $$->children.push_back($3); $$->children.push_back($5); }
+          | SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI              { $$ = new Statement("Statement", ""); $$->children.push_back($3); }
           ;
 
-Expression : PrimaryExpression                                                { $$ = new Node("Expression", ""); $$->children.push_back($1); } 
+Expression : PrimaryExpression                                                { $$ = new Expression("Expression", ""); $$->children.push_back($1); } 
            | Expression AND PrimaryExpression                                 { $$ = $1; $$->children.push_back($3); }
            | Expression OR PrimaryExpression                                  { $$ = $1; $$->children.push_back($3); }
            | Expression LT PrimaryExpression                                  { $$ = $1; $$->children.push_back($3); }
@@ -140,19 +146,19 @@ Expression : PrimaryExpression                                                { 
            | Expression DOT Identifier LPARENTHESE ExpressionList RPARENTHESE { $$ = $1; $$->children.push_back($3); $$->children.push_back($5); }
            ;
 
-ExpressionList : Expression                      { $$ = new Node("ExpressionList", ""); $$->children.push_back($1); }
+ExpressionList : Expression                      { $$ = new Expression("ExpressionList", ""); $$->children.push_back($1); }
                | ExpressionList COMMA Expression { $$ = $1; $$->children.push_back($3); }
                ;
 
-PrimaryExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new Node("PrimaryExpression", ""); $$->children.push_back($4); }
-                  | NEW Identifier LPARENTHESE RPARENTHESE { $$ = new Node("PrimaryExpression", ""); $$->children.push_back($2); }
-                  | LPARENTHESE Expression RPARENTHESE     { $$ = new Node("PrimaryExpression", ""); $$->children.push_back($2); } 
-                  | Identifier                             { $$ = new Node("PrimaryExpression", ""); $$->children.push_back($1); }
-                  | NOT Expression                         { $$ = new Node("PrimaryExpression", $1); $$->children.push_back($2); }
-                  | NUM                                    { $$ = new Node("Number", $1); }
-                  | TRUE                                   { $$ = new Node("Boolean", $1); }
-                  | FALSE                                  { $$ = new Node("Boolean", $1); }
-                  | THIS                                   { $$ = new Node("This", $1); }
+PrimaryExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new Expression("PrimaryExpression", ""); $$->children.push_back($4); }
+                  | NEW Identifier LPARENTHESE RPARENTHESE { $$ = new Expression("PrimaryExpression", ""); $$->children.push_back($2); }
+                  | LPARENTHESE Expression RPARENTHESE     { $$ = new Expression("PrimaryExpression", ""); $$->children.push_back($2); } 
+                  | Identifier                             { $$ = new Expression("PrimaryExpression", ""); $$->children.push_back($1); }
+                  | NOT Expression                         { $$ = new Expression("PrimaryExpression", $1); $$->children.push_back($2); }
+                  | NUM                                    { $$ = new Expression("Number", $1); }
+                  | TRUE                                   { $$ = new Expression("Boolean", $1); }
+                  | FALSE                                  { $$ = new Expression("Boolean", $1); }
+                  | THIS                                   { $$ = new Expression("This", $1); }
                   ;
 
 Identifier : IDENTIFIER { $$ = new Node("Identifier", $1); }

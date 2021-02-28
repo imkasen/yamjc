@@ -2,9 +2,10 @@ LEX = flex
 YACC = bison
 CC = g++
 OBJECT = compiler
+nodes = nodes/*.cpp
 
-$(OBJECT): lex.yy.c parser.tab.o main.cpp node.cpp
-		$(CC) -g -o $(OBJECT) parser.tab.o lex.yy.c main.cpp node.cpp -std=c++14
+$(OBJECT): lex.yy.c parser.tab.o main.cpp $(nodes)
+		$(CC) -g -o $(OBJECT) parser.tab.o lex.yy.c main.cpp $(nodes) -std=c++14
 
 parser.tab.o: parser.tab.cc
 		$(CC) -g -c parser.tab.cc -std=c++14

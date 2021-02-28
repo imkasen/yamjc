@@ -1,5 +1,5 @@
 #include "main.h"
-#include "node.h"
+#include "nodes/node.h"
 
 extern std::shared_ptr<Node> root;
 
