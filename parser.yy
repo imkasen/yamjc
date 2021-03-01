@@ -131,16 +131,16 @@ Statement : LBRACE RBRACE                                                  { $$ 
           | SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI              { $$ = new Statement("Statement", ""); $$->children.push_back($3); }
           ;
 
-Expression : PrimaryExpression                                                { $$ = new Expression("Expression", ""); $$->children.push_back($1); } 
-           | Expression AND PrimaryExpression                                 { $$ = $1; $$->children.push_back($3); }
-           | Expression OR PrimaryExpression                                  { $$ = $1; $$->children.push_back($3); }
-           | Expression LT PrimaryExpression                                  { $$ = $1; $$->children.push_back($3); }
-           | Expression GT PrimaryExpression                                  { $$ = $1; $$->children.push_back($3); }
-           | Expression ADD PrimaryExpression                                 { $$ = $1; $$->children.push_back($3); }
-           | Expression SUB PrimaryExpression                                 { $$ = $1; $$->children.push_back($3); }
-           | Expression MUL PrimaryExpression                                 { $$ = $1; $$->children.push_back($3); }
-           | Expression DIV PrimaryExpression                                 { $$ = $1; $$->children.push_back($3); }
-           | Expression LBRACKET PrimaryExpression RBRACKET                   { $$ = $1; $$->children.push_back($3); }
+Expression : PrimaryExpression                                                { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
+           | Expression AND Expression                                        { $$ = new Expression("AND_Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression OR Expression                                         { $$ = new Expression("OR_Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression LT Expression                                         { $$ = new Expression("LT_Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression GT Expression                                         { $$ = new Expression("GT_Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression ADD Expression                                        { $$ = new Expression("ADD_Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression SUB Expression                                        { $$ = new Expression("SUB_Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression MUL Expression                                        { $$ = new Expression("MUL_Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression DIV Expression                                        { $$ = new Expression("DIV_Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression LBRACKET Expression RBRACKET                          { $$ = $1; $$->children.push_back($3); }
            | Expression DOT LENGTH                                            { $$ = $1; }
            | Expression DOT Identifier LPARENTHESE RPARENTHESE                { $$ = $1; $$->children.push_back($3); }
            | Expression DOT Identifier LPARENTHESE ExpressionList RPARENTHESE { $$ = $1; $$->children.push_back($3); $$->children.push_back($5); }
