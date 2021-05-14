@@ -21,7 +21,7 @@ class QS{
 	aux01 = this.Print();
 	System.out.println(9999);
 	aux01 = size - 1 ;
-	aux01 = this.Sort(0,aux01);
+	aux01 = this.Sort(0, aux01);
 	aux01 = this.Print();
 	return 0 ;
     }
@@ -64,14 +64,14 @@ class QS{
 		number[i] = number[j] ;
 		number[j] = t ;
 		//aux03 = i + 1 ;
-		if ( j < (i+1)) cont01 = false ;
+		if ( j < (i + 1)) cont01 = false ;
 		else cont01 = true ;
 	    }
 	    number[j] = number[i] ;
 	    number[i] = number[right] ;
 	    number[right] = t ;
-	    nt = this.Sort(left,i-1);
-	    nt = this.Sort(i+1,right);
+	    nt = this.Sort(left,i - 1);
+	    nt = this.Sort(i + 1,right);
 	}
 	else nt = 0 ;
 	return 0 ;
