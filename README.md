@@ -8,7 +8,7 @@ Mini Java Compiler Practice.
 # Requirements
 
 ``` shell
-apt-get install build-essential graphviz flex bison
+apt install build-essential graphviz flex bison
 ```
 
 # Usage

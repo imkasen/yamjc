@@ -19,4 +19,4 @@ tree:
 		dot -T pdf tree.dot -o tree.pdf
 clean:
 		@rm -f parser.tab.* lex.yy.c* $(OBJECT) stack.hh tree.dot tree.pdf
-		@rm -R compiler.dSYM
+		# @rm -R compiler.dSYM

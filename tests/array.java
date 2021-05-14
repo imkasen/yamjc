@@ -11,6 +11,6 @@ class fuc extends func1 {
 	
 	    number[0] = 20;
 	
-	    return 0 ;	
+	    return 0;	
     }
 }
