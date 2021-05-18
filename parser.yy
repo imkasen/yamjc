@@ -57,6 +57,7 @@
 %type <Type*> Type
 %type <Statement*> Statements Statement
 %type <Expression*> Expression ExpressionList PrimaryExpression
+%type <Return*> Return
 
 %%
 
@@ -92,15 +93,18 @@ Declarations : VarDeclaration                 { $$ = new Node("Declarations", ""
 VarDeclaration : Type Identifier SEMI { $$ = new VarDeclaration("VarDeclaration", ""); $$->children.push_back($1); $$->children.push_back($2); }
                ;
 
-MethodDeclaration : PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE RETURN Expression SEMI RBRACE 
-                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($8); }
-                  | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE RETURN Expression SEMI RBRACE
-                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($9); }
-                  | PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE DeclarStates RETURN Expression SEMI RBRACE
-                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); $$->children.push_back($9); }
-                  | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE DeclarStates RETURN Expression SEMI RBRACE
-                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); $$->children.push_back($10); }
+MethodDeclaration : PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE Return SEMI RBRACE 
+                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); }
+                  | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE Return SEMI RBRACE
+                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); }
+                  | PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE DeclarStates Return SEMI RBRACE
+                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); $$->children.push_back($8); }
+                  | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE DeclarStates Return SEMI RBRACE
+                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); $$->children.push_back($9); }
                   ;
+
+Return : RETURN Expression { $$ = new Return("Return", ""); $$->children.push_back($2); }
+       ;
 
 DeclarStates : VarDeclaration              { $$ = new Node("DeclarStates", ""); $$->children.push_back($1); }
              | Statement                   { $$ = new Node("DeclarStates", ""); $$->children.push_back($1); }
