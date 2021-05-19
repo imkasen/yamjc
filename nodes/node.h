@@ -23,6 +23,7 @@ class Node
 		Node(string t, string v);
 
 		void print_tree(int depth = 0);
+		void save_tree(std::ofstream *outStream, int depth = 0);
 		void generate_tree(int &count, std::ofstream *outStream);
 };
 
