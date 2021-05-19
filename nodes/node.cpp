@@ -29,7 +29,10 @@ void Node::save_tree(std::ofstream *outStream, int depth)
 void Node::generate_tree(int &count, std::ofstream *outStream)
 {
     id = ++count;
-    *outStream << "n" << id << " [label=\"" << type << ":" << value << "\"];" << endl;
+    if (value != "")
+        *outStream << "n" << id << " [label=\"" << type << ":" << value << "\"];" << endl;
+    else
+        *outStream << "n" << id << " [label=\"" << type << "\"];" << endl;
 
     for (auto i = children.begin(); i != children.end(); ++i)
     {
