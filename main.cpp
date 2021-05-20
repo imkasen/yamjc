@@ -1,5 +1,5 @@
 #include "main.h"
-#include "nodes/node.h"
+#include "ast/node.h"
 
 extern std::shared_ptr<Node> root;
 
@@ -34,13 +34,13 @@ int main(int argc, char* argv[])
     outStream.close();
 
     // print AST in cmd
-    std::cout << "Built a parse-tree:" << std::endl;
-    root->print_tree();
+    // std::cout << "Built a parse-tree:" << std::endl;
+    // root->print_tree();
 
     // generate AST.txt
     std::ofstream outStream2;
     outStream2.open("tree.txt", std::ios::out);
-    outStream2 << "Generate a parse-tree.txt:" << std::endl;
+    outStream2 << "Built a parse-tree in txt:" << std::endl;
     root->save_tree(&outStream2);
     outStream2.close();
 

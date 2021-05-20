@@ -6,7 +6,7 @@
 %define api.token.constructor
 
 %code requires{
-  #include "nodes/nodes.h"
+  #include "ast/nodes.h"
 }
 
 %code provides {
