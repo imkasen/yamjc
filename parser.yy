@@ -125,13 +125,13 @@ Statements : Statement            { $$ = new Statement("Statements", ""); $$->ch
            | Statements Statement { $$ = $1; $$->children.push_back($2); }
            ;
 
-Statement : LBRACE RBRACE                                                  { $$ = new Statement("Statement", "Empty"); }
+Statement : LBRACE RBRACE                                                  { $$ = new Statement("Statement", "EMPTY"); }
           | LBRACE Statements RBRACE                                       { $$ = new Statement("Statement", ""); $$->children.push_back($2); }
           | Identifier ASSIGN Expression SEMI                              { $$ = new Statement("Statement", "="); $$->children.push_back($1); $$->children.push_back($3); }
           | Identifier LBRACKET Expression RBRACKET ASSIGN Expression SEMI { $$ = new Statement("Statement", "="); $$->children.push_back($1); $$->children.push_back($3); $$->children.push_back($6); }
           | IF LPARENTHESE Expression RPARENTHESE Statement ElseStatement  { $$ = new Statement("Statement", "IF"); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($6); }
           | WHILE LPARENTHESE Expression RPARENTHESE Statement             { $$ = new Statement("Statement", "WHILE"); $$->children.push_back($3); $$->children.push_back($5); }
-          | SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI              { $$ = new Statement("Statement", "Print"); $$->children.push_back($3); }
+          | SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI              { $$ = new Statement("Statement", "S.O.PRINTLN"); $$->children.push_back($3); }
           ;
 
 ElseStatement : ELSE Statement { $$ = new Statement("Statement", "ELSE"); $$->children.push_back($2); }
@@ -156,15 +156,15 @@ ExpressionList : Expression                      { $$ = new Expression("Expressi
                | ExpressionList COMMA Expression { $$ = $1; $$->children.push_back($3); }
                ;
 
-PrimaryExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new Expression("PrimaryExpression", ""); $$->children.push_back($4); }
-                  | NEW Identifier LPARENTHESE RPARENTHESE { $$ = new Expression("PrimaryExpression", ""); $$->children.push_back($2); }
+PrimaryExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new Expression("PrimaryExpression", "NEW"); $$->children.push_back($4); }
+                  | NEW Identifier LPARENTHESE RPARENTHESE { $$ = new Expression("PrimaryExpression", "NEW"); $$->children.push_back($2); }
                   | LPARENTHESE Expression RPARENTHESE     { $$ = new Expression("PrimaryExpression", ""); $$->children.push_back($2); } 
                   | Identifier                             { $$ = new Expression("PrimaryExpression", ""); $$->children.push_back($1); }
                   | NOT Expression                         { $$ = new Expression("PrimaryExpression", $1); $$->children.push_back($2); }
                   | NUM                                    { $$ = new Expression("Number", $1); }
                   | TRUE                                   { $$ = new Expression("Boolean", $1); }
                   | FALSE                                  { $$ = new Expression("Boolean", $1); }
-                  | THIS                                   { $$ = new Expression("This", $1); }
+                  | THIS                                   { $$ = new Expression("This", ""); }
                   ;
 
 Identifier : IDENTIFIER { $$ = new Node("Identifier", $1); }
