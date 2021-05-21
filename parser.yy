@@ -46,7 +46,7 @@
 
 %start Goal
 
-%type <Node*> ClassDeclarations Declarations DeclarStates Identifier
+%type <Node*> ClassDeclarations Declarations DeclarStates Identifier Return
 
 %type <Goal*> Goal
 %type <MainClass*> MainClass 
@@ -57,7 +57,6 @@
 %type <Type*> Type
 %type <Statement*> Statements Statement
 %type <Expression*> Expression ExpressionList PrimaryExpression
-%type <Return*> Return
 
 %%
 
@@ -103,7 +102,7 @@ MethodDeclaration : PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE Return
                     { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); $$->children.push_back($9); }
                   ;
 
-Return : RETURN Expression { $$ = new Return("Return", ""); $$->children.push_back($2); }
+Return : RETURN Expression { $$ = new Node("Return", ""); $$->children.push_back($2); }
        ;
 
 DeclarStates : VarDeclaration              { $$ = new Node("DeclarStates", ""); $$->children.push_back($1); }
