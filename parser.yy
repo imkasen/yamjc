@@ -55,7 +55,7 @@
 %type <MethodDeclaration*> MethodDeclaration
 %type <FormalParameterList*> FormalParameterList
 %type <Type*> Type
-%type <Statement*> Statements Statement
+%type <Statement*> Statements Statement ElseStatement
 %type <Expression*> Expression ExpressionList PrimaryExpression
 
 %%
@@ -129,10 +129,13 @@ Statement : LBRACE RBRACE                                                  { $$ 
           | LBRACE Statements RBRACE                                       { $$ = new Statement("Statement", ""); $$->children.push_back($2); }
           | Identifier ASSIGN Expression SEMI                              { $$ = new Statement("Statement", "="); $$->children.push_back($1); $$->children.push_back($3); }
           | Identifier LBRACKET Expression RBRACKET ASSIGN Expression SEMI { $$ = new Statement("Statement", "="); $$->children.push_back($1); $$->children.push_back($3); $$->children.push_back($6); }
-          | IF LPARENTHESE Expression RPARENTHESE Statement ELSE Statement { $$ = new Statement("Statement", "IF"); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($7); }
+          | IF LPARENTHESE Expression RPARENTHESE Statement ElseStatement  { $$ = new Statement("Statement", "IF"); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($6); }
           | WHILE LPARENTHESE Expression RPARENTHESE Statement             { $$ = new Statement("Statement", "WHILE"); $$->children.push_back($3); $$->children.push_back($5); }
           | SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI              { $$ = new Statement("Statement", "Print"); $$->children.push_back($3); }
           ;
+
+ElseStatement : ELSE Statement { $$ = new Statement("Statement", "ELSE"); $$->children.push_back($2); }
+              ;
 
 Expression : PrimaryExpression                                                { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
            | Expression AND Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
