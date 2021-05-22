@@ -147,7 +147,7 @@ Expression : PrimaryExpression                                                { 
            | Expression MUL Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression DIV Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression LBRACKET Expression RBRACKET                          { $$ = $1; $$->children.push_back($3); }
-           | Expression DOT LENGTH                                            { $$ = $1; }
+           | Expression DOT LENGTH                                            { $$ = new Expression("Expression", $3); $$->children.push_back($1); }
            | Expression DOT Identifier LPARENTHESE RPARENTHESE                { $$ = $1; $$->children.push_back($3); }
            | Expression DOT Identifier LPARENTHESE ExpressionList RPARENTHESE { $$ = $1; $$->children.push_back($3); $$->children.push_back($5); }
            ;
