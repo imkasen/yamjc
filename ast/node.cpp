@@ -8,35 +8,35 @@ Node::Node() // Bison needs this
 
 Node::Node(string t, string v) : type(t), value(v) {}
 
-void Node::print_tree(int depth)
+void Node::printTree(int depth)
 {
     for (int i = 0; i < depth; ++i)
         cout << "  ";
-    cout << type << ":" << value << endl;
+    cout << this->type << ":" << this->value << endl;
     for (auto i = children.begin(); i != children.end(); ++i)
-        (*i)->print_tree(depth + 1);
+        (*i)->printTree(depth + 1);
 }
 
-void Node::save_tree(std::ofstream *outStream, int depth)
+void Node::saveTree(std::ofstream *outStream, int depth)
 {
     for (int i = 0; i < depth; ++i)
         *outStream << "  ";
-    *outStream << type << ":" << value << endl;
+    *outStream << this->type << ":" << this->value << endl;
     for (auto i = children.begin(); i != children.end(); ++i)
-        (*i)->save_tree(outStream, depth + 1);
+        (*i)->saveTree(outStream, depth + 1);
 }
 
-void Node::generate_tree(int &count, std::ofstream *outStream)
+void Node::generateTree(int &count, std::ofstream *outStream)
 {
-    id = ++count;
+    this->id = ++count;
     if (value != "")
-        *outStream << "n" << id << " [label=\"" << type << ":" << value << "\"];" << endl;
+        *outStream << "n" << this->id << " [label=\"" << this->type << ":" << this->value << "\"];" << endl;
     else
-        *outStream << "n" << id << " [label=\"" << type << "\"];" << endl;
+        *outStream << "n" << this->id << " [label=\"" << this->type << "\"];" << endl;
 
     for (auto i = children.begin(); i != children.end(); ++i)
     {
-        (*i)->generate_tree(count, outStream);
-        *outStream << "n" << id << " -> n" << (*i)->id << endl;
+        (*i)->generateTree(count, outStream);
+        *outStream << "n" << this->id << " -> n" << (*i)->id << endl;
     }
 }

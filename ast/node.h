@@ -14,17 +14,19 @@ using std::endl;
 
 class Node
 {
-	public:
+	private:
 		int id;
 		string type, value;
+
+	public:
 		std::list<Node *> children;
 
 		Node();
 		Node(string t, string v);
 
-		void print_tree(int depth = 0);
-		void save_tree(std::ofstream *outStream, int depth = 0);
-		void generate_tree(int &count, std::ofstream *outStream);
+		void printTree(int depth = 0);
+		void saveTree(std::ofstream *outStream, int depth = 0);
+		void generateTree(int &count, std::ofstream *outStream);
 };
 
 #endif

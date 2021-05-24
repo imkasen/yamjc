@@ -29,19 +29,19 @@ int main(int argc, char* argv[])
     outStream.open("tree.dot", std::ios::out);
     int count = 0;
     outStream << "digraph {" << std::endl;
-    root->generate_tree(count, &outStream);
+    root->generateTree(count, &outStream);
     outStream << "}" << std::endl;
     outStream.close();
 
     // print AST in cmd
     // std::cout << "Built a parse-tree:" << std::endl;
-    // root->print_tree();
+    // root->printTree();
 
     // generate AST.txt
     std::ofstream outStream2;
     outStream2.open("tree.txt", std::ios::out);
     outStream2 << "Built a parse-tree in txt:" << std::endl;
-    root->save_tree(&outStream2);
+    root->saveTree(&outStream2);
     outStream2.close();
 
     //Build symbol table
