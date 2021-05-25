@@ -14,7 +14,7 @@ using std::endl;
 
 class Node
 {
-	private:
+	protected:
 		int id;
 		string type, value;
 
