@@ -15,7 +15,7 @@ parser.tab.cc: parser.yy
 
 lex.yy.c: lexer.flex parser.tab.cc
 		$(LEX) lexer.flex
-tree: 
-		dot -T svg tree.dot -o tree.svg
+tree: # generate ast
+		dot -T svg ast.dot -o ast.svg
 clean:
-		@rm -f parser.tab.* lex.yy.c* $(OBJECT) stack.hh tree.*
+		@rm -f parser.tab.* lex.yy.c* $(OBJECT) stack.hh ast.*

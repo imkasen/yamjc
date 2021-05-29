@@ -24,9 +24,9 @@ class Node
 		Node();
 		Node(string t, string v);
 
-		void printTree(int depth = 0);
-		void saveTree(std::ofstream *outStream, int depth = 0);
-		void generateTree(int &count, std::ofstream *outStream);
+		void printAST(int depth = 0);
+		void saveAST(std::ofstream *outStream, int depth = 0);
+		void generateAST(int &count, std::ofstream *outStream);
 };
 
 #endif

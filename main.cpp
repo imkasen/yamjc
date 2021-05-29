@@ -26,22 +26,22 @@ int main(int argc, char* argv[])
 
     // generate AST.dot
     std::ofstream outStream;
-    outStream.open("tree.dot", std::ios::out);
+    outStream.open("ast.dot", std::ios::out);
     int count = 0;
     outStream << "digraph {" << std::endl;
-    root->generateTree(count, &outStream);
+    root->generateAST(count, &outStream);
     outStream << "}" << std::endl;
     outStream.close();
 
     // print AST in cmd
     // std::cout << "Built a parse-tree:" << std::endl;
-    // root->printTree();
+    // root->printAST();
 
     // generate AST.txt
     std::ofstream outStream2;
-    outStream2.open("tree.txt", std::ios::out);
-    outStream2 << "Built a parse-tree in txt:" << std::endl;
-    root->saveTree(&outStream2);
+    outStream2.open("ast.txt", std::ios::out);
+    outStream2 << "Built a parse-tree in text:" << std::endl;
+    root->saveAST(&outStream2);
     outStream2.close();
 
     //Build symbol table
