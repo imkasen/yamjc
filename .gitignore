@@ -1,3 +1,12 @@
+# generated compiler files
+
+parser.tab.*
+lex.yy.c*
+compiler
+stack.hh
+*.dot
+*.svg
+*.txt
 
 # Created macos,linux,windows,vim,visualstudiocode,cmake,jetbrains+all
 
