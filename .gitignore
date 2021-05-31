@@ -4,9 +4,13 @@ parser.tab.*
 lex.yy.c*
 compiler
 stack.hh
-*.dot
-*.svg
-*.txt
+/*.dot
+/*.svg
+/*.txt
+
+# CMake
+!CMakeLists.txt
+/build/
 
 # Created macos,linux,windows,vim,visualstudiocode,cmake,jetbrains+all
 
