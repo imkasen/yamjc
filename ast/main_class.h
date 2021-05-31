@@ -5,9 +5,9 @@
 
 class MainClass : public Node
 {
-    public:
-        MainClass();
-        MainClass(string t, string v);
+public:
+    MainClass();
+    MainClass(string t, string v);
 };
 
 #endif

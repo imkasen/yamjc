@@ -5,9 +5,9 @@
 
 class Expression : public Node
 {
-    public:
-        Expression();
-        Expression(string t, string v);
+public:
+    Expression();
+    Expression(string t, string v);
 };
 
 #endif

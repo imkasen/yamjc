@@ -5,9 +5,9 @@
 
 class VarDeclaration : public Node
 {
-    public:
-        VarDeclaration();
-        VarDeclaration(string t, string v);
+public:
+    VarDeclaration();
+    VarDeclaration(string t, string v);
 };
 
 #endif

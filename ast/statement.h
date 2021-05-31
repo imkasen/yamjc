@@ -5,9 +5,9 @@
 
 class Statement : public Node
 {
-    public:
-        Statement();
-        Statement(string t, string v);
+public:
+    Statement();
+    Statement(string t, string v);
 };
 
 #endif

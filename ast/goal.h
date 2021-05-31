@@ -5,9 +5,9 @@
 
 class Goal : public Node
 {
-    public:
-        Goal();
-        Goal(string t, string v);
+public:
+    Goal();
+    Goal(string t, string v);
 };
 
 #endif

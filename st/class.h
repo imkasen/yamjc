@@ -7,21 +7,21 @@
 
 class Class : public Record
 {
-    private:
-        string record = "class";
+private:
+    string record = "class";
 
-    protected:
-        map<string, Variable> variables;
-        map<string, Method> methods;
+protected:
+    map<string, Variable> variables;
+    map<string, Method> methods;
 
-    public:
-        Class();
-        Class(map<string, Variable> variables, map<string, Method> methods);
+public:
+    Class();
+    Class(map<string, Variable> variables, map<string, Method> methods);
 
-        void addVariable();
-        void addMethod();
-        Variable lookupVariable();
-        Method lookupMethod();
+    void addVariable();
+    void addMethod();
+    Variable lookupVariable();
+    Method lookupMethod();
 };
 
 #endif

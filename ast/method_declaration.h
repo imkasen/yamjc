@@ -5,9 +5,9 @@
 
 class MethodDeclaration : public Node
 {
-    public:
-        MethodDeclaration();
-        MethodDeclaration(string t, string v);
+public:
+    MethodDeclaration();
+    MethodDeclaration(string t, string v);
 };
 
 #endif

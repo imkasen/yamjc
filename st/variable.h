@@ -5,12 +5,12 @@
 
 class Variable : public Record
 {
-    private:
-        string record = "variable";
+private:
+    string record = "variable";
 
-    public:
-        Variable();
-        Variable(string id, string type);
+public:
+    Variable();
+    Variable(string id, string type);
 };
 
 #endif

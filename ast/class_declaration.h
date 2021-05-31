@@ -5,9 +5,9 @@
 
 class ClassDeclaration : public Node
 {
-    public:
-        ClassDeclaration();
-        ClassDeclaration(string t, string v);
+public:
+    ClassDeclaration();
+    ClassDeclaration(string t, string v);
 };
 
 #endif

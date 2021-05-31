@@ -5,9 +5,9 @@
 
 class FormalParameterList : public Node
 {
-    public:
-        FormalParameterList();
-        FormalParameterList(string t, string v);
+public:
+    FormalParameterList();
+    FormalParameterList(string t, string v);
 };
 
 #endif

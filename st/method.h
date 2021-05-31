@@ -9,19 +9,19 @@ using std::map;
 
 class Method : public Record
 {
-    private:
-        string record = "method";
+private:
+    string record = "method";
 
-    protected:
-        map<string, Variable> parameters;
-        map<string, Variable> variables;
+protected:
+    map<string, Variable> parameters;
+    map<string, Variable> variables;
     
-    public:
-        Method();
-        Method(map<string, Variable> parameters, map<string, Variable> variables);
+public:
+    Method();
+    Method(map<string, Variable> parameters, map<string, Variable> variables);
         
-        void addVariable();
-        void addParameter();
+    void addVariable();
+    void addParameter();
 };
 
 
