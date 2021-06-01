@@ -22,6 +22,10 @@ public:
 
     void setId(string id);
     void setType(string type);
+    string getId();
+    string getType();
+    string getRecord();
+    
     void printRecord();
 };
 

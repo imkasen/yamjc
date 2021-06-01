@@ -1,27 +1,22 @@
 #ifndef METHOD_H
 #define METHOD_H
 
-#include "record.h"
 #include "variable.h"
 
-#include <map>
-using std::map;
-
-class Method : public Record
+class Method : public Variable
 {
 private:
     string record = "method";
 
 protected:
-    map<string, Variable> parameters;
-    map<string, Variable> variables;
+    unordered_map<string, Variable> parameters;
     
 public:
     Method();
-    Method(map<string, Variable> parameters, map<string, Variable> variables);
-        
-    void addVariable();
-    void addParameter();
+    Method(string id, string type);
+
+    void addParameter(Variable parameter);
+    Variable lookupParameter(string name);
 };
 
 
