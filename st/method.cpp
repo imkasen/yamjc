@@ -13,7 +13,7 @@ void Method::addParameter(Variable parameter)
     }
     else
     {
-        std::cerr << "The parameter" << parameter.getId() << " already exists!" << endl;
+        std::cerr << "The parameter " << parameter.getId() << " already exists!" << endl;
     }
 }
 

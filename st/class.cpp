@@ -13,7 +13,7 @@ void Class::addMethod(Method method)
     }
     else
     {
-        std::cerr << "The method" << method.getId() << " already exists!" << endl;
+        std::cerr << "The method " << method.getId() << " already exists!" << endl;
     }
 }
 

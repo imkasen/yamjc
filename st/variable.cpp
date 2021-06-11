@@ -13,7 +13,7 @@ void Variable::addVariable(Variable variable)
     }
     else 
     {
-        std::cerr << "The variable" << variable.getId() << " already exists!" << endl;
+        std::cerr << "The variable " << variable.getId() << " already exists!" << endl;
     }
 }
 
