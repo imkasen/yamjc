@@ -24,14 +24,14 @@ apt install build-essential graphviz flex bison
 
 ``` shell
 $ make
-$ ./compiler <file>
-$ make tree
+$ ./compiler <file_path>
+$ make ast  # generate the abstract syntax tree
 $ make clean
 ```
 
 # Bug
 
-* Make sure to leave a space after the minus sign, otherwise it will be recognized as a negative sign
+* Make sure to leave a space after the minus sign, otherwise it will be recognized as a negative sign. (Caused by insufficient regular expressions in the flex file)
   ``` Java
   1-1 // error, recognized as 1 and -1
   1 - 1 // recognized as the subtraction
@@ -39,5 +39,5 @@ $ make clean
 
 # LICENSE
 
-GPL v3
+GNU GPL v3
 
