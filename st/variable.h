@@ -3,8 +3,8 @@
 
 #include "record.h"
 
-#include <unordered_map>
-using std::unordered_map;
+#include <map>
+using std::map;
 
 class Variable : public Record
 {
@@ -12,7 +12,7 @@ private:
     string record = "variable";
 
 protected:
-    unordered_map<string, Variable> variables;
+    map<string, Variable> variables;
 
 public:
     Variable();

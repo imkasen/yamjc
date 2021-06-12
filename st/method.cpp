@@ -6,12 +6,8 @@ Method::Method(string id, string type) : Variable(id, type) {}
 
 void Method::addParameter(Variable parameter)
 {
-    auto iterator = this->parameters.find(parameter.getId());
-    if (iterator == this->parameters.end()) // does not exist
-    {
-        this->parameters.insert({parameter.getId(), parameter});
-    }
-    else
+    auto ret = this->parameters.insert(std::pair<string, Variable>(parameter.getId(), parameter));
+    if (!ret.second && ret.first->first == parameter.getId()) // false
     {
         std::cerr << "The parameter " << parameter.getId() << " already exists!" << endl;
     }

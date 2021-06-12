@@ -9,7 +9,7 @@ private:
     string record = "class";
 
 protected:
-    unordered_map<string, Method> methods;
+    map<string, Method> methods;
 
 public:
     Class();

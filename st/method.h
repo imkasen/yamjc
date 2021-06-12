@@ -9,7 +9,7 @@ private:
     string record = "method";
 
 protected:
-    unordered_map<string, Variable> parameters;
+    map<string, Variable> parameters;
     
 public:
     Method();

@@ -6,12 +6,8 @@ Class::Class(string id, string type) : Variable(id, type) {}
 
 void Class::addMethod(Method method)
 {
-    auto iterator = this->methods.find(method.getId());
-    if (iterator == this->methods.end()) // does not exist
-    {
-        this->methods.insert({method.getId(), method});
-    }
-    else
+    auto ret = this->methods.insert(std::pair<string, Method>(method.getId(), method));
+    if (!ret.second && ret.first->first == method.getId()) // false
     {
         std::cerr << "The method " << method.getId() << " already exists!" << endl;
     }
