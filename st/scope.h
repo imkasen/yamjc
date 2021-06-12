@@ -4,23 +4,28 @@
 #include "record.h"
 
 #include <list>
-#include <unordered_map>
+#include <map>
 using std::list;
-using std::unordered_map;
+using std::map;
 
 class Scope
 {
 protected:
-    int next = 0; // next child to visit
-    Scope parentScope; // parent scope
-    list<Scope> childrenScopes; // children scopes
-    unordered_map<string, Record> records; // symbol to record map
+    int next = 0;                // next child to visit
+    Scope parentScope;           // parent scope
+    list<Scope> childrenScopes;  // children scopes
+    map<string, Record> records; // symbol to record map
 
 public:
-    Scope nextChild();
-    Record lookup(string key);
-    void resetScope();
+    Scope();
 
+    Scope nextChild();
+    Scope getParentScope();
+
+    Record lookupRecord(string key);
+    void addRecord(string, Record);
+    void resetScope();
+    void printScope();
 };
 
 #endif

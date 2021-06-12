@@ -1,5 +1,7 @@
 #include "scope.h"
 
+Scope::Scope() {}
+
 Scope Scope::nextChild()
 {
     Scope nextChild;
@@ -16,8 +18,12 @@ Scope Scope::nextChild()
     }
 }
 
-Record Scope::lookup(string key)
+Scope Scope::getParentScope()
 {
+
+}
+
+Record Scope::lookupRecord(string key) {
     if (records.containsKey(key)) // does it exist in the current scope?
     {
         return record.get(key);
@@ -35,6 +41,11 @@ Record Scope::lookup(string key)
     }
 }
 
+void Scope::addRecord(string, Record)
+{
+
+}
+
 void Scope::resetScope()
 {
     next = 0;
@@ -42,4 +53,9 @@ void Scope::resetScope()
     {
         children.get(i).resetScope();
     }
+}
+
+void Scope::printScope()
+{
+
 }
