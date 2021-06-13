@@ -16,10 +16,9 @@
 %code{
   #include "main.h"
   
-  Node* root;
+  Node *root;
 
   extern int node_id;
-  
 }
 
 %token <std::string> CLASS PUBLIC STATIC VOID MAIN STRING EXTENDS LENGTH NEW THIS RETURN

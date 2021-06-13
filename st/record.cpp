@@ -2,8 +2,8 @@
 
 Record::Record()
 {
-    id = "uninitialised";
-    type = "uninitialised";
+    this->id = "uninitialised";
+    this->type = "uninitialised";
 }
 
 Record::Record(string id, string type) : id(id), type(type) {}
