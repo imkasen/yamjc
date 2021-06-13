@@ -20,6 +20,13 @@ Mini-Java Compiler Practice.
 apt install build-essential graphviz flex bison
 ```
 
+# Compiler Phases
+
+<p align="center">
+    <img src="https://github.com/Kasen96/MiniJava-Compiler/blob/master/phases.png" 
+        width="400" height="auto" alt="Compiler Phases">
+</p>
+
 # Usage
 
 ``` shell
