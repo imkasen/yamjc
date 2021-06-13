@@ -6,6 +6,12 @@ Scope::Scope()
     this->parentScope = nullptr;
 }
 
+Scope::Scope(Scope scope)
+{
+    this->next = 0;
+    this->parentScope = scope;
+}
+
 Scope Scope::getNextChild() {
     Scope nextChild;
     if (next == childrenScopes.size()) // create new child scope
@@ -44,7 +50,7 @@ Record Scope::lookupRecord(string key) {
     }
 }
 
-void Scope::addRecord(string, Record)
+void Scope::addRecord(string key, Record item)
 {
 
 }

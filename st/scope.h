@@ -18,12 +18,13 @@ protected:
 
 public:
     Scope();
+    Scope(Scope scope);
 
     Scope getNextChild();
     Scope getParentScope();
 
     Record lookupRecord(string key);
-    void addRecord(string, Record);
+    void addRecord(string key, Record item);
     void resetScope();
     void printScope();
 };
