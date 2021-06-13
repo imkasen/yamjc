@@ -11,15 +11,15 @@ using std::map;
 class Scope
 {
 protected:
-    int next = 0;                // next child to visit
-    Scope parentScope;           // parent scope
+    int next;                    // next child to visit
+    Scope *parentScope;          // parent scope
     list<Scope> childrenScopes;  // children scopes
     map<string, Record> records; // symbol to record map
 
 public:
     Scope();
 
-    Scope nextChild();
+    Scope getNextChild();
     Scope getParentScope();
 
     Record lookupRecord(string key);

@@ -1,9 +1,12 @@
 #include "scope.h"
 
-Scope::Scope() {}
-
-Scope Scope::nextChild()
+Scope::Scope()
 {
+    this->next = 0;
+    this->parentScope = nullptr;
+}
+
+Scope Scope::getNextChild() {
     Scope nextChild;
     if (next == childrenScopes.size()) // create new child scope
     {
