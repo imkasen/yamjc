@@ -5,16 +5,14 @@
 
 #include <list>
 #include <map>
-using std::list;
-using std::map;
 
 class Scope
 {
 protected:
-    int next;                    // next child to visit
-    Scope *parentScope;          // parent scope
-    list<Scope> childrenScopes;  // children scopes
-    map<string, Record> records; // symbol to record map
+    int next;                           // next child to visit
+    Scope *parentScope;                 // parent scope
+    std::list<Scope *> childrenScopes;  // children scopes
+    std::map<string, Record> records;   // symbol to record map
 
 public:
     Scope();

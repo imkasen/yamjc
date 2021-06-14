@@ -9,7 +9,7 @@ private:
     string record = "class";
 
 protected:
-    map<string, Method> methods;
+    std::map<string, Method> methods;
 
 public:
     Class();

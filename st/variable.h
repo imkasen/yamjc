@@ -4,7 +4,6 @@
 #include "record.h"
 
 #include <map>
-using std::map;
 
 class Variable : public Record
 {
@@ -12,7 +11,7 @@ private:
     string record = "variable";
 
 protected:
-    map<string, Variable> variables;
+    std::map<string, Variable> variables;
 
 public:
     Variable();
