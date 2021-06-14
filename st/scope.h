@@ -3,15 +3,15 @@
 
 #include "record.h"
 
-#include <list>
+#include <deque>
 #include <map>
 
 class Scope
 {
-protected:
+private:
     int next;                           // next child to visit
     Scope *parentScope;                 // parent scope
-    std::list<Scope *> childrenScopes;  // children scopes
+    std::deque<Scope *> childrenScopes; // children scopes
     std::map<string, Record> records;   // symbol to record map
 
 public:

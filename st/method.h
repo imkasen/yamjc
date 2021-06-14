@@ -7,8 +7,6 @@ class Method : public Variable
 {
 private:
     string record = "method";
-
-protected:
     std::map<string, Variable> parameters;
     
 public:

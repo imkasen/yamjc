@@ -1,10 +1,10 @@
-#include "class.h"
+#include "st_class.h"
 
-Class::Class() : Variable() {}
+STClass::STClass() : Variable() {}
 
-Class::Class(string id, string type) : Variable(id, type) {}
+STClass::STClass(string id, string type) : Variable(id, type) {}
 
-void Class::addMethod(Method method)
+void STClass::addMethod(Method method)
 {
     auto ret = this->methods.insert(std::pair<string, Method>(method.getId(), method));
     if (!ret.second && ret.first->first == method.getId()) // false
@@ -13,7 +13,7 @@ void Class::addMethod(Method method)
     }
 }
 
-Method Class::lookupMethod(string name)
+Method STClass::lookupMethod(string name)
 {
     auto iterator = this->methods.find(name);
     if (iterator != this->methods.end()) // exists

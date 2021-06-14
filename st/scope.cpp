@@ -13,16 +13,16 @@ Scope::Scope(Scope scope)
 }
 
 Scope Scope::getNextChild() {
-    Scope nextChild;
+    Scope *nextChild;
     if (next == childrenScopes.size()) // create new child scope
     {
         nextChild = new Scope(this);
-        childrenScopes.add(nextChild);
+        childrenScopes.push_back(nextChild);
     }
     else
     {
-        nextChild = childrenScopes.get(next); // visit scope
-        next++
+        nextChild = childrenScopes.at(next); // visit scope
+        next++;
         return nextChild;
     }
 }
