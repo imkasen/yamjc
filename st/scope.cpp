@@ -14,15 +14,14 @@ Scope::Scope(Scope scope)
 
 Scope Scope::getNextChild() {
     Scope nextChild;
-    if ((this->next) == childrenScopes.size()) // create new child scope
+    if (this->next == this->childrenScopes.size()) // create new child scope
     {
         nextChild = new Scope(*this);
-        childrenScopes.push_back(nextChild);
+        this->childrenScopes.push_back(nextChild);
     }
     else
     {
-        (this->next)++;
-        nextChild = childrenScopes.at(next); // visit scope
+        nextChild = this->childrenScopes.at((this->next)++); // visit scope
     }
     return nextChild;
 }
