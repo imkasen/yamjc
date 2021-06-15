@@ -2,36 +2,35 @@
 
 SymbolTable::SymbolTable()
 {
-    root = new Scope(nullptr);
-    current = root;
+    this->root = new Scope();
+    this->current = this->root;
 }
 
 void SymbolTable::enterScope()
 {
-    current.nextChild(); // create new scope if needed
+    this->current = this->current->getNextChild(); // create new scope if needed
 }
 
 void SymbolTable::exitScope()
 {
-    current = current.Parent();
+    this->current = this->current->getParentScope();
 }
 
-void SymbolTable::put(string key, Record item)
+void SymbolTable::addRecord(string key, Record item)
 {
-    current.put(key, item);
+    this->current->addRecord(key, item);
 }
 
-Record SymbolTable::lookup(string key)
+Record SymbolTable::lookupRecord(string key)
 {
-    return current.lookup(key);
+    return this->current->lookupRecord(key);
 }
 
 void SymbolTable::printTable()
 {
-    root.printScope();
+    this->root->printScope();
 }
 
-void SymbolTable::exitScope()
-{
-    root.resetScope(); // preparation for new traversal
+void SymbolTable::resetTable() {
+    this->root->resetScope(); // preparation for new traversal
 }

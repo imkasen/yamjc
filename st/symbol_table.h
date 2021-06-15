@@ -5,9 +5,9 @@
 
 class SymbolTable
 {
-protected:
-    Scope root;
-    Scope current;
+private:
+    Scope *root;
+    Scope *current;
 
 public:
     SymbolTable();
@@ -15,8 +15,8 @@ public:
     void enterScope();
     void exitScope();
 
-    void put(string key, Record item);
-    Record lookup(string key);
+    void addRecord(string key, Record item);
+    Record lookupRecord(string key);
 
     void printTable();
     void resetTable();
