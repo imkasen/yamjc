@@ -1,14 +1,16 @@
-LEX = flex
-YACC = bison
-CC = g++
-TARGET = compiler
-NODES = ast/*.cpp
+LEX      := flex
+YACC     := bison
+CC       := g++
+TARGET   := compiler
+NODES    := ast/*.cpp
+ST_IMPLS := st/*.cpp
+STD      := -std=c++17
 
-$(TARGET): lex.yy.c parser.tab.o main.cpp $(NODES)
-	$(CC) -g -o $(TARGET) parser.tab.o lex.yy.c main.cpp $(NODES) -std=c++14
+$(TARGET): lex.yy.c parser.tab.o main.cpp $(NODES) $(ST_IMPLS)
+	$(CC) -g -o $(TARGET) parser.tab.o lex.yy.c main.cpp $(NODES) $(ST_IMPLS) $(STD)
 
 parser.tab.o: parser.tab.cc
-	$(CC) -g -c parser.tab.cc -std=c++14
+	$(CC) -g -c parser.tab.cc $(STD)
 
 parser.tab.cc: parser.yy
 	$(YACC) parser.yy
