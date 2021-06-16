@@ -6,17 +6,18 @@ Scope::Scope()
     this->parentScope = nullptr;
 }
 
-Scope::Scope(Scope scope)
+Scope::Scope(Scope *scope_ptr)
 {
     this->next = 0;
-    this->parentScope = scope;
+    this->parentScope = scope_ptr;
 }
 
-Scope Scope::getNextChild() {
-    Scope nextChild;
+Scope* Scope::getNextChild()
+{
+    Scope *nextChild;
     if (this->next == this->childrenScopes.size()) // create new child scope
     {
-        nextChild = new Scope(*this);
+        nextChild = new Scope(this);
         this->childrenScopes.push_back(nextChild);
     }
     else
@@ -26,12 +27,13 @@ Scope Scope::getNextChild() {
     return nextChild;
 }
 
-Scope Scope::getParentScope()
+Scope* Scope::getParentScope() const
 {
-    return *(this->parentScope);
+    return this->parentScope;
 }
 
-Record Scope::lookupRecord(string key) {
+optional<Record> Scope::lookupRecord(string key) const
+{
     auto iterator = this->records.find(key);
     if (iterator != this->records.end()) // exist in the current scope
     {
@@ -41,7 +43,7 @@ Record Scope::lookupRecord(string key) {
     {
         if (!(this->parentScope)) // == nullptr
         {
-            return nullptr; // identifier not in the symbol table
+            return nullopt; // identifier not in the symbol table
         }
         else 
         {
@@ -64,7 +66,7 @@ void Scope::resetScope()
     this->next = 0;
 }
 
-void Scope::printScope()
+void Scope::printScope() const
 {
     for (const auto iter : this->records)
     {

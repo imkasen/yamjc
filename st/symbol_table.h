@@ -16,9 +16,9 @@ public:
     void exitScope();
 
     void addRecord(string key, Record item);
-    Record lookupRecord(string key);
+    optional<Record> lookupRecord(string key) const;
 
-    void printTable();
+    void printTable() const;
     void resetTable();
 };
 

@@ -5,26 +5,29 @@
 
 #include <deque>
 #include <map>
+#include <optional>
+using std::optional;
+using std::nullopt;
 
 class Scope
 {
 private:
-    int next;                         // next child to visit
-    Scope *parentScope;               // parent scope
-    std::deque<Scope> childrenScopes; // children scopes
-    std::map<string, Record> records; // symbol to record map
+    int next;                          // next child to visit
+    Scope *parentScope;                // parent scope
+    std::deque<Scope*> childrenScopes; // children scopes
+    std::map<string, Record> records;  // symbol to record map
 
 public:
     Scope();
-    Scope(Scope scope);
+    Scope(Scope *scope_ptr);
 
-    Scope getNextChild();
-    Scope getParentScope();
+    Scope* getNextChild();
+    Scope* getParentScope() const;
 
-    Record lookupRecord(string key);
+    optional<Record> lookupRecord(string key) const;
     void addRecord(string key, Record item);
     void resetScope();
-    void printScope();
+    void printScope() const;
 };
 
 #endif

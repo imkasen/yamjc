@@ -21,16 +21,17 @@ void SymbolTable::addRecord(string key, Record item)
     this->current->addRecord(key, item);
 }
 
-Record SymbolTable::lookupRecord(string key)
+optional<Record> SymbolTable::lookupRecord(string key) const
 {
     return this->current->lookupRecord(key);
 }
 
-void SymbolTable::printTable()
+void SymbolTable::printTable() const
 {
     this->root->printScope();
 }
 
-void SymbolTable::resetTable() {
+void SymbolTable::resetTable()
+{
     this->root->resetScope(); // preparation for new traversal
 }
