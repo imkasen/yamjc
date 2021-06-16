@@ -14,7 +14,7 @@ void Variable::addVariable(Variable variable)
     }
 }
 
-optional<Variable> Variable::lookupVariable(string name)
+optional<Variable> Variable::lookupVariable(string name) const
 {
     // iterator: std::map<string, Variable>::iterator
     auto iterator = this->variables.find(name);

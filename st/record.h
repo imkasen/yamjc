@@ -22,11 +22,11 @@ public:
 
     void setId(string id);
     void setType(string type);
-    string getId();
-    string getType();
-    string getRecord();
+    string getId() const;
+    string getType() const;
+    string getRecord() const;
     
-    void printRecord();
+    void printRecord() const;
 };
 
 #endif

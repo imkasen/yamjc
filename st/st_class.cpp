@@ -13,7 +13,7 @@ void STClass::addMethod(Method method)
     }
 }
 
-optional<Method> STClass::lookupMethod(string name)
+optional<Method> STClass::lookupMethod(string name) const
 {
     auto iterator = this->methods.find(name);
     if (iterator != this->methods.end()) // exists

@@ -18,22 +18,22 @@ void Record::setType(string type)
     this->type = type;
 }
 
-string Record::getId()
+string Record::getId() const
 {
     return this->id;
 }
 
-string Record::getType()
+string Record::getType() const
 {
     return this->type;
 }
 
-string Record::getRecord()
+string Record::getRecord() const
 {
     return this->record;
 }
 
-void Record::printRecord()
+void Record::printRecord() const
 {
     cout << "name: " << this->getId() << "; record: " << this->getRecord() << "; type: " << this->getType() << endl;
 }

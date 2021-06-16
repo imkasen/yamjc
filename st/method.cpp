@@ -13,7 +13,7 @@ void Method::addParameter(Variable parameter)
     }
 }
 
-optional<Variable> Method::lookupParameter(string name)
+optional<Variable> Method::lookupParameter(string name) const
 {
     auto iterator = this->parameters.find(name);
     if (iterator != this->parameters.end()) // exists

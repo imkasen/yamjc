@@ -21,7 +21,7 @@ public:
     Variable(string id, string type);
 
     void addVariable(Variable variable);
-    optional<Variable> lookupVariable(string name);
+    optional<Variable> lookupVariable(string name) const;
 };
 
 #endif
