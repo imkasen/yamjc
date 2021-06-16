@@ -13,12 +13,16 @@ void STClass::addMethod(Method method)
     }
 }
 
-Method STClass::lookupMethod(string name)
+optional<Method> STClass::lookupMethod(string name)
 {
     auto iterator = this->methods.find(name);
     if (iterator != this->methods.end()) // exists
     {
         return iterator->second;
+    }
+    else
+    {
+        return nullopt;
     }
 }
 

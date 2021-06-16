@@ -14,12 +14,16 @@ void Variable::addVariable(Variable variable)
     }
 }
 
-Variable Variable::lookupVariable(string name)
+optional<Variable> Variable::lookupVariable(string name)
 {
     // iterator: std::map<string, Variable>::iterator
     auto iterator = this->variables.find(name);
     if (iterator != this->variables.end()) // exists
     {
         return iterator->second;
+    }
+    else
+    {
+        return nullopt;
     }
 }

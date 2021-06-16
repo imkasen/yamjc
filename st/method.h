@@ -14,7 +14,7 @@ public:
     Method(string id, string type);
 
     void addParameter(Variable parameter);
-    Variable lookupParameter(string name);
+    optional<Variable> lookupParameter(string name);
 };
 
 

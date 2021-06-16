@@ -13,11 +13,15 @@ void Method::addParameter(Variable parameter)
     }
 }
 
-Variable Method::lookupParameter(string name)
+optional<Variable> Method::lookupParameter(string name)
 {
     auto iterator = this->parameters.find(name);
     if (iterator != this->parameters.end()) // exists
     {
         return iterator->second;
+    }
+    else
+    {
+        return nullopt;
     }
 }

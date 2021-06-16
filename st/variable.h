@@ -4,6 +4,9 @@
 #include "record.h"
 
 #include <map>
+#include <optional>
+using std::optional;
+using std::nullopt;
 
 class Variable : public Record
 {
@@ -18,7 +21,7 @@ public:
     Variable(string id, string type);
 
     void addVariable(Variable variable);
-    Variable lookupVariable(string name);
+    optional<Variable> lookupVariable(string name);
 };
 
 #endif

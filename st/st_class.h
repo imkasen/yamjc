@@ -14,7 +14,7 @@ public:
     STClass(string id, string type);
 
     void addMethod(Method method);
-    Method lookupMethod(string name);
+    optional<Method> lookupMethod(string name);
 };
 
 #endif
