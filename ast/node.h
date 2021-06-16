@@ -5,7 +5,6 @@
 #include <string>
 #include <list>
 #include <fstream>
-#include <vector>
 #include <memory>
 
 using std::string;

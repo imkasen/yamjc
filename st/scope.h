@@ -12,10 +12,10 @@ using std::nullopt;
 class Scope
 {
 private:
-    int next;                          // next child to visit
-    Scope *parentScope;                // parent scope
-    std::deque<Scope*> childrenScopes; // children scopes
-    std::map<string, Record> records;  // symbol to record map
+    int next;                           // next child to visit
+    Scope *parentScope;                 // parent scope
+    std::deque<Scope *> childrenScopes; // children scopes
+    std::map<string, Record> records;   // symbol to record map
 
 public:
     Scope();
