@@ -5,7 +5,7 @@ extern std::shared_ptr<Node> root;
 
 void yy::parser::error(const string &err)
 {
-    std::cerr << "Cannot generate a syntax tree for this input: " << err << std::endl;
+    std::cerr << "Cannot generate a syntax tree for this input: " << err << endl;
 }
 
 int main(int argc, char* argv[])
@@ -15,32 +15,42 @@ int main(int argc, char* argv[])
     {
         FILE *file = std::fopen(argv[1], "r");
         if (file)
+        {
             yyin = file;
+        }
         else
-            yyin = stdin;
+        {
+            std::cerr << "The file path is wrong." << endl;
+            return 1;
+        }
 
         yy::parser parser;
         parser.parse();
         std::fclose(file);
+    }
+    else
+    {
+        std::cerr << "No input file." << endl;
+        return 1;
     }
 
     // generate AST.dot
     std::ofstream outStream;
     outStream.open("ast.dot", std::ios::out);
     int count = 0;
-    outStream << "digraph {" << std::endl;
+    outStream << "digraph {" << endl;
     root->generateAST(count, &outStream);
-    outStream << "}" << std::endl;
+    outStream << "}" << endl;
     outStream.close();
 
     // print AST in cmd
-    // std::cout << "Built a parse-tree:" << std::endl;
+    // cout << "Built a parse-tree:" << endl;
     // root->printAST();
 
     // generate AST.txt
     std::ofstream outStream2;
     outStream2.open("ast.txt", std::ios::out);
-    outStream2 << "Built a parse-tree in text:" << std::endl;
+    outStream2 << "Built a parse-tree in text:" << endl;
     root->saveAST(&outStream2);
     outStream2.close();
 
