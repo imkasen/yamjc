@@ -45,17 +45,20 @@
 
 %start Goal
 
-%type <Node*> ClassDeclarations Declarations DeclareStates Identifier Return
+%type <Node *> ClassDeclarations Identifier
 
-%type <Goal*> Goal
-%type <MainClass*> MainClass 
-%type <ClassDeclaration*> ClassDeclaration ClassExtendsDeclaration 
-%type <VarDeclaration*> VarDeclaration
-%type <MethodDeclaration*> MethodDeclaration
-%type <FormalParameterList*> FormalParameterList
-%type <Type*> Type
-%type <Statement*> Statements Statement ElseStatement
-%type <Expression*> Expression ExpressionList PrimaryExpression
+%type <Goal *> Goal
+%type <MainClass *> MainClass
+%type <DeclareStates *> DeclareStates
+%type <ClassDeclaration *> ClassDeclaration ClassExtendsDeclaration
+%type <Declarations *> Declarations
+%type <VarDeclaration *> VarDeclaration
+%type <MethodDeclaration *> MethodDeclaration
+%type <FormalParameterList *> FormalParameterList
+%type <Type *> Type
+%type <Statement *> Statements Statement ElseStatement
+%type <Expression *> Expression ExpressionList PrimaryExpression
+%type <Return *> Return
 
 %%
 
@@ -82,8 +85,8 @@ ClassExtendsDeclaration : CLASS Identifier EXTENDS Identifier LBRACE RBRACE     
                         | CLASS Identifier EXTENDS Identifier LBRACE Declarations RBRACE { $$ = new ClassDeclaration("ClassDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); $$->children.push_back($6); }
                         ;
 
-Declarations : VarDeclaration                 { $$ = new Node("Declarations", ""); $$->children.push_back($1); }
-             | MethodDeclaration              { $$ = new Node("Declarations", ""); $$->children.push_back($1); }
+Declarations : VarDeclaration                 { $$ = new Declarations("Declarations", ""); $$->children.push_back($1); }
+             | MethodDeclaration              { $$ = new Declarations("Declarations", ""); $$->children.push_back($1); }
              | Declarations VarDeclaration    { $$ = $1; $$->children.push_back($2); }
              | Declarations MethodDeclaration { $$ = $1; $$->children.push_back($2); }
              ;
@@ -101,11 +104,11 @@ MethodDeclaration : PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE Return
                     { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); $$->children.push_back($9); }
                   ;
 
-Return : RETURN Expression { $$ = new Node("Return", ""); $$->children.push_back($2); }
+Return : RETURN Expression { $$ = new Return("Return", ""); $$->children.push_back($2); }
        ;
 
-DeclareStates : VarDeclaration               { $$ = new Node("DeclareStates", ""); $$->children.push_back($1); }
-              | Statement                    { $$ = new Node("DeclareStates", ""); $$->children.push_back($1); }
+DeclareStates : VarDeclaration               { $$ = new DeclareStates("DeclareStates", ""); $$->children.push_back($1); }
+              | Statement                    { $$ = new DeclareStates("DeclareStates", ""); $$->children.push_back($1); }
               | DeclareStates VarDeclaration { $$ = $1; $$->children.push_back($2); }
               | DeclareStates Statement      { $$ = $1; $$->children.push_back($2); }
               ;
