@@ -2,7 +2,6 @@
 #define VARIABLE_H
 
 #include "record.h"
-
 #include <map>
 #include <optional>
 using std::optional;

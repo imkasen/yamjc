@@ -17,7 +17,6 @@
   #include "main.h"
   
   Node *root;
-
   extern int node_id;
 }
 

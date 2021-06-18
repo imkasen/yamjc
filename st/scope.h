@@ -2,7 +2,6 @@
 #define SCOPE_H
 
 #include "record.h"
-
 #include <deque>
 #include <map>
 #include <optional>
