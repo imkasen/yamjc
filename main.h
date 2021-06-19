@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include "ast/node.h"
 #include <iostream>
 #include <string>
 #include <fstream>

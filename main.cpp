@@ -1,7 +1,6 @@
 #include "main.h"
-#include "ast/node.h"
 
-extern std::shared_ptr<Node> root;
+extern std::unique_ptr<Node> root;
 
 void yy::parser::error(const string &err)
 {
