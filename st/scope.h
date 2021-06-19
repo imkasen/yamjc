@@ -26,7 +26,7 @@ public:
     optional<Record> lookupRecord(string key) const;
     void addRecord(string key, Record item);
     void resetScope();
-    void printScope() const;
+    const void printScope() const;
 };
 
 #endif

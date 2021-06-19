@@ -6,7 +6,7 @@
 class Method : public Variable
 {
 private:
-    string record = "method";
+    inline static const string RECORD = "method";
     std::map<string, Variable> parameters;
     
 public:

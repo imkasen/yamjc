@@ -6,7 +6,7 @@
 class STClass : public Variable
 {
 private:
-    string record = "class";
+    inline static const string RECORD = "class";
     std::map<string, Method> methods;
 
 public:

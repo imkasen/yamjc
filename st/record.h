@@ -10,7 +10,7 @@ using std::endl;
 class Record
 {
 private:
-    string record = "record";
+    inline static const string RECORD = "record";
 
 protected:
     string id;
@@ -20,13 +20,13 @@ public:
     Record();
     Record(string id, string type);
 
-    void setId(string id);
-    void setType(string type);
-    string getId() const;
-    string getType() const;
-    string getRecord() const;
+    void setId(string r_id);
+    void setType(string r_type);
+    const string getId() const;
+    const string getType() const;
+    const string getRecord() const;
     
-    void printRecord() const;
+    const void printRecord() const;
 };
 
 #endif

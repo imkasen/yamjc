@@ -10,7 +10,7 @@ using std::nullopt;
 class Variable : public Record
 {
 private:
-    string record = "variable";
+    inline static const string RECORD = "variable";
 
 protected:
     std::map<string, Variable> variables;

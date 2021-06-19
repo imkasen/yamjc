@@ -66,7 +66,7 @@ void Scope::resetScope()
     this->next = 0;
 }
 
-void Scope::printScope() const
+const void Scope::printScope() const
 {
     for (const auto iter : this->records)
     {

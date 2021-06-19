@@ -8,32 +8,32 @@ Record::Record()
 
 Record::Record(string id, string type) : id(id), type(type) {}
 
-void Record::setId(string id) 
+void Record::setId(string r_id)
 {
-    this->id = id;
+    this->id = r_id;
 }
 
-void Record::setType(string type)
+void Record::setType(string r_type)
 {
-    this->type = type;
+    this->type = r_type;
 }
 
-string Record::getId() const
+const string Record::getId() const
 {
     return this->id;
 }
 
-string Record::getType() const
+const string Record::getType() const
 {
     return this->type;
 }
 
-string Record::getRecord() const
+const string Record::getRecord() const
 {
-    return this->record;
+    return this->RECORD;
 }
 
-void Record::printRecord() const
+const void Record::printRecord() const
 {
     cout << "name: " << this->getId() << "; record: " << this->getRecord() << "; type: " << this->getType() << endl;
 }
