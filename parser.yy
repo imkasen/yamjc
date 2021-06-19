@@ -93,24 +93,25 @@ Declarations : VarDeclaration                 { $$ = new Declarations("Declarati
 VarDeclaration : Type Identifier SEMI { $$ = new VarDeclaration("VarDeclaration", ""); $$->children.push_back($1); $$->children.push_back($2); }
                ;
 
-MethodDeclaration : PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE Return SEMI RBRACE 
+MethodDeclaration : PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE Return SEMI RBRACE
                     { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); }
                   | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE Return SEMI RBRACE
                     { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); }
-                  | PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE DeclareStates Return SEMI RBRACE
-                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); $$->children.push_back($8); }
-                  | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE DeclareStates Return SEMI RBRACE
-                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); $$->children.push_back($9); }
+                  | PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE DeclareStates SEMI RBRACE
+                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); }
+                  | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE DeclareStates SEMI RBRACE
+                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); }
                   ;
-
-Return : RETURN Expression { $$ = new Return("Return", ""); $$->children.push_back($2); }
-       ;
 
 DeclareStates : VarDeclaration               { $$ = new DeclareStates("DeclareStates", ""); $$->children.push_back($1); }
               | Statement                    { $$ = new DeclareStates("DeclareStates", ""); $$->children.push_back($1); }
               | DeclareStates VarDeclaration { $$ = $1; $$->children.push_back($2); }
               | DeclareStates Statement      { $$ = $1; $$->children.push_back($2); }
+              | DeclareStates Return         { $$ = $1; $$->children.push_back($2); }
               ;
+
+Return : RETURN Expression { $$ = new Return("Return", ""); $$->children.push_back($2); }
+       ;
 
 FormalParameterList : Type Identifier                           { $$ = new FormalParameterList("FormalParameterList", ""); $$->children.push_back($1); $$->children.push_back($2); }
                     | FormalParameterList COMMA Type Identifier { $$ = $1; $$->children.push_back($3); $$->children.push_back($4); }
