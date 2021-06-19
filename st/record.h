@@ -7,10 +7,11 @@ using std::string;
 using std::cout;
 using std::endl;
 
+// basic class in tree-based symbol table implementation
 class Record
 {
 private:
-    inline static const string RECORD = "record";
+    inline static const string RECORD = "record"; // require c++17
 
 protected:
     string id;

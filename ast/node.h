@@ -11,6 +11,7 @@ using std::string;
 using std::cout;
 using std::endl;
 
+// basic class in abstract syntax tree
 class Node
 {
 protected:

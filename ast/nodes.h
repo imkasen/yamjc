@@ -1,7 +1,8 @@
 #ifndef NODES_H
 #define NODES_H
 
-// include all head files in the "nodes" folder
+// Include all head files in the "ast" folder.
+// parser.yy needs this file.
 
 #include "node.h"
 #include "goal.h"
