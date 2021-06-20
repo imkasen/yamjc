@@ -7,11 +7,17 @@ using std::string;
 using std::cout;
 using std::endl;
 
-// basic class in tree-based symbol table implementation
+/*
+ * The basic class in tree-based symbol table implementation.
+ *
+ * Variable : Node
+ * Method : Node
+ * STClass : Node
+ */
 class Record
 {
 private:
-    inline static const string RECORD = "record"; // require c++17
+    inline static const string RECORD = "record"; // requires c++17
 
 protected:
     string id;

@@ -11,7 +11,14 @@ using std::string;
 using std::cout;
 using std::endl;
 
-// basic class in abstract syntax tree
+/*
+ * The basic class in abstract syntax tree.
+ *
+ * Goal : Node
+ * MainClass : Node
+ * ...
+ * Identifier : Node
+ */
 class Node
 {
 protected:

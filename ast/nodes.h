@@ -1,13 +1,15 @@
 #ifndef NODES_H
 #define NODES_H
 
-// Include all head files in the "ast" folder.
-// parser.yy needs this file.
+/*
+ * Include all head files in the "ast" folder.
+ * "parser.yy" needs this file.
+ */
 
 #include "node.h"
 #include "goal.h"
 #include "main_class.h"
-#include "declare_states.h"
+#include "method_body.h"
 #include "class_declaration.h"
 #include "declarations.h"
 #include "variable_declaration.h"
@@ -17,5 +19,6 @@
 #include "statement.h"
 #include "expression.h"
 #include "return.h"
+#include "identifier.h"
 
 #endif

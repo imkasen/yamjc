@@ -44,11 +44,11 @@
 
 %start Goal
 
-%type <Node *> ClassDeclarations Identifier
+%type <Node *> ClassDeclarations
 
 %type <Goal *> Goal
 %type <MainClass *> MainClass
-%type <DeclareStates *> DeclareStates
+%type <MethodBody *> MethodBody
 %type <ClassDeclaration *> ClassDeclaration ClassExtendsDeclaration
 %type <Declarations *> Declarations
 %type <VarDeclaration *> VarDeclaration
@@ -58,6 +58,7 @@
 %type <Statement *> Statements Statement ElseStatement
 %type <Expression *> Expression ExpressionList PrimaryExpression
 %type <Return *> Return
+%type <Identifier *> Identifier
 
 %%
 
@@ -68,7 +69,7 @@ Goal : MainClass              { $$ = new Goal("Goal", ""); $$->children.push_bac
 
 MainClass : CLASS Identifier LBRACE PUBLIC STATIC VOID MAIN LPARENTHESE STRING LBRACKET RBRACKET Identifier RPARENTHESE LBRACE RBRACE RBRACE
               { $$ = new MainClass("MainClass", ""); $$->children.push_back($2); $$->children.push_back($12); }
-          | CLASS Identifier LBRACE PUBLIC STATIC VOID MAIN LPARENTHESE STRING LBRACKET RBRACKET Identifier RPARENTHESE LBRACE DeclareStates RBRACE RBRACE
+          | CLASS Identifier LBRACE PUBLIC STATIC VOID MAIN LPARENTHESE STRING LBRACKET RBRACKET Identifier RPARENTHESE LBRACE MethodBody RBRACE RBRACE
               { $$ = new MainClass("MainClass", ""); $$->children.push_back($2); $$->children.push_back($12); $$->children.push_back($15); }
           ;
 
@@ -97,18 +98,18 @@ MethodDeclaration : PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE Return
                     { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); }
                   | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE Return SEMI RBRACE
                     { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); }
-                  | PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE DeclareStates SEMI RBRACE
+                  | PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE MethodBody SEMI RBRACE
                     { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); }
-                  | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE DeclareStates SEMI RBRACE
+                  | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE MethodBody SEMI RBRACE
                     { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); }
                   ;
 
-DeclareStates : VarDeclaration               { $$ = new DeclareStates("DeclareStates", ""); $$->children.push_back($1); }
-              | Statement                    { $$ = new DeclareStates("DeclareStates", ""); $$->children.push_back($1); }
-              | DeclareStates VarDeclaration { $$ = $1; $$->children.push_back($2); }
-              | DeclareStates Statement      { $$ = $1; $$->children.push_back($2); }
-              | DeclareStates Return         { $$ = $1; $$->children.push_back($2); }
-              ;
+MethodBody : VarDeclaration            { $$ = new MethodBody("MethodBody", ""); $$->children.push_back($1); }
+           | Statement                 { $$ = new MethodBody("MethodBody", ""); $$->children.push_back($1); }
+           | MethodBody VarDeclaration { $$ = $1; $$->children.push_back($2); }
+           | MethodBody Statement      { $$ = $1; $$->children.push_back($2); }
+           | MethodBody Return         { $$ = $1; $$->children.push_back($2); }
+           ;
 
 Return : RETURN Expression { $$ = new Return("Return", ""); $$->children.push_back($2); }
        ;
@@ -169,6 +170,6 @@ PrimaryExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new Expression
                   | THIS                                   { $$ = new Expression("This", ""); }
                   ;
 
-Identifier : IDENTIFIER { $$ = new Node("Identifier", $1); }
+Identifier : IDENTIFIER { $$ = new Identifier("Identifier", $1); }
            ;
 %%

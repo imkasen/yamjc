@@ -1,6 +1,6 @@
 #include "main.h"
 
-extern std::unique_ptr<Node> root;
+extern Node *root;
 
 void yy::parser::error(const string &err)
 {
