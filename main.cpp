@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
     // generate AST.dot
     std::ofstream outStream;
     outStream.open("ast.dot", std::ios::out);
-    int count = 0;
+    size_t count = 0;
     outStream << "digraph {" << endl;
     root->generateAST(count, &outStream);
     outStream << "}" << endl;

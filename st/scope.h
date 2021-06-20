@@ -9,10 +9,10 @@
 class Scope
 {
 private:
-    int next;                           // next child to visit
-    Scope *parentScope;                 // parent scope
-    std::deque<Scope *> childrenScopes; // children scopes
-    std::map<std::string, Record> records;   // symbol to record map
+    size_t next;                            // next child to visit
+    Scope *parentScope;                     // parent scope
+    std::deque<Scope *> childrenScopes;     // children scopes
+    std::map<std::string, Record> records;  // symbol to record map
 
 public:
     Scope();

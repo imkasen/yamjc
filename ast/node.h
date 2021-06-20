@@ -18,7 +18,7 @@
 class Node
 {
 protected:
-	int id;
+	size_t id;
 	std::string type, value;
 
 public:
@@ -27,9 +27,9 @@ public:
 	Node();
 	Node(std::string t, std::string v);
 
-	void printAST(int depth = 0);
-	void saveAST(std::ofstream *outStream, int depth = 0);
-	void generateAST(int &count, std::ofstream *outStream);
+	void printAST(size_t depth = 0);
+	void saveAST(std::ofstream *outStream, size_t depth = 0);
+	void generateAST(size_t &count, std::ofstream *outStream);
 };
 
 #endif

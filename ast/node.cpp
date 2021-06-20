@@ -12,9 +12,9 @@ Node::Node() // Bison needs this
 Node::Node(string t, string v) : type(t), value(v) {}
 
 // Print ast in the command line.
-void Node::printAST(int depth)
+void Node::printAST(size_t depth)
 {
-    for (int i = 0; i < depth; ++i)
+    for (size_t i = 0; i < depth; ++i)
     {
         cout << "  ";
     }
@@ -26,9 +26,9 @@ void Node::printAST(int depth)
 }
 
 // Save ast in the ast.txt.
-void Node::saveAST(std::ofstream *outStream, int depth)
+void Node::saveAST(std::ofstream *outStream, size_t depth)
 {
-    for (int i = 0; i < depth; ++i)
+    for (size_t i = 0; i < depth; ++i)
     {
         *outStream << "  ";
     }
@@ -40,7 +40,7 @@ void Node::saveAST(std::ofstream *outStream, int depth)
 }
 
 // Generate ast in the ast.dot.
-void Node::generateAST(int &count, std::ofstream *outStream)
+void Node::generateAST(size_t &count, std::ofstream *outStream)
 {
     this->id = ++count;
     if (this->value != "")
