@@ -7,7 +7,7 @@ class Expression : public Node
 {
 public:
     Expression();
-    Expression(string t, string v);
+    Expression(std::string t, std::string v);
 };
 
 #endif

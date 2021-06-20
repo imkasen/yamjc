@@ -2,4 +2,4 @@
 
 MethodDeclaration::MethodDeclaration() : Node() {}
 
-MethodDeclaration::MethodDeclaration(string t, string v) : Node(t, v) {}
+MethodDeclaration::MethodDeclaration(std::string t, std::string v) : Node(t, v) {}

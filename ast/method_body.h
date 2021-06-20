@@ -7,7 +7,7 @@ class MethodBody : public Node
 {
 public:
     MethodBody();
-    MethodBody(string t, string v);
+    MethodBody(std::string t, std::string v);
 };
 
 #endif

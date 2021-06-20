@@ -7,7 +7,7 @@ class Statement : public Node
 {
 public:
     Statement();
-    Statement(string t, string v);
+    Statement(std::string t, std::string v);
 };
 
 #endif

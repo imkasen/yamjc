@@ -1,4 +1,5 @@
 #include "symbol_table.h"
+using std::string;
 
 SymbolTable::SymbolTable()
 {
@@ -21,7 +22,7 @@ void SymbolTable::addRecord(string key, Record item)
     this->current->addRecord(key, item);
 }
 
-optional<Record> SymbolTable::lookupRecord(string key) const
+std::optional<Record> SymbolTable::lookupRecord(string key) const
 {
     return this->current->lookupRecord(key);
 }

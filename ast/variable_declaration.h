@@ -7,7 +7,7 @@ class VarDeclaration : public Node
 {
 public:
     VarDeclaration();
-    VarDeclaration(string t, string v);
+    VarDeclaration(std::string t, std::string v);
 };
 
 #endif

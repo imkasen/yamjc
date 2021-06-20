@@ -7,7 +7,7 @@ class FormalParameterList : public Node
 {
 public:
     FormalParameterList();
-    FormalParameterList(string t, string v);
+    FormalParameterList(std::string t, std::string v);
 };
 
 #endif

@@ -5,8 +5,6 @@
 #include <deque>
 #include <map>
 #include <optional>
-using std::optional;
-using std::nullopt;
 
 class Scope
 {
@@ -14,7 +12,7 @@ private:
     int next;                           // next child to visit
     Scope *parentScope;                 // parent scope
     std::deque<Scope *> childrenScopes; // children scopes
-    std::map<string, Record> records;   // symbol to record map
+    std::map<std::string, Record> records;   // symbol to record map
 
 public:
     Scope();
@@ -23,8 +21,8 @@ public:
     Scope* getNextChild();
     Scope* getParentScope() const;
 
-    optional<Record> lookupRecord(string key) const;
-    void addRecord(string key, Record item);
+    std::optional<Record> lookupRecord(std::string key) const;
+    void addRecord(std::string key, Record item);
     void resetScope();
     const void printScope() const;
 };

@@ -7,7 +7,7 @@ class Return : public Node
 {
 public:
     Return();
-    Return(string t, string v);
+    Return(std::string t, std::string v);
 };
 
 #endif

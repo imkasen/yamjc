@@ -7,7 +7,7 @@ class MethodDeclaration : public Node
 {
 public:
     MethodDeclaration();
-    MethodDeclaration(string t, string v);
+    MethodDeclaration(std::string t, std::string v);
 };
 
 #endif

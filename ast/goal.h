@@ -7,7 +7,7 @@ class Goal : public Node
 {
 public:
     Goal();
-    Goal(string t, string v);
+    Goal(std::string t, std::string v);
 };
 
 #endif

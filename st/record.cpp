@@ -1,4 +1,5 @@
 #include "record.h"
+using std::string;
 
 Record::Record()
 {
@@ -35,5 +36,5 @@ const string Record::getRecord() const
 
 const void Record::printRecord() const
 {
-    cout << "name: " << this->getId() << "; record: " << this->getRecord() << "; type: " << this->getType() << endl;
+    std::cout << "name: " << this->getId() << "; record: " << this->getRecord() << "; type: " << this->getType() << std::endl;
 }

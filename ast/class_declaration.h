@@ -7,7 +7,7 @@ class ClassDeclaration : public Node
 {
 public:
     ClassDeclaration();
-    ClassDeclaration(string t, string v);
+    ClassDeclaration(std::string t, std::string v);
 };
 
 #endif

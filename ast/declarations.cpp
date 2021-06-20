@@ -2,4 +2,4 @@
 
 Declarations::Declarations() : Node() {}
 
-Declarations::Declarations(string t, string v) : Node(t, v) {}
+Declarations::Declarations(std::string t, std::string v) : Node(t, v) {}

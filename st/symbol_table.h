@@ -15,8 +15,8 @@ public:
     void enterScope();
     void exitScope();
 
-    void addRecord(string key, Record item);
-    optional<Record> lookupRecord(string key) const;
+    void addRecord(std::string key, Record item);
+    std::optional<Record> lookupRecord(std::string key) const;
 
     void printTable() const;
     void resetTable();

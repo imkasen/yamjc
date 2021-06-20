@@ -2,4 +2,4 @@
 
 FormalParameterList::FormalParameterList() : Node() {}
 
-FormalParameterList::FormalParameterList(string t, string v) : Node(t, v) {}
+FormalParameterList::FormalParameterList(std::string t, std::string v) : Node(t, v) {}

@@ -1,4 +1,5 @@
 #include "scope.h"
+using std::string;
 
 Scope::Scope()
 {
@@ -32,7 +33,7 @@ Scope* Scope::getParentScope() const
     return this->parentScope;
 }
 
-optional<Record> Scope::lookupRecord(string key) const
+std::optional<Record> Scope::lookupRecord(string key) const
 {
     auto iterator = this->records.find(key);
     if (iterator != this->records.end()) // exist in the current scope
@@ -43,7 +44,7 @@ optional<Record> Scope::lookupRecord(string key) const
     {
         if (!(this->parentScope)) // == nullptr
         {
-            return nullopt; // identifier not in the symbol table
+            return std::nullopt; // identifier not in the symbol table
         }
         else 
         {

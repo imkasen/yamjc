@@ -7,7 +7,7 @@ class Identifier : public Node
 {
 public:
     Identifier();
-    Identifier(string t, string v);
+    Identifier(std::string t, std::string v);
 };
 
 #endif

@@ -2,4 +2,4 @@
 
 VarDeclaration::VarDeclaration() : Node() {}
 
-VarDeclaration::VarDeclaration(string t, string v) : Node(t, v) {}
+VarDeclaration::VarDeclaration(std::string t, std::string v) : Node(t, v) {}

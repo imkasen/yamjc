@@ -1,4 +1,5 @@
 #include "method.h"
+using std::string;
 
 Method::Method() : Variable() {}
 
@@ -9,11 +10,11 @@ void Method::addParameter(Variable parameter)
     auto ret = this->parameters.insert(std::pair<string, Variable>(parameter.getId(), parameter));
     if (!ret.second && ret.first->first == parameter.getId()) // false
     {
-        std::cerr << "The parameter " << parameter.getId() << " already exists!" << endl;
+        std::cerr << "The parameter " << parameter.getId() << " already exists!" << std::endl;
     }
 }
 
-optional<Variable> Method::lookupParameter(string name) const
+std::optional<Variable> Method::lookupParameter(string name) const
 {
     auto iterator = this->parameters.find(name);
     if (iterator != this->parameters.end()) // exists
@@ -22,6 +23,6 @@ optional<Variable> Method::lookupParameter(string name) const
     }
     else
     {
-        return nullopt;
+        return std::nullopt;
     }
 }

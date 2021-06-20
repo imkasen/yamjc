@@ -7,7 +7,7 @@ class MainClass : public Node
 {
 public:
     MainClass();
-    MainClass(string t, string v);
+    MainClass(std::string t, std::string v);
 };
 
 #endif

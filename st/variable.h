@@ -4,23 +4,21 @@
 #include "record.h"
 #include <map>
 #include <optional>
-using std::optional;
-using std::nullopt;
 
 class Variable : public Record
 {
 private:
-    inline static const string RECORD = "variable";
+    inline static const std::string RECORD = "variable";
 
 protected:
-    std::map<string, Variable> variables;
+    std::map<std::string, Variable> variables;
 
 public:
     Variable();
-    Variable(string id, string type);
+    Variable(std::string id, std::string type);
 
     void addVariable(Variable variable);
-    optional<Variable> lookupVariable(string name) const;
+    std::optional<Variable> lookupVariable(std::string name) const;
 };
 
 #endif

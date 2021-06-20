@@ -2,4 +2,4 @@
 
 Goal::Goal() : Node() {}
 
-Goal::Goal(string t, string v) : Node(t, v) {}
+Goal::Goal(std::string t, std::string v) : Node(t, v) {}

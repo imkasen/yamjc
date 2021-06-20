@@ -7,7 +7,7 @@ class Type : public Node
 {
 public:
     Type();
-    Type(string t, string v);
+    Type(std::string t, std::string v);
 };
 
 #endif

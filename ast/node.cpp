@@ -1,4 +1,7 @@
 #include "node.h"
+using std::string;
+using std::cout;
+using std::endl;
 
 Node::Node() // Bison needs this
 {

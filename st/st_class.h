@@ -6,15 +6,15 @@
 class STClass : public Variable
 {
 private:
-    inline static const string RECORD = "class";
-    std::map<string, Method> methods;
+    inline static const std::string RECORD = "class";
+    std::map<std::string, Method> methods;
 
 public:
     STClass();
-    STClass(string id, string type);
+    STClass(std::string id, std::string type);
 
     void addMethod(Method method);
-    optional<Method> lookupMethod(string name) const;
+    std::optional<Method> lookupMethod(std::string name) const;
 };
 
 #endif

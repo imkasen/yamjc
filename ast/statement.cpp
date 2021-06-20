@@ -2,4 +2,4 @@
 
 Statement::Statement() : Node() {}
 
-Statement::Statement(string t, string v) : Node(t, v) {}
+Statement::Statement(std::string t, std::string v) : Node(t, v) {}

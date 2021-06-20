@@ -6,15 +6,15 @@
 class Method : public Variable
 {
 private:
-    inline static const string RECORD = "method";
-    std::map<string, Variable> parameters;
+    inline static const std::string RECORD = "method";
+    std::map<std::string, Variable> parameters;
     
 public:
     Method();
-    Method(string id, string type);
+    Method(std::string id, std::string type);
 
     void addParameter(Variable parameter);
-    optional<Variable> lookupParameter(string name) const;
+    std::optional<Variable> lookupParameter(std::string name) const;
 };
 
 

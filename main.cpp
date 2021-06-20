@@ -1,4 +1,7 @@
 #include "main.h"
+using std::cout;
+using std::endl;
+using std::string;
 
 extern Node *root;
 

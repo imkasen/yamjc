@@ -7,10 +7,6 @@
 #include <fstream>
 #include <memory>
 
-using std::string;
-using std::cout;
-using std::endl;
-
 /*
  * The basic class in abstract syntax tree.
  *
@@ -23,13 +19,13 @@ class Node
 {
 protected:
 	int id;
-	string type, value;
+	std::string type, value;
 
 public:
 	std::list<Node *> children;
 
 	Node();
-	Node(string t, string v);
+	Node(std::string t, std::string v);
 
 	void printAST(int depth = 0);
 	void saveAST(std::ofstream *outStream, int depth = 0);

@@ -2,4 +2,4 @@
 
 Expression::Expression() : Node() {}
 
-Expression::Expression(string t, string v) : Node(t, v) {}
+Expression::Expression(std::string t, std::string v) : Node(t, v) {}

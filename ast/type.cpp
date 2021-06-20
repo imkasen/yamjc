@@ -2,4 +2,4 @@
 
 Type::Type() : Node() {}
 
-Type::Type(string t, string v) : Node(t, v) {}
+Type::Type(std::string t, std::string v) : Node(t, v) {}

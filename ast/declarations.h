@@ -7,7 +7,7 @@ class Declarations : public Node
 {
 public:
     Declarations();
-    Declarations(string t, string v);
+    Declarations(std::string t, std::string v);
 };
 
 #endif

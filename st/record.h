@@ -3,9 +3,6 @@
 
 #include <iostream>
 #include <string>
-using std::string;
-using std::cout;
-using std::endl;
 
 /*
  * The basic class in tree-based symbol table implementation.
@@ -17,21 +14,21 @@ using std::endl;
 class Record
 {
 private:
-    inline static const string RECORD = "record"; // requires c++17
+    inline static const std::string RECORD = "record"; // requires c++17
 
 protected:
-    string id;
-    string type;
+    std::string id;
+    std::string type;
 
 public:
     Record();
-    Record(string id, string type);
+    Record(std::string id, std::string type);
 
-    void setId(string r_id);
-    void setType(string r_type);
-    const string getId() const;
-    const string getType() const;
-    const string getRecord() const;
+    void setId(std::string r_id);
+    void setType(std::string r_type);
+    const std::string getId() const;
+    const std::string getType() const;
+    const std::string getRecord() const;
     
     const void printRecord() const;
 };

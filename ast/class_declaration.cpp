@@ -2,4 +2,4 @@
 
 ClassDeclaration::ClassDeclaration() : Node() {}
 
-ClassDeclaration::ClassDeclaration(string t, string v) : Node(t, v) {}
+ClassDeclaration::ClassDeclaration(std::string t, std::string v) : Node(t, v) {}

@@ -1,4 +1,5 @@
 #include "variable.h"
+using std::string;
 
 Variable::Variable() : Record() {}
 
@@ -10,11 +11,11 @@ void Variable::addVariable(Variable variable)
     auto ret = this->variables.insert(std::pair<string, Variable>(variable.getId(), variable));
     if (!ret.second && ret.first->first == variable.getId()) // false
     {
-        std::cerr << "The variable " << variable.getId() << " already exists!" << endl;
+        std::cerr << "The variable " << variable.getId() << " already exists!" << std::endl;
     }
 }
 
-optional<Variable> Variable::lookupVariable(string name) const
+std::optional<Variable> Variable::lookupVariable(string name) const
 {
     // iterator: std::map<string, Variable>::iterator
     auto iterator = this->variables.find(name);
@@ -24,6 +25,6 @@ optional<Variable> Variable::lookupVariable(string name) const
     }
     else
     {
-        return nullopt;
+        return std::nullopt;
     }
 }

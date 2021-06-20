@@ -2,4 +2,4 @@
 
 Identifier::Identifier() : Node() {}
 
-Identifier::Identifier(string t, string v) : Node(t, v) {}
+Identifier::Identifier(std::string t, std::string v) : Node(t, v) {}

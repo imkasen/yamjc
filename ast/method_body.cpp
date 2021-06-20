@@ -2,4 +2,4 @@
 
 MethodBody::MethodBody() : Node() {}
 
-MethodBody::MethodBody(string t, string v) : Node(t, v) {}
+MethodBody::MethodBody(std::string t, std::string v) : Node(t, v) {}
