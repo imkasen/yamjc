@@ -14,6 +14,9 @@ void STClass::addMethod(Method method)
     }
 }
 
+/*
+ * @return Method | std::nullopt
+ */
 std::optional<Method> STClass::lookupMethod(string name) const
 {
     auto iterator = this->methods.find(name);

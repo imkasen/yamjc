@@ -33,7 +33,10 @@ Scope* Scope::getParentScope() const
     return this->parentScope;
 }
 
-std::optional<Record> Scope::lookupRecord(string key) const
+/*
+ * @return Record ptr | std::nullopt
+ */
+std::optional<Record *> Scope::lookupRecord(string key) const
 {
     auto iterator = this->records.find(key);
     if (iterator != this->records.end()) // exist in the current scope
@@ -53,24 +56,24 @@ std::optional<Record> Scope::lookupRecord(string key) const
     }
 }
 
-void Scope::addRecord(string key, Record item)
+void Scope::addRecord(string key, Record *item)
 {
-    this->records.insert(std::pair<string, Record>(key, item));
+    this->records.insert(std::pair<string, Record *>(key, item));
 }
 
 void Scope::resetScope()
 {
-    for (Scope iter : this->childrenScopes)
+    for (auto iter : this->childrenScopes)
     {
-        iter.resetScope();
+        iter->resetScope();
     }
     this->next = 0;
 }
 
 const void Scope::printScope() const
 {
-    for (const auto iter : this->records)
+    for (const auto &iter : this->records)
     {
-        iter.second.printRecord();
+        (iter.second)->printRecord();
     }
 }

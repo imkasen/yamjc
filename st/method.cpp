@@ -14,6 +14,9 @@ void Method::addParameter(Variable parameter)
     }
 }
 
+/*
+ * @return Variable | std::nullopt
+ */
 std::optional<Variable> Method::lookupParameter(string name) const
 {
     auto iterator = this->parameters.find(name);

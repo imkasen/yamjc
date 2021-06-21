@@ -17,12 +17,15 @@ void SymbolTable::exitScope()
     this->current = this->current->getParentScope();
 }
 
-void SymbolTable::addRecord(string key, Record item)
+void SymbolTable::addRecord(string key, Record *item)
 {
     this->current->addRecord(key, item);
 }
 
-std::optional<Record> SymbolTable::lookupRecord(string key) const
+/*
+ * @return Record ptr | std::nullopt
+ */
+std::optional<Record *> SymbolTable::lookupRecord(string key) const
 {
     return this->current->lookupRecord(key);
 }

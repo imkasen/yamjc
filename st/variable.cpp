@@ -15,6 +15,9 @@ void Variable::addVariable(Variable variable)
     }
 }
 
+/*
+ * @return Variable | std::nullopt
+ */
 std::optional<Variable> Variable::lookupVariable(string name) const
 {
     // iterator: std::map<string, Variable>::iterator
