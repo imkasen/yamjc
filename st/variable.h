@@ -17,8 +17,8 @@ public:
     Variable();
     Variable(std::string id, std::string type);
 
-    void addVariable(Variable variable);
-    std::optional<Variable> lookupVariable(std::string name) const;
+    void addVariable(const Variable &variable);
+    std::optional<Variable> lookupVariable(const std::string &name) const;
 };
 
 #endif

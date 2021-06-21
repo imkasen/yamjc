@@ -13,8 +13,8 @@ public:
     STClass();
     STClass(std::string id, std::string type);
 
-    void addMethod(Method method);
-    std::optional<Method> lookupMethod(std::string name) const;
+    void addMethod(const Method &method);
+    std::optional<Method> lookupMethod(const std::string &name) const;
 };
 
 #endif

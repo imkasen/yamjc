@@ -5,7 +5,7 @@ Variable::Variable() : Record() {}
 
 Variable::Variable(string id, string type) : Record(id, type) {}
 
-void Variable::addVariable(Variable variable)
+void Variable::addVariable(const Variable &variable)
 {
     // ret: std::pair<std::map<string, Variable>::iterator, bool>
     auto ret = this->variables.insert(std::pair<string, Variable>(variable.getId(), variable));
@@ -18,7 +18,7 @@ void Variable::addVariable(Variable variable)
 /*
  * @return Variable | std::nullopt
  */
-std::optional<Variable> Variable::lookupVariable(string name) const
+std::optional<Variable> Variable::lookupVariable(const string &name) const
 {
     // iterator: std::map<string, Variable>::iterator
     auto iterator = this->variables.find(name);

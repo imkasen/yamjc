@@ -9,12 +9,12 @@ Record::Record()
 
 Record::Record(string id, string type) : id(id), type(type) {}
 
-void Record::setId(string r_id)
+void Record::setId(const string &r_id)
 {
     this->id = r_id;
 }
 
-void Record::setType(string r_type)
+void Record::setType(const string &r_type)
 {
     this->type = r_type;
 }

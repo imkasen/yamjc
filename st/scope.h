@@ -21,8 +21,8 @@ public:
     Scope* getNextChild();
     Scope* getParentScope() const;
 
-    std::optional<Record *> lookupRecord(std::string key) const;
-    void addRecord(std::string key, Record *item);
+    std::optional<Record *> lookupRecord(const std::string &key) const;
+    void addRecord(const std::string &key, Record *item);
     void resetScope();
     const void printScope() const;
 };

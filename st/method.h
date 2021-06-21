@@ -13,8 +13,8 @@ public:
     Method();
     Method(std::string id, std::string type);
 
-    void addParameter(Variable parameter);
-    std::optional<Variable> lookupParameter(std::string name) const;
+    void addParameter(const Variable &parameter);
+    std::optional<Variable> lookupParameter(const std::string &name) const;
 };
 
 

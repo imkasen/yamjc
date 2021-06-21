@@ -24,8 +24,8 @@ public:
     Record();
     Record(std::string id, std::string type);
 
-    void setId(std::string r_id);
-    void setType(std::string r_type);
+    void setId(const std::string &r_id);
+    void setType(const std::string &r_type);
     const std::string getId() const;
     const std::string getType() const;
     const std::string getRecord() const;

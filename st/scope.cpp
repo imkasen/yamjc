@@ -36,7 +36,7 @@ Scope* Scope::getParentScope() const
 /*
  * @return Record ptr | std::nullopt
  */
-std::optional<Record *> Scope::lookupRecord(string key) const
+std::optional<Record *> Scope::lookupRecord(const string &key) const
 {
     auto iterator = this->records.find(key);
     if (iterator != this->records.end()) // exist in the current scope
@@ -56,7 +56,7 @@ std::optional<Record *> Scope::lookupRecord(string key) const
     }
 }
 
-void Scope::addRecord(string key, Record *item)
+void Scope::addRecord(const string &key, Record *item)
 {
     this->records.insert(std::pair<string, Record *>(key, item));
 }
