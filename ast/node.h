@@ -5,7 +5,6 @@
 #include <string>
 #include <list>
 #include <fstream>
-#include <memory>
 
 /*
  * The basic class in abstract syntax tree.

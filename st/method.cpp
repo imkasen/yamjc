@@ -7,10 +7,10 @@ Method::Method(string id, string type) : Variable(id, type) {}
 
 void Method::addParameter(const Variable &parameter)
 {
-    auto ret = this->parameters.insert(std::pair<string, Variable>(parameter.getId(), parameter));
-    if (!ret.second && ret.first->first == parameter.getId()) // false
+    auto ret = this->parameters.insert({parameter.getId(), parameter});
+    if (!ret.second) // false
     {
-        std::cerr << "The parameter " << parameter.getId() << " already exists!" << std::endl;
+        std::cerr << "The parameter " << parameter.getId() << " already exists in the method!" << std::endl;
     }
 }
 

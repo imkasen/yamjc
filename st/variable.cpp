@@ -8,8 +8,8 @@ Variable::Variable(string id, string type) : Record(id, type) {}
 void Variable::addVariable(const Variable &variable)
 {
     // ret: std::pair<std::map<string, Variable>::iterator, bool>
-    auto ret = this->variables.insert(std::pair<string, Variable>(variable.getId(), variable));
-    if (!ret.second && ret.first->first == variable.getId()) // false
+    auto ret = this->variables.insert({variable.getId(), variable}); // = insert(std::pair<string, Variable>(variable.getId(), variable))
+    if (!ret.second) // false
     {
         std::cerr << "The variable " << variable.getId() << " already exists!" << std::endl;
     }

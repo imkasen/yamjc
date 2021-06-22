@@ -7,10 +7,10 @@ STClass::STClass(string id, string type) : Variable(id, type) {}
 
 void STClass::addMethod(const Method &method)
 {
-    auto ret = this->methods.insert(std::pair<string, Method>(method.getId(), method));
-    if (!ret.second && ret.first->first == method.getId()) // false
+    auto ret = this->methods.insert({method.getId(), method});
+    if (!ret.second) // false
     {
-        std::cerr << "The method " << method.getId() << " already exists!" << std::endl;
+        std::cerr << "The method " << method.getId() << " already exists in the class!" << std::endl;
     }
 }
 

@@ -58,7 +58,11 @@ std::optional<Record *> Scope::lookupRecord(const string &key) const
 
 void Scope::addRecord(const string &key, Record *item)
 {
-    this->records.insert(std::pair<string, Record *>(key, item));
+    auto ret = this->records.insert({key, item}); // = insert(std::pair<string, Record *>(key, item))
+    if (!ret.second) // false
+    {
+        std::cerr << "The record " << key << " already exists in the scope!" << std::endl;
+    }
 }
 
 void Scope::resetScope()
