@@ -26,6 +26,8 @@ public:
     void addRecord(const std::string &key, Record *item);
     void resetScope();
     const void printScope() const;
+
+    virtual ~Scope() = default;
 };
 
 #endif

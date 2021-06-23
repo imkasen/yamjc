@@ -20,6 +20,8 @@ public:
 
     void addVariable(const Variable &variable);
     std::optional<Variable> lookupVariable(const std::string &name) const;
+
+    virtual ~Variable() = default;
 };
 
 #endif

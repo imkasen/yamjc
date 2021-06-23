@@ -15,6 +15,8 @@ public:
 
     void addParameter(const Variable &parameter);
     std::optional<Variable> lookupParameter(const std::string &name) const;
+
+    virtual ~Method() = default;
 };
 
 

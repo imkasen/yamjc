@@ -20,6 +20,8 @@ public:
 
     void printTable() const;
     void resetTable();
+
+    virtual ~SymbolTable() = default;
 };
 
 #endif

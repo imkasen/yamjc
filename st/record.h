@@ -31,6 +31,8 @@ public:
     const std::string getRecord() const;
     
     const void printRecord() const;
+
+    virtual ~Record() = default;
 };
 
 #endif
