@@ -57,3 +57,12 @@ void Node::generateAST(size_t &count, std::ofstream *outStream)
         *outStream << "n" << this->id << " -> n" << (*i)->id << endl;
     }
 }
+
+Node::~Node()
+{
+    for (auto && ptr : children)
+    {
+        delete ptr;
+        ptr = nullptr;
+    }
+}

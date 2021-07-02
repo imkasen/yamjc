@@ -17,7 +17,7 @@ void SymbolTable::exitScope()
     this->current = this->current->getParentScope();
 }
 
-void SymbolTable::addRecord(const string &key, Record *item)
+void SymbolTable::addRecord(const string &key, const Record &item)
 {
     this->current->addRecord(key, item);
 }
@@ -25,7 +25,7 @@ void SymbolTable::addRecord(const string &key, Record *item)
 /*
  * @return Record ptr | std::nullopt
  */
-std::optional<Record *> SymbolTable::lookupRecord(const string &key) const
+std::optional<Record> SymbolTable::lookupRecord(const string &key) const
 {
     return this->current->lookupRecord(key);
 }

@@ -32,7 +32,6 @@ public:
     
     const void printRecord() const;
 
-    virtual ~Record() = default;
 };
 
 #endif

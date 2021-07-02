@@ -3,7 +3,7 @@ using std::cout;
 using std::endl;
 using std::string;
 
-extern Node *root;
+extern std::shared_ptr<Node> root;
 
 void yy::parser::error(const string &err)
 {

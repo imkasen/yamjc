@@ -36,7 +36,7 @@ Scope* Scope::getParentScope() const
 /*
  * @return Record ptr | std::nullopt
  */
-std::optional<Record *> Scope::lookupRecord(const string &key) const
+std::optional<Record> Scope::lookupRecord(const string &key) const
 {
     auto iterator = this->records.find(key);
     if (iterator != this->records.end()) // exist in the current scope
@@ -56,9 +56,9 @@ std::optional<Record *> Scope::lookupRecord(const string &key) const
     }
 }
 
-void Scope::addRecord(const string &key, Record *item)
+void Scope::addRecord(const string &key, const Record &item)
 {
-    auto ret = this->records.insert({key, item}); // = insert(std::pair<string, Record *>(key, item))
+    auto ret = this->records.insert({key, item}); // = insert(std::pair<string, Record>(key, item))
     if (!ret.second) // false
     {
         std::cerr << "The record " << key << " already exists in the scope!" << std::endl;
@@ -78,6 +78,18 @@ const void Scope::printScope() const
 {
     for (const auto &iter : this->records)
     {
-        (iter.second)->printRecord();
+        (iter.second).printRecord();
+    }
+}
+
+Scope::~Scope()
+{
+    delete parentScope;
+    parentScope = nullptr;
+
+    for (auto && ptr : childrenScopes)
+    {
+        delete ptr;
+        ptr = nullptr;
     }
 }

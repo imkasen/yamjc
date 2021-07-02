@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <memory>
 
 #define YY_DECL yy::parser::symbol_type yylex() 
 YY_DECL;

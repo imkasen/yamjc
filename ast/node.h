@@ -30,7 +30,7 @@ public:
 	void saveAST(std::ofstream *outStream, size_t depth = 0);
 	void generateAST(size_t &count, std::ofstream *outStream);
 
-	virtual ~Node() = default;
+	virtual ~Node();
 };
 
 #endif

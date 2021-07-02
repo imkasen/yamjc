@@ -13,7 +13,7 @@ private:
     size_t next;                             // next child to visit
     Scope *parentScope;                      // parent scope
     std::deque<Scope *> childrenScopes;      // children scopes
-    std::map<std::string, Record *> records; // symbol to record map
+    std::map<std::string, Record> records; // symbol to record map
 
 public:
     Scope();
@@ -22,12 +22,12 @@ public:
     Scope* getNextChild();
     Scope* getParentScope() const;
 
-    std::optional<Record *> lookupRecord(const std::string &key) const;
-    void addRecord(const std::string &key, Record *item);
+    std::optional<Record> lookupRecord(const std::string &key) const;
+    void addRecord(const std::string &key, const Record &item);
     void resetScope();
     const void printScope() const;
 
-    virtual ~Scope() = default;
+    virtual ~Scope();
 };
 
 #endif

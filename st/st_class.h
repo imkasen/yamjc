@@ -16,7 +16,6 @@ public:
     void addMethod(const Method &method);
     std::optional<Method> lookupMethod(const std::string &name) const;
 
-    virtual ~STClass() = default;
 };
 
 #endif
