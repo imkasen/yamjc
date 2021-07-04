@@ -7,10 +7,10 @@ Scope::Scope()
     this->parentScope = nullptr;
 }
 
-Scope::Scope(Scope *scope_ptr)
+Scope::Scope(Scope &parent)
 {
     this->next = 0;
-    this->parentScope = scope_ptr;
+    this->parentScope = &parent;
 }
 
 Scope* Scope::getNextChild()
@@ -18,7 +18,7 @@ Scope* Scope::getNextChild()
     Scope *nextChild;
     if (this->next == this->childrenScopes.size()) // create new child scope
     {
-        nextChild = new Scope(this);
+        nextChild = new Scope(*this);
         this->childrenScopes.push_back(nextChild);
     }
     else
