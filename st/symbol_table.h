@@ -6,8 +6,8 @@
 class SymbolTable
 {
 private:
-    Scope *root;
-    Scope *current;
+    std::shared_ptr<Scope> root;
+    std::shared_ptr<Scope> current;
 
 public:
     SymbolTable();

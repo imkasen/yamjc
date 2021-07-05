@@ -7,18 +7,18 @@ Scope::Scope()
     this->parentScope = nullptr;
 }
 
-Scope::Scope(Scope &parent)
+Scope::Scope(std::shared_ptr<Scope> parent)
 {
     this->next = 0;
-    this->parentScope = &parent;
+    this->parentScope = parent;
 }
 
-Scope* Scope::getNextChild()
+std::shared_ptr<Scope> Scope::getNextChild()
 {
-    Scope *nextChild;
+    std::shared_ptr<Scope> nextChild;
     if (this->next == this->childrenScopes.size()) // create new child scope
     {
-        nextChild = new Scope(*this);
+        nextChild = std::make_shared<Scope>(shared_from_this());
         this->childrenScopes.push_back(nextChild);
     }
     else
@@ -28,7 +28,7 @@ Scope* Scope::getNextChild()
     return nextChild;
 }
 
-Scope* Scope::getParentScope() const
+std::shared_ptr<Scope> Scope::getParentScope() const
 {
     return this->parentScope;
 }
@@ -79,17 +79,5 @@ const void Scope::printScope() const
     for (const auto &iter : this->records)
     {
         (iter.second).printRecord();
-    }
-}
-
-Scope::~Scope()
-{
-    delete parentScope;
-    parentScope = nullptr;
-
-    for (auto && ptr : childrenScopes)
-    {
-        delete ptr;
-        ptr = nullptr;
     }
 }

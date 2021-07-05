@@ -3,7 +3,7 @@ using std::string;
 
 SymbolTable::SymbolTable()
 {
-    this->root = new Scope();
+    this->root = std::make_shared<Scope>();
     this->current = this->root;
 }
 

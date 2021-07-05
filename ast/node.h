@@ -21,12 +21,17 @@ protected:
 	std::string type, value;
 
 public:
+    /*
+     * awkward design,
+     * bison does not support smart pointers well,
+     * so raw pointer is used.
+     */
 	std::list<Node *> children;
 
 	Node();
 	Node(std::string t, std::string v);
 
-	void printAST(size_t depth = 0);
+    // void printAST(size_t depth = 0);
 	void saveAST(std::ofstream *outStream, size_t depth = 0);
 	void generateAST(size_t &count, std::ofstream *outStream);
 
