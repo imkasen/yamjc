@@ -57,8 +57,8 @@ int main(int argc, char* argv[])
     outStream2.close();
 
     //Build symbol table
-    //ST st;
-    //root->buildST(st);
+    std::shared_ptr<SymbolTable> st = std::shared_ptr<SymbolTable>();
+    root->buildST(st);
 
     //Semantic analysis
     //root->checkSemantics(st);

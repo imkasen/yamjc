@@ -2,11 +2,12 @@
 
 parser.tab.*
 lex.yy.c*
-compiler
+/compiler
 stack.hh
 /*.dot
 /*.svg
 /*.txt
+/test/
 
 # CMake
 !CMakeLists.txt

@@ -3,6 +3,7 @@
 
 #include "parser.tab.hh"
 #include "ast/node.h"
+#include "st/symbol_table.h"
 #include <iostream>
 #include <string>
 #include <fstream>

@@ -1,9 +1,10 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include "../st/symbol_table.h"
 #include <iostream>
 #include <string>
-#include <list>
+#include <deque>
 #include <fstream>
 
 /*
@@ -17,25 +18,38 @@
 class Node
 {
 protected:
-	size_t id;
-	std::string type, value;
+    size_t id;
+    std::string type, value;
+    static std::shared_ptr<SymbolTable> st;
 
 public:
     /*
-     * awkward design,
-     * bison does not support smart pointers well,
+     * an awkward design,
+     * Bison does not support smart pointers well,
      * so raw pointer is used.
      */
-	std::list<Node *> children;
+    std::deque<Node *> children;
 
-	Node();
-	Node(std::string t, std::string v);
+    Node();
+    Node(std::string t, std::string v);
 
+    void setId(size_t n_id);
+    void setType(std::string n_type);
+    void setValue(std::string n_value);
+    const size_t getId() const;
+    const std::string getType() const;
+    const std::string getValue() const;
+
+    // AST
     // void printAST(size_t depth = 0);
-	void saveAST(std::ofstream *outStream, size_t depth = 0);
-	void generateAST(size_t &count, std::ofstream *outStream);
+    void saveAST(std::ofstream *outStream, size_t depth = 0);
+    void generateAST(size_t &count, std::ofstream *outStream);
 
-	virtual ~Node();
+    // ST
+    void buildST(std::shared_ptr<SymbolTable> &symbol_table);
+    virtual std::string execute(Node *node) = 0;
+
+    virtual ~Node();
 };
 
 #endif
