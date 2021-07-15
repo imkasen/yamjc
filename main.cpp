@@ -3,7 +3,7 @@ using std::cout;
 using std::endl;
 using std::string;
 
-extern std::shared_ptr<Node> root;
+extern Node root;
 
 void yy::parser::error(const string &err)
 {
@@ -41,26 +41,26 @@ int main(int argc, char* argv[])
     outStream.open("ast.dot", std::ios::out);
     size_t count = 0;
     outStream << "digraph {" << endl;
-    root->generateAST(count, &outStream);
+    root.generateAST(count, &outStream);
     outStream << "}" << endl;
     outStream.close();
 
     // print AST in cmd
     // cout << "Built a parse-tree:" << endl;
-    // root->printAST();
+    // root.printAST();
 
     // generate AST.txt
     std::ofstream outStream2;
     outStream2.open("ast.txt", std::ios::out);
     outStream2 << "Built a parse-tree in text:" << endl;
-    root->saveAST(&outStream2);
+    root.saveAST(&outStream2);
     outStream2.close();
 
     //Build symbol table
     std::shared_ptr<SymbolTable> st = std::shared_ptr<SymbolTable>();
-    root->buildST(st);
+    root.buildST(st);
 
     //Semantic analysis
-    //root->checkSemantics(st);
+    //root.checkSemantics(st);
     return 0;
 }

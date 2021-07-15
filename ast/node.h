@@ -20,15 +20,10 @@ class Node
 protected:
     size_t id;
     std::string type, value;
-    static std::shared_ptr<SymbolTable> st;
+    inline static std::shared_ptr<SymbolTable> st = nullptr;
 
 public:
-    /*
-     * an awkward design,
-     * Bison does not support smart pointers well,
-     * so raw pointer is used.
-     */
-    std::deque<Node *> children;
+    std::deque<Node> children;
 
     Node();
     Node(std::string t, std::string v);
@@ -47,9 +42,8 @@ public:
 
     // ST
     void buildST(std::shared_ptr<SymbolTable> &symbol_table);
-    virtual std::string execute(Node *node) = 0;
 
-    virtual ~Node();
+    virtual ~Node() = default;
 };
 
 #endif

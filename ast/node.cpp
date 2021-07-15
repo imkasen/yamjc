@@ -3,8 +3,6 @@ using std::string;
 using std::cout;
 using std::endl;
 
-std::shared_ptr<SymbolTable> Node::st = nullptr;
-
 Node::Node() // Bison needs this
 {
     this->type = "uninitialised";
@@ -54,7 +52,7 @@ void Node::printAST(size_t depth)
     cout << this->getType() << ":" << this->getValue() << endl;
     for (auto i = this->children.begin(); i != this->children.end(); ++i)
     {
-        (*i)->printAST(depth + 1);
+        (*i).printAST(depth + 1);
     }
 }
 */
@@ -69,7 +67,7 @@ void Node::saveAST(std::ofstream *outStream, size_t depth)
     *outStream << this->getType() << ":" << this->getValue() << endl;
     for (auto i = this->children.begin(); i != this->children.end(); ++i)
     {
-        (*i)->saveAST(outStream, depth + 1);
+        (*i).saveAST(outStream, depth + 1);
     }
 }
 
@@ -87,8 +85,8 @@ void Node::generateAST(size_t &count, std::ofstream *outStream)
     }
     for (auto i = this->children.begin(); i != this->children.end(); ++i)
     {
-        (*i)->generateAST(count, outStream);
-        *outStream << "n" << this->getId() << " -> n" << (*i)->getId() << endl;
+        (*i).generateAST(count, outStream);
+        *outStream << "n" << this->getId() << " -> n" << (*i).getId() << endl;
     }
 }
 
@@ -96,14 +94,4 @@ void Node::generateAST(size_t &count, std::ofstream *outStream)
 void Node::buildST(std::shared_ptr<SymbolTable> &symbol_table)
 {
     Node::st = symbol_table;
-}
-
-Node::~Node()
-{
-    for (auto && ptr : children)
-    {
-        delete ptr;
-        ptr = nullptr;
-    }
-    children.clear();
 }
