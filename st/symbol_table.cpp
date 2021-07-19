@@ -17,6 +17,11 @@ void SymbolTable::exitScope()
     this->current = this->current->getParentScope();
 }
 
+void SymbolTable::setScopeTitle(const std::string title)
+{
+    this->current->setScopeTitle(title);
+}
+
 void SymbolTable::addRecord(const string &key, const Record &item)
 {
     this->current->addRecord(key, item);

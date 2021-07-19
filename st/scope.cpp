@@ -13,6 +13,16 @@ Scope::Scope(std::shared_ptr<Scope> parent)
     this->parentScope = parent;
 }
 
+void Scope::setScopeTitle(const std::string title)
+{
+    this->scope_title = title;
+}
+
+string Scope::getScopeTitle() const
+{
+    return this->scope_title;
+}
+
 std::shared_ptr<Scope> Scope::getNextChild()
 {
     std::shared_ptr<Scope> nextChild;

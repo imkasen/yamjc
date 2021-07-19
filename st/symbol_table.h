@@ -15,6 +15,8 @@ public:
     void enterScope();
     void exitScope();
 
+    void setScopeTitle(const std::string title);
+
     void addRecord(const std::string &key, const Record &item);
     std::optional<Record> lookupRecord(const std::string &key) const;
 

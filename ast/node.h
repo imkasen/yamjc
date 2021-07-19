@@ -42,6 +42,7 @@ public:
 
     // ST
     void buildST(std::shared_ptr<SymbolTable> &symbol_table);
+    virtual std::optional<std::string> execute() = 0;
 
     virtual ~Node() = default;
 };

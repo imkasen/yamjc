@@ -94,4 +94,5 @@ void Node::generateAST(size_t &count, std::ofstream *outStream)
 void Node::buildST(std::shared_ptr<SymbolTable> &symbol_table)
 {
     Node::st = symbol_table;
+    this->execute();
 }
