@@ -8,6 +8,9 @@ class Identifier : public Node
 public:
     Identifier();
     Identifier(std::string t, std::string v);
+
+    // ST
+    virtual std::optional<std::string> execute() override;
 };
 
 #endif

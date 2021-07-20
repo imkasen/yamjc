@@ -2,7 +2,6 @@
 #define GOAL_H
 
 #include "node.h"
-#include "../st/st_class.h"
 
 class Goal : public Node
 {

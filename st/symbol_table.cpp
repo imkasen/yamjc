@@ -17,12 +17,17 @@ void SymbolTable::exitScope()
     this->current = this->current->getParentScope();
 }
 
-void SymbolTable::setScopeTitle(const std::string title)
+void SymbolTable::setScopeTitle(const std::string &title)
 {
     this->current->setScopeTitle(title);
 }
 
-void SymbolTable::addRecord(const string &key, const Record &item)
+std::shared_ptr<Scope> SymbolTable::getParentScope() const
+{
+    return this->current->getParentScope();
+}
+
+void SymbolTable::addRecord(const string &key, const std::shared_ptr<Record> &item)
 {
     this->current->addRecord(key, item);
 }

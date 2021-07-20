@@ -1,6 +1,9 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include "../st/variable.h"
+#include "../st/method.h"
+#include "../st/st_class.h"
 #include "../st/symbol_table.h"
 #include <iostream>
 #include <string>

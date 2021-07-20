@@ -15,9 +15,10 @@ public:
     void enterScope();
     void exitScope();
 
-    void setScopeTitle(const std::string title);
+    void setScopeTitle(const std::string &title);
+    std::shared_ptr<Scope> getParentScope() const;
 
-    void addRecord(const std::string &key, const Record &item);
+    void addRecord(const std::string &key, const std::shared_ptr<Record> &item);
     std::optional<Record> lookupRecord(const std::string &key) const;
 
     void printTable() const;

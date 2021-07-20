@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <memory>
 
 /*
  * The basic class in tree-based symbol table implementation.

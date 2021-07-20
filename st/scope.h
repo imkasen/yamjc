@@ -5,7 +5,6 @@
 #include <deque>
 #include <map>
 #include <optional>
-#include <memory>
 
 class Scope : public std::enable_shared_from_this<Scope>
 {
@@ -20,14 +19,14 @@ public:
     Scope();
     Scope(std::shared_ptr<Scope> parent);
 
-    void setScopeTitle(const std::string title);
+    void setScopeTitle(const std::string &title);
     const std::string getScopeTitle() const;
 
     std::shared_ptr<Scope> getNextChild();
     std::shared_ptr<Scope> getParentScope() const;
 
     std::optional<Record> lookupRecord(const std::string &key) const;
-    void addRecord(const std::string &key, const Record &item);
+    void addRecord(const std::string &key, const std::shared_ptr<Record> &item);
     void resetScope();
     const void printScope() const;
 

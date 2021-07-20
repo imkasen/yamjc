@@ -13,7 +13,7 @@ Scope::Scope(std::shared_ptr<Scope> parent)
     this->parentScope = parent;
 }
 
-void Scope::setScopeTitle(const std::string title)
+void Scope::setScopeTitle(const std::string &title)
 {
     this->scope_title = title;
 }
@@ -66,9 +66,9 @@ std::optional<Record> Scope::lookupRecord(const string &key) const
     }
 }
 
-void Scope::addRecord(const string &key, const Record &item)
+void Scope::addRecord(const string &key, const std::shared_ptr<Record> &item)
 {
-    auto ret = this->records.insert({key, item}); // = insert(std::pair<string, Record>(key, item))
+    auto ret = this->records.insert({key, item}); // = insert(std::pair<string, std::shared_ptr<Record>>(key, item))
     if (!ret.second) // false
     {
         std::cerr << "The record " << key << " already exists in the scope!" << std::endl;
