@@ -13,7 +13,7 @@ Goal::Goal(string t, string v) : Node(t, v) {}
  */
 std::optional<string> Goal::execute()
 {
-    for (const auto child : children)
+    for (auto child : children)
     {
         string class_name = "";
         Node::st->setScopeTitle("Program");

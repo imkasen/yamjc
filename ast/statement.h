@@ -8,6 +8,9 @@ class Statement : public Node
 public:
     Statement();
     Statement(std::string t, std::string v);
+
+    // ST
+    virtual std::optional<std::string> execute() override;
 };
 
 #endif

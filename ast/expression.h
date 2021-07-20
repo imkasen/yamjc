@@ -8,6 +8,9 @@ class Expression : public Node
 public:
     Expression();
     Expression(std::string t, std::string v);
+
+    // ST
+    virtual std::optional<std::string> execute() override;
 };
 
 #endif
