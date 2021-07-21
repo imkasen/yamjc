@@ -33,7 +33,7 @@ void SymbolTable::addRecord(const string &key, const std::shared_ptr<Record> &it
 }
 
 /*
- * @return Record ptr | std::nullopt
+ * @return std::optional<Record> | std::nullopt
  */
 std::optional<Record> SymbolTable::lookupRecord(const string &key) const
 {

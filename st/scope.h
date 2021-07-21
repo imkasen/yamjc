@@ -10,10 +10,10 @@ class Scope : public std::enable_shared_from_this<Scope>
 {
 private:
     std::string scope_title = "";
-    size_t next;                                       // next child to visit
-    std::shared_ptr<Scope> parentScope;                // parent scope
-    std::deque<std::shared_ptr<Scope>> childrenScopes; // children scopes
-    std::map<std::string, Record> records;             // symbol to record map
+    size_t next;                                            // next child to visit
+    std::shared_ptr<Scope> parentScope;                     // parent scope
+    std::deque<std::shared_ptr<Scope>> childrenScopes;      // children scopes
+    std::map<std::string, std::shared_ptr<Record>> records; // symbol to record map
 
 public:
     Scope();

@@ -44,7 +44,7 @@ std::shared_ptr<Scope> Scope::getParentScope() const
 }
 
 /*
- * @return Record ptr | std::nullopt
+ * @return std::optional<Record> | std::nullopt
  */
 std::optional<Record> Scope::lookupRecord(const string &key) const
 {

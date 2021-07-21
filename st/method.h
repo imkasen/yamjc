@@ -13,7 +13,7 @@ public:
     Method();
     Method(std::string id, std::string type);
 
-    void addParameter(std::shared_ptr<Variable> &parameter);
+    void addParameter(const std::shared_ptr<Variable> &parameter);
     std::optional<std::shared_ptr<Variable>> lookupParameter(const std::string &name) const;
 
 };
