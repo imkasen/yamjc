@@ -13,7 +13,7 @@ public:
     STClass();
     STClass(std::string id, std::string type);
 
-    void addMethod(const std::shared_ptr<Method> &method);
+    void addMethod(std::shared_ptr<Method> &method);
     std::optional<std::shared_ptr<Method>> lookupMethod(const std::string &name) const;
 
 };

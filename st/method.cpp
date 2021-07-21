@@ -5,7 +5,7 @@ Method::Method() : Variable() {}
 
 Method::Method(string id, string type) : Variable(id, type) {}
 
-void Method::addParameter(const std::shared_ptr<Variable> &parameter)
+void Method::addParameter(std::shared_ptr<Variable> &parameter)
 {
     auto ret = this->parameters.insert({parameter->getId(), parameter});
     if (!ret.second) // false

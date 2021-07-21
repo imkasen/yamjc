@@ -15,11 +15,11 @@ std::optional<string> Goal::execute()
 {
     for (auto child : children)
     {
-        string class_name = "";
+        string class_name;
         Node::st->setScopeTitle("Program");
 
         Node::st->enterScope(); // enter class scope
-        class_name = child.execute();
+        class_name = child.execute().value_or("Unknown");
         Node::st->setScopeTitle("Class:" + class_name);
         Node::st->exitScope(); // exit class scope
 

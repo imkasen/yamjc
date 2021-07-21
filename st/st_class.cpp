@@ -5,7 +5,7 @@ STClass::STClass() : Variable() {}
 
 STClass::STClass(string id, string type) : Variable(id, type) {}
 
-void STClass::addMethod(const std::shared_ptr<Method> &method)
+void STClass::addMethod(std::shared_ptr<Method> &method)
 {
     auto ret = this->methods.insert({method->getId(), method});
     if (!ret.second) // false

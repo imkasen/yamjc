@@ -29,11 +29,13 @@ MainClass::MainClass(string t, string v) : Node(t, v) {}
  */
 std::optional<string> MainClass::execute()
 {
+    string class_name, class_type, parameter_name;
+
     // create records to the current scope
-    string class_name = this->children.at(0).execute();
-    std::shared_ptr<Variable> variable_this_ptr = std::make_shared<Variable>("this", class_name); // used as type here
+    class_name = class_type = this->children.at(0).execute().value_or("Unknown");
+    std::shared_ptr<Variable> variable_this_ptr = std::make_shared<Variable>("this", class_type); // used as type here
     std::shared_ptr<Method> method_main_ptr = std::make_shared<Method>("main", "void");
-    Node::st->addRecord("this", ariable_this_ptr);
+    Node::st->addRecord("this", variable_this_ptr);
     Node::st->addRecord("main", method_main_ptr);
 
     // create a class record to the parent scope("Program")
@@ -45,7 +47,7 @@ std::optional<string> MainClass::execute()
     // enter the method scope
     Node::st->enterScope();
     Node::st->setScopeTitle("Method:main");
-    string parameter_name = this->children.at(1).execute();
+    parameter_name = this->children.at(1).execute().value_or("Unknown");
     std::shared_ptr<Variable> variable_parameter_ptr = std::make_shared<Variable>(parameter_name, "String[]");
     method_main_ptr->addParameter(variable_parameter_ptr);
     Node::st->addRecord(parameter_name, variable_parameter_ptr);

@@ -5,7 +5,7 @@ Variable::Variable() : Record() {}
 
 Variable::Variable(string id, string type) : Record(id, type) {}
 
-void Variable::addVariable(const std::shared_ptr<Variable> &variable)
+void Variable::addVariable(std::shared_ptr<Variable> &variable)
 {
     // ret: std::pair<std::map<string, std::shared_ptr<Variable>>::iterator, bool>
     auto ret = this->variables.insert({variable->getId(), variable}); // = insert(std::pair<string, std::shared_ptr<Variable>>(variable->getId(), variable))
