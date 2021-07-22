@@ -3,14 +3,14 @@ using std::string;
 
 Method::Method() : Variable() {}
 
-Method::Method(string id, string type) : Variable(id, type) {}
+Method::Method(string name, string type) : Variable(name, type) {}
 
 void Method::addParameter(const std::shared_ptr<Variable> &parameter)
 {
-    auto ret = this->parameters.insert({parameter->getId(), parameter});
+    auto ret = this->parameters.insert({parameter->getName(), parameter});
     if (!ret.second) // false
     {
-        std::cerr << "The parameter " << parameter->getId() << " already exists in the method!" << std::endl;
+        std::cerr << "The parameter " << parameter->getName() << " already exists in the method!" << std::endl;
     }
 }
 

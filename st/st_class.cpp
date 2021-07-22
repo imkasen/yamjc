@@ -3,14 +3,14 @@ using std::string;
 
 STClass::STClass() : Variable() {}
 
-STClass::STClass(string id, string type) : Variable(id, type) {}
+STClass::STClass(string name, string type) : Variable(name, type) {}
 
 void STClass::addMethod(const std::shared_ptr<Method> &method)
 {
-    auto ret = this->methods.insert({method->getId(), method});
+    auto ret = this->methods.insert({method->getName(), method});
     if (!ret.second) // false
     {
-        std::cerr << "The method " << method->getId() << " already exists in the class!" << std::endl;
+        std::cerr << "The method " << method->getName() << " already exists in the class!" << std::endl;
     }
 }
 

@@ -18,16 +18,16 @@ private:
     inline static const std::string RECORD = "record"; // requires c++17
 
 protected:
-    std::string id;
+    std::string name;
     std::string type;
 
 public:
     Record();
-    Record(std::string id, std::string type);
+    Record(std::string name, std::string type);
 
-    void setId(const std::string &r_id);
+    void setName(const std::string &r_name);
     void setType(const std::string &r_type);
-    const std::string getId() const;
+    const std::string getName() const;
     const std::string getType() const;
     const std::string getRecord() const;
     

@@ -3,15 +3,15 @@ using std::string;
 
 Variable::Variable() : Record() {}
 
-Variable::Variable(string id, string type) : Record(id, type) {}
+Variable::Variable(string name, string type) : Record(name, type) {}
 
 void Variable::addVariable(const std::shared_ptr<Variable> &variable)
 {
     // ret: std::pair<std::map<string, std::shared_ptr<Variable>>::iterator, bool>
-    auto ret = this->variables.insert({variable->getId(), variable}); // = insert(std::pair<string, std::shared_ptr<Variable>>(variable->getId(), variable))
+    auto ret = this->variables.insert({variable->getName(), variable}); // = insert(std::pair<string, std::shared_ptr<Variable>>(variable->getId(), variable))
     if (!ret.second) // false
     {
-        std::cerr << "The variable " << variable->getId() << " already exists!" << std::endl;
+        std::cerr << "The variable " << variable->getName() << " already exists!" << std::endl;
     }
 }
 

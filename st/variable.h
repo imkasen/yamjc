@@ -16,7 +16,7 @@ protected:
 
 public:
     Variable();
-    Variable(std::string id, std::string type);
+    Variable(std::string name, std::string type);
 
     void addVariable(const std::shared_ptr<Variable> &variable);
     std::optional<std::shared_ptr<Variable>> lookupVariable(const std::string &name) const;

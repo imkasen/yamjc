@@ -8,6 +8,7 @@ MainClass::MainClass(string t, string v) : Node(t, v) {}
 /*
  * 1.
  * Create records in the current "Class" scope.
+ * Set the scope title.
  * Scope add:
  *     Variable: this
  *     Method: main
@@ -19,13 +20,14 @@ MainClass::MainClass(string t, string v) : Node(t, v) {}
  * Add "this" and "main" listed above into "Class"
  *
  * 3.
- * Enter into a child "Method" scope and create a parameter record.
+ * Enter into the child "Method" scope and create a parameter record.
+ * Set the child scope title.
  * Child scope add:
  *     Variable: <parameter name>
  * Add parameter into "main" Method listed above.
  * Traverse children.
  *
- * @return: string - class name
+ * @return: std::nullopt
  */
 std::optional<string> MainClass::generateST()
 {
@@ -33,6 +35,7 @@ std::optional<string> MainClass::generateST()
 
     // create records to the current scope
     class_name = class_type = this->children.at(0).generateST().value_or("Unknown");
+    Node::st->setScopeTitle("Class: " + class_name); // set the current scope title
     std::shared_ptr<Variable> variable_this_ptr = std::make_shared<Variable>("this", class_type); // used as type here
     std::shared_ptr<Method> method_main_ptr = std::make_shared<Method>("main", "void");
     Node::st->addRecord("this", variable_this_ptr);
@@ -46,7 +49,7 @@ std::optional<string> MainClass::generateST()
 
     // enter the method scope
     Node::st->enterScope();
-    Node::st->setScopeTitle("Method:main");
+    Node::st->setScopeTitle("Method: main"); // set the child scope title
     parameter_name = this->children.at(1).generateST().value_or("Unknown");
     std::shared_ptr<Variable> variable_parameter_ptr = std::make_shared<Variable>(parameter_name, "String[]");
     method_main_ptr->addParameter(variable_parameter_ptr);
@@ -57,5 +60,5 @@ std::optional<string> MainClass::generateST()
     }
     Node::st->exitScope(); // exit method scope
 
-    return class_name;
+    return std::nullopt;
 }

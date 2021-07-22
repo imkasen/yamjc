@@ -3,15 +3,15 @@ using std::string;
 
 Record::Record()
 {
-    this->id = "uninitialised";
+    this->name = "uninitialised";
     this->type = "uninitialised";
 }
 
-Record::Record(string id, string type) : id(id), type(type) {}
+Record::Record(string name, string type) : name(name), type(type) {}
 
-void Record::setId(const string &r_id)
+void Record::setName(const std::string &r_name)
 {
-    this->id = r_id;
+    this->name = r_name;
 }
 
 void Record::setType(const string &r_type)
@@ -19,9 +19,9 @@ void Record::setType(const string &r_type)
     this->type = r_type;
 }
 
-const string Record::getId() const
+const string Record::getName() const
 {
-    return this->id;
+    return this->Name;
 }
 
 const string Record::getType() const
@@ -36,5 +36,5 @@ const string Record::getRecord() const
 
 const void Record::printRecord() const
 {
-    std::cout << "name: " << this->getId() << "; record: " << this->getRecord() << "; type: " << this->getType() << std::endl;
+    std::cout << "name: " << this->getName() << "; record: " << this->getRecord() << "; type: " << this->getType() << std::endl;
 }
