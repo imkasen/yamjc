@@ -13,10 +13,11 @@ Goal::Goal(string t, string v) : Node(t, v) {}
  */
 std::optional<string> Goal::generateST()
 {
+    Node::st->setScopeTitle("Program");
+
     for (auto child : children)
     {
         string class_name;
-        Node::st->setScopeTitle("Program");
 
         Node::st->enterScope(); // enter class scope
         class_name = child.generateST().value_or("Unknown");

@@ -33,8 +33,9 @@ std::shared_ptr<Scope> Scope::getNextChild()
     }
     else
     {
-        nextChild = this->childrenScopes.at((this->next)++); // visit scope
+        nextChild = this->childrenScopes.at(this->next); // visit scope
     }
+    ++(this->next);
     return nextChild;
 }
 
