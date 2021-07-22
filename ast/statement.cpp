@@ -4,11 +4,11 @@ Statement::Statement() : Node() {}
 
 Statement::Statement(std::string t, std::string v) : Node(t, v) {}
 
-std::optional<std::string> Statement::execute()
+std::optional<std::string> Statement::generateST()
 {
     for (auto child: children)
     {
-        child.execute();
+        child.generateST();
     }
 
     return std::nullopt;

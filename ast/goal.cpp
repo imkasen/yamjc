@@ -11,7 +11,7 @@ Goal::Goal(string t, string v) : Node(t, v) {}
  *
  * @return: std::nullopt
  */
-std::optional<string> Goal::execute()
+std::optional<string> Goal::generateST()
 {
     for (auto child : children)
     {
@@ -19,7 +19,7 @@ std::optional<string> Goal::execute()
         Node::st->setScopeTitle("Program");
 
         Node::st->enterScope(); // enter class scope
-        class_name = child.execute().value_or("Unknown");
+        class_name = child.generateST().value_or("Unknown");
         Node::st->setScopeTitle("Class:" + class_name);
         Node::st->exitScope(); // exit class scope
 
@@ -27,14 +27,14 @@ std::optional<string> Goal::execute()
         if (child.getType() == "MainClass")
         {
             Node::st->enterScope(); // enter class scope
-            class_name = child.execute();
+            class_name = child.generateST();
             Node::st->setScopeTitle("Class:" + class_name);
             Node::st->exitScope(); // exit class scope
         }
         else // child.getType() == "ClassDeclaration"
         {
             Node::st->enterScope(); // enter class scope
-            class_name = child.execute();
+            class_name = child.generateST();
             Node::st->setScopeTitle("Class:" + class_name);
             Node::st->exitScope(); // exit class scope
 

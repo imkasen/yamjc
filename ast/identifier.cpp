@@ -5,7 +5,7 @@ Identifier::Identifier() : Node() {}
 
 Identifier::Identifier(string t, string v) : Node(t, v) {}
 
-std::optional<string> Identifier::execute()
+std::optional<string> Identifier::generateST()
 {
     return this->getValue();
 }

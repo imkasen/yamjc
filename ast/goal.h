@@ -9,8 +9,7 @@ public:
     Goal();
     Goal(std::string t, std::string v);
 
-    // ST
-    virtual std::optional<std::string> execute() override;
+    virtual std::optional<std::string> generateST() override;
 };
 
 #endif

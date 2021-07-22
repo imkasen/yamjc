@@ -4,11 +4,11 @@ Expression::Expression() : Node() {}
 
 Expression::Expression(std::string t, std::string v) : Node(t, v) {}
 
-std::optional<std::string> Expression::execute()
+std::optional<std::string> Expression::generateST()
 {
     for (auto child: children)
     {
-        child.execute();
+        child.generateST();
     }
 
     return std::nullopt;
