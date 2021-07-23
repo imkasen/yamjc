@@ -18,7 +18,7 @@ void Scope::setScopeTitle(const std::string &title)
     this->scope_title = title;
 }
 
-string Scope::getScopeTitle() const
+const string Scope::getScopeTitle() const
 {
     return this->scope_title;
 }
@@ -45,9 +45,9 @@ std::shared_ptr<Scope> Scope::getParentScope() const
 }
 
 /*
- * @return std::optional<Record> | std::nullopt
+ * @return std::shared_ptr<Record> | std::nullopt
  */
-std::optional<Record> Scope::lookupRecord(const string &key) const
+std::optional<std::shared_ptr<Record>> Scope::lookupRecord(const string &key) const
 {
     auto iterator = this->records.find(key);
     if (iterator != this->records.end()) // exist in the current scope
@@ -89,6 +89,6 @@ const void Scope::printScope() const
 {
     for (const auto &iter : this->records)
     {
-        (iter.second).printRecord();
+        (iter.second)->printRecord();
     }
 }

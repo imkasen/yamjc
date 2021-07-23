@@ -94,5 +94,15 @@ void Node::generateAST(size_t &count, std::ofstream *outStream)
 void Node::buildST(std::shared_ptr<SymbolTable> &symbol_table)
 {
     Node::st = symbol_table;
-    this->execute();
+    this->generateST();
+}
+
+std::optional<std::string> Node::generateST()
+{
+    for (auto child: children)
+    {
+        child.generateST();
+    }
+
+    return std::nullopt;
 }

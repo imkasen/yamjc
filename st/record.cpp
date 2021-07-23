@@ -21,7 +21,7 @@ void Record::setType(const string &r_type)
 
 const string Record::getName() const
 {
-    return this->Name;
+    return this->name;
 }
 
 const string Record::getType() const
