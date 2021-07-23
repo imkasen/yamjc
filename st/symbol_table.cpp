@@ -22,6 +22,11 @@ void SymbolTable::setScopeTitle(const std::string &title)
     this->current->setScopeTitle(title);
 }
 
+std::string SymbolTable::getScopeTitle() const
+{
+    return this->current->getScopeTitle();
+}
+
 std::shared_ptr<Scope> SymbolTable::getParentScope() const
 {
     return this->current->getParentScope();

@@ -8,6 +8,8 @@ class VarDeclaration : public Node
 public:
     VarDeclaration();
     VarDeclaration(std::string t, std::string v);
+
+    virtual std::optional<std::string> generateST() override;
 };
 
 #endif

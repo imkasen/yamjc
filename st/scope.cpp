@@ -20,7 +20,9 @@ void Scope::setScopeTitle(const std::string &title)
 
 const string Scope::getScopeTitle() const
 {
-    return this->scope_title;
+    // "xxx: xxx"
+    size_t pos = this->scope_title.find(" ") + 1;
+    return this->scope_title.substr(pos);
 }
 
 std::shared_ptr<Scope> Scope::getNextChild()
@@ -56,14 +58,17 @@ std::optional<std::shared_ptr<Record>> Scope::lookupRecord(const string &key) co
     }
     else
     {
+        /*
         if (!(this->parentScope)) // == nullptr
         {
             return std::nullopt; // identifier not in the symbol table
         }
-        else 
+        else
         {
             return (this->parentScope)->lookupRecord(key); // delegate the request to parent scope
         }
+         */
+        return std::nullopt;
     }
 }
 

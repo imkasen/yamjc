@@ -16,6 +16,7 @@ public:
     void exitScope();
 
     void setScopeTitle(const std::string &title);
+    std::string getScopeTitle() const;
     std::shared_ptr<Scope> getParentScope() const;
 
     void addRecord(const std::string &key, const std::shared_ptr<Record> &item);
