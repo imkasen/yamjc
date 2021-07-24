@@ -1,5 +1,6 @@
 #include "node.h"
 using std::string;
+using std::size_t;
 using std::cout;
 using std::endl;
 

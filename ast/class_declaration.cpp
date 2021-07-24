@@ -1,5 +1,6 @@
 #include "class_declaration.h"
 using std::string;
+using std::size_t;
 
 ClassDeclaration::ClassDeclaration() : Node() {}
 

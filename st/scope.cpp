@@ -1,5 +1,6 @@
 #include "scope.h"
 using std::string;
+using std::size_t;
 
 Scope::Scope()
 {
@@ -21,8 +22,15 @@ void Scope::setScopeTitle(const std::string &title)
 const string Scope::getScopeTitle() const
 {
     // "xxx: xxx"
-    size_t pos = this->scope_title.find(" ") + 1;
-    return this->scope_title.substr(pos);
+    size_t pos = this->scope_title.find(" ");
+    if (pos != string::npos)
+    {
+        return this->scope_title.substr(pos + 1);
+    }
+    else
+    {
+        return this->scope_title; // "Program"
+    }
 }
 
 std::shared_ptr<Scope> Scope::getNextChild()

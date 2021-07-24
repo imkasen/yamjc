@@ -1,5 +1,6 @@
 #include "main_class.h"
 using std::string;
+using std::size_t;
 
 MainClass::MainClass() : Node() {}
 

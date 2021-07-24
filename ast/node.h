@@ -21,7 +21,7 @@
 class Node
 {
 protected:
-    size_t id;
+    std::size_t id;
     std::string type, value;
     inline static std::shared_ptr<SymbolTable> st = nullptr;
 
@@ -31,17 +31,17 @@ public:
     Node();
     Node(std::string t, std::string v);
 
-    void setId(size_t n_id);
+    void setId(std::size_t n_id);
     void setType(std::string n_type);
     void setValue(std::string n_value);
-    const size_t getId() const;
+    const std::size_t getId() const;
     const std::string getType() const;
     const std::string getValue() const;
 
     // AST
-    // void printAST(size_t depth = 0);
-    void saveAST(std::ofstream *outStream, size_t depth = 0);
-    void generateAST(size_t &count, std::ofstream *outStream);
+    // void printAST(std::size_t depth = 0);
+    void saveAST(std::ofstream *outStream, std::size_t depth = 0);
+    void generateAST(std::size_t &count, std::ofstream *outStream);
 
     // ST
     void buildST(std::shared_ptr<SymbolTable> &symbol_table);

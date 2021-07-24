@@ -1,4 +1,5 @@
 #include "main.h"
+using std::size_t;
 using std::cout;
 using std::endl;
 using std::string;
