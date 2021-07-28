@@ -38,26 +38,26 @@ int main(int argc, char* argv[])
     }
 
     // generate AST.dot
-    std::ofstream outStream;
-    outStream.open("ast.dot", std::ios::out);
+    std::ofstream ast_dot_stream;
+    ast_dot_stream.open("ast.dot", std::ios::out);
     size_t count = 0;
-    outStream << "digraph {" << endl;
-    root.generateAST(count, &outStream);
-    outStream << "}" << endl;
-    outStream.close();
+    ast_dot_stream << "digraph {" << endl;
+    root.generateAST(count, &ast_dot_stream);
+    ast_dot_stream << "}" << endl;
+    ast_dot_stream.close();
 
     // print AST in cmd
     // cout << "Built a parse-tree:" << endl;
     // root.printAST();
 
     // generate AST.txt
-    std::ofstream outStream2;
-    outStream2.open("ast.txt", std::ios::out);
-    outStream2 << "Built a parse-tree in text:" << endl;
-    root.saveAST(&outStream2);
-    outStream2.close();
+    std::ofstream ast_text_stream;
+    ast_text_stream.open("ast.txt", std::ios::out);
+    ast_text_stream << "Built a parse-tree in text:" << endl;
+    root.saveAST(&ast_text_stream);
+    ast_text_stream.close();
 
-    //Build symbol table
+    // build symbol table, generate st.dot
     std::shared_ptr<SymbolTable> st = std::shared_ptr<SymbolTable>();
     root.buildST(st);
 
