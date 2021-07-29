@@ -23,11 +23,11 @@ std::optional<string> VarDeclaration::generateST()
     variable_type = this->children.at(0)->generateST().value_or("Unknown");
     variable_name = this->children.at(1)->generateST().value_or("Unknown");
     std::shared_ptr<Variable> variable_ptr = std::make_shared<Variable>(variable_name, variable_type);
-    Node::st->addRecord(variable_name, variable_ptr);
+    VarDeclaration::st.addRecord(variable_name, variable_ptr);
 
     // add variable records into "Class"
-    string scope_name = Node::st->getScopeTitle();
-    auto record_ptr = Node::st->getParentScope()->lookupRecord(scope_name).value_or(nullptr); // std::shared_ptr<Record>
+    string scope_name = VarDeclaration::st.getScopeTitle();
+    auto record_ptr = VarDeclaration::st.getParentScope()->lookupRecord(scope_name).value_or(nullptr); // std::shared_ptr<Record>
     auto class_ptr = std::dynamic_pointer_cast<STClass>(record_ptr);
     class_ptr->addVariable(variable_ptr);
 

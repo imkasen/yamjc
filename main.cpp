@@ -58,8 +58,7 @@ int main(int argc, char* argv[])
     ast_text_stream.close();
 
     // build symbol table
-    std::shared_ptr<SymbolTable> st = std::shared_ptr<SymbolTable>();
-    // root->buildST(st);
+    root->generateST();
 
     //Semantic analysis
     //root.checkSemantics(st);

@@ -14,13 +14,13 @@ Goal::Goal(string t, string v) : Node(t, v) {}
  */
 std::optional<string> Goal::generateST()
 {
-    Node::st->setScopeTitle("Program");
+    Goal::st.setScopeTitle("Program");
 
     for (auto child : children)
     {
-        Node::st->enterScope(); // enter class scope
+        Goal::st.enterScope(); // enter class scope
         child->generateST();
-        Node::st->exitScope(); // exit class scope
+        Goal::st.exitScope(); // exit class scope
     }
 
     return std::nullopt;

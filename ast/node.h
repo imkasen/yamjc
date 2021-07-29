@@ -23,7 +23,6 @@ class Node
 protected:
     std::size_t id;
     std::string type, value;
-    inline static std::shared_ptr<SymbolTable> st = nullptr;
 
 public:
     /*
@@ -32,6 +31,7 @@ public:
      * but the smart pointer is too complicated in bison.
      */
     std::deque<Node *> children;
+    inline static SymbolTable st = SymbolTable();
 
     Node();
     Node(std::string t, std::string v);
@@ -49,7 +49,6 @@ public:
     void generateAST(std::size_t &count, std::ofstream *outStream);
 
     // ST
-    void buildST(std::shared_ptr<SymbolTable> &symbol_table);
     virtual std::optional<std::string> generateST();
 
     virtual ~Node();

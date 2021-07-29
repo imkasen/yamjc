@@ -92,12 +92,6 @@ void Node::generateAST(size_t &count, std::ofstream *outStream)
 }
 
 // Generate symbol table
-void Node::buildST(std::shared_ptr<SymbolTable> &symbol_table)
-{
-    Node::st = symbol_table;
-    this->generateST();
-}
-
 std::optional<std::string> Node::generateST()
 {
     for (auto child: children)
