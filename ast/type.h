@@ -9,7 +9,7 @@ public:
     Type();
     Type(std::string t, std::string v);
 
-    virtual std::optional<std::string> generateST() override;
+    std::optional<std::string> generateST() override;
 };
 
 #endif
