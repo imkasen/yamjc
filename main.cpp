@@ -40,9 +40,9 @@ int main(int argc, char* argv[])
     // generate AST.dot
     std::ofstream ast_dot_stream;
     ast_dot_stream.open("ast.dot", std::ios::out);
-    size_t count = 0;
+    size_t ast_count = 0;
     ast_dot_stream << "digraph {" << endl;
-    root.generateAST(count, &ast_dot_stream);
+    root.generateAST(ast_count, &ast_dot_stream);
     ast_dot_stream << "}" << endl;
     ast_dot_stream.close();
 
@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
     root.saveAST(&ast_text_stream);
     ast_text_stream.close();
 
-    // build symbol table, generate st.dot
+    // build symbol table
     std::shared_ptr<SymbolTable> st = std::shared_ptr<SymbolTable>();
     root.buildST(st);
 

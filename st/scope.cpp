@@ -91,9 +91,9 @@ void Scope::addRecord(const string &key, const std::shared_ptr<Record> &item)
 
 void Scope::resetScope()
 {
-    for (auto iter : this->childrenScopes)
+    for (auto ptr : this->childrenScopes)
     {
-        iter->resetScope();
+        ptr->resetScope();
     }
     this->next = 0;
 }

@@ -53,4 +53,5 @@ void SymbolTable::printTable() const
 void SymbolTable::resetTable()
 {
     this->root->resetScope(); // preparation for new traversal
+    this->current = this->root;
 }

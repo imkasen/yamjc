@@ -75,7 +75,7 @@ void Node::saveAST(std::ofstream *outStream, size_t depth)
 // Generate ast in the ast.dot.
 void Node::generateAST(size_t &count, std::ofstream *outStream)
 {
-    this->setId(++count);
+    this->setId(count++);
     if (this->getValue() != "")
     {
         *outStream << "n" << this->getId() << " [label=\"" << this->getType() << ":" << this->getValue() << "\"];" << endl;
@@ -87,7 +87,7 @@ void Node::generateAST(size_t &count, std::ofstream *outStream)
     for (auto i = this->children.begin(); i != this->children.end(); ++i)
     {
         (*i).generateAST(count, outStream);
-        *outStream << "n" << this->getId() << " -> n" << (*i).getId() << endl;
+        *outStream << "n" << this->getId() << " -> n" << (*i).getId() << ";" << endl;
     }
 }
 
