@@ -14,24 +14,23 @@
  */
 class Record
 {
-private:
-    inline static const std::string RECORD = "record"; // requires c++17
-
 protected:
     std::string name;
     std::string type;
+    std::string record;
 
 public:
     Record();
-    Record(std::string name, std::string type);
+    Record(std::string name, std::string type, std::string record);
 
     void setName(const std::string &r_name);
+    void setRecord(const std::string &r_record);
     void setType(const std::string &r_type);
     const std::string getName() const;
-    const std::string getType() const;
     const std::string getRecord() const;
+    const std::string getType() const;
     
-    const void printRecord() const;
+    const std::string printRecord() const;
 
     virtual ~Record() = default;
 };

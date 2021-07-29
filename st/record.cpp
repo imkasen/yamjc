@@ -5,13 +5,19 @@ Record::Record()
 {
     this->name = "uninitialised";
     this->type = "uninitialised";
+    this->record = "Record";
 }
 
-Record::Record(string name, string type) : name(name), type(type) {}
+Record::Record(string name, string type, string record) : name(name), type(type), record(record) {}
 
 void Record::setName(const std::string &r_name)
 {
     this->name = r_name;
+}
+
+void Record::setRecord(const std::string &r_record)
+{
+    this->record = r_record;
 }
 
 void Record::setType(const string &r_type)
@@ -31,10 +37,10 @@ const string Record::getType() const
 
 const string Record::getRecord() const
 {
-    return this->RECORD;
+    return this->record;
 }
 
-const void Record::printRecord() const
+const std::string Record::printRecord() const
 {
-    std::cout << "name: " << this->getName() << "; record: " << this->getRecord() << "; type: " << this->getType() << std::endl;
+    return "name: " + this->getName() + "; record: " + this->getRecord() + "; type: " + this->getType() + "\n";
 }

@@ -5,6 +5,7 @@
 #include <deque>
 #include <map>
 #include <optional>
+#include <fstream>
 
 class Scope : public std::enable_shared_from_this<Scope>
 {
@@ -28,7 +29,7 @@ public:
     std::optional<std::shared_ptr<Record>> lookupRecord(const std::string &key) const;
     void addRecord(const std::string &key, const std::shared_ptr<Record> &item);
     void resetScope();
-    const void printScope() const;
+    void generateST(std::size_t &index, std::ofstream *outStream);
 
 };
 

@@ -45,9 +45,10 @@ std::optional<std::shared_ptr<Record>> SymbolTable::lookupRecord(const string &k
     return this->current->lookupRecord(key);
 }
 
-void SymbolTable::printTable() const
+void SymbolTable::generateST(std::ofstream *outStream)
 {
-    this->root->printScope();
+    std::size_t index = 0;
+    this->root->generateST(index, outStream);
 }
 
 void SymbolTable::resetTable()

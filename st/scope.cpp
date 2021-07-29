@@ -1,6 +1,7 @@
 #include "scope.h"
 using std::string;
 using std::size_t;
+using std::endl;
 
 Scope::Scope()
 {
@@ -85,7 +86,7 @@ void Scope::addRecord(const string &key, const std::shared_ptr<Record> &item)
     auto ret = this->records.insert({key, item}); // = insert(std::pair<string, std::shared_ptr<Record>>(key, item))
     if (!ret.second) // false
     {
-        std::cerr << "The record " << key << " already exists in the scope!" << std::endl;
+        std::cerr << "The record " << key << " already exists in the scope!" << endl;
     }
 }
 
@@ -98,10 +99,20 @@ void Scope::resetScope()
     this->next = 0;
 }
 
-const void Scope::printScope() const
+void Scope::generateST(std::size_t &index, std::ofstream *outStream)
 {
-    for (const auto &iter : this->records)
+    static size_t count = index;
+    string content = "Symbol table (" + this->scope_title + ")\n";
+    for (const auto pair : records)
     {
-        (iter.second)->printRecord();
+        content += pair.second->printRecord();
+    }
+
+    // draw
+    *outStream << "n" << index << " [shape=rectangle, label=\"" << content << "\"];" << endl;
+    for (const auto childScope : childrenScopes)
+    {
+        *outStream << "n" << index << " -- n" << count + 1 << ";" << endl;
+        childScope->generateST(++count, outStream);
     }
 }

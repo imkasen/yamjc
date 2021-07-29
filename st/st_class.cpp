@@ -2,8 +2,7 @@
 using std::string;
 
 STClass::STClass() : Variable() {}
-
-STClass::STClass(string name, string type) : Variable(name, type) {}
+STClass::STClass(string name, string type) : Variable(name, type, "Class") {}
 
 void STClass::addMethod(const std::shared_ptr<Method> &method)
 {

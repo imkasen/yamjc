@@ -22,7 +22,7 @@ public:
     void addRecord(const std::string &key, const std::shared_ptr<Record> &item);
     std::optional<std::shared_ptr<Record>> lookupRecord(const std::string &key) const;
 
-    void printTable() const;
+    void generateST(std::ofstream *outStream);
     void resetTable();
 
     virtual ~SymbolTable() = default;

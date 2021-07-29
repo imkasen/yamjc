@@ -2,8 +2,8 @@
 using std::string;
 
 Variable::Variable() : Record() {}
-
-Variable::Variable(string name, string type) : Record(name, type) {}
+Variable::Variable(string name, string type) : Record(name, type, "Variable") {}
+Variable::Variable(string name, string type, string record) : Record(name, type, record) {}
 
 void Variable::addVariable(const std::shared_ptr<Variable> &variable)
 {

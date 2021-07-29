@@ -2,8 +2,7 @@
 using std::string;
 
 Method::Method() : Variable() {}
-
-Method::Method(string name, string type) : Variable(name, type) {}
+Method::Method(string name, string type) : Variable(name, type, "Method") {}
 
 void Method::addParameter(const std::shared_ptr<Variable> &parameter)
 {

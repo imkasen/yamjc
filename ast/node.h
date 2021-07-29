@@ -49,6 +49,7 @@ public:
     void generateAST(std::size_t &count, std::ofstream *outStream);
 
     // ST
+    void buildST(std::ofstream *outStream);
     virtual std::optional<std::string> generateST();
 
     virtual ~Node();

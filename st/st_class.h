@@ -6,7 +6,6 @@
 class STClass : public Variable
 {
 private:
-    inline static const std::string RECORD = "class";
     std::map<std::string, std::shared_ptr<Method>> methods;
 
 public:

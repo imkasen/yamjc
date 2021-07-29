@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    // generate AST.dot
+    // generate ast.dot
     std::ofstream ast_dot_stream;
     ast_dot_stream.open("ast.dot", std::ios::out);
     size_t ast_count = 0;
@@ -57,8 +57,13 @@ int main(int argc, char* argv[])
     root->saveAST(&ast_text_stream);
     ast_text_stream.close();
 
-    // build symbol table
-    root->generateST();
+    // build symbol table, generate st.dot
+    std::ofstream st_dot_stream;
+    st_dot_stream.open("st.dot", std::ios::out);
+    st_dot_stream << "graph {" << endl;
+    root->buildST(&st_dot_stream);
+    st_dot_stream << "}" << endl;
+    st_dot_stream.close();
 
     //Semantic analysis
     //root.checkSemantics(st);

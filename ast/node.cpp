@@ -92,6 +92,14 @@ void Node::generateAST(size_t &count, std::ofstream *outStream)
 }
 
 // Generate symbol table
+void Node::buildST(std::ofstream *outStream)
+{
+    this->generateST();
+    Node::st.resetTable();
+    // generate st.dot
+    Node::st.generateST(outStream);
+}
+
 std::optional<std::string> Node::generateST()
 {
     for (auto child: children)
