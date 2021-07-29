@@ -19,8 +19,9 @@ lex.yy.c: lexer.flex parser.tab.cc
 	$(LEX) lexer.flex
 
 
-.PHONY : all ast st clean
+.PHONY : all graph ast st clean
 all: $(TARGET)
+graph: ast st
 ast:
 	dot -T svg ast.dot -o ast.svg
 st:

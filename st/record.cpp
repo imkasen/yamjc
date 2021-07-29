@@ -42,5 +42,5 @@ const string Record::getRecord() const
 
 const std::string Record::printRecord() const
 {
-    return "name: " + this->getName() + "; record: " + this->getRecord() + "; type: " + this->getType() + "\n";
+    return "name: " + this->getName() + "; record: " + this->getRecord() + "; type: " + this->getType();
 }

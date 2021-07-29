@@ -99,20 +99,20 @@ void Scope::resetScope()
     this->next = 0;
 }
 
-void Scope::generateST(std::size_t &index, std::ofstream *outStream)
+void Scope::printST(std::size_t &index, std::ofstream *outStream)
 {
     static size_t count = index;
-    string content = "Symbol table (" + this->scope_title + ")\n";
+    string content = "<U><B>" + this->scope_title + "</B></U><BR/>\n";
     for (const auto pair : records)
     {
-        content += pair.second->printRecord();
+        content += pair.second->printRecord() + "<BR/>\n";
     }
 
     // draw
-    *outStream << "n" << index << " [shape=rectangle, label=\"" << content << "\"];" << endl;
+    *outStream << "n" << index << " [label=<" << content << ">];" << endl; // HTML like labels
     for (const auto childScope : childrenScopes)
     {
         *outStream << "n" << index << " -- n" << count + 1 << ";" << endl;
-        childScope->generateST(++count, outStream);
+        childScope->printST(++count, outStream);
     }
 }

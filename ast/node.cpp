@@ -97,7 +97,7 @@ void Node::buildST(std::ofstream *outStream)
     this->generateST();
     Node::st.resetTable();
     // generate st.dot
-    Node::st.generateST(outStream);
+    Node::st.printST(outStream);
 }
 
 std::optional<std::string> Node::generateST()
