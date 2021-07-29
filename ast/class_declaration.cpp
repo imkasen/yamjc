@@ -26,7 +26,7 @@ std::optional<string> ClassDeclaration::generateST()
     string class_name, class_type;
 
     // create records to the current scope
-    class_name = class_type = this->children.at(0).generateST().value_or("Unknown");
+    class_name = class_type = this->children.at(0)->generateST().value_or("Unknown");
     Node::st->setScopeTitle("Class: " + class_name); // set the current scope title
     std::shared_ptr<Variable> variable_this_ptr = std::make_shared<Variable>("this", class_type);
     Node::st->addRecord("this", variable_this_ptr);
@@ -38,7 +38,7 @@ std::optional<string> ClassDeclaration::generateST()
 
     for (size_t i = 1; i < this->children.size(); ++i) // Declarations
     {
-        this->children.at(i).generateST();
+        this->children.at(i)->generateST();
     }
 
     return std::nullopt;

@@ -26,7 +26,12 @@ protected:
     inline static std::shared_ptr<SymbolTable> st = nullptr;
 
 public:
-    std::deque<Node> children;
+    /*
+     * An awkward design.
+     * Should use the smart pointer here,
+     * but the smart pointer is too complicated in bison.
+     */
+    std::deque<Node *> children;
 
     Node();
     Node(std::string t, std::string v);
@@ -47,7 +52,7 @@ public:
     void buildST(std::shared_ptr<SymbolTable> &symbol_table);
     virtual std::optional<std::string> generateST();
 
-    virtual ~Node() = default;
+    virtual ~Node();
 };
 
 #endif

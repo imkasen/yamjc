@@ -4,7 +4,7 @@ using std::cout;
 using std::endl;
 using std::string;
 
-extern Node root;
+extern std::shared_ptr<Node> root;
 
 void yy::parser::error(const string &err)
 {
@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
     ast_dot_stream.open("ast.dot", std::ios::out);
     size_t ast_count = 0;
     ast_dot_stream << "digraph {" << endl;
-    root.generateAST(ast_count, &ast_dot_stream);
+    root->generateAST(ast_count, &ast_dot_stream);
     ast_dot_stream << "}" << endl;
     ast_dot_stream.close();
 
@@ -54,12 +54,12 @@ int main(int argc, char* argv[])
     std::ofstream ast_text_stream;
     ast_text_stream.open("ast.txt", std::ios::out);
     ast_text_stream << "Built a parse-tree in text:" << endl;
-    root.saveAST(&ast_text_stream);
+    root->saveAST(&ast_text_stream);
     ast_text_stream.close();
 
     // build symbol table
     std::shared_ptr<SymbolTable> st = std::shared_ptr<SymbolTable>();
-    root.buildST(st);
+    // root->buildST(st);
 
     //Semantic analysis
     //root.checkSemantics(st);

@@ -53,7 +53,7 @@ void Node::printAST(size_t depth)
     cout << this->getType() << ":" << this->getValue() << endl;
     for (auto i = this->children.begin(); i != this->children.end(); ++i)
     {
-        (*i).printAST(depth + 1);
+        (*i)->printAST(depth + 1);
     }
 }
 */
@@ -68,7 +68,7 @@ void Node::saveAST(std::ofstream *outStream, size_t depth)
     *outStream << this->getType() << ":" << this->getValue() << endl;
     for (auto i = this->children.begin(); i != this->children.end(); ++i)
     {
-        (*i).saveAST(outStream, depth + 1);
+        (*i)->saveAST(outStream, depth + 1);
     }
 }
 
@@ -86,8 +86,8 @@ void Node::generateAST(size_t &count, std::ofstream *outStream)
     }
     for (auto i = this->children.begin(); i != this->children.end(); ++i)
     {
-        (*i).generateAST(count, outStream);
-        *outStream << "n" << this->getId() << " -> n" << (*i).getId() << ";" << endl;
+        (*i)->generateAST(count, outStream);
+        *outStream << "n" << this->getId() << " -> n" << (*i)->getId() << ";" << endl;
     }
 }
 
@@ -102,8 +102,17 @@ std::optional<std::string> Node::generateST()
 {
     for (auto child: children)
     {
-        child.generateST();
+        child->generateST();
     }
 
     return std::nullopt;
+}
+
+Node::~Node()
+{
+    for (auto && ptr : children)
+    {
+        delete ptr;
+    }
+    children.clear();
 }

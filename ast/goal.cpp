@@ -19,7 +19,7 @@ std::optional<string> Goal::generateST()
     for (auto child : children)
     {
         Node::st->enterScope(); // enter class scope
-        child.generateST();
+        child->generateST();
         Node::st->exitScope(); // exit class scope
     }
 
