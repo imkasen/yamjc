@@ -62,6 +62,8 @@
 <COMMENT>.*                { /* comment */ }
 <COMMENT>\n                { BEGIN(0); }
 
+"/*"(.|\n)*"*/"            { /* comment */ }
+
 0|[-]?[1-9][0-9]*          { return yy::parser::make_NUM(yytext); }
 [_a-zA-Z\$][_a-zA-Z0-9\$]* { return yy::parser::make_IDENTIFIER(yytext); }
 
