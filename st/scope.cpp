@@ -34,6 +34,19 @@ const string Scope::getScopeTitle() const
     }
 }
 
+const string Scope::getScopeType() const
+{
+    size_t pos = this->scope_title.find(" ");
+    if (pos != string::npos)
+    {
+        return this->scope_title.substr(0, pos - 1);
+    }
+    else
+    {
+        return this->scope_title; // "Program"
+    }
+}
+
 std::shared_ptr<Scope> Scope::getNextChild()
 {
     std::shared_ptr<Scope> nextChild;

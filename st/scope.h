@@ -22,6 +22,7 @@ public:
 
     void setScopeTitle(const std::string &title);
     const std::string getScopeTitle() const;
+    const std::string getScopeType() const;
 
     std::shared_ptr<Scope> getNextChild();
     std::shared_ptr<Scope> getParentScope() const;
