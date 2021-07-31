@@ -8,6 +8,8 @@ class MethodBody : public Node
 public:
     MethodBody();
     MethodBody(std::string t, std::string v);
+
+    std::optional<std::string> generateST() override;
 };
 
 #endif
