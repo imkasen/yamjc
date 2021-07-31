@@ -30,8 +30,9 @@ public:
     std::optional<std::shared_ptr<Record>> lookupRecord(const std::string &key) const;
     void addRecord(const std::string &key, const std::shared_ptr<Record> &item);
     void resetScope();
-    void printST(std::size_t &index, std::ofstream *outStream);
+    void printST(std::size_t index, std::ofstream *outStream);
 
+    virtual ~Scope() = default;
 };
 
 #endif

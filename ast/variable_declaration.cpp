@@ -2,7 +2,6 @@
 using std::string;
 
 VarDeclaration::VarDeclaration() : Node() {}
-
 VarDeclaration::VarDeclaration(string t, string v) : Node(t, v) {}
 /*
  * 1.

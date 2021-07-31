@@ -2,7 +2,6 @@
 using std::string;
 
 Goal::Goal() : Node() {}
-
 Goal::Goal(string t, string v) : Node(t, v) {}
 
 /*

@@ -3,7 +3,6 @@ using std::string;
 using std::size_t;
 
 FormalParameterList::FormalParameterList() : Node() {}
-
 FormalParameterList::FormalParameterList(string t, string v) : Node(t, v) {}
 
 /*
@@ -26,7 +25,7 @@ std::optional<string> FormalParameterList::generateST()
         string parameter_name, parameter_type;
         parameter_type = this->children.at(i)->generateST().value_or("Unknown");
         parameter_name = this->children.at(i + 1)->generateST().value_or("Unknown");
-        std::shared_ptr<Variable> parameter_ptr = std::make_shared<Variable>(parameter_name, parameter_type);
+        std::shared_ptr<Parameter> parameter_ptr = std::make_shared<Parameter>(parameter_name, parameter_type);
         FormalParameterList::st.addRecord(parameter_name, parameter_ptr);
 
         // add parameter records into "Method"

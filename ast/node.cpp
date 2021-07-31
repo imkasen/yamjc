@@ -109,12 +109,3 @@ std::optional<std::string> Node::generateST()
 
     return std::nullopt;
 }
-
-Node::~Node()
-{
-    for (auto && ptr : children)
-    {
-        delete ptr;
-    }
-    children.clear();
-}

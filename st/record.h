@@ -8,9 +8,10 @@
 /*
  * The basic class in tree-based symbol table implementation.
  *
- * Variable : Node
- * Method : Node
- * STClass : Node
+ * Variable : record
+ * Parameter : Variable // parameter is variable
+ * Method : Variable
+ * STClass : Variable
  */
 class Record
 {

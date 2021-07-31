@@ -3,7 +3,6 @@ using std::string;
 using std::size_t;
 
 MainClass::MainClass() : Node() {}
-
 MainClass::MainClass(string t, string v) : Node(t, v) {}
 
 /*
@@ -52,7 +51,7 @@ std::optional<string> MainClass::generateST()
     MainClass::st.enterScope();
     MainClass::st.setScopeTitle("Method: main"); // set the child scope title
     parameter_name = this->children.at(1)->generateST().value_or("Unknown");
-    std::shared_ptr<Variable> variable_parameter_ptr = std::make_shared<Variable>(parameter_name, "String[]");
+    std::shared_ptr<Parameter> variable_parameter_ptr = std::make_shared<Parameter>(parameter_name, "String[]");
     method_main_ptr->addParameter(variable_parameter_ptr);
     MainClass::st.addRecord(parameter_name, variable_parameter_ptr);
     for (size_t i = 2; i < this->children.size(); ++i) // MethodBody

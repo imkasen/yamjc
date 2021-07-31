@@ -3,7 +3,6 @@ using std::string;
 using std::size_t;
 
 ClassDeclaration::ClassDeclaration() : Node() {}
-
 ClassDeclaration::ClassDeclaration(string t, string v) : Node(t, v) {}
 
 /*

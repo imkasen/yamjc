@@ -106,7 +106,7 @@ void Scope::resetScope()
     this->next = 0;
 }
 
-void Scope::printST(std::size_t &index, std::ofstream *outStream)
+void Scope::printST(std::size_t index, std::ofstream *outStream)
 {
     static size_t count = index;
     string content = "<U><B>" + this->scope_title + "</B></U><BR/><BR/>\n";

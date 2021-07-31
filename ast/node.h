@@ -2,6 +2,7 @@
 #define NODE_H
 
 #include "../st/variable.h"
+#include "../st/parameter.h"
 #include "../st/method.h"
 #include "../st/st_class.h"
 #include "../st/symbol_table.h"
@@ -52,7 +53,7 @@ public:
     void buildST(std::ofstream *outStream);
     virtual std::optional<std::string> generateST();
 
-    virtual ~Node();
+    virtual ~Node() = default;
 };
 
 #endif
