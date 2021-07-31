@@ -8,6 +8,8 @@ class MethodDeclaration : public Node
 public:
     MethodDeclaration();
     MethodDeclaration(std::string t, std::string v);
+
+    std::optional<std::string> generateST() override;
 };
 
 #endif
