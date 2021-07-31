@@ -133,7 +133,7 @@ Statement : LBRACE RBRACE                                                  { $$ 
           | Identifier LBRACKET Expression RBRACKET ASSIGN Expression SEMI { $$ = new Statement("Statement", "="); $$->children.push_back($1); $$->children.push_back($3); $$->children.push_back($6); }
           | IF LPARENTHESE Expression RPARENTHESE Statement ElseStatement  { $$ = new Statement("Statement", "IF"); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($6); }
           | WHILE LPARENTHESE Expression RPARENTHESE Statement             { $$ = new Statement("Statement", "WHILE"); $$->children.push_back($3); $$->children.push_back($5); }
-          | SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI              { $$ = new Statement("Statement", "S.O.pRINTLN"); $$->children.push_back($3); }
+          | SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI              { $$ = new Statement("Statement", "S.O.PRINTLN"); $$->children.push_back($3); }
           ;
 
 ElseStatement : ELSE Statement { $$ = new Statement("Statement", "ELSE"); $$->children.push_back($2); }

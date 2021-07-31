@@ -19,6 +19,9 @@ ClassDeclaration::ClassDeclaration(string t, string v) : Node(t, v) {}
  *     Class: <class name>
  * Add "this" listed above into "Class"
  *
+ * 3.
+ * Traverse children.
+ *
  * @return: std::nullopt
  */
 std::optional<string> ClassDeclaration::generateST()

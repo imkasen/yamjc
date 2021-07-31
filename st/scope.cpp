@@ -65,18 +65,12 @@ std::optional<std::shared_ptr<Record>> Scope::lookupRecord(const string &key) co
     {
         return iterator->second;
     }
+    else if (this->parentScope) // key doest not exist && parent scope != nullptr
+    {
+        return this->parentScope->lookupRecord(key); // delegate the request to parent scope
+    }
     else
     {
-        /*
-        if (!(this->parentScope)) // == nullptr
-        {
-            return std::nullopt; // identifier not in the symbol table
-        }
-        else
-        {
-            return (this->parentScope)->lookupRecord(key); // delegate the request to parent scope
-        }
-         */
         return std::nullopt;
     }
 }
@@ -102,7 +96,7 @@ void Scope::resetScope()
 void Scope::printST(std::size_t &index, std::ofstream *outStream)
 {
     static size_t count = index;
-    string content = "<U><B>" + this->scope_title + "</B></U><BR/>\n";
+    string content = "<U><B>" + this->scope_title + "</B></U><BR/><BR/>\n";
     for (const auto pair : records)
     {
         content += pair.second->printRecord() + "<BR/>\n";

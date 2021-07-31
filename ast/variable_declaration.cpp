@@ -27,7 +27,7 @@ std::optional<string> VarDeclaration::generateST()
 
     // add variable records into "Class"
     string scope_name = VarDeclaration::st.getScopeTitle();
-    auto record_ptr = VarDeclaration::st.getParentScope()->lookupRecord(scope_name).value_or(nullptr); // std::shared_ptr<Record>
+    auto record_ptr = VarDeclaration::st.lookupRecord(scope_name).value_or(nullptr); // std::shared_ptr<Record>
     auto class_ptr = std::dynamic_pointer_cast<STClass>(record_ptr);
     class_ptr->addVariable(variable_ptr);
 

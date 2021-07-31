@@ -55,10 +55,12 @@ std::optional<string> MainClass::generateST()
     std::shared_ptr<Variable> variable_parameter_ptr = std::make_shared<Variable>(parameter_name, "String[]");
     method_main_ptr->addParameter(variable_parameter_ptr);
     MainClass::st.addRecord(parameter_name, variable_parameter_ptr);
+    /*
     for (size_t i = 2; i < this->children.size(); ++i) // MethodBody
     {
         this->children.at(i)->generateST();
     }
+     */
     MainClass::st.exitScope(); // exit method scope
 
     return std::nullopt;
