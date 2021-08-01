@@ -31,9 +31,8 @@ MainClass::MainClass(string t, string v) : Node(t, v) {}
  */
 std::optional<string> MainClass::generateST()
 {
-    string class_name, class_type, parameter_name;
-
     // create records to the current scope
+    string class_name, class_type;
     class_name = class_type = this->children.at(0)->generateST().value_or("Unknown");
     MainClass::st.setScopeTitle("Class: " + class_name); // set the current scope title
     std::shared_ptr<Variable> variable_this_ptr = std::make_shared<Variable>("this", class_type); // used as type here
@@ -50,7 +49,7 @@ std::optional<string> MainClass::generateST()
     // enter the method scope
     MainClass::st.enterScope();
     MainClass::st.setScopeTitle("Method: main"); // set the child scope title
-    parameter_name = this->children.at(1)->generateST().value_or("Unknown");
+    string parameter_name = this->children.at(1)->generateST().value_or("Unknown");
     std::shared_ptr<Parameter> variable_parameter_ptr = std::make_shared<Parameter>(parameter_name, "String[]");
     method_main_ptr->addParameter(variable_parameter_ptr);
     MainClass::st.addRecord(parameter_name, variable_parameter_ptr);

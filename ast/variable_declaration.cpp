@@ -18,9 +18,8 @@ VarDeclaration::VarDeclaration(string t, string v) : Node(t, v) {}
 std::optional<string> VarDeclaration::generateST()
 {
     // create variable records
-    string variable_type, variable_name;
-    variable_type = this->children.at(0)->generateST().value_or("Unknown");
-    variable_name = this->children.at(1)->generateST().value_or("Unknown");
+    string variable_type = this->children.at(0)->generateST().value_or("Unknown");
+    string variable_name = this->children.at(1)->generateST().value_or("Unknown");
     std::shared_ptr<Variable> variable_ptr = std::make_shared<Variable>(variable_name, variable_type);
     VarDeclaration::st.addRecord(variable_name, variable_ptr);
 

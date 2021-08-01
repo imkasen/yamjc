@@ -25,9 +25,8 @@ ClassDeclaration::ClassDeclaration(string t, string v) : Node(t, v) {}
  */
 std::optional<string> ClassDeclaration::generateST()
 {
-    string class_name, class_type;
-
     // create records to the current scope
+    string class_name, class_type;
     class_name = class_type = this->children.at(0)->generateST().value_or("Unknown");
     ClassDeclaration::st.setScopeTitle("Class: " + class_name); // set the current scope title
     std::shared_ptr<Variable> variable_this_ptr = std::make_shared<Variable>("this", class_type);

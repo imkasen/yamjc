@@ -32,9 +32,13 @@ std::optional<string> MethodDeclaration::generateST()
 
     // add method records into "Class"
     string scope_name = MethodDeclaration::st.getScopeTitle();
+    string scope_type = MethodDeclaration::st.getScopeType();
     auto record_ptr = MethodDeclaration::st.lookupRecord(scope_name).value_or(nullptr);
-    auto class_ptr = std::dynamic_pointer_cast<STClass>(record_ptr);
-    class_ptr->addVariable(method_ptr);
+    if (scope_type == "Class")
+    {
+        auto class_ptr = std::dynamic_pointer_cast<STClass>(record_ptr);
+        class_ptr->addVariable(method_ptr);
+    }
 
     // enter method scope
     MethodDeclaration::st.enterScope();
