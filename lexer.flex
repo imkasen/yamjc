@@ -3,8 +3,6 @@
     #include "main.h"
 }
 
-%x COMMENT
-
 %option noyywrap nounput batch noinput stack
 
 %%
@@ -58,9 +56,8 @@
 "="                        { return yy::parser::make_ASSIGN(yytext); }
 "."                        { return yy::parser::make_DOT(yytext); }
 
-"//"                       { BEGIN(COMMENT); }
-<COMMENT>.*                { /* comment */ }
-<COMMENT>\n                { BEGIN(0); }
+"//".*                     { /* comment */ }
+"/*"(.|\n)*"*/"            { /* comment */ }
 
 0|[-]?[1-9][0-9]*          { return yy::parser::make_NUM(yytext); }
 [_a-zA-Z\$][_a-zA-Z0-9\$]* { return yy::parser::make_IDENTIFIER(yytext); }
