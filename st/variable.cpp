@@ -5,6 +5,11 @@ Variable::Variable() : Record() {}
 Variable::Variable(string name, string type) : Record(name, type, "Variable") {}
 Variable::Variable(string name, string type, string record) : Record(name, type, record) {}
 
+const std::map<std::string, std::shared_ptr<Variable>> Variable::getVariables() const
+{
+    return this->variables;
+}
+
 void Variable::addVariable(const std::shared_ptr<Variable> &variable)
 {
     // ret: std::pair<std::map<string, std::shared_ptr<Variable>>::iterator, bool>

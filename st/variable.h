@@ -16,6 +16,8 @@ public:
     Variable(std::string name, std::string type);
     Variable(std::string name, std::string type, std::string record);
 
+    const std::map<std::string, std::shared_ptr<Variable>> getVariables() const;
+
     void addVariable(const std::shared_ptr<Variable> &variable);
     std::optional<std::shared_ptr<Variable>> lookupVariable(const std::string &name) const;
 

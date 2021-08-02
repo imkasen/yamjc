@@ -1,19 +1,21 @@
 #ifndef METHOD_H
 #define METHOD_H
 
-#include "variable.h"
+#include "parameter.h"
 
-class Method : public Variable
+class Method : public Parameter
 {
 private:
-    std::map<std::string, std::shared_ptr<Variable>> parameters;
+    std::map<std::string, std::shared_ptr<Parameter>> parameters;
     
 public:
     Method();
     Method(std::string name, std::string type);
 
-    void addParameter(const std::shared_ptr<Variable> &parameter);
-    std::optional<std::shared_ptr<Variable>> lookupParameter(const std::string &name) const;
+    const std::map<std::string, std::shared_ptr<Parameter>> getParameters() const;
+
+    void addParameter(const std::shared_ptr<Parameter> &parameter);
+    std::optional<std::shared_ptr<Parameter>> lookupParameter(const std::string &name) const;
 
 };
 

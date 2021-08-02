@@ -1,10 +1,15 @@
 #include "method.h"
 using std::string;
 
-Method::Method() : Variable() {}
-Method::Method(string name, string type) : Variable(name, type, "Method") {}
+Method::Method() : Parameter() {}
+Method::Method(string name, string type) : Parameter(name, type, "Method") {}
 
-void Method::addParameter(const std::shared_ptr<Variable> &parameter)
+const std::map<std::string, std::shared_ptr<Parameter>> Method::getParameters() const
+{
+    return this->parameters;
+}
+
+void Method::addParameter(const std::shared_ptr<Parameter> &parameter)
 {
     auto ret = this->parameters.insert({parameter->getName(), parameter});
     if (!ret.second) // false
@@ -14,9 +19,9 @@ void Method::addParameter(const std::shared_ptr<Variable> &parameter)
 }
 
 /*
- * @return std::shared_ptr<Variable> | std::nullopt
+ * @return std::shared_ptr<Parameter> | std::nullopt
  */
-std::optional<std::shared_ptr<Variable>> Method::lookupParameter(const string &name) const
+std::optional<std::shared_ptr<Parameter>> Method::lookupParameter(const string &name) const
 {
     auto iterator = this->parameters.find(name);
     if (iterator != this->parameters.end()) // exists

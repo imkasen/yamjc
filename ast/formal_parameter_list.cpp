@@ -31,7 +31,7 @@ std::optional<string> FormalParameterList::generateST()
         string scope_name = FormalParameterList::st.getScopeTitle();
         string scope_type = FormalParameterList::st.getScopeType();
         auto record_ptr = FormalParameterList::st.lookupRecord(scope_name).value_or(nullptr);
-        if (scope_type == "Method")
+        if (scope_type == "Method" && record_ptr)
         {
             auto method_ptr = std::dynamic_pointer_cast<Method>(record_ptr);
             method_ptr->addParameter(parameter_ptr);

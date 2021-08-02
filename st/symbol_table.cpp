@@ -51,6 +51,11 @@ std::optional<std::shared_ptr<Record>> SymbolTable::lookupRecord(const string &k
     return this->current->lookupRecord(key);
 }
 
+std::optional<std::shared_ptr<Scope>> SymbolTable::lookupChildScope(const string &key) const
+{
+    return this->current->lookupChildScope(key);
+}
+
 void SymbolTable::printST(std::ofstream *outStream)
 {
     *outStream << "label=\"Symbol Table\";" << endl;

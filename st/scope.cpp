@@ -97,6 +97,23 @@ void Scope::addRecord(const string &key, const std::shared_ptr<Record> &item)
     }
 }
 
+/*
+ * @return std::shared_ptr<Scope> | std::nullopt
+ */
+std::optional<std::shared_ptr<Scope>> Scope::lookupChildScope(const string &key) const
+{
+    auto iter = std::find_if(this->childrenScopes.begin(), this->childrenScopes.end(),
+                             [&key](std::shared_ptr<Scope> scope_ptr){
+                                 return scope_ptr->getScopeTitle() == key;
+    });
+    if (iter != this->childrenScopes.end())
+    {
+        return *iter;
+    }
+
+    return std::nullopt;
+}
+
 void Scope::resetScope()
 {
     for (auto ptr : this->childrenScopes)

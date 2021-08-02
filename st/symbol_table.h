@@ -23,6 +23,8 @@ public:
     void addRecord(const std::string &key, const std::shared_ptr<Record> &item);
     std::optional<std::shared_ptr<Record>> lookupRecord(const std::string &key) const;
 
+    std::optional<std::shared_ptr<Scope>> lookupChildScope(const std::string &key) const;
+
     void printST(std::ofstream *outStream);
     void resetTable();
 

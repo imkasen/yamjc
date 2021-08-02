@@ -34,7 +34,7 @@ std::optional<string> MethodDeclaration::generateST()
     string scope_name = MethodDeclaration::st.getScopeTitle();
     string scope_type = MethodDeclaration::st.getScopeType();
     auto record_ptr = MethodDeclaration::st.lookupRecord(scope_name).value_or(nullptr);
-    if (scope_type == "Class")
+    if (scope_type == "Class" && record_ptr)
     {
         auto class_ptr = std::dynamic_pointer_cast<STClass>(record_ptr);
         class_ptr->addMethod(method_ptr);

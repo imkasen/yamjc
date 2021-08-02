@@ -6,6 +6,7 @@
 #include <map>
 #include <optional>
 #include <fstream>
+#include <algorithm>
 
 class Scope : public std::enable_shared_from_this<Scope>
 {
@@ -29,6 +30,9 @@ public:
 
     std::optional<std::shared_ptr<Record>> lookupRecord(const std::string &key) const;
     void addRecord(const std::string &key, const std::shared_ptr<Record> &item);
+
+    std::optional<std::shared_ptr<Scope>> lookupChildScope(const std::string &key) const;
+
     void resetScope();
     void printST(std::size_t index, std::ofstream *outStream);
 

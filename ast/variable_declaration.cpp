@@ -27,12 +27,12 @@ std::optional<string> VarDeclaration::generateST()
     string scope_name = VarDeclaration::st.getScopeTitle();
     string scope_type = VarDeclaration::st.getScopeType();
     auto record_ptr = VarDeclaration::st.lookupRecord(scope_name).value_or(nullptr); // std::shared_ptr<Record>
-    if (scope_type == "Class")
+    if (scope_type == "Class" && record_ptr)
     {
         auto class_ptr = std::dynamic_pointer_cast<STClass>(record_ptr);
         class_ptr->addVariable(variable_ptr);
     }
-    else if (scope_type == "Method")
+    else if (scope_type == "Method" && record_ptr)
     {
         auto method_ptr = std::dynamic_pointer_cast<Method>(record_ptr);
         method_ptr->addVariable(variable_ptr);
