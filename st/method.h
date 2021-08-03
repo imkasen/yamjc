@@ -6,13 +6,13 @@
 class Method : public Parameter
 {
 private:
-    std::map<std::string, std::shared_ptr<Parameter>> parameters;
+    std::unordered_map<std::string, std::shared_ptr<Parameter>> parameters;
     
 public:
     Method();
     Method(std::string name, std::string type);
 
-    const std::map<std::string, std::shared_ptr<Parameter>> getParameters() const;
+    const std::unordered_map<std::string, std::shared_ptr<Parameter>> getParameters() const;
 
     void addParameter(const std::shared_ptr<Parameter> &parameter);
     std::optional<std::shared_ptr<Parameter>> lookupParameter(const std::string &name) const;

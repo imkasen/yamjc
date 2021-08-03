@@ -4,7 +4,7 @@ using std::string;
 Method::Method() : Parameter() {}
 Method::Method(string name, string type) : Parameter(name, type, "Method") {}
 
-const std::map<std::string, std::shared_ptr<Parameter>> Method::getParameters() const
+const std::unordered_map<std::string, std::shared_ptr<Parameter>> Method::getParameters() const
 {
     return this->parameters;
 }

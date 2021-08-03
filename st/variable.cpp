@@ -5,14 +5,14 @@ Variable::Variable() : Record() {}
 Variable::Variable(string name, string type) : Record(name, type, "Variable") {}
 Variable::Variable(string name, string type, string record) : Record(name, type, record) {}
 
-const std::map<std::string, std::shared_ptr<Variable>> Variable::getVariables() const
+const std::unordered_map<std::string, std::shared_ptr<Variable>> Variable::getVariables() const
 {
     return this->variables;
 }
 
 void Variable::addVariable(const std::shared_ptr<Variable> &variable)
 {
-    // ret: std::pair<std::map<string, std::shared_ptr<Variable>>::iterator, bool>
+    // ret: std::pair<std::unordered_map<string, std::shared_ptr<Variable>>::iterator, bool>
     auto ret = this->variables.insert({variable->getName(), variable}); // = insert(std::pair<string, std::shared_ptr<Variable>>(variable->getId(), variable))
     if (!ret.second) // false
     {
@@ -25,7 +25,7 @@ void Variable::addVariable(const std::shared_ptr<Variable> &variable)
  */
 std::optional<std::shared_ptr<Variable>> Variable::lookupVariable(const string &name) const
 {
-    // iterator: std::map<string, std::shared_ptr<Variable>>::iterator
+    // iterator: std::unordered_map<string, std::shared_ptr<Variable>>::iterator
     auto iterator = this->variables.find(name);
     if (iterator != this->variables.end()) // exists
     {

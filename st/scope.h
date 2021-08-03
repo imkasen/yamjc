@@ -3,7 +3,7 @@
 
 #include "record.h"
 #include <deque>
-#include <map>
+#include <unordered_map>
 #include <optional>
 #include <fstream>
 #include <algorithm>
@@ -15,7 +15,7 @@ private:
     std::size_t next;                                       // next child to visit
     std::shared_ptr<Scope> parentScope;                     // parent scope
     std::deque<std::shared_ptr<Scope>> childrenScopes;      // children scopes
-    std::map<std::string, std::shared_ptr<Record>> records; // symbol to record map
+    std::unordered_map<std::string, std::shared_ptr<Record>> records; // symbol to record map
 
 public:
     Scope();
