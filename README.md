@@ -23,7 +23,7 @@ apt install build-essential graphviz flex bison
 # Compiler Phases
 
 <div align="center">
-    <img src="./phases.png" 
+    <img src="./images/phases.png" 
         width="600" height="auto" alt="Compiler Phases">
 </div>
 
@@ -32,7 +32,8 @@ apt install build-essential graphviz flex bison
 ``` shell
 $ make
 $ ./compiler <file_path>
-$ make ast  # generate the abstract syntax tree
+# generate graphs | abstract syntax tree | symbol table
+$ make graph | ast | st
 $ make clean
 ```
 
