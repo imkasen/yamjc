@@ -1,4 +1,5 @@
-%skeleton "lalr1.cc" 
+%skeleton "lalr1.cc"
+%require "3.2"
 %language "c++"
 %defines
 %define parse.error verbose

@@ -15,8 +15,8 @@ parser.tab.o: parser.tab.cc
 parser.tab.cc: parser.yy
 	$(YACC) parser.yy
 
-lex.yy.c: lexer.flex parser.tab.cc
-	$(LEX) lexer.flex
+lex.yy.c: lexer.ll
+	$(LEX) lexer.ll
 
 
 .PHONY : all graph ast st clean
@@ -27,4 +27,4 @@ ast:
 st:
 	dot -T svg st.dot -o st.svg
 clean:
-	@rm -f parser.tab.* lex.yy.c* $(TARGET) stack.hh ast.* st.*
+	@rm -f parser.tab.* lex.yy.c* $(TARGET) ast.* st.*
