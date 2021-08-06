@@ -15,7 +15,7 @@
 }
 
 %code{
-  #include "source/main.h"
+  #include "src/main.h"
   
   Node *root;
 }

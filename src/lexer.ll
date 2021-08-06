@@ -1,6 +1,6 @@
 %top{
     #include "include/ast/node.h"
-    #include "source/main.h"
+    #include "src/main.h"
 }
 
 %option noyywrap nounput batch noinput stack
