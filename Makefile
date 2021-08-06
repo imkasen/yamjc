@@ -2,21 +2,21 @@ LEX      := flex
 YACC     := bison
 CC       := g++
 TARGET   := compiler
-NODES    := ast/*.cpp
-ST_IMPLS := st/*.cpp
+NODES    := source/ast/*.cpp
+ST_IMPLS := source/st/*.cpp
 STD      := -std=c++17
 
-$(TARGET): lex.yy.c parser.tab.o main.cpp $(NODES) $(ST_IMPLS)
-	$(CC) -g -o $(TARGET) parser.tab.o lex.yy.c main.cpp $(NODES) $(ST_IMPLS) $(STD)
+$(TARGET): lex.yy.c parser.tab.o source/main.cpp $(NODES) $(ST_IMPLS)
+	$(CC) -g -o $(TARGET) parser.tab.o lex.yy.c source/main.cpp $(NODES) $(ST_IMPLS) $(STD)
 
 parser.tab.o: parser.tab.cc
 	$(CC) -g -c parser.tab.cc $(STD)
 
-parser.tab.cc: parser.yy
-	$(YACC) parser.yy
+parser.tab.cc: source/parser.yy
+	$(YACC) source/parser.yy
 
-lex.yy.c: lexer.ll
-	$(LEX) lexer.ll
+lex.yy.c: source/lexer.ll
+	$(LEX) source/lexer.ll
 
 
 .PHONY : all graph ast st clean

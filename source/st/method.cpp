@@ -1,4 +1,4 @@
-#include "method.h"
+#include "../../include/st/method.h"
 using std::string;
 
 Method::Method() : Parameter() {}

@@ -1,4 +1,4 @@
-#include "identifier.h"
+#include "../../include/ast/identifier.h"
 using std::string;
 
 Identifier::Identifier() : Node() {}

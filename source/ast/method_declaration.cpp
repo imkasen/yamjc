@@ -1,4 +1,4 @@
-#include "method_declaration.h"
+#include "../../include/ast/method_declaration.h"
 using std::string;
 using std::size_t;
 

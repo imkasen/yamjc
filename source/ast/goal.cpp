@@ -1,4 +1,4 @@
-#include "goal.h"
+#include "../../include/ast/goal.h"
 using std::string;
 
 Goal::Goal() : Node() {}

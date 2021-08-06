@@ -23,7 +23,7 @@ apt install build-essential graphviz flex bison
 # Compiler Phases
 
 <div align="center">
-    <img src="./images/phases.png" 
+    <img src="resource/images/phases.png" 
         width="600" height="auto" alt="Compiler Phases">
 </div>
 

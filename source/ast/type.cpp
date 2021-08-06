@@ -1,4 +1,4 @@
-#include "type.h"
+#include "../../include/ast/type.h"
 using std::string;
 
 Type::Type() : Node() {}

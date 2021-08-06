@@ -1,4 +1,4 @@
-#include "main_class.h"
+#include "../../include/ast/main_class.h"
 using std::string;
 using std::size_t;
 
