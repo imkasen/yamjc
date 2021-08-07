@@ -1,4 +1,4 @@
-#include "../../include/st/symbol_table.h"
+#include "st/symbol_table.h"
 using std::string;
 using std::endl;
 

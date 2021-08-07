@@ -1,4 +1,4 @@
-#include "../../include/st/variable.h"
+#include "st/variable.h"
 using std::string;
 
 Variable::Variable() : Record() {}

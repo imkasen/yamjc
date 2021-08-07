@@ -1,4 +1,4 @@
-#include "../../include/ast/variable_declaration.h"
+#include "ast/variable_declaration.h"
 using std::string;
 
 VarDeclaration::VarDeclaration() : Node() {}

@@ -1,4 +1,4 @@
-#include "../../include/ast/formal_parameter_list.h"
+#include "ast/formal_parameter_list.h"
 using std::string;
 using std::size_t;
 

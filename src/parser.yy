@@ -7,7 +7,7 @@
 %define api.token.constructor
 
 %code requires{
-  #include "include/ast/nodes.h"
+  #include "ast/nodes.h"
 }
 
 %code provides {
@@ -15,7 +15,7 @@
 }
 
 %code{
-  #include "src/main.h"
+  #include "main.h"
   
   Node *root;
 }

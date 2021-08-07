@@ -1,4 +1,4 @@
-#include "../../include/st/scope.h"
+#include "st/scope.h"
 using std::string;
 using std::size_t;
 using std::endl;

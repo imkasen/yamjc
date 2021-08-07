@@ -16,9 +16,11 @@ Mini-Java Compiler Practice.
 
 # Requirements
 
-``` shell
-apt install build-essential graphviz flex bison
-```
+* CMake
+* build-essential
+* graphviz
+* flex
+* bison
 
 # Compiler Phases
 
@@ -29,12 +31,24 @@ apt install build-essential graphviz flex bison
 
 # Usage
 
+## ~~Makefile~~
+
 ``` shell
 $ make
 $ ./compiler <file_path>
 # generate graphs | abstract syntax tree | symbol table
-$ make graph | ast | st
+$ make graph || [ast || st]
 $ make clean
+```
+
+## CMake
+``` shell
+$ mkdir build/ && cd build/
+$ cmake ..
+$ make
+$ ./compiler <file_path>  # ../resource/examples/xxx.java
+$ ./graph.sh [ast || st]
+$ make clean || rm -rf build/
 ```
 
 # Bug
