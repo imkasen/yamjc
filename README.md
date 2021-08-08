@@ -1,7 +1,7 @@
 MiniJava Compiler
 ======
 
-Mini-Java Compiler Practice.
+A Mini-Java Compiler Practice.
 
 # What is Mini-Java?
 
@@ -16,6 +16,7 @@ Mini-Java Compiler Practice.
 
 # Requirements
 
+* Linux
 * CMake
 * build-essential
 * graphviz
@@ -31,14 +32,14 @@ Mini-Java Compiler Practice.
 
 # Usage
 
-## CMake
 ``` shell
 $ mkdir build/ && cd build/
 $ cmake ..
-$ make || cmake --build .
-$ ./compiler <file_path>  # ../resource/examples/xxx.java
-$ ./graph.sh [ast || st]
-$ make clean || rm -rf build/
+$ make  # or cmake --build .
+$ ./compiler <file_path>  # e.g. "../resource/examples/xxx.java"
+$ sh graph.sh # args: [ast] [st]
+$ make clean
+$ cd .. && rm -rf build/
 ```
 
 # Bug
