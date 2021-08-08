@@ -31,21 +31,11 @@ Mini-Java Compiler Practice.
 
 # Usage
 
-## ~~Makefile~~
-
-``` shell
-$ make
-$ ./compiler <file_path>
-# generate graphs | abstract syntax tree | symbol table
-$ make graph || [ast || st]
-$ make clean
-```
-
 ## CMake
 ``` shell
 $ mkdir build/ && cd build/
 $ cmake ..
-$ make
+$ make || cmake --build .
 $ ./compiler <file_path>  # ../resource/examples/xxx.java
 $ ./graph.sh [ast || st]
 $ make clean || rm -rf build/

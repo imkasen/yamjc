@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "../build/parser.tab.hh"
+#include "parser.tab.hh"  // ${PROJECT_BINARY_DIR}
 #include "ast/node.h"
 #include "st/symbol_table.h"
 #include <iostream>
