@@ -1,9 +1,11 @@
 #include "ast/main_class.h"
+
+#include <utility>
 using std::string;
 using std::size_t;
 
 MainClass::MainClass() : Node() {}
-MainClass::MainClass(string t, string v) : Node(t, v) {}
+MainClass::MainClass(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * 1.

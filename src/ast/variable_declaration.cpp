@@ -1,8 +1,10 @@
 #include "ast/variable_declaration.h"
+
+#include <utility>
 using std::string;
 
 VarDeclaration::VarDeclaration() : Node() {}
-VarDeclaration::VarDeclaration(string t, string v) : Node(t, v) {}
+VarDeclaration::VarDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
 /*
  * 1.
  * Create records in the current "Class" || "Method" scope.

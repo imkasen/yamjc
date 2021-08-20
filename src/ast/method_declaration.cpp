@@ -1,9 +1,11 @@
 #include "ast/method_declaration.h"
+
+#include <utility>
 using std::string;
 using std::size_t;
 
 MethodDeclaration::MethodDeclaration() : Node() {}
-MethodDeclaration::MethodDeclaration(std::string t, std::string v) : Node(t, v) {}
+MethodDeclaration::MethodDeclaration(std::string t, std::string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * 1.

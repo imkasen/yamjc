@@ -22,14 +22,14 @@
 class Node
 {
 protected:
-    std::size_t id;
+    std::size_t id = 0;
     std::string type, value;
 
 public:
     /*
-     * An awkward design.
-     * Should use the smart pointer here,
-     * but the smart pointer is too complicated in bison.
+     * An awkward design,
+     * should use the smart pointer here,
+     * but bison does not support the smart pointer well.
      */
     std::deque<Node *> children;
     inline static SymbolTable st = SymbolTable();
@@ -40,9 +40,9 @@ public:
     void setId(std::size_t n_id);
     void setType(std::string n_type);
     void setValue(std::string n_value);
-    const std::size_t getId() const;
-    const std::string getType() const;
-    const std::string getValue() const;
+    [[nodiscard]] std::size_t getId() const;
+    [[nodiscard]] std::string getType() const;
+    [[nodiscard]] std::string getValue() const;
 
     // AST
     // void printAST(std::size_t depth = 0);
@@ -53,7 +53,7 @@ public:
     void buildST(std::ofstream *outStream);
     virtual std::optional<std::string> generateST();
 
-    virtual ~Node() = default;
+    virtual ~Node();
 };
 
 #endif

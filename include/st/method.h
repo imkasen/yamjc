@@ -12,7 +12,7 @@ public:
     Method();
     Method(std::string name, std::string type);
 
-    const std::unordered_map<std::string, std::shared_ptr<Parameter>> getParameters() const;
+    std::unordered_map<std::string, std::shared_ptr<Parameter>> getParameters() const;
 
     void addParameter(const std::shared_ptr<Parameter> &parameter);
     std::optional<std::shared_ptr<Parameter>> lookupParameter(const std::string &name) const;

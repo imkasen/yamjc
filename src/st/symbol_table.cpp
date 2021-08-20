@@ -23,12 +23,12 @@ void SymbolTable::setScopeTitle(const std::string &title)
     this->current->setScopeTitle(title);
 }
 
-const string SymbolTable::getScopeTitle() const
+string SymbolTable::getScopeTitle() const
 {
     return this->current->getScopeTitle();
 }
 
-const string SymbolTable::getScopeType() const
+string SymbolTable::getScopeType() const
 {
     return this->current->getScopeType();
 }

@@ -1,9 +1,11 @@
 #include "ast/class_declaration.h"
+
+#include <utility>
 using std::string;
 using std::size_t;
 
 ClassDeclaration::ClassDeclaration() : Node() {}
-ClassDeclaration::ClassDeclaration(string t, string v) : Node(t, v) {}
+ClassDeclaration::ClassDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * 1.
@@ -54,7 +56,7 @@ std::optional<string> ClassDeclaration::generateST()
             std::shared_ptr<STClass> parent_class_ptr = std::dynamic_pointer_cast<STClass>(c_record_ptr);
 
             // deep copy variables in Class
-            for (const auto pair : parent_class_ptr->getVariables())
+            for (const auto &pair : parent_class_ptr->getVariables())
             {
                 if (pair.first != "this" && !ClassDeclaration::st.lookupRecord(pair.first).has_value())
                 {
@@ -65,7 +67,7 @@ std::optional<string> ClassDeclaration::generateST()
             }
 
             // deep copy methods in Class
-            for (const auto pair : parent_class_ptr->getMethods())
+            for (const auto &pair : parent_class_ptr->getMethods())
             {
                 // methods that need to be inherited but not overwritten
                 if (!ClassDeclaration::st.lookupChildScope(pair.first).value_or(nullptr))
@@ -77,11 +79,11 @@ std::optional<string> ClassDeclaration::generateST()
                     // enter method scope, generate st only
                     ClassDeclaration::st.enterScope();
                     ClassDeclaration::st.setScopeTitle("Method: " + method_ptr->getName());
-                    for (const auto v_pair : method_ptr->getVariables())
+                    for (const auto &v_pair : method_ptr->getVariables())
                     {
                         ClassDeclaration::st.addRecord(v_pair.first, v_pair.second);
                     }
-                    for (const auto p_pair : method_ptr->getParameters())
+                    for (const auto &p_pair : method_ptr->getParameters())
                     {
                         ClassDeclaration::st.addRecord(p_pair.first, p_pair.second);
                     }

@@ -26,7 +26,7 @@ A Mini-Java Compiler Practice.
 # Compiler Phases
 
 <div align="center">
-    <img src="resource/images/phases.png" 
+    <img src="resource/phases.png" 
         width="600" height="auto" alt="Compiler Phases">
 </div>
 
@@ -42,10 +42,12 @@ $ make clean
 $ cd .. && rm -rf build/
 ```
 
-# Bug
+# Flaws
 
-* Make sure to leave a space after the minus sign, otherwise it will be recognized as a negative sign. (Caused by insufficient regular expressions in the flex file)
+* Mix use of raw pointers and smart pointers
+* Make sure to leave a space after the minus sign, otherwise it will be recognized as a negative sign.
   ``` Java
+  // e.g.
   1-1 // error, recognized as 1 and -1
   1 - 1 // recognized as the subtraction
   ```

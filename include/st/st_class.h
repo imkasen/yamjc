@@ -12,7 +12,7 @@ public:
     STClass();
     STClass(std::string name, std::string type);
 
-    const std::unordered_map<std::string, std::shared_ptr<Method>> getMethods() const;
+    std::unordered_map<std::string, std::shared_ptr<Method>> getMethods() const;
 
     void addMethod(const std::shared_ptr<Method> &method);
     std::optional<std::shared_ptr<Method>> lookupMethod(const std::string &name) const;

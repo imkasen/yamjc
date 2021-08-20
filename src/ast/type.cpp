@@ -1,12 +1,14 @@
 #include "ast/type.h"
+
+#include <utility>
 using std::string;
 
 Type::Type() : Node() {}
-Type::Type(string t, string v) : Node(t, v) {}
+Type::Type(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 std::optional<string> Type::generateST()
 {
-    if (!this->getValue().empty() && this->children.size() == 0) // has value && no children
+    if (!this->getValue().empty() && this->children.empty()) // has value && no children
     {
         return this->getValue();
     }

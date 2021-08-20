@@ -1,3 +1,6 @@
+# This Makefile is used in the past
+# and does not apply to the current file structure.
+
 LEX      := flex
 YACC     := bison
 CC       := g++

@@ -27,11 +27,11 @@ public:
     void setName(const std::string &r_name);
     void setRecord(const std::string &r_record);
     void setType(const std::string &r_type);
-    const std::string getName() const;
-    const std::string getRecord() const;
-    const std::string getType() const;
+    [[nodiscard]] std::string getName() const;
+    [[nodiscard]] std::string getRecord() const;
+    [[nodiscard]] std::string getType() const;
     
-    const std::string printRecord() const;
+    [[nodiscard]] std::string printRecord() const;
 
     virtual ~Record() = default;
 };

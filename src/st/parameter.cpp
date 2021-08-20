@@ -1,6 +1,10 @@
 #include "st/parameter.h"
+
+#include <utility>
 using std::string;
 
 Parameter::Parameter() : Variable() {}
-Parameter::Parameter(string name, string type) : Variable(name, type, "Parameter") {}
-Parameter::Parameter(string name, string type, string record) : Variable(name, type, record) {}
+Parameter::Parameter(string name, string type)
+    : Variable(std::move(name), std::move(type), "Parameter") {}
+Parameter::Parameter(string name, string type, string record)
+    : Variable(std::move(name), std::move(type), std::move(record)) {}

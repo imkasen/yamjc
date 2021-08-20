@@ -1,4 +1,6 @@
 #include "st/scope.h"
+
+#include <utility>
 using std::string;
 using std::size_t;
 using std::endl;
@@ -12,7 +14,7 @@ Scope::Scope()
 Scope::Scope(std::shared_ptr<Scope> parent)
 {
     this->next = 0;
-    this->parentScope = parent;
+    this->parentScope = std::move(parent);
 }
 
 void Scope::setScopeTitle(const std::string &title)
@@ -20,10 +22,10 @@ void Scope::setScopeTitle(const std::string &title)
     this->scope_title = title;
 }
 
-const string Scope::getScopeTitle() const
+string Scope::getScopeTitle() const
 {
     // "xxx: xxx"
-    size_t pos = this->scope_title.find(" ");
+    size_t pos = this->scope_title.find(' ');
     if (pos != string::npos)
     {
         return this->scope_title.substr(pos + 1);
@@ -34,9 +36,9 @@ const string Scope::getScopeTitle() const
     }
 }
 
-const string Scope::getScopeType() const
+string Scope::getScopeType() const
 {
-    size_t pos = this->scope_title.find(" ");
+    size_t pos = this->scope_title.find(' ');
     if (pos != string::npos)
     {
         return this->scope_title.substr(0, pos - 1);
@@ -103,7 +105,7 @@ void Scope::addRecord(const string &key, const std::shared_ptr<Record> &item)
 std::optional<std::shared_ptr<Scope>> Scope::lookupChildScope(const string &key) const
 {
     auto iter = std::find_if(this->childrenScopes.begin(), this->childrenScopes.end(),
-                             [&key](std::shared_ptr<Scope> scope_ptr){
+                             [&key](const std::shared_ptr<Scope> &scope_ptr){
                                  return scope_ptr->getScopeTitle() == key;
     });
     if (iter != this->childrenScopes.end())
@@ -116,7 +118,7 @@ std::optional<std::shared_ptr<Scope>> Scope::lookupChildScope(const string &key)
 
 void Scope::resetScope()
 {
-    for (auto ptr : this->childrenScopes)
+    for (const auto &ptr : this->childrenScopes)
     {
         ptr->resetScope();
     }
@@ -127,14 +129,14 @@ void Scope::printST(std::size_t index, std::ofstream *outStream)
 {
     static size_t count = index;
     string content = "<U><B>" + this->scope_title + "</B></U><BR/><BR/>\n";
-    for (const auto pair : records)
+    for (const auto &pair : this->records)
     {
         content += pair.second->printRecord() + "<BR/>\n";
     }
 
     // draw
     *outStream << "n" << index << " [label=<" << content << ">];" << endl; // HTML like labels
-    for (const auto childScope : childrenScopes)
+    for (const auto &childScope : this->childrenScopes)
     {
         *outStream << "n" << index << " -- n" << count + 1 << ";" << endl;
         childScope->printST(++count, outStream);

@@ -1,11 +1,15 @@
 #include "st/variable.h"
+
+#include <utility>
 using std::string;
 
 Variable::Variable() : Record() {}
-Variable::Variable(string name, string type) : Record(name, type, "Variable") {}
-Variable::Variable(string name, string type, string record) : Record(name, type, record) {}
+Variable::Variable(string name, string type)
+    : Record(std::move(name), std::move(type), "Variable") {}
+Variable::Variable(string name, string type, string record)
+    : Record(std::move(name), std::move(type), std::move(record)) {}
 
-const std::unordered_map<std::string, std::shared_ptr<Variable>> Variable::getVariables() const
+std::unordered_map<std::string, std::shared_ptr<Variable>> Variable::getVariables() const
 {
     return this->variables;
 }

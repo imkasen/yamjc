@@ -1,4 +1,6 @@
 #include "st/record.h"
+
+#include <utility>
 using std::string;
 
 Record::Record()
@@ -8,7 +10,8 @@ Record::Record()
     this->record = "Record";
 }
 
-Record::Record(string name, string type, string record) : name(name), type(type), record(record) {}
+Record::Record(string name, string type, string record)
+    : name(std::move(name)), type(std::move(type)), record(std::move(record)) {}
 
 void Record::setName(const std::string &r_name)
 {
@@ -25,22 +28,22 @@ void Record::setType(const string &r_type)
     this->type = r_type;
 }
 
-const string Record::getName() const
+string Record::getName() const
 {
     return this->name;
 }
 
-const string Record::getType() const
+string Record::getType() const
 {
     return this->type;
 }
 
-const string Record::getRecord() const
+string Record::getRecord() const
 {
     return this->record;
 }
 
-const std::string Record::printRecord() const
+string Record::printRecord() const
 {
     return "name: " + this->getName() + "; record: " + this->getRecord() + "; type: " + this->getType();
 }

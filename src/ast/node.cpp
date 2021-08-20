@@ -1,4 +1,6 @@
 #include "ast/node.h"
+
+#include <utility>
 using std::string;
 using std::size_t;
 using std::cout;
@@ -10,7 +12,16 @@ Node::Node() // Bison needs this
     this->value = "uninitialised";
 }
 
-Node::Node(string t, string v) : type(t), value(v) {}
+Node::Node(string t, string v) : type(std::move(t)), value(std::move(v)) {}
+
+Node::~Node()
+{
+    for (auto && child : this->children)
+    {
+        delete child;
+    }
+    this->children.clear();
+}
 
 void Node::setId(size_t n_id)
 {
@@ -19,25 +30,25 @@ void Node::setId(size_t n_id)
 
 void Node::setType(std::string n_type)
 {
-    this->type = n_type;
+    this->type = std::move(n_type);
 }
 
 void Node::setValue(std::string n_value)
 {
-    this->value = n_value;
+    this->value = std::move(n_value);
 }
 
-const size_t Node::getId() const
+size_t Node::getId() const
 {
     return this->id;
 }
 
-const std::string Node::getType() const
+std::string Node::getType() const
 {
     return this->type;
 }
 
-const std::string Node::getValue() const
+std::string Node::getValue() const
 {
     return this->value;
 }
@@ -66,9 +77,9 @@ void Node::saveAST(std::ofstream *outStream, size_t depth)
         *outStream << "  ";
     }
     *outStream << this->getType() << ":" << this->getValue() << endl;
-    for (auto i = this->children.begin(); i != this->children.end(); ++i)
+    for (auto &child : this->children)
     {
-        (*i)->saveAST(outStream, depth + 1);
+        child->saveAST(outStream, depth + 1);
     }
 }
 
@@ -76,7 +87,7 @@ void Node::saveAST(std::ofstream *outStream, size_t depth)
 void Node::generateAST(size_t &count, std::ofstream *outStream)
 {
     this->setId(count++);
-    if (this->getValue() != "")
+    if (!this->getValue().empty())
     {
         *outStream << "n" << this->getId() << " [label=\"" << this->getType() << ":" << this->getValue() << "\"];" << endl;
     }
@@ -84,10 +95,10 @@ void Node::generateAST(size_t &count, std::ofstream *outStream)
     {
         *outStream << "n" << this->getId() << " [label=\"" << this->getType() << "\"];" << endl;
     }
-    for (auto i = this->children.begin(); i != this->children.end(); ++i)
+    for (auto &child : this->children)
     {
-        (*i)->generateAST(count, outStream);
-        *outStream << "n" << this->getId() << " -> n" << (*i)->getId() << ";" << endl;
+        child->generateAST(count, outStream);
+        *outStream << "n" << this->getId() << " -> n" << child->getId() << ";" << endl;
     }
 }
 
@@ -102,7 +113,7 @@ void Node::buildST(std::ofstream *outStream)
 
 std::optional<std::string> Node::generateST()
 {
-    for (auto child: children)
+    for (auto &child: this->children)
     {
         child->generateST();
     }

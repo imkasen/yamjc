@@ -1,9 +1,11 @@
 #include "ast/formal_parameter_list.h"
+
+#include <utility>
 using std::string;
 using std::size_t;
 
 FormalParameterList::FormalParameterList() : Node() {}
-FormalParameterList::FormalParameterList(string t, string v) : Node(t, v) {}
+FormalParameterList::FormalParameterList(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * 1.

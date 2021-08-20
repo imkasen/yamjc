@@ -1,10 +1,12 @@
 #include "st/method.h"
+
+#include <utility>
 using std::string;
 
 Method::Method() : Parameter() {}
-Method::Method(string name, string type) : Parameter(name, type, "Method") {}
+Method::Method(string name, string type) : Parameter(std::move(name), std::move(type), "Method") {}
 
-const std::unordered_map<std::string, std::shared_ptr<Parameter>> Method::getParameters() const
+std::unordered_map<std::string, std::shared_ptr<Parameter>> Method::getParameters() const
 {
     return this->parameters;
 }
