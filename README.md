@@ -14,11 +14,11 @@ A Mini-Java Compiler Practice.
 1. [BNF for MiniJava](https://www.cambridge.org/us/features/052182060X/grammar.html)
 2. [BNF for MiniJava](https://web.cs.ucla.edu/classes/spring11/cs132/cs132/mj/minijava.html)
 
-# Requirements
+# Environments
 
-* Linux
+* Linux (Ubuntu)
 * CMake
-* build-essential
+* gcc, g++ (build-essential)
 * graphviz
 * flex
 * bison
@@ -44,13 +44,8 @@ $ cd .. && rm -rf build/
 
 # Flaws
 
-* Mix use of raw pointers and smart pointers
-* Make sure to leave a space after the minus sign, otherwise it will be recognized as a negative sign.
-  ``` Java
-  // e.g.
-  1-1 // error, recognized as 1 and -1
-  1 - 1 // recognized as the subtraction
-  ```
+* Mix use of raw pointers and smart pointers.
+* Integer literals are non-negative, but negative numbers can result from computations.
 
 # LICENSE
 
