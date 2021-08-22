@@ -140,19 +140,19 @@ Statement : LBRACE RBRACE                                                  { $$ 
 ElseStatement : ELSE Statement { $$ = new Statement("Statement", "ELSE"); $$->children.push_back($2); }
               ;
 
-Expression : PrimaryExpression                                                { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
-           | Expression AND Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-           | Expression OR Expression                                         { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-           | Expression LT Expression                                         { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-           | Expression GT Expression                                         { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-           | Expression ADD Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-           | Expression SUB Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-           | Expression MUL Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-           | Expression DIV Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-           | Expression LBRACKET Expression RBRACKET                          { $$ = $1; $$->children.push_back($3); }
-           | Expression DOT LENGTH                                            { $$ = new Expression("Expression", $3); $$->children.push_back($1); }
+Expression : Expression AND PrimaryExpression                                 { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression OR PrimaryExpression                                  { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression LT PrimaryExpression                                  { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression GT PrimaryExpression                                  { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression ADD PrimaryExpression                                 { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression SUB PrimaryExpression                                 { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression MUL PrimaryExpression                                 { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression DIV PrimaryExpression                                 { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression LBRACKET PrimaryExpression RBRACKET                   { $$ = $1; $$->children.push_back($3); }
+           | Expression DOT PrimaryExpression                                 { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression DOT Identifier LPARENTHESE RPARENTHESE                { $$ = $1; $$->children.push_back($3); }
            | Expression DOT Identifier LPARENTHESE ExpressionList RPARENTHESE { $$ = $1; $$->children.push_back($3); $$->children.push_back($5); }
+           | PrimaryExpression                                                { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
            ;
 
 ExpressionList : Expression                      { $$ = new Expression("ExpressionList", ""); $$->children.push_back($1); }
@@ -168,6 +168,7 @@ PrimaryExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new Expression
                   | TRUE                                   { $$ = new Expression("Boolean", $1); }
                   | FALSE                                  { $$ = new Expression("Boolean", $1); }
                   | THIS                                   { $$ = new Expression("This", ""); }
+                  | LENGTH                                 { $$ = new Expression("Length", ""); }
                   ;
 
 Identifier : IDENTIFIER { $$ = new Identifier("Identifier", $1); }
