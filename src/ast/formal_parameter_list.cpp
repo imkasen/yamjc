@@ -1,6 +1,4 @@
 #include "ast/formal_parameter_list.h"
-
-#include <utility>
 using std::string;
 using std::size_t;
 

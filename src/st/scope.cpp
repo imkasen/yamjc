@@ -1,6 +1,4 @@
 #include "st/scope.h"
-
-#include <utility>
 using std::string;
 using std::size_t;
 using std::endl;

@@ -1,6 +1,4 @@
 #include "ast/type.h"
-
-#include <utility>
 using std::string;
 
 Type::Type() : Node() {}

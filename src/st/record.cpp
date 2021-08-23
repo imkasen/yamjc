@@ -1,6 +1,4 @@
 #include "st/record.h"
-
-#include <utility>
 using std::string;
 
 Record::Record()

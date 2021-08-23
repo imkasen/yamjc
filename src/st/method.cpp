@@ -1,6 +1,4 @@
 #include "st/method.h"
-
-#include <utility>
 using std::string;
 
 Method::Method() : Parameter() {}

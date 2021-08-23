@@ -1,6 +1,4 @@
 #include "ast/goal.h"
-
-#include <utility>
 using std::string;
 
 Goal::Goal() : Node() {}

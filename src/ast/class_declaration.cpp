@@ -1,6 +1,4 @@
 #include "ast/class_declaration.h"
-
-#include <utility>
 using std::string;
 using std::size_t;
 

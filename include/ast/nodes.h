@@ -18,6 +18,7 @@
 #include "type.h"
 #include "statement.h"
 #include "expression.h"
+#include "primary_expression.h"
 #include "return.h"
 #include "identifier.h"
 

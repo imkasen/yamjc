@@ -1,6 +1,4 @@
 #include "st/variable.h"
-
-#include <utility>
 using std::string;
 
 Variable::Variable() : Record() {}

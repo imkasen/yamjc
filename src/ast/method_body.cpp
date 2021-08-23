@@ -1,7 +1,5 @@
 #include "ast/method_body.h"
 
-#include <utility>
-
 MethodBody::MethodBody() : Node() {}
 MethodBody::MethodBody(std::string t, std::string v) : Node(std::move(t), std::move(v)) {}
 

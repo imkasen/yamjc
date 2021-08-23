@@ -56,7 +56,8 @@
 %type <FormalParameterList *> FormalParameterList
 %type <Type *> Type
 %type <Statement *> Statements Statement ElseStatement
-%type <Expression *> Expression ExpressionList PrimaryExpression
+%type <Expression *> Expression ExpressionList
+%type <PrimaryExpression *> PrimaryExpression
 %type <Return *> Return
 %type <Identifier *> Identifier
 
@@ -152,23 +153,23 @@ Expression : Expression AND Expression                                        { 
            | Expression DOT PrimaryExpression                                 { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression DOT Identifier LPARENTHESE RPARENTHESE                { $$ = $1; $$->children.push_back($3); }
            | Expression DOT Identifier LPARENTHESE ExpressionList RPARENTHESE { $$ = $1; $$->children.push_back($3); $$->children.push_back($5); }
-           | PrimaryExpression                                                { $$ = $1; }
+           | PrimaryExpression                                                { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
            ;
 
 ExpressionList : Expression                      { $$ = new Expression("ExpressionList", ""); $$->children.push_back($1); }
                | ExpressionList COMMA Expression { $$ = $1; $$->children.push_back($3); }
                ;
 
-PrimaryExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new Expression("PrimaryExpression", "NEW"); $$->children.push_back($4); }
-                  | NEW Identifier LPARENTHESE RPARENTHESE { $$ = new Expression("PrimaryExpression", "NEW"); $$->children.push_back($2); }
-                  | LPARENTHESE Expression RPARENTHESE     { $$ = new Expression("PrimaryExpression", ""); $$->children.push_back($2); }
-                  | Identifier                             { $$ = new Expression("PrimaryExpression", ""); $$->children.push_back($1); }
-                  | NOT Expression                         { $$ = new Expression("PrimaryExpression", $1); $$->children.push_back($2); }
-                  | NUM                                    { $$ = new Expression("Number", $1); }
-                  | TRUE                                   { $$ = new Expression("Boolean", $1); }
-                  | FALSE                                  { $$ = new Expression("Boolean", $1); }
-                  | THIS                                   { $$ = new Expression("This", ""); }
-                  | LENGTH                                 { $$ = new Expression("Length", ""); }
+PrimaryExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new PrimaryExpression("PrimaryExpression", "NEW"); $$->children.push_back($4); }
+                  | NEW Identifier LPARENTHESE RPARENTHESE { $$ = new PrimaryExpression("PrimaryExpression", "NEW"); $$->children.push_back($2); }
+                  | LPARENTHESE Expression RPARENTHESE     { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($2); }
+                  | Identifier                             { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($1); }
+                  | NOT Expression                         { $$ = new PrimaryExpression("PrimaryExpression", $1); $$->children.push_back($2); }
+                  | NUM                                    { $$ = new PrimaryExpression("Number", $1); }
+                  | TRUE                                   { $$ = new PrimaryExpression("Boolean", $1); }
+                  | FALSE                                  { $$ = new PrimaryExpression("Boolean", $1); }
+                  | THIS                                   { $$ = new PrimaryExpression("This", ""); }
+                  | LENGTH                                 { $$ = new PrimaryExpression("Length", ""); }
                   ;
 
 Identifier : IDENTIFIER { $$ = new Identifier("Identifier", $1); }
