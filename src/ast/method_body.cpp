@@ -15,3 +15,13 @@ std::optional<std::string> MethodBody::generateST()
 
     return std::nullopt;
 }
+
+std::optional<std::string> MethodBody::checkSemantics()
+{
+    for (auto &child : this->children)
+    {
+        child->checkSemantics();
+    }
+
+    return std::nullopt;
+}

@@ -40,7 +40,7 @@ std::optional<string> ClassDeclaration::generateST()
     ClassDeclaration::st.getParentScope()->addRecord(class_name, class_ptr);
 
     // "Class" extends
-    if (this->children.at(1)->getType() == "Identifier")
+    if (this->children.size() > 1 && this->children.at(1)->getType() == "Identifier")
     {
         for (size_t i = 2; i < this->children.size(); ++i) // Declarations
         {
@@ -95,6 +95,27 @@ std::optional<string> ClassDeclaration::generateST()
         for (size_t i = 1; i < this->children.size(); ++i) // Declarations
         {
             this->children.at(i)->generateST();
+        }
+    }
+
+    return std::nullopt;
+}
+
+std::optional<std::string> ClassDeclaration::checkSemantics()
+{
+    // "Class" extends
+    if (this->children.size() > 1 && this->children.at(1)->getType() == "Identifier")
+    {
+        for (size_t i = 2; i < this->children.size(); ++i) // Declarations
+        {
+            this->children.at(i)->checkSemantics();
+        }
+    }
+    else // no Class extends
+    {
+        for (size_t i = 1; i < this->children.size(); ++i) // Declarations
+        {
+            this->children.at(i)->checkSemantics();
         }
     }
 

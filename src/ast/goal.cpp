@@ -17,8 +17,22 @@ std::optional<string> Goal::generateST()
 
     for (auto &child : this->children)
     {
-        Goal::st.enterScope(); // enter class scope
+        // enter class scope
+        Goal::st.enterScope();
         child->generateST();
+        Goal::st.exitScope(); // exit class scope
+    }
+
+    return std::nullopt;
+}
+
+std::optional<std::string> Goal::checkSemantics()
+{
+    for (auto &child : this->children)
+    {
+        // enter class scope
+        Goal::st.enterScope();
+        child->checkSemantics();
         Goal::st.exitScope(); // exit class scope
     }
 

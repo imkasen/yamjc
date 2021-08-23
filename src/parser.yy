@@ -149,7 +149,7 @@ Expression : Expression AND Expression                                        { 
            | Expression SUB Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression MUL Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression DIV Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-           | Expression LBRACKET Expression RBRACKET                          { $$ = $1; $$->children.push_back($3); }
+           | Expression LBRACKET Expression RBRACKET                          { $$ = new Expression("Expression", $2+$4); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression DOT PrimaryExpression                                 { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression DOT Identifier LPARENTHESE RPARENTHESE                { $$ = $1; $$->children.push_back($3); }
            | Expression DOT Identifier LPARENTHESE ExpressionList RPARENTHESE { $$ = $1; $$->children.push_back($3); $$->children.push_back($5); }
@@ -160,7 +160,7 @@ ExpressionList : Expression                      { $$ = new Expression("Expressi
                | ExpressionList COMMA Expression { $$ = $1; $$->children.push_back($3); }
                ;
 
-PrimaryExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new PrimaryExpression("PrimaryExpression", "NEW"); $$->children.push_back($4); }
+PrimaryExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new PrimaryExpression("PrimaryExpression", "NEW "+$2+$3+$5); $$->children.push_back($4); }
                   | NEW Identifier LPARENTHESE RPARENTHESE { $$ = new PrimaryExpression("PrimaryExpression", "NEW"); $$->children.push_back($2); }
                   | LPARENTHESE Expression RPARENTHESE     { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($2); }
                   | Identifier                             { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($1); }

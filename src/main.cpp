@@ -66,6 +66,6 @@ int main(int argc, char* argv[])
     st_dot_stream.close();
 
     //Semantic analysis
-    //root.checkSemantics(st);
+    root->semanticAnalysis();
     return 0;
 }

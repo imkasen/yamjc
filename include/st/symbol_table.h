@@ -13,6 +13,7 @@ public:
     SymbolTable();
 
     void enterScope();
+    // bool enterScope(const std::string &key);
     void exitScope();
 
     void setScopeTitle(const std::string &title);
@@ -22,6 +23,7 @@ public:
 
     void addRecord(const std::string &key, const std::shared_ptr<Record> &item);
     [[nodiscard]] std::optional<std::shared_ptr<Record>> lookupRecord(const std::string &key) const;
+    [[nodiscard]] std::optional<std::shared_ptr<Record>> lookupRecordInRoot(const std::string &key) const;
 
     [[nodiscard]] std::optional<std::shared_ptr<Scope>> lookupChildScope(const std::string &key) const;
 

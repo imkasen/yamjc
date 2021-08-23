@@ -53,6 +53,10 @@ public:
     void buildST(std::ofstream *outStream);
     virtual std::optional<std::string> generateST();
 
+    // Semantic Analysis
+    void semanticAnalysis();
+    virtual std::optional<std::string> checkSemantics();
+
     virtual ~Node();
 };
 

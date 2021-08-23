@@ -61,3 +61,15 @@ std::optional<string> MainClass::generateST()
 
     return std::nullopt;
 }
+
+std::optional<std::string> MainClass::checkSemantics()
+{
+    // enter method scope
+    MainClass::st.enterScope();
+    for (size_t i = 2; i < this->children.size(); ++i) // MethodBody
+    {
+        this->children.at(i)->checkSemantics();
+    }
+    MainClass::st.exitScope();
+    return std::nullopt;
+}

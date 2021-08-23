@@ -26,12 +26,12 @@ void Node::setId(size_t n_id)
     this->id = n_id;
 }
 
-void Node::setType(std::string n_type)
+void Node::setType(string n_type)
 {
     this->type = std::move(n_type);
 }
 
-void Node::setValue(std::string n_value)
+void Node::setValue(string n_value)
 {
     this->value = std::move(n_value);
 }
@@ -41,12 +41,12 @@ size_t Node::getId() const
     return this->id;
 }
 
-std::string Node::getType() const
+string Node::getType() const
 {
     return this->type;
 }
 
-std::string Node::getValue() const
+string Node::getValue() const
 {
     return this->value;
 }
@@ -109,11 +109,28 @@ void Node::buildST(std::ofstream *outStream)
     Node::st.printST(outStream);
 }
 
-std::optional<std::string> Node::generateST()
+std::optional<string> Node::generateST()
 {
     for (auto &child: this->children)
     {
         child->generateST();
+    }
+
+    return std::nullopt;
+}
+
+// SA
+void Node::semanticAnalysis()
+{
+    this->checkSemantics();
+    Node::st.resetTable();
+}
+
+std::optional<string> Node::checkSemantics()
+{
+    for (auto &child : this->children)
+    {
+        child->checkSemantics();
     }
 
     return std::nullopt;

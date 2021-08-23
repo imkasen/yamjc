@@ -51,3 +51,16 @@ std::optional<string> MethodDeclaration::generateST()
 
     return std::nullopt;
 }
+
+std::optional<std::string> MethodDeclaration::checkSemantics()
+{
+    // enter method scope
+    MethodDeclaration::st.enterScope();
+    for (size_t i = 2; i < this->children.size(); ++i) // FormalParameterList, MethodBody
+    {
+        this->children.at(i)->checkSemantics();
+    }
+    MethodDeclaration::st.exitScope(); // exit method scope
+
+    return std::nullopt;
+}

@@ -8,6 +8,8 @@ class PrimaryExpression : public Node
 public:
     PrimaryExpression();
     PrimaryExpression(std::string t, std::string v);
+
+    std::optional<std::string> checkSemantics() override;
 };
 
 #endif

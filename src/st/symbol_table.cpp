@@ -13,9 +13,24 @@ void SymbolTable::enterScope()
     this->current = this->current->getNextChild(); // create new scope if needed
 }
 
+/*
+bool SymbolTable::enterScope(const std::string &key)
+{
+    if (this->root->lookupChildScope(key).has_value())
+    {
+        this->current = this->root->lookupChildScope(key).value();
+        return true;
+    }
+    return false;
+}
+*/
+
 void SymbolTable::exitScope()
 {
-    this->current = this->current->getParentScope();
+    if (this->current)
+    {
+        this->current = this->current->getParentScope();
+    }
 }
 
 void SymbolTable::setScopeTitle(const std::string &title)
@@ -49,6 +64,15 @@ void SymbolTable::addRecord(const string &key, const std::shared_ptr<Record> &it
 std::optional<std::shared_ptr<Record>> SymbolTable::lookupRecord(const string &key) const
 {
     return this->current->lookupRecord(key);
+}
+
+/*
+ * search class in "Program" scope
+ * @return std::shared_ptr<Record> | std::nullopt
+ */
+std::optional<std::shared_ptr<Record>> SymbolTable::lookupRecordInRoot(const std::string &key) const
+{
+    return this->root->lookupRecord(key);
 }
 
 std::optional<std::shared_ptr<Scope>> SymbolTable::lookupChildScope(const string &key) const
