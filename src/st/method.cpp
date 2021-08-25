@@ -4,32 +4,31 @@ using std::string;
 Method::Method() : Parameter() {}
 Method::Method(string name, string type) : Parameter(std::move(name), std::move(type), "Method") {}
 
-std::unordered_map<std::string, std::shared_ptr<Parameter>> Method::getParameters() const
+std::deque<std::shared_ptr<Parameter>> Method::getParameters() const
 {
     return this->parameters;
 }
 
 void Method::addParameter(const std::shared_ptr<Parameter> &parameter)
 {
-    auto ret = this->parameters.insert({parameter->getName(), parameter});
-    if (!ret.second) // false
+    if (!this->lookupParameter(parameter->getName()).value_or(nullptr))
     {
-        std::cerr << "The parameter " << parameter->getName() << " already exists in the method!" << std::endl;
+        this->parameters.push_back(parameter);
     }
 }
 
 /*
  * @return std::shared_ptr<Parameter> | std::nullopt
  */
-std::optional<std::shared_ptr<Parameter>> Method::lookupParameter(const string &name) const
+std::optional<std::shared_ptr<Parameter>> Method::lookupParameter(const std::string &name) const
 {
-    auto iterator = this->parameters.find(name);
-    if (iterator != this->parameters.end()) // exists
+    for (const auto &para : this->parameters)
     {
-        return iterator->second;
+        if (para->getName() == name)
+        {
+            return para;
+        }
     }
-    else
-    {
-        return std::nullopt;
-    }
+
+    return std::nullopt;
 }

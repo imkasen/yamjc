@@ -20,7 +20,10 @@ std::optional<std::string> MethodBody::checkSemantics()
 {
     for (auto &child : this->children)
     {
-        child->checkSemantics();
+        if (child->getType() == "Statement")
+        {
+            child->checkSemantics();
+        }
     }
 
     return std::nullopt;

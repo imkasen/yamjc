@@ -81,9 +81,9 @@ std::optional<string> ClassDeclaration::generateST()
                     {
                         ClassDeclaration::st.addRecord(v_pair.first, v_pair.second);
                     }
-                    for (const auto &p_pair : method_ptr->getParameters())
+                    for (const auto &p_ptr : method_ptr->getParameters())
                     {
-                        ClassDeclaration::st.addRecord(p_pair.first, p_pair.second);
+                        ClassDeclaration::st.addRecord(p_ptr->getName(), p_ptr);
                     }
                     ClassDeclaration::st.exitScope();
                 }

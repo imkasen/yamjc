@@ -39,7 +39,7 @@ string Scope::getScopeType() const
     size_t pos = this->scope_title.find(' ');
     if (pos != string::npos)
     {
-        return this->scope_title.substr(0, pos - 1);
+        return this->scope_title.substr(0, pos - 1); // delete ':'
     }
     else
     {

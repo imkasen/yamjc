@@ -67,5 +67,6 @@ int main(int argc, char* argv[])
 
     //Semantic analysis
     root->semanticAnalysis();
-    return 0;
+
+    return EXIT_SUCCESS;
 }

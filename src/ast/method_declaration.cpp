@@ -56,7 +56,7 @@ std::optional<std::string> MethodDeclaration::checkSemantics()
 {
     // enter method scope
     MethodDeclaration::st.enterScope();
-    for (size_t i = 2; i < this->children.size(); ++i) // FormalParameterList, MethodBody
+    for (size_t i = 3; i < this->children.size(); ++i) // MethodBody
     {
         this->children.at(i)->checkSemantics();
     }
