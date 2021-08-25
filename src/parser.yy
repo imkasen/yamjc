@@ -165,9 +165,9 @@ PrimaryExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new PrimaryExp
                   | LPARENTHESE Expression RPARENTHESE     { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($2); }
                   | Identifier                             { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($1); }
                   | NOT Expression                         { $$ = new PrimaryExpression("PrimaryExpression", $1); $$->children.push_back($2); }
-                  | NUM                                    { $$ = new PrimaryExpression("Number", $1); }
-                  | TRUE                                   { $$ = new PrimaryExpression("Boolean", $1); }
-                  | FALSE                                  { $$ = new PrimaryExpression("Boolean", $1); }
+                  | NUM                                    { $$ = new PrimaryExpression("int", $1); }
+                  | TRUE                                   { $$ = new PrimaryExpression("boolean", $1); }
+                  | FALSE                                  { $$ = new PrimaryExpression("boolean", $1); }
                   | THIS                                   { $$ = new PrimaryExpression("This", ""); }
                   | LENGTH                                 { $$ = new PrimaryExpression("Length", ""); }
                   ;

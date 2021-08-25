@@ -180,15 +180,6 @@ bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr)
             string type_from_m = method_ptr->getParameters().at(i)->getType();
             string type_from_p = p_deque.at(i);
 
-            if (type_from_p == "Number")
-            {
-                type_from_p = "int";
-            }
-            else if (type_from_p == "Boolean")
-            {
-                type_from_p = "boolean";
-            }
-
             if (type_from_p != type_from_m)
             {
                 std::cerr << "[Semantic Analysis] - Error: Parameter types do not match!" << std::endl;
