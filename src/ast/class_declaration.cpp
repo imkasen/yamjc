@@ -48,7 +48,7 @@ std::optional<string> ClassDeclaration::generateST()
         }
 
         string parent_class_name = this->children.at(1)->getValue();
-        class_ptr->setType(class_type + "," + parent_class_name);
+        class_ptr->setType(class_type + " " + parent_class_name);
 
         auto c_record_ptr = ClassDeclaration::st.lookupRecord(parent_class_name).value_or(nullptr);
         if (c_record_ptr)

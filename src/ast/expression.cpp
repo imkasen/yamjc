@@ -163,12 +163,7 @@ bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr)
 
         string parameter_type_list = this->children.at(2)->checkSemantics().value_or("");
         // split string
-        size_t pos;
-        while ((pos = parameter_type_list.find(' ')) != string::npos)
-        {
-            p_deque.push_back(parameter_type_list.substr(0, pos));
-            parameter_type_list.erase(0, pos + 1);
-        }
+        Expression::strSplit(p_deque, parameter_type_list, " ");
 
         if (p_deque.size() != method_ptr->getParameters().size())
         {
@@ -183,13 +178,46 @@ bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr)
 
             if (type_from_p != type_from_m)
             {
+                // extends
+                auto c_record_ptr = Expression::st.lookupRecordInRoot(type_from_p).value_or(nullptr);
+                auto class_ptr = std::dynamic_pointer_cast<STClass>(c_record_ptr);
+                if (class_ptr)
+                {
+                    std::deque<string> c_deque;
+                    Expression::strSplit(c_deque, class_ptr->getType(), " ");
+
+                    if (std::find(c_deque.begin(), c_deque.end(), type_from_m) != c_deque.end())
+                    {
+                        return true;
+                    }
+                }
+
                 std::cerr << "[Semantic Analysis] - Error: Parameter types (\""
                 << type_from_m << "\" - \"" << type_from_p
                 << "\") do not match!" << std::endl;
+
                 return false;
             }
         }
     }
 
     return true;
+}
+
+void Expression::strSplit(std::deque<std::string> &deque, const std::string &text, const std::string &delimiter)
+{
+    size_t pos;
+    string text_str = text;
+
+    // not end with delimiter
+    if (text_str.rfind(delimiter) != (text_str.length() - delimiter.length()))
+    {
+        text_str += delimiter;
+    }
+
+    while ((pos = text_str.find(delimiter)) != string::npos)
+    {
+        deque.push_back(text_str.substr(0, pos));
+        text_str.erase(0, pos + delimiter.length());
+    }
 }
