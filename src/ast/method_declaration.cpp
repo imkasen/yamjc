@@ -56,9 +56,12 @@ std::optional<std::string> MethodDeclaration::checkSemantics()
 {
     // enter method scope
     MethodDeclaration::st.enterScope();
-    for (size_t i = 3; i < this->children.size(); ++i) // MethodBody
+    for (auto &child : this->children)
     {
-        this->children.at(i)->checkSemantics();
+        if (child->getType() == "MethodBody")
+        {
+            child->checkSemantics();
+        }
     }
     MethodDeclaration::st.exitScope(); // exit method scope
 

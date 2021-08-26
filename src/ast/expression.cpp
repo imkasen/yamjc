@@ -43,7 +43,8 @@ std::optional<string> Expression::checkSemantics()
             }
         }
         // PrimaryExpression
-        else {
+        else if (this->children.at(0)->getValue().empty())
+        {
             // check parameters
             var_name = this->children.at(0)->checkSemantics().value_or("");
             v_record_ptr = Expression::st.lookupRecord(var_name).value_or(nullptr);
@@ -141,7 +142,7 @@ std::optional<string> Expression::checkSemantics()
             }
 
             // if: Expression -> PrimaryExpression -> Expression ...
-            return method_name;
+            return m_record_ptr->getType();
         }
     }
 
@@ -182,7 +183,9 @@ bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr)
 
             if (type_from_p != type_from_m)
             {
-                std::cerr << "[Semantic Analysis] - Error: Parameter types do not match!" << std::endl;
+                std::cerr << "[Semantic Analysis] - Error: Parameter types (\""
+                << type_from_m << "\" - \"" << type_from_p
+                << "\") do not match!" << std::endl;
                 return false;
             }
         }

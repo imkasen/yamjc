@@ -45,7 +45,8 @@ $ cd .. && rm -rf build/
 # Flaws
 
 * Mix use of raw pointers and smart pointers.
-* Only non-negative integer literals are supported, but negative numbers can result from computations.
+* Only non-negative integer literals are supported.
+* Subclasses cannot be implicitly converted to parent classes.
 
 # LICENSE
 
