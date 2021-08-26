@@ -47,6 +47,10 @@ std::optional<string> Expression::checkSemantics()
         {
             // check parameters
             var_name = this->children.at(0)->checkSemantics().value_or("");
+            if (var_name == "int" || var_name == "boolean")
+            {
+                return var_name;
+            }
             v_record_ptr = Expression::st.lookupRecord(var_name).value_or(nullptr);
             if (v_record_ptr)
             {
@@ -60,7 +64,7 @@ std::optional<string> Expression::checkSemantics()
             }
         }
     }
-    // Expression -> Number, Boolean, ...
+    // Expression -> int, boolean, This, ...
     else if (this->children.size() == 1)
     {
         // check parameters
@@ -102,7 +106,8 @@ std::optional<string> Expression::checkSemantics()
             }
         }
         // PrimaryExpression
-        else if (this->children.at(0)->getValue().empty())
+        // PrimaryExpression:!
+        else
         {
             var_name = this->children.at(0)->checkSemantics().value_or("");
             method_name = this->children.at(1)->checkSemantics().value_or("");
@@ -141,8 +146,47 @@ std::optional<string> Expression::checkSemantics()
                 return std::nullopt;
             }
 
-            // if: Expression -> PrimaryExpression -> Expression ...
+            // Expression -> PrimaryExpression -> Expression ...
             return m_record_ptr->getType();
+        }
+    }
+    // Expression -> This, Identifier
+    // Expression -> This, Identifier, ExpressionList
+    else if (this->children.size() <= 3 && this->children.at(0)->getType() == "This")
+    {
+        method_name = this->children.at(1)->checkSemantics().value_or("");
+        m_record_ptr = Expression::st.lookupRecord(method_name).value_or(nullptr);
+        if (!m_record_ptr)
+        {
+            std::cerr << "[Semantic Analysis] - Error: Method \"" << method_name
+            << "\" does not exist!" << std::endl;
+            return std::nullopt;
+        }
+
+        if (!this->checkParameters(m_record_ptr))
+        {
+            return std::nullopt;
+        }
+
+        // Expression -> PrimaryExpression -> Expression ...
+        return m_record_ptr->getType();
+    }
+    // Expression -> Expression, Expression
+    else if (this->children.size() == 2
+        && this->getValue() != "[]" && this->getValue() != ".") // skip Expression:[], Expression:. (Length)
+    {
+        string lhs = this->children.at(0)->checkSemantics().value_or("");
+        string rhs = this->children.at(1)->checkSemantics().value_or("");
+        if (!lhs.empty() && !rhs.empty() && lhs == rhs)
+        {
+            return lhs;
+        }
+        else
+        {
+            std::cerr << "[Semantic Analysis] - Error: lhs (\"" << lhs <<
+                "\") and rhs (\""<< rhs <<"\") variable types are different!"
+                << std::endl;
+            return std::nullopt;
         }
     }
 
