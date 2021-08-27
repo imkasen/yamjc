@@ -153,6 +153,7 @@ Expression : Expression AND Expression                                        { 
            | Expression DOT PrimaryExpression                                 { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression DOT Identifier LPARENTHESE RPARENTHESE                { $$ = $1; $$->children.push_back($3); }
            | Expression DOT Identifier LPARENTHESE ExpressionList RPARENTHESE { $$ = $1; $$->children.push_back($3); $$->children.push_back($5); }
+           | NOT Expression                                                   { $$ = new Expression("Expression", $1); $$->children.push_back($2); }
            | PrimaryExpression                                                { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
            ;
 
@@ -164,11 +165,10 @@ PrimaryExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new PrimaryExp
                   | NEW Identifier LPARENTHESE RPARENTHESE { $$ = new PrimaryExpression("PrimaryExpression", "NEW"); $$->children.push_back($2); }
                   | LPARENTHESE Expression RPARENTHESE     { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($2); }
                   | Identifier                             { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($1); }
-                  | NOT Expression                         { $$ = new PrimaryExpression("PrimaryExpression", $1); $$->children.push_back($2); }
                   | NUM                                    { $$ = new PrimaryExpression("int", $1); }
                   | TRUE                                   { $$ = new PrimaryExpression("boolean", $1); }
                   | FALSE                                  { $$ = new PrimaryExpression("boolean", $1); }
-                  | THIS                                   { $$ = new PrimaryExpression("This", ""); }
+                  | THIS                                   { $$ = new PrimaryExpression("this", ""); }
                   | LENGTH                                 { $$ = new PrimaryExpression("Length", ""); }
                   ;
 

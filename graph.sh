@@ -2,11 +2,19 @@
 
 set -Eeuo pipefail
 
+ast() {
+  dot -T svg ast.dot -o ast.svg
+}
+
+st() {
+  dot -T svg st.dot -o st.svg
+}
+
 if [[ $# -eq 0 ]]; then
-  dot -T svg ast.dot -o ast.svg
-  dot -T svg st.dot -o st.svg
+  ast
+  st
 elif [[ $# -eq 1 && $1 == "ast" ]]; then
-  dot -T svg ast.dot -o ast.svg
+  ast
 elif [[ $# -eq 1 && $1 == "st" ]]; then
-  dot -T svg st.dot -o st.svg
+  st
 fi
