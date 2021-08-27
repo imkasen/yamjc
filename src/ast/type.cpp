@@ -17,3 +17,19 @@ std::optional<string> Type::generateST()
 
     return std::nullopt;
 }
+
+std::optional<std::string> Type::checkSemantics()
+{
+    // Type -> Identifier
+    if (this->children.size() == 1 && this->getValue().empty())
+    {
+        return this->children.at(0)->checkSemantics();
+    }
+    // Type:int, Type:boolean, type:int[]
+    else if (this->children.empty() && !this->getValue().empty())
+    {
+        return this->getValue();
+    }
+
+    return std::nullopt;
+}

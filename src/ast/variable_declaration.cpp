@@ -40,3 +40,19 @@ std::optional<string> VarDeclaration::generateST()
 
     return std::nullopt;
 }
+
+std::optional<std::string> VarDeclaration::checkSemantics()
+{
+    string type_name = this->children.at(0)->checkSemantics().value_or("");
+    if (type_name != "int" && type_name != "boolean" && type_name != "int[]")
+    {
+        auto c_record_ptr = VarDeclaration::st.lookupRecordInRoot(type_name).value_or(nullptr);
+        if (!c_record_ptr)
+        {
+            std::cerr << "[Semantic Analysis] - Error: Class \"" << type_name
+                      << "\" does not exist!" << std::endl;
+        }
+    }
+
+    return std::nullopt;
+}

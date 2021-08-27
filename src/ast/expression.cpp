@@ -1,6 +1,8 @@
 #include "ast/expression.h"
 using std::string;
 using std::size_t;
+using std::cerr;
+using std::endl;
 
 Expression::Expression() : Node() {}
 Expression::Expression(string t, string v) : Node(std::move(t), std::move(v)) {}
@@ -38,9 +40,8 @@ std::optional<string> Expression::checkSemantics()
             c_record_ptr = Expression::st.lookupRecordInRoot(class_name).value_or(nullptr);
             if (!c_record_ptr)
             {
-                std::cerr << "[Semantic Analysis] - Error: Class \"" << class_name
-                    << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
-                    << "\"!" << std::endl;
+                cerr << "[Semantic Analysis] - Error: Class \"" << class_name
+                    << "\" does not exist!" << endl;
                 return std::nullopt;
             }
         }
@@ -60,9 +61,9 @@ std::optional<string> Expression::checkSemantics()
             }
             else
             {
-                std::cerr << "[Semantic Analysis] - Error: Variable \"" << var_name
+                cerr << "[Semantic Analysis] - Error: Variable \"" << var_name
                     << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
-                    << "\"!" << std::endl;
+                    << "\"!" << endl;
                 return std::nullopt;
             }
         }
@@ -105,9 +106,8 @@ std::optional<string> Expression::checkSemantics()
 
             if (!class_ptr)
             {
-                std::cerr << "[Semantic Analysis] - Error: Class \"" << class_name
-                    << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
-                    << "\"!" << std::endl;
+                cerr << "[Semantic Analysis] - Error: Class \"" << class_name
+                    << "\" does not exist!" << endl;
                 return std::nullopt;
             }
             else
@@ -115,9 +115,9 @@ std::optional<string> Expression::checkSemantics()
                 m_record_ptr = class_ptr->lookupMethod(method_name).value_or(nullptr);
                 if (!m_record_ptr)
                 {
-                    std::cerr << "[Semantic Analysis] - Error: Method \"" << method_name
+                    cerr << "[Semantic Analysis] - Error: Method \"" << method_name
                         << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
-                        << "\"!" << std::endl;
+                        << "\"!" << endl;
                     return std::nullopt;
                 }
             }
@@ -136,9 +136,9 @@ std::optional<string> Expression::checkSemantics()
             v_record_ptr = Expression::st.lookupRecord(var_name).value_or(nullptr);
             if (!v_record_ptr)
             {
-                std::cerr << "[Semantic Analysis] - Error: Variable \"" << var_name
+                cerr << "[Semantic Analysis] - Error: Variable \"" << var_name
                     << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
-                    << "\"!" << std::endl;
+                    << "\"!" << endl;
                 return std::nullopt;
             }
 
@@ -148,9 +148,8 @@ std::optional<string> Expression::checkSemantics()
 
             if (!class_ptr)
             {
-                std::cerr << "[Semantic Analysis] - Error: Class \"" << class_name
-                    << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
-                    << "\"!" << std::endl;
+                cerr << "[Semantic Analysis] - Error: Class \"" << class_name
+                    << "\" does not exist!" << endl;
                 return std::nullopt;
             }
             else
@@ -158,9 +157,9 @@ std::optional<string> Expression::checkSemantics()
                 m_record_ptr = class_ptr->lookupMethod(method_name).value_or(nullptr);
                 if (!m_record_ptr)
                 {
-                    std::cerr << "[Semantic Analysis] - Error: Method \"" << method_name
+                    cerr << "[Semantic Analysis] - Error: Method \"" << method_name
                         << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
-                        << "\"!" << std::endl;
+                        << "\"!" << endl;
                     return std::nullopt;
                 }
             }
@@ -176,15 +175,15 @@ std::optional<string> Expression::checkSemantics()
     }
     // Expression -> this, Identifier
     // Expression -> this, Identifier, ExpressionList
-    else if (this->children.size() <= 3 && this->children.at(0)->getType() == "This")
+    else if (this->children.size() <= 3 && this->children.at(0)->getType() == "this")
     {
         method_name = this->children.at(1)->checkSemantics().value_or("");
         m_record_ptr = Expression::st.lookupRecord(method_name).value_or(nullptr);
         if (!m_record_ptr)
         {
-            std::cerr << "[Semantic Analysis] - Error: Method \"" << method_name
+            cerr << "[Semantic Analysis] - Error: Method \"" << method_name
                 << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
-                << "\"!" << std::endl;
+                << "\"!" << endl;
             return std::nullopt;
         }
 
@@ -209,9 +208,9 @@ std::optional<string> Expression::checkSemantics()
             v_record_ptr = Expression::st.lookupRecord(var_name).value_or(nullptr);
             if (!v_record_ptr)
             {
-                std::cerr << "[Semantic Analysis] - Error: Variable \"" << var_name
+                cerr << "[Semantic Analysis] - Error: Variable \"" << var_name
                     << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
-                    << "\"!" << std::endl;
+                    << "\"!" << endl;
                 return std::nullopt;
             }
 
@@ -221,9 +220,8 @@ std::optional<string> Expression::checkSemantics()
 
             if (!class_ptr)
             {
-                std::cerr << "[Semantic Analysis] - Error: Class \"" << class_name
-                    << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
-                    << "\"!" << std::endl;
+                cerr << "[Semantic Analysis] - Error: Class \"" << class_name
+                    << "\" does not exist!" << endl;
                 return std::nullopt;
             }
             else
@@ -231,9 +229,9 @@ std::optional<string> Expression::checkSemantics()
                 m_record_ptr = class_ptr->lookupMethod(method_name).value_or(nullptr);
                 if (!m_record_ptr)
                 {
-                    std::cerr << "[Semantic Analysis] - Error: Method \"" << method_name
+                    cerr << "[Semantic Analysis] - Error: Method \"" << method_name
                         << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
-                        << "\"!" << std::endl;
+                        << "\"!" << endl;
                     return std::nullopt;
                 }
             }
@@ -258,9 +256,9 @@ std::optional<string> Expression::checkSemantics()
             }
             else
             {
-                std::cerr << "[Semantic Analysis] - Error: lhs (\""
+                cerr << "[Semantic Analysis] - Error: lhs (\""
                     << lhs << "\") and rhs (\"" << rhs << "\") variable types are different in scope \""
-                    << Expression::st.getScopeTitle() << "\"!" << std::endl;
+                    << Expression::st.getScopeTitle() << "\"!" << endl;
                 return std::nullopt;
             }
         }
@@ -287,8 +285,8 @@ bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr)
 
         if (p_deque.size() != method_ptr->getParameters().size())
         {
-            std::cerr << "[Semantic Analysis] - Error: Parameter numbers do not match in scope \""
-                << Expression::st.getScopeTitle() << "\"!" << std::endl;
+            cerr << "[Semantic Analysis] - Error: Parameter numbers do not match in scope \""
+                << Expression::st.getScopeTitle() << "\"!" << endl;
             return false;
         }
 
@@ -313,9 +311,9 @@ bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr)
                     }
                 }
 
-                std::cerr << "[Semantic Analysis] - Error: Parameter types (\""
+                cerr << "[Semantic Analysis] - Error: Parameter types (\""
                     << type_from_m << "\" - \"" << type_from_p << "\") do not match in scope \""
-                    << Expression::st.getScopeTitle() << "\"!" << std::endl;
+                    << Expression::st.getScopeTitle() << "\"!" << endl;
 
                 return false;
             }
