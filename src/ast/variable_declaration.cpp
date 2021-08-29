@@ -51,6 +51,7 @@ std::optional<std::string> VarDeclaration::checkSemantics()
         {
             std::cerr << "[Semantic Analysis] - Error: Class \"" << type_name
                       << "\" does not exist!" << std::endl;
+            exit(EXIT_FAILURE);
         }
     }
 

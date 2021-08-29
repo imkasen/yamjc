@@ -10,6 +10,7 @@
 #include <string>
 #include <deque>
 #include <fstream>
+#include <cstdlib>
 
 /*
  * The basic class in abstract syntax tree.

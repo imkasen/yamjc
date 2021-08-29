@@ -3,6 +3,7 @@ using std::string;
 using std::size_t;
 using std::cerr;
 using std::endl;
+using std::exit;
 
 Expression::Expression() : Node() {}
 Expression::Expression(string t, string v) : Node(std::move(t), std::move(v)) {}
@@ -42,7 +43,7 @@ std::optional<string> Expression::checkSemantics()
             {
                 cerr << "[Semantic Analysis] - Error: Class \"" << class_name
                     << "\" does not exist!" << endl;
-                return std::nullopt;
+                exit(EXIT_FAILURE);
             }
         }
         // PrimaryExpression
@@ -64,7 +65,7 @@ std::optional<string> Expression::checkSemantics()
                 cerr << "[Semantic Analysis] - Error: Variable \"" << var_name
                     << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
                     << "\"!" << endl;
-                return std::nullopt;
+                exit(EXIT_FAILURE);
             }
         }
     }
@@ -108,7 +109,7 @@ std::optional<string> Expression::checkSemantics()
             {
                 cerr << "[Semantic Analysis] - Error: Class \"" << class_name
                     << "\" does not exist!" << endl;
-                return std::nullopt;
+                exit(EXIT_FAILURE);
             }
             else
             {
@@ -118,13 +119,13 @@ std::optional<string> Expression::checkSemantics()
                     cerr << "[Semantic Analysis] - Error: Method \"" << method_name
                         << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
                         << "\"!" << endl;
-                    return std::nullopt;
+                    exit(EXIT_FAILURE);
                 }
             }
 
             if (!this->checkParameters(m_record_ptr))
             {
-                return std::nullopt;
+                exit(EXIT_FAILURE);
             }
         }
         // PrimaryExpression
@@ -139,7 +140,7 @@ std::optional<string> Expression::checkSemantics()
                 cerr << "[Semantic Analysis] - Error: Variable \"" << var_name
                     << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
                     << "\"!" << endl;
-                return std::nullopt;
+                exit(EXIT_FAILURE);
             }
 
             class_name = v_record_ptr->getType();
@@ -150,7 +151,7 @@ std::optional<string> Expression::checkSemantics()
             {
                 cerr << "[Semantic Analysis] - Error: Class \"" << class_name
                     << "\" does not exist!" << endl;
-                return std::nullopt;
+                exit(EXIT_FAILURE);
             }
             else
             {
@@ -160,13 +161,13 @@ std::optional<string> Expression::checkSemantics()
                     cerr << "[Semantic Analysis] - Error: Method \"" << method_name
                         << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
                         << "\"!" << endl;
-                    return std::nullopt;
+                    exit(EXIT_FAILURE);
                 }
             }
 
             if (!this->checkParameters(m_record_ptr))
             {
-                return std::nullopt;
+                exit(EXIT_FAILURE);
             }
 
             // Expression -> PrimaryExpression -> Expression ...
@@ -184,12 +185,12 @@ std::optional<string> Expression::checkSemantics()
             cerr << "[Semantic Analysis] - Error: Method \"" << method_name
                 << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
                 << "\"!" << endl;
-            return std::nullopt;
+            exit(EXIT_FAILURE);
         }
 
         if (!this->checkParameters(m_record_ptr))
         {
-            return std::nullopt;
+            exit(EXIT_FAILURE);
         }
 
         // Expression -> PrimaryExpression -> Expression ...
@@ -211,7 +212,7 @@ std::optional<string> Expression::checkSemantics()
                 cerr << "[Semantic Analysis] - Error: Variable \"" << var_name
                     << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
                     << "\"!" << endl;
-                return std::nullopt;
+                exit(EXIT_FAILURE);
             }
 
             class_name = v_record_ptr->getType();
@@ -222,7 +223,7 @@ std::optional<string> Expression::checkSemantics()
             {
                 cerr << "[Semantic Analysis] - Error: Class \"" << class_name
                     << "\" does not exist!" << endl;
-                return std::nullopt;
+                exit(EXIT_FAILURE);
             }
             else
             {
@@ -232,13 +233,13 @@ std::optional<string> Expression::checkSemantics()
                     cerr << "[Semantic Analysis] - Error: Method \"" << method_name
                         << "\" does not exist in scope \"" << Expression::st.getScopeTitle()
                         << "\"!" << endl;
-                    return std::nullopt;
+                    exit(EXIT_FAILURE);
                 }
             }
 
             if (!this->checkParameters(m_record_ptr))
             {
-                return std::nullopt;
+                exit(EXIT_FAILURE);
             }
 
             // Expression -> PrimaryExpression -> Expression ...
@@ -259,7 +260,7 @@ std::optional<string> Expression::checkSemantics()
                 cerr << "[Semantic Analysis] - Error: lhs (\""
                     << lhs << "\") and rhs (\"" << rhs << "\") variable types are different in scope \""
                     << Expression::st.getScopeTitle() << "\"!" << endl;
-                return std::nullopt;
+                exit(EXIT_FAILURE);
             }
         }
     }
@@ -314,7 +315,6 @@ bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr)
                 cerr << "[Semantic Analysis] - Error: Parameter types (\""
                     << type_from_m << "\" - \"" << type_from_p << "\") do not match in scope \""
                     << Expression::st.getScopeTitle() << "\"!" << endl;
-
                 return false;
             }
         }
