@@ -8,6 +8,8 @@ class Return : public Node
 public:
     Return();
     Return(std::string t, std::string v);
+
+    std::optional<std::string> checkSemantics() override;
 };
 
 #endif

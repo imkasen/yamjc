@@ -45,6 +45,21 @@ std::optional<string> Expression::checkSemantics()
                     << "\" does not exist!" << endl;
                 exit(EXIT_FAILURE);
             }
+
+            return c_record_ptr->getType();
+        }
+        // PrimaryExpression:New int[]
+        else if (this->children.at(0)->getValue() == "NEW int[]")
+        {
+            string type = this->children.at(0)->checkSemantics().value_or("");
+            if (type != "int")
+            {
+                cerr << R"([Semantic Analysis] - Error: only "int" can be used to create "NEW int[]" in scope ")"
+                     << Expression::st.getScopeTitle() << "\"!" << endl;
+                exit(EXIT_FAILURE);
+            }
+
+            return "int[]";
         }
         // PrimaryExpression
         else if (this->children.at(0)->getValue().empty())
@@ -127,6 +142,8 @@ std::optional<string> Expression::checkSemantics()
             {
                 exit(EXIT_FAILURE);
             }
+
+            return m_record_ptr->getType();
         }
         // PrimaryExpression
         else
@@ -170,7 +187,6 @@ std::optional<string> Expression::checkSemantics()
                 exit(EXIT_FAILURE);
             }
 
-            // Expression -> PrimaryExpression -> Expression ...
             return m_record_ptr->getType();
         }
     }
@@ -193,7 +209,6 @@ std::optional<string> Expression::checkSemantics()
             exit(EXIT_FAILURE);
         }
 
-        // Expression -> PrimaryExpression -> Expression ...
         return m_record_ptr->getType();
     }
     // Expression -> Expression, ...
@@ -242,7 +257,6 @@ std::optional<string> Expression::checkSemantics()
                 exit(EXIT_FAILURE);
             }
 
-            // Expression -> PrimaryExpression -> Expression ...
             return m_record_ptr->getType();
         }
         // Expression -> Expression, Expression
@@ -253,6 +267,11 @@ std::optional<string> Expression::checkSemantics()
             string rhs = this->children.at(1)->checkSemantics().value_or("");
             if (!lhs.empty() && !rhs.empty() && lhs == rhs)
             {
+                // IF, WHILE
+                if (this->getValue() == ">" || this->getValue() == "<")
+                {
+                    return "boolean";
+                }
                 return lhs;
             }
             else
@@ -261,6 +280,26 @@ std::optional<string> Expression::checkSemantics()
                     << lhs << "\") and rhs (\"" << rhs << "\") variable types are different in scope \""
                     << Expression::st.getScopeTitle() << "\"!" << endl;
                 exit(EXIT_FAILURE);
+            }
+        }
+        // Expression:. -> Expression, Length
+        else if (this->children.size() == 2 && this->getValue() == ".")
+        {
+            string lhs = this->children.at(0)->checkSemantics().value_or("");
+            string rhs;
+            if (this->children.at(1)->getType() == "Length")
+            {
+                rhs = "int";
+                if (!lhs.empty() && !rhs.empty() && lhs == "int[]")
+                {
+                    return rhs;
+                }
+                else
+                {
+                    cerr << R"([Semantic Analysis] - Error: ".length" can only be applied to "int[]" in scope ")"
+                         << Expression::st.getScopeTitle() << "\"!" << endl;
+                    exit(EXIT_FAILURE);
+                }
             }
         }
     }
@@ -299,17 +338,12 @@ bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr)
             if (type_from_p != type_from_m)
             {
                 // extends
+                // MyVisitor = MyVisitor Visitor, Visitor = MyVisitor Visitor
                 auto c_record_ptr = Expression::st.lookupRecordInRoot(type_from_p).value_or(nullptr);
-                auto class_ptr = std::dynamic_pointer_cast<STClass>(c_record_ptr);
-                if (class_ptr)
+                string c_record_ptr_type = c_record_ptr->getType();
+                if (c_record_ptr_type.find(type_from_m) != string::npos)
                 {
-                    std::deque<string> c_deque;
-                    Expression::strSplit(c_deque, class_ptr->getType(), " ");
-
-                    if (std::find(c_deque.begin(), c_deque.end(), type_from_m) != c_deque.end())
-                    {
-                        return true;
-                    }
+                    return true;
                 }
 
                 cerr << "[Semantic Analysis] - Error: Parameter types (\""

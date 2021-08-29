@@ -58,7 +58,7 @@ std::optional<std::string> MethodDeclaration::checkSemantics()
     MethodDeclaration::st.enterScope();
     for (auto &child : this->children)
     {
-        if (child->getType() == "MethodBody")
+        if (child->getType() == "MethodBody" || child->getType() == "Return")
         {
             child->checkSemantics();
         }

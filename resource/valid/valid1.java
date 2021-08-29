@@ -3,7 +3,6 @@
 class TreeVisitor {
     public static void main(String[] a) {
         System.out.println(new TV().Start(3)); // OK
-        // System.out.println(new TV()); // OK
         // System.out.println(new Test()); // No Test class
         // System.out.println(new TV().Test(3));  // No Test() method.
         // System.out.println(new Test().Start(3)); // No Test class
