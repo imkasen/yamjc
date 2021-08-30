@@ -23,6 +23,8 @@ class TV {
 }
 
 class Tree {
+    int i;
+
     public boolean Init(int num) {
         return true;
     }

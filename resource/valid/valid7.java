@@ -10,17 +10,22 @@ class TV {
     public int Start(int num) {
         Tree root;
         boolean ntb;
+        boolean ntb2;
 
         root = new Tree();
 
-        // if (true) // OK
+        if (true) // OK
+        // if (ntb && ntb2) // OK
+        // if (true && 1) // not boolean
+        // if (root.Init(1)) // OK
         // if (1) // not boolean
-        // {}
-        // else {}
+        {}
+        else {}
 
-        // while (true) // OK
+        while (true) // OK
+        // while (root.Init(1)) // OK
         // while (1) // not boolean
-        // {}
+        {}
 
         return num;
     }
