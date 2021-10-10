@@ -13,7 +13,6 @@ public:
     SymbolTable();
 
     void enterScope();
-    // bool enterScope(const std::string &key);
     void exitScope();
 
     void setScopeTitle(const std::string &title);

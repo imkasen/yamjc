@@ -13,18 +13,6 @@ void SymbolTable::enterScope()
     this->current = this->current->getNextChild(); // create new scope if needed
 }
 
-/*
-bool SymbolTable::enterScope(const std::string &key)
-{
-    if (this->root->lookupChildScope(key).has_value())
-    {
-        this->current = this->root->lookupChildScope(key).value();
-        return true;
-    }
-    return false;
-}
-*/
-
 void SymbolTable::exitScope()
 {
     if (this->current)
