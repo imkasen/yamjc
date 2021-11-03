@@ -26,7 +26,7 @@ A Mini-Java Compiler Practice.
 # Compiler Phases
 
 <div align="center">
-    <img src="resource/phases.png" 
+    <img src="resource/phases.svg" 
         width="600" height="auto" alt="Compiler Phases">
 </div>
 
