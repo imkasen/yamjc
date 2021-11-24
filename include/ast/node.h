@@ -33,7 +33,7 @@ public:
      * but bison does not support the smart pointer well.
      */
     std::deque<Node *> children;
-    inline static SymbolTable st = SymbolTable();
+    inline static SymbolTable st = SymbolTable(); // NOLINT
 
     Node();
     Node(std::string t, std::string v);

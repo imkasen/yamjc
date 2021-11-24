@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
         else
         {
             std::cerr << "The file path is wrong." << endl;
-            return 1;
+            return EXIT_FAILURE;
         }
 
         yy::parser parser;
@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
     else
     {
         std::cerr << "No input file." << endl;
-        return 1;
+        return EXIT_FAILURE;
     }
 
     // generate ast.dot
@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
     st_dot_stream << "}" << endl;
     st_dot_stream.close();
 
-    //Semantic analysis
+    // semantic analysis
     root->semanticAnalysis();
 
     return EXIT_SUCCESS;
