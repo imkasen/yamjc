@@ -3,8 +3,7 @@
 
 #include "node.h"
 
-class PrimaryExpression : public Node
-{
+class PrimaryExpression : public Node {
 public:
     PrimaryExpression();
     PrimaryExpression(std::string t, std::string v);

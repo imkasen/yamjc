@@ -1,28 +1,22 @@
 #include "main.h"
-using std::size_t;
 using std::cout;
 using std::endl;
+using std::size_t;
 using std::string;
 
 extern std::shared_ptr<Node> root;
 
-void yy::parser::error(const string &err)
-{
+void yy::parser::error(const string &err) {
     std::cerr << "Cannot generate a syntax tree for this input: " << err << endl;
 }
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
     // read file from cmd
-    if (argc > 1)
-    {
+    if (argc > 1) {
         FILE *file = std::fopen(argv[1], "r");
-        if (file)
-        {
+        if (file) {
             yyin = file;
-        }
-        else
-        {
+        } else {
             std::cerr << "The file path is wrong." << endl;
             return EXIT_FAILURE;
         }
@@ -30,9 +24,7 @@ int main(int argc, char* argv[])
         yy::parser parser;
         parser.parse();
         std::fclose(file);
-    }
-    else
-    {
+    } else {
         std::cerr << "No input file." << endl;
         return EXIT_FAILURE;
     }

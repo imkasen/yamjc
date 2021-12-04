@@ -3,8 +3,7 @@
 
 #include "scope.h"
 
-class SymbolTable
-{
+class SymbolTable {
 private:
     std::shared_ptr<Scope> root;
     std::shared_ptr<Scope> current;

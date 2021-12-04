@@ -3,8 +3,7 @@
 
 #include "node.h"
 
-class VarDeclaration : public Node
-{
+class VarDeclaration : public Node {
 public:
     VarDeclaration();
     VarDeclaration(std::string t, std::string v);

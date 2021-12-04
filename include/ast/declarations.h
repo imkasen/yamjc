@@ -3,8 +3,7 @@
 
 #include "node.h"
 
-class Declarations : public Node
-{
+class Declarations : public Node {
 public:
     Declarations();
     Declarations(std::string t, std::string v);

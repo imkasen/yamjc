@@ -1,21 +1,20 @@
 #ifndef SCOPE_H
 #define SCOPE_H
 
-#include "record.h"
-#include <deque>
-#include <unordered_map>
-#include <optional>
-#include <fstream>
 #include <algorithm>
+#include <deque>
+#include <fstream>
+#include <optional>
+#include <unordered_map>
+#include "record.h"
 
-class Scope : public std::enable_shared_from_this<Scope>
-{
+class Scope : public std::enable_shared_from_this<Scope> {
 private:
     std::string scope_title;
-    std::size_t next;                                       // next child to visit
-    std::shared_ptr<Scope> parentScope;                     // parent scope
-    std::deque<std::shared_ptr<Scope>> childrenScopes;      // child scopes
-    std::unordered_map<std::string, std::shared_ptr<Record>> records; // symbol to record map
+    std::size_t next;                                                  // next child to visit
+    std::shared_ptr<Scope> parentScope;                                // parent scope
+    std::deque<std::shared_ptr<Scope>> childrenScopes;                 // child scopes
+    std::unordered_map<std::string, std::shared_ptr<Record>> records;  // symbol to record map
 
 public:
     Scope();

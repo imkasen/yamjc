@@ -3,8 +3,7 @@
 
 #include "node.h"
 
-class MethodBody : public Node
-{
+class MethodBody : public Node {
 public:
     MethodBody();
     MethodBody(std::string t, std::string v);

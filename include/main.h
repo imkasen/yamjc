@@ -1,15 +1,15 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "parser.tab.hh"  // ${PROJECT_BINARY_DIR}
-#include "ast/node.h"
-#include "st/symbol_table.h"
-#include <iostream>
-#include <string>
 #include <fstream>
+#include <iostream>
 #include <memory>
+#include <string>
+#include "ast/node.h"
+#include "parser.tab.hh"  // ${PROJECT_BINARY_DIR}
+#include "st/symbol_table.h"
 
-#define YY_DECL yy::parser::symbol_type yylex() 
+#define YY_DECL yy::parser::symbol_type yylex()
 YY_DECL;
 
 #endif

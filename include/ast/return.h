@@ -3,8 +3,7 @@
 
 #include "node.h"
 
-class Return : public Node
-{
+class Return : public Node {
 public:
     Return();
     Return(std::string t, std::string v);

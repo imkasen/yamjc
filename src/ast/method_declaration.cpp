@@ -1,6 +1,6 @@
 #include "ast/method_declaration.h"
-using std::string;
 using std::size_t;
+using std::string;
 
 MethodDeclaration::MethodDeclaration() : Node() {}
 MethodDeclaration::MethodDeclaration(std::string t, std::string v) : Node(std::move(t), std::move(v)) {}
@@ -21,8 +21,7 @@ MethodDeclaration::MethodDeclaration(std::string t, std::string v) : Node(std::m
  *
  * @return: std::nullopt
  */
-std::optional<string> MethodDeclaration::generateST()
-{
+std::optional<string> MethodDeclaration::generateST() {
     // create method records
     string method_name, method_type;
     method_type = this->children.at(0)->generateST().value_or("Unknown");
@@ -34,8 +33,7 @@ std::optional<string> MethodDeclaration::generateST()
     string scope_name = MethodDeclaration::st.getScopeTitle();
     string scope_type = MethodDeclaration::st.getScopeType();
     auto record_ptr = MethodDeclaration::st.lookupRecord(scope_name).value_or(nullptr);
-    if (scope_type == "Class" && record_ptr)
-    {
+    if (scope_type == "Class" && record_ptr) {
         auto class_ptr = std::dynamic_pointer_cast<STClass>(record_ptr);
         class_ptr->addMethod(method_ptr);
     }
@@ -43,27 +41,24 @@ std::optional<string> MethodDeclaration::generateST()
     // enter method scope
     MethodDeclaration::st.enterScope();
     MethodDeclaration::st.setScopeTitle("Method: " + method_name);
-    for (size_t i = 2; i < this->children.size(); ++i) // FormalParameterList, MethodBody
-    {
+    // FormalParameterList, MethodBody
+    for (size_t i = 2; i < this->children.size(); ++i) {
         this->children.at(i)->generateST();
     }
-    MethodDeclaration::st.exitScope(); // exit method scope
+    MethodDeclaration::st.exitScope();  // exit method scope
 
     return std::nullopt;
 }
 
-std::optional<std::string> MethodDeclaration::checkSemantics()
-{
+std::optional<std::string> MethodDeclaration::checkSemantics() {
     // enter method scope
     MethodDeclaration::st.enterScope();
-    for (auto &child : this->children)
-    {
-        if (child->getType() == "MethodBody" || child->getType() == "Return")
-        {
+    for (auto &child : this->children) {
+        if (child->getType() == "MethodBody" || child->getType() == "Return") {
             child->checkSemantics();
         }
     }
-    MethodDeclaration::st.exitScope(); // exit method scope
+    MethodDeclaration::st.exitScope();  // exit method scope
 
     return std::nullopt;
 }

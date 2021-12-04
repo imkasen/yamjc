@@ -3,8 +3,7 @@
 
 #include "node.h"
 
-class Goal : public Node
-{
+class Goal : public Node {
 public:
     Goal();
     Goal(std::string t, std::string v);

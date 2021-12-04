@@ -3,8 +3,7 @@
 
 #include "node.h"
 
-class Expression : public Node
-{
+class Expression : public Node {
 private:
     bool checkParameters(const std::shared_ptr<Record> &m_record_ptr);
     static void strSplit(std::deque<std::string> &deque, const std::string &text, const std::string &delimiter);

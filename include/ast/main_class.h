@@ -3,8 +3,7 @@
 
 #include "node.h"
 
-class MainClass : public Node
-{
+class MainClass : public Node {
 public:
     MainClass();
     MainClass(std::string t, std::string v);

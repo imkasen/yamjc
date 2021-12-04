@@ -3,8 +3,7 @@
 
 #include "node.h"
 
-class FormalParameterList : public Node
-{
+class FormalParameterList : public Node {
 public:
     FormalParameterList();
     FormalParameterList(std::string t, std::string v);

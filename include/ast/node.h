@@ -1,16 +1,16 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include "st/variable.h"
-#include "st/parameter.h"
-#include "st/method.h"
-#include "st/st_class.h"
-#include "st/symbol_table.h"
-#include <iostream>
-#include <string>
+#include <cstdlib>
 #include <deque>
 #include <fstream>
-#include <cstdlib>
+#include <iostream>
+#include <string>
+#include "st/method.h"
+#include "st/parameter.h"
+#include "st/st_class.h"
+#include "st/symbol_table.h"
+#include "st/variable.h"
 
 /*
  * The basic class in abstract syntax tree.
@@ -20,8 +20,7 @@
  * ...
  * Identifier : Node
  */
-class Node
-{
+class Node {
 protected:
     std::size_t id = 0;
     std::string type, value;
@@ -33,7 +32,7 @@ public:
      * but bison does not support the smart pointer well.
      */
     std::deque<Node *> children;
-    inline static SymbolTable st = SymbolTable(); // NOLINT
+    inline static SymbolTable st = SymbolTable();  // NOLINT
 
     Node();
     Node(std::string t, std::string v);

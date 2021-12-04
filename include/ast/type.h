@@ -3,8 +3,7 @@
 
 #include "node.h"
 
-class Type : public Node
-{
+class Type : public Node {
 public:
     Type();
     Type(std::string t, std::string v);

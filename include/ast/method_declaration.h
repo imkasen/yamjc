@@ -3,8 +3,7 @@
 
 #include "node.h"
 
-class MethodDeclaration : public Node
-{
+class MethodDeclaration : public Node {
 public:
     MethodDeclaration();
     MethodDeclaration(std::string t, std::string v);

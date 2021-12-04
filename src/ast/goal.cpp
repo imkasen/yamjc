@@ -11,29 +11,25 @@ Goal::Goal(string t, string v) : Node(std::move(t), std::move(v)) {}
  *
  * @return: std::nullopt
  */
-std::optional<string> Goal::generateST()
-{
+std::optional<string> Goal::generateST() {
     Goal::st.setScopeTitle("Program");
 
-    for (auto &child : this->children)
-    {
+    for (auto &child : this->children) {
         // enter class scope
         Goal::st.enterScope();
         child->generateST();
-        Goal::st.exitScope(); // exit class scope
+        Goal::st.exitScope();  // exit class scope
     }
 
     return std::nullopt;
 }
 
-std::optional<std::string> Goal::checkSemantics()
-{
-    for (auto &child : this->children)
-    {
+std::optional<std::string> Goal::checkSemantics() {
+    for (auto &child : this->children) {
         // enter class scope
         Goal::st.enterScope();
         child->checkSemantics();
-        Goal::st.exitScope(); // exit class scope
+        Goal::st.exitScope();  // exit class scope
     }
 
     return std::nullopt;

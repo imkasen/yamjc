@@ -2,8 +2,8 @@
 #define RECORD_H
 
 #include <iostream>
-#include <string>
 #include <memory>
+#include <string>
 #include <utility>
 
 /*
@@ -14,8 +14,7 @@
  * Method : Variable
  * STClass : Variable
  */
-class Record
-{
+class Record {
 protected:
     std::string name;
     std::string type;
@@ -28,10 +27,11 @@ public:
     void setName(const std::string &r_name);
     void setRecord(const std::string &r_record);
     void setType(const std::string &r_type);
+
     [[nodiscard]] std::string getName() const;
     [[nodiscard]] std::string getRecord() const;
     [[nodiscard]] std::string getType() const;
-    
+
     [[nodiscard]] std::string printRecord() const;
 
     virtual ~Record() = default;

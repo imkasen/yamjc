@@ -3,12 +3,9 @@
 MethodBody::MethodBody() : Node() {}
 MethodBody::MethodBody(std::string t, std::string v) : Node(std::move(t), std::move(v)) {}
 
-std::optional<std::string> MethodBody::generateST()
-{
-    for (auto &child: this->children)
-    {
-        if (child->getType() == "VarDeclaration")
-        {
+std::optional<std::string> MethodBody::generateST() {
+    for (auto &child : this->children) {
+        if (child->getType() == "VarDeclaration") {
             child->generateST();
         }
     }
@@ -16,10 +13,8 @@ std::optional<std::string> MethodBody::generateST()
     return std::nullopt;
 }
 
-std::optional<std::string> MethodBody::checkSemantics()
-{
-    for (auto &child : this->children)
-    {
+std::optional<std::string> MethodBody::checkSemantics() {
+    for (auto &child : this->children) {
         child->checkSemantics();
     }
 

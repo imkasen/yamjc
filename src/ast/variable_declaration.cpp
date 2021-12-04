@@ -15,8 +15,7 @@ VarDeclaration::VarDeclaration(string t, string v) : Node(std::move(t), std::mov
  *
  * @return: std::nullopt
  */
-std::optional<string> VarDeclaration::generateST()
-{
+std::optional<string> VarDeclaration::generateST() {
     // create variable records
     string variable_type = this->children.at(0)->generateST().value_or("Unknown");
     string variable_name = this->children.at(1)->generateST().value_or("Unknown");
@@ -26,14 +25,11 @@ std::optional<string> VarDeclaration::generateST()
     // add variable records into "Class" || "Method"
     string scope_name = VarDeclaration::st.getScopeTitle();
     string scope_type = VarDeclaration::st.getScopeType();
-    auto record_ptr = VarDeclaration::st.lookupRecord(scope_name).value_or(nullptr); // std::shared_ptr<Record>
-    if (scope_type == "Class" && record_ptr)
-    {
+    auto record_ptr = VarDeclaration::st.lookupRecord(scope_name).value_or(nullptr);  // std::shared_ptr<Record>
+    if (scope_type == "Class" && record_ptr) {
         auto class_ptr = std::dynamic_pointer_cast<STClass>(record_ptr);
         class_ptr->addVariable(variable_ptr);
-    }
-    else if (scope_type == "Method" && record_ptr)
-    {
+    } else if (scope_type == "Method" && record_ptr) {
         auto method_ptr = std::dynamic_pointer_cast<Method>(record_ptr);
         method_ptr->addVariable(variable_ptr);
     }
@@ -41,16 +37,12 @@ std::optional<string> VarDeclaration::generateST()
     return std::nullopt;
 }
 
-std::optional<std::string> VarDeclaration::checkSemantics()
-{
+std::optional<std::string> VarDeclaration::checkSemantics() {
     string type_name = this->children.at(0)->checkSemantics().value_or("");
-    if (type_name != "int" && type_name != "boolean" && type_name != "int[]")
-    {
+    if (type_name != "int" && type_name != "boolean" && type_name != "int[]") {
         auto c_record_ptr = VarDeclaration::st.lookupRecordInRoot(type_name).value_or(nullptr);
-        if (!c_record_ptr)
-        {
-            std::cerr << "[Semantic Analysis] - Error: Class \"" << type_name
-                      << "\" does not exist!" << std::endl;
+        if (!c_record_ptr) {
+            std::cerr << "[Semantic Analysis] - Error: Class \"" << type_name << "\" does not exist!" << std::endl;
             exit(EXIT_FAILURE);
         }
     }
