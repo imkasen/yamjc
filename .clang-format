@@ -1,0 +1,14 @@
+BasedOnStyle: Google
+AccessModifierOffset: -4
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty
+AllowShortLoopsOnASingleLine: false
+ColumnLimit: 120
+DerivePointerAlignment: false
+IncludeBlocks: Merge
+IndentWidth: 4
+Language: Cpp
+PointerAlignment: Right
+SpaceBeforeCpp11BracedList: true
+TabWidth: 4
