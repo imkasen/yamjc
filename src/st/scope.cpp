@@ -57,6 +57,7 @@ std::shared_ptr<Scope> Scope::getParentScope() const {
  * @return std::shared_ptr<Record> | std::nullopt
  */
 std::optional<std::shared_ptr<Record>> Scope::lookupRecord(const string &key) const {  // NOLINT
+    // iterator: std::unordered_map<string, std::shared_ptr<Record>>::iterator
     auto iterator = this->records.find(key);
     // exist in the current scope
     if (iterator != this->records.end()) {
@@ -71,8 +72,10 @@ std::optional<std::shared_ptr<Record>> Scope::lookupRecord(const string &key) co
 }
 
 void Scope::addRecord(const string &key, const std::shared_ptr<Record> &item) {
-    auto ret = this->records.insert({key, item});  // = insert(std::pair<string, std::shared_ptr<Record>>(key, item))
-    if (!ret.second) {                             // false
+    // ret: std::pair<std::unordered_map<string, std::shared_ptr<Record>>::iterator, bool>
+    // = insert(std::pair<string, std::shared_ptr<Record>>(key, item))
+    auto ret = this->records.insert({key, item});
+    if (!ret.second) {  // false
         std::cerr << "The record " << key << " already exists in the scope!" << endl;
     }
 }
@@ -81,20 +84,21 @@ void Scope::addRecord(const string &key, const std::shared_ptr<Record> &item) {
  * @return std::shared_ptr<Scope> | std::nullopt
  */
 std::optional<std::shared_ptr<Scope>> Scope::lookupChildScope(const string &key) const {
-    auto iter = std::find_if(this->childrenScopes.begin(), this->childrenScopes.end(),
+    // iterator: std::deque<std::shared_ptr<Scope>>::iterator
+    auto iterator = std::find_if(this->childrenScopes.begin(), this->childrenScopes.end(),
                              [&key](const std::shared_ptr<Scope> &scope_ptr) {
                                  return scope_ptr->getScopeTitle() == key;
                              });
-    if (iter != this->childrenScopes.end()) {
-        return *iter;
+    if (iterator != this->childrenScopes.end()) {
+        return *iterator;
     }
 
     return std::nullopt;
 }
 
 void Scope::resetScope() {  // NOLINT
-    for (const auto &ptr : this->childrenScopes) {
-        ptr->resetScope();
+    for (const auto &childScope_ptr : this->childrenScopes) {
+        childScope_ptr->resetScope();
     }
     this->next = 0;
 }
@@ -102,14 +106,14 @@ void Scope::resetScope() {  // NOLINT
 void Scope::printST(std::size_t index, std::ofstream *outStream) {  // NOLINT
     static size_t count = index;
     string content = "<U><B>" + this->scope_title + "</B></U><BR/><BR/>\n";
-    for (const auto &pair : this->records) {
-        content += pair.second->printRecord() + "<BR/>\n";
+    for (const auto &record_pair : this->records) {
+        content += record_pair.second->printRecord() + "<BR/>\n";
     }
 
     // draw
     *outStream << "n" << index << " [label=<" << content << ">];" << endl;  // HTML like labels
-    for (const auto &childScope : this->childrenScopes) {
+    for (const auto &childScope_ptr : this->childrenScopes) {
         *outStream << "n" << index << " -- n" << count + 1 << ";" << endl;
-        childScope->printST(++count, outStream);
+        childScope_ptr->printST(++count, outStream);
     }
 }

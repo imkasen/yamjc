@@ -10,7 +10,7 @@
  * The basic class in tree-based symbol table implementation.
  *
  * Variable : record
- * Parameter : Variable // parameter is variable
+ * Parameter : Variable  // parameter is variable
  * Method : Variable
  * STClass : Variable
  */
