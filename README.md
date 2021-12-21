@@ -16,12 +16,12 @@ A Mini-Java Compiler Practice.
 
 # Environments
 
-* Linux (Ubuntu)
-* CMake
-* gcc, g++ (build-essential)
-* graphviz
-* flex
-* bison
+* Linux (Ubuntu 20.04 LTS)
+* CMake 3.16.3
+* g++ 9.3.0 (build-essential)
+* graphviz 2.43.0
+* flex 2.6.4
+* Bison 3.5.1
 
 # Compiler Phases
 
@@ -29,6 +29,15 @@ A Mini-Java Compiler Practice.
     <img src="resource/phases.svg" 
         width="600" height="auto" alt="Compiler Phases">
 </div>
+
+# File structure
+
+* `include/` : C++ header files
+* `resource/`
+  * `examples/` : files for testing lexical analysis and syntax analysis
+  * `tests/` : files used for back-end stage
+  * `valid/` : files for testing semantic analysis
+* `src/` : C++ source files
 
 # Usage
 

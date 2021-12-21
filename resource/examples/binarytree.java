@@ -236,8 +236,8 @@ class Tree {
             ntb = this.RemoveRight(p_node, c_node);
         } else {
             auxkey1 = c_node.GetKey();
-            //auxtree01 = p_node.GetLeft() ;
-            //auxkey2 = auxtree01.GetKey() ;
+            // auxtree01 = p_node.GetLeft() ;
+            // auxkey2 = auxtree01.GetKey() ;
             auxkey2 = (p_node.GetLeft()).GetKey();
 
             if (this.Compare(auxkey1, auxkey2)) {
@@ -259,9 +259,9 @@ class Tree {
         boolean ntb;
 
         while (c_node.GetHas_Right()) {
-            //auxtree01 = c_node.GetRight() ;
-            //auxint02 = auxtree01.GetKey();
-            //ntb = c_node.SetKey(auxint02);
+            // auxtree01 = c_node.GetRight() ;
+            // auxint02 = auxtree01.GetKey();
+            // ntb = c_node.SetKey(auxint02);
             ntb = c_node.SetKey((c_node.GetRight()).GetKey());
             p_node = c_node;
             c_node = c_node.GetRight();
@@ -280,9 +280,9 @@ class Tree {
         boolean ntb;
 
         while (c_node.GetHas_Left()) {
-            //auxtree01 = c_node.GetLeft() ;
-            //auxint02 = auxtree01.GetKey();
-            //ntb = c_node.SetKey(auxint02);
+            // auxtree01 = c_node.GetLeft() ;
+            // auxint02 = auxtree01.GetKey();
+            // ntb = c_node.SetKey(auxint02);
             ntb = c_node.SetKey((c_node.GetLeft()).GetKey());
             p_node = c_node;
             c_node = c_node.GetLeft();
@@ -345,8 +345,8 @@ class Tree {
         boolean ntb;
 
         if (node.GetHas_Left()) {
-            //auxtree01 = node.GetLeft() ;
-            //ntb = this.RecPrint(auxtree01);
+            // auxtree01 = node.GetLeft() ;
+            // ntb = this.RecPrint(auxtree01);
             ntb = this.RecPrint(node.GetLeft());
         } else {
             ntb = true;
@@ -355,8 +355,8 @@ class Tree {
         System.out.println(node.GetKey());
 
         if (node.GetHas_Right()) {
-            //auxtree01 = node.GetRight() ;
-            //ntb = this.RecPrint(auxtree01);
+            // auxtree01 = node.GetRight() ;
+            // ntb = this.RecPrint(auxtree01);
             ntb = this.RecPrint(node.GetRight());
         } else {
             ntb = true;

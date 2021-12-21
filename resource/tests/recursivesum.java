@@ -10,7 +10,7 @@ class Test {
         if (num < 2)
             sum = 1;
         else
-            sum = num + this.Sum(num-1);
+            sum = num + this.Sum(num - 1);
         return sum;
     }
 }

@@ -31,7 +31,7 @@ class Bar1 {
             System.out.println(0);
         }
         System.out.println(p1);
-        System.out.println(p2-p1);
+        System.out.println(p2 - p1);
         return 4;
     }
 }

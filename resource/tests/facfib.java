@@ -1,6 +1,6 @@
 class FacFib {
     public static void main(String[] a){
-        System.out.println(new FacFib2().Compute(5,10));
+        System.out.println(new FacFib2().Compute(5, 10));
     }
 }
 
@@ -29,7 +29,7 @@ class FacFib2 {
         if (num < 1)
             fac = 1;
         else
-            fac = num * (this.ComputeFac(num-1));
+            fac = num * (this.ComputeFac(num - 1));
         return fac;
     }
 

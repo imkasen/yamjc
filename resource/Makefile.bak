@@ -1,5 +1,5 @@
-# This Makefile is used in the past
-# and does not apply to the current file structure.
+# This Makefile was used in the past.
+# It can not be applied to the current file structure.
 
 LEX      := flex
 YACC     := bison

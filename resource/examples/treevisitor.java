@@ -54,17 +54,17 @@ class Tree {
     boolean has_right;
     Tree my_null;
 
-    //Tree new_node ;
-    //Tree current_node ;
-    //Tree parent_node ;
+    // Tree new_node ;
+    // Tree current_node ;
+    // Tree parent_node ;
 
     // boolean ntb ;
-    //boolean cont ;
-    //boolean found ;
-    //int ifound ;
-    //  boolean is_root ;
-    //  int     nti ;
-    //  int key_aux ;
+    // boolean cont ;
+    // boolean found ;
+    // int ifound ;
+    // boolean is_root ;
+    // int     nti ;
+    // int key_aux ;
     // int auxkey1 ;
     // int auxkey2 ;
     public boolean Init(int v_key) {

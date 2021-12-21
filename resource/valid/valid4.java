@@ -7,16 +7,16 @@ class TreeVisitor {
 }
 
 class TV {
-    Tree ttt; // OK
-    boolean nta; // OK
-    int i; // OK
+    Tree ttt;     // OK
+    boolean nta;  // OK
+    int i;        // OK
 
     public int Start(int num) {
-        Tree root; // OK
-        boolean ntb; // OK
-        int[] j; // OK
+        Tree root;    // OK
+        boolean ntb;  // OK
+        int[] j;      // OK
 
-        // Test test1; // No Test Class
+        // Test test1;  // No Test Class
 
         return num;
     }
