@@ -56,7 +56,7 @@ void Node::printAST(size_t depth) {
 }
 */
 
-// Save ast in the ast.txt.
+// Save ast in "ast.txt"
 void Node::saveAST(std::ofstream *outStream, size_t depth) {  // NOLINT
     for (size_t i = 0; i < depth; ++i) {
         *outStream << "  ";
@@ -67,8 +67,8 @@ void Node::saveAST(std::ofstream *outStream, size_t depth) {  // NOLINT
     }
 }
 
-// Generate ast in the ast.dot.
-void Node::generateAST(size_t &count, std::ofstream *outStream) {  // NOLINT
+// Generate ast in "ast.dot"
+void Node::generateAST(std::ofstream *outStream, size_t &count) {  // NOLINT
     this->setId(count++);
     if (!this->getValue().empty()) {
         *outStream << "n" << this->getId() << " [label=\"" << this->getType() << ":" << this->getValue() << "\"];"
@@ -77,16 +77,16 @@ void Node::generateAST(size_t &count, std::ofstream *outStream) {  // NOLINT
         *outStream << "n" << this->getId() << " [label=\"" << this->getType() << "\"];" << endl;
     }
     for (auto &child : this->children) {
-        child->generateAST(count, outStream);
+        child->generateAST(outStream, count);
         *outStream << "n" << this->getId() << " -> n" << child->getId() << ";" << endl;
     }
 }
 
-// Generate symbol table
+// Generate the symbol table
 void Node::buildST(std::ofstream *outStream) {
     this->generateST();
     Node::st.resetTable();
-    // generate st.dot
+    // Generate "st.dot"
     Node::st.printST(outStream);
 }
 
@@ -98,7 +98,6 @@ std::optional<string> Node::generateST() {  // NOLINT
     return std::nullopt;
 }
 
-// SA
 void Node::semanticAnalysis() {
     this->checkSemantics();
     Node::st.resetTable();

@@ -30,41 +30,41 @@ MainClass::MainClass(string t, string v) : Node(std::move(t), std::move(v)) {}
  * @return: std::nullopt
  */
 std::optional<string> MainClass::generateST() {
-    // create records to the current scope
+    // Create records to the current scope
     string class_name, class_type;
     class_name = class_type = this->children.at(0)->generateST().value_or("Unknown");
-    MainClass::st.setScopeTitle("Class: " + class_name);  // set the current scope title
-    std::shared_ptr<Variable> variable_this_ptr = std::make_shared<Variable>("this", class_type);  // used as type here
+    MainClass::st.setScopeTitle("Class: " + class_name);  // Set the current scope title
+    std::shared_ptr<Variable> variable_this_ptr = std::make_shared<Variable>("this", class_type);  // Used as type here
     std::shared_ptr<Method> method_main_ptr = std::make_shared<Method>("main", "void");
     MainClass::st.addRecord("this", variable_this_ptr);
     MainClass::st.addRecord("main", method_main_ptr);
 
-    // create a class record to the parent scope("Program")
+    // Create a class record to the parent scope("Program")
     std::shared_ptr<STClass> class_ptr = std::make_shared<STClass>(class_name, "int");
     class_ptr->addVariable(variable_this_ptr);
     class_ptr->addMethod(method_main_ptr);
     MainClass::st.getParentScope()->addRecord(class_name, class_ptr);
 
-    // enter the method scope
+    // Enter the method scope
     MainClass::st.enterScope();
-    MainClass::st.setScopeTitle("Method: main");  // set the child scope title
+    MainClass::st.setScopeTitle("Method: main");  // Set the child scope title
     string parameter_name = this->children.at(1)->generateST().value_or("Unknown");
     std::shared_ptr<Parameter> variable_parameter_ptr = std::make_shared<Parameter>(parameter_name, "String[]");
     method_main_ptr->addParameter(variable_parameter_ptr);
     MainClass::st.addRecord(parameter_name, variable_parameter_ptr);
-    // MethodBody
+    // "MethodBody"
     for (size_t i = 2; i < this->children.size(); ++i) {
         this->children.at(i)->generateST();
     }
-    MainClass::st.exitScope();  // exit method scope
+    MainClass::st.exitScope();  // Exit method scope
 
     return std::nullopt;
 }
 
 std::optional<std::string> MainClass::checkSemantics() {
-    // enter method scope
+    // Enter method scope
     MainClass::st.enterScope();
-    // MethodBody
+    // "MethodBody"
     for (size_t i = 2; i < this->children.size(); ++i) {
         this->children.at(i)->checkSemantics();
     }

@@ -12,14 +12,14 @@ std::optional<string> Statement::checkSemantics() {
         // e.g. xxx = 123;
         // etc...
         if (this->children.size() == 2) {
-            string lhs_name = this->children.at(0)->checkSemantics().value_or("");  // identifier
-            string rhs_type = this->children.at(1)->checkSemantics().value_or("");  // expression
+            string lhs_name = this->children.at(0)->checkSemantics().value_or("");  // "Identifier"
+            string rhs_type = this->children.at(1)->checkSemantics().value_or("");  // "Expression"
 
             auto record_ptr = Statement::st.lookupRecord(lhs_name).value_or(nullptr);
             if (record_ptr) {
                 string lhs_record_type = record_ptr->getType();
 
-                // extends
+                // "Extends"
                 if (lhs_record_type != rhs_type && rhs_type.find(lhs_record_type) == string::npos) {
                     cerr << "[Semantic Analysis] - Error: Can not assign \"" << rhs_type << "\" (rhs) to \""
                          << lhs_record_type << "\" (lhs) in the scope \"" << Statement::st.getScopeTitle() << "\"!"
@@ -34,7 +34,7 @@ std::optional<string> Statement::checkSemantics() {
         }
         // e.g. number[0] = 20;
         else if (this->children.size() == 3) {
-            string lhs_name = this->children.at(0)->checkSemantics().value_or("");  // identifier
+            string lhs_name = this->children.at(0)->checkSemantics().value_or("");  // "Identifier"
             string pos_type = this->children.at(1)->checkSemantics().value_or("");
             string rhs_type = this->children.at(2)->checkSemantics().value_or("");
 

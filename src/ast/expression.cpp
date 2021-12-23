@@ -17,9 +17,9 @@ std::optional<string> Expression::checkSemantics() {
     std::shared_ptr<Record> m_record_ptr;
     std::shared_ptr<STClass> class_ptr;
 
-    // ExpressionList
+    // "ExpressionList"
     if (this->getType() == "ExpressionList") {
-        // check parameters
+        // Check parameters
         string parameter_type_list;
 
         for (auto &child : this->children) {
@@ -28,9 +28,9 @@ std::optional<string> Expression::checkSemantics() {
 
         return parameter_type_list;
     }
-    // Expression -> PrimaryExpression
+    // "Expression" -> "PrimaryExpression"
     else if (this->children.size() == 1 && this->children.at(0)->getType() == "PrimaryExpression") {
-        // PrimaryExpression:NEW
+        // "PrimaryExpression:NEW"
         if (this->children.at(0)->getValue() == "NEW") {
             class_name = this->children.at(0)->checkSemantics().value_or("");
             c_record_ptr = Expression::st.lookupRecordInRoot(class_name).value_or(nullptr);
@@ -41,7 +41,7 @@ std::optional<string> Expression::checkSemantics() {
 
             return c_record_ptr->getType();
         }
-        // PrimaryExpression:New int[]
+        // "PrimaryExpression:New int[]"
         else if (this->children.at(0)->getValue() == "NEW int[]") {
             string type = this->children.at(0)->checkSemantics().value_or("");
             if (type != "int") {
@@ -52,9 +52,9 @@ std::optional<string> Expression::checkSemantics() {
 
             return "int[]";
         }
-        // PrimaryExpression
+        // "PrimaryExpression"
         else if (this->children.at(0)->getValue().empty()) {
-            // check parameters
+            // Check parameters
             var_name = this->children.at(0)->checkSemantics().value_or("");
             if (var_name == "int" || var_name == "boolean") {
                 return var_name;
@@ -69,11 +69,11 @@ std::optional<string> Expression::checkSemantics() {
             }
         }
     }
-    // Expression:! -> Expression
+    // "Expression:!" -> "Expression"
     else if (this->children.size() == 1 && this->getValue() == "!") {
         return this->children.at(0)->checkSemantics();
     }
-    // Expression -> int, boolean, this
+    // "Expression" -> "int", "boolean", "this"
     else if (this->children.size() == 1) {
         string type = this->children.at(0)->getType();
         if (type == "this") {
@@ -82,15 +82,15 @@ std::optional<string> Expression::checkSemantics() {
                 return v_record_ptr->getType();
             }
         }
-        // int, boolean
+        // "int", "boolean"
         else {
             return type;
         }
     }
-    // Expression -> PrimaryExpression, Identifier
-    // Expression -> PrimaryExpression, Identifier, ExpressionList
+    // "Expression" -> "PrimaryExpression", "Identifier"
+    // "Expression" -> "PrimaryExpression", "Identifier", "ExpressionList"
     else if (this->children.size() <= 3 && this->children.at(0)->getType() == "PrimaryExpression") {
-        // PrimaryExpression:NEW
+        // "PrimaryExpression:NEW"
         if (this->children.at(0)->getValue() == "NEW") {
             class_name = this->children.at(0)->checkSemantics().value_or("");
             method_name = this->children.at(1)->checkSemantics().value_or("");
@@ -116,7 +116,7 @@ std::optional<string> Expression::checkSemantics() {
 
             return m_record_ptr->getType();
         }
-        // PrimaryExpression
+        // "PrimaryExpression"
         else {
             var_name = this->children.at(0)->checkSemantics().value_or("");
             method_name = this->children.at(1)->checkSemantics().value_or("");
@@ -151,8 +151,8 @@ std::optional<string> Expression::checkSemantics() {
             return m_record_ptr->getType();
         }
     }
-    // Expression -> this, Identifier
-    // Expression -> this, Identifier, ExpressionList
+    // "Expression" -> "this", "Identifier"
+    // "Expression" -> "this", "Identifier", "ExpressionList"
     else if (this->children.size() <= 3 && this->children.at(0)->getType() == "this") {
         method_name = this->children.at(1)->checkSemantics().value_or("");
         m_record_ptr = Expression::st.lookupRecord(method_name).value_or(nullptr);
@@ -168,10 +168,10 @@ std::optional<string> Expression::checkSemantics() {
 
         return m_record_ptr->getType();
     }
-    // Expression -> Expression, ...
+    // "Expression" -> "Expression", ...
     else if (this->children.size() <= 3 && this->children.at(0)->getType() == "Expression") {
-        // Expression:! -> Expression, Identifier
-        // Expression:! -> Expression, Identifier, ExpressionList
+        // "Expression:!" -> "Expression", "Identifier"
+        // "Expression:!" -> "Expression", "Identifier", "ExpressionList"
         if (this->getValue() == "!" && this->children.at(1)->getType() == "Identifier") {
             var_name = this->children.at(0)->checkSemantics().value_or("");
             method_name = this->children.at(1)->checkSemantics().value_or("");
@@ -205,13 +205,13 @@ std::optional<string> Expression::checkSemantics() {
 
             return m_record_ptr->getType();
         }
-        // Expression -> Expression, Expression
+        // "Expression" -> "Expression", "Expression"
         else if (this->children.size() == 2 && this->getValue() != "[]" &&
-                 this->getValue() != ".") {  // skip Expression:[], Expression:.
+                 this->getValue() != ".") {  // Skip "Expression:[]", "Expression:."
             string lhs = this->children.at(0)->checkSemantics().value_or("");
             string rhs = this->children.at(1)->checkSemantics().value_or("");
             if (!lhs.empty() && !rhs.empty() && lhs == rhs) {
-                // IF, WHILE
+                // "IF", "WHILE"
                 if (this->getValue() == ">" || this->getValue() == "<") {
                     return "boolean";
                 }
@@ -223,7 +223,7 @@ std::optional<string> Expression::checkSemantics() {
                 exit(EXIT_FAILURE);
             }
         }
-        // Expression:. -> Expression, Length
+        // "Expression:." -> "Expression", "Length"
         else if (this->children.size() == 2 && this->getValue() == ".") {
             string lhs = this->children.at(0)->checkSemantics().value_or("");
             string rhs;
@@ -253,7 +253,7 @@ bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr) {
         }
 
         string parameter_type_list = this->children.at(2)->checkSemantics().value_or("");
-        // split string
+        // Split string
         Expression::strSplit(p_deque, parameter_type_list, " ");
 
         if (p_deque.size() != method_ptr->getParameters().size()) {
@@ -267,7 +267,7 @@ bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr) {
             string type_from_p = p_deque.at(i);
 
             if (type_from_p != type_from_m) {
-                // extends
+                // Extends
                 // MyVisitor = MyVisitor Visitor, Visitor = MyVisitor Visitor
                 auto c_record_ptr = Expression::st.lookupRecordInRoot(type_from_p).value_or(nullptr);
                 string c_record_ptr_type = c_record_ptr->getType();
@@ -289,7 +289,7 @@ void Expression::strSplit(std::deque<std::string> &deque, const std::string &tex
     size_t pos;
     string text_str = text;
 
-    // not end with delimiter
+    // Not end with the delimiter
     if (text_str.rfind(delimiter) != (text_str.length() - delimiter.length())) {
         text_str += delimiter;
     }

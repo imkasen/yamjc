@@ -5,7 +5,6 @@
  * Include all head files in the "ast" folder.
  * "parser.yy" needs this file.
  */
-
 #include "class_declaration.h"
 #include "declarations.h"
 #include "expression.h"

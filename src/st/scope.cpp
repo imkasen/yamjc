@@ -30,7 +30,7 @@ string Scope::getScopeTitle() const {
 string Scope::getScopeType() const {
     size_t pos = this->scope_title.find(' ');
     if (pos != string::npos) {
-        return this->scope_title.substr(0, pos - 1);  // delete ':'
+        return this->scope_title.substr(0, pos - 1);  // Delete ':'
     } else {
         return this->scope_title;  // "Program"
     }
@@ -38,12 +38,12 @@ string Scope::getScopeType() const {
 
 std::shared_ptr<Scope> Scope::getNextChild() {
     std::shared_ptr<Scope> nextChild;
-    // create new child scope
+    // Create new child scope
     if (this->next == this->childrenScopes.size()) {
         nextChild = std::make_shared<Scope>(shared_from_this());
         this->childrenScopes.push_back(nextChild);
     } else {
-        nextChild = this->childrenScopes.at(this->next);  // visit scope
+        nextChild = this->childrenScopes.at(this->next);  // Visit scope
     }
     ++(this->next);
     return nextChild;
@@ -59,11 +59,11 @@ std::shared_ptr<Scope> Scope::getParentScope() const {
 std::optional<std::shared_ptr<Record>> Scope::lookupRecord(const string &key) const {  // NOLINT
     // iterator: std::unordered_map<string, std::shared_ptr<Record>>::iterator
     auto iterator = this->records.find(key);
-    // exist in the current scope
+    // Exist in the current scope
     if (iterator != this->records.end()) {
         return iterator->second;
     }
-    // key doest not exist && parent scope != nullptr
+    // Key doest not exist && parent scope != nullptr
     else if (this->parentScope) {
         return this->parentScope->lookupRecord(key);  // delegate the request to parent scope
     } else {
@@ -73,7 +73,7 @@ std::optional<std::shared_ptr<Record>> Scope::lookupRecord(const string &key) co
 
 void Scope::addRecord(const string &key, const std::shared_ptr<Record> &item) {
     // ret: std::pair<std::unordered_map<string, std::shared_ptr<Record>>::iterator, bool>
-    // = insert(std::pair<string, std::shared_ptr<Record>>(key, item))
+    // == insert(std::pair<string, std::shared_ptr<Record>>(key, item))
     auto ret = this->records.insert({key, item});
     if (!ret.second) {  // false
         std::cerr << "The record " << key << " already exists in the scope!" << endl;
@@ -110,7 +110,7 @@ void Scope::printST(std::size_t index, std::ofstream *outStream) {  // NOLINT
         content += record_pair.second->printRecord() + "<BR/>\n";
     }
 
-    // draw
+    // Draw
     *outStream << "n" << index << " [label=<" << content << ">];" << endl;  // HTML like labels
     for (const auto &childScope_ptr : this->childrenScopes) {
         *outStream << "n" << index << " -- n" << count + 1 << ";" << endl;

@@ -19,13 +19,13 @@ FormalParameterList::FormalParameterList(string t, string v) : Node(std::move(t)
  */
 std::optional<string> FormalParameterList::generateST() {
     for (size_t i = 0; i < this->children.size(); i += 2) {
-        // create parameter records
+        // Create parameter records
         string parameter_type = this->children.at(i)->generateST().value_or("Unknown");
         string parameter_name = this->children.at(i + 1)->generateST().value_or("Unknown");
         std::shared_ptr<Parameter> parameter_ptr = std::make_shared<Parameter>(parameter_name, parameter_type);
         FormalParameterList::st.addRecord(parameter_name, parameter_ptr);
 
-        // add parameter records into "Method"
+        // Add parameter records into "Method"
         string scope_name = FormalParameterList::st.getScopeTitle();
         string scope_type = FormalParameterList::st.getScopeType();
         auto record_ptr = FormalParameterList::st.lookupRecord(scope_name).value_or(nullptr);

@@ -32,12 +32,12 @@ A Mini-Java Compiler Practice.
 
 # File structure
 
-* `include/` : C++ header files
+* `include/` : header files
 * `resource/`
-  * `examples/` : files for testing lexical analysis and syntax analysis
+  * `examples/` : files used for testing lexical & syntax analysis
   * `tests/` : files used for back-end stage
-  * `valid/` : files for testing semantic analysis
-* `src/` : C++ source files
+  * `valid/` : files used for testing semantic analysis
+* `src/` : source files
 
 # Usage
 
@@ -45,7 +45,7 @@ A Mini-Java Compiler Practice.
 $ mkdir build/ && cd build/
 $ cmake ..
 $ make  # or cmake --build .
-$ ./compiler <file_path>  # e.g. "../resource/examples/xxx.java"
+$ ./compiler <file_path>  # e.g. "../resource/examples/factorial.java"
 $ sh graph.sh # args: [ast] [st]
 $ make clean
 $ cd .. && rm -rf build/

@@ -28,8 +28,10 @@ protected:
 public:
     /*
      * An awkward design,
-     * should use the smart pointer here,
-     * but bison does not support the smart pointer well.
+     * smart pointers should be used here,
+     * but Bison does not support them very well.
+     * -----
+     * TODO: Try to use smart pointers to replace raw pointers.
      */
     std::deque<Node *> children;
     inline static SymbolTable st = SymbolTable();  // NOLINT
@@ -44,16 +46,16 @@ public:
     [[nodiscard]] std::string getType() const;
     [[nodiscard]] std::string getValue() const;
 
-    // AST
+    // Functions related to the abstract syntax tree
     // void printAST(std::size_t depth = 0);
     void saveAST(std::ofstream *outStream, std::size_t depth = 0);
-    void generateAST(std::size_t &count, std::ofstream *outStream);
+    void generateAST(std::ofstream *outStream, std::size_t &count);
 
-    // ST
+    // Functions related to the symbol table
     void buildST(std::ofstream *outStream);
     virtual std::optional<std::string> generateST();
 
-    // Semantic Analysis
+    // Functions related to the semantic Analysis
     void semanticAnalysis();
     virtual std::optional<std::string> checkSemantics();
 

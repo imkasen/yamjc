@@ -16,13 +16,13 @@ VarDeclaration::VarDeclaration(string t, string v) : Node(std::move(t), std::mov
  * @return: std::nullopt
  */
 std::optional<string> VarDeclaration::generateST() {
-    // create variable records
+    // Create variable records
     string variable_type = this->children.at(0)->generateST().value_or("Unknown");
     string variable_name = this->children.at(1)->generateST().value_or("Unknown");
     std::shared_ptr<Variable> variable_ptr = std::make_shared<Variable>(variable_name, variable_type);
     VarDeclaration::st.addRecord(variable_name, variable_ptr);
 
-    // add variable records into "Class" || "Method"
+    // Add variable records into "Class" || "Method"
     string scope_name = VarDeclaration::st.getScopeTitle();
     string scope_type = VarDeclaration::st.getScopeType();
     auto record_ptr = VarDeclaration::st.lookupRecord(scope_name).value_or(nullptr);  // std::shared_ptr<Record>

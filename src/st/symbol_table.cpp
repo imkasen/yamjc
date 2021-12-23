@@ -8,7 +8,7 @@ SymbolTable::SymbolTable() {
 }
 
 void SymbolTable::enterScope() {
-    this->current = this->current->getNextChild();  // create new scope if needed
+    this->current = this->current->getNextChild();  // Create new scope if needed
 }
 
 void SymbolTable::exitScope() {
@@ -45,7 +45,7 @@ std::optional<std::shared_ptr<Record>> SymbolTable::lookupRecord(const string &k
 }
 
 /*
- * search class in "Program" scope
+ * Search class in "Program" scope
  * @return std::shared_ptr<Record> | std::nullopt
  */
 std::optional<std::shared_ptr<Record>> SymbolTable::lookupRecordInRoot(const std::string &key) const {
@@ -57,7 +57,7 @@ std::optional<std::shared_ptr<Scope>> SymbolTable::lookupChildScope(const string
 }
 
 void SymbolTable::printST(std::ofstream *outStream) {
-    // graphviz grammar
+    // Graphviz grammar
     *outStream << "label=\"Symbol Table\";" << endl;
     *outStream << "labelloc=\"t\";\n" << endl;
     *outStream << "node [shape=rect, fontname=Arial, width=5];\n" << endl;
@@ -67,6 +67,6 @@ void SymbolTable::printST(std::ofstream *outStream) {
 }
 
 void SymbolTable::resetTable() {
-    this->root->resetScope();  // preparation for new traversal
+    this->root->resetScope();  // Preparation for a new traversal
     this->current = this->root;
 }
