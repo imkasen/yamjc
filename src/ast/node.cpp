@@ -13,7 +13,7 @@ Node::Node() {
 Node::Node(string t, string v) : type(std::move(t)), value(std::move(v)) {}
 
 Node::~Node() {
-    for (auto &&child : this->children) {
+    for (auto child : this->children) {
         delete child;
     }
     this->children.clear();
@@ -62,7 +62,7 @@ void Node::saveAST(std::ofstream *outStream, size_t depth) {  // NOLINT
         *outStream << "  ";
     }
     *outStream << this->getType() << ":" << this->getValue() << endl;
-    for (auto &child : this->children) {
+    for (auto child : this->children) {
         child->saveAST(outStream, depth + 1);
     }
 }
@@ -76,7 +76,7 @@ void Node::generateAST(std::ofstream *outStream, size_t &count) {  // NOLINT
     } else {
         *outStream << "n" << this->getId() << " [label=\"" << this->getType() << "\"];" << endl;
     }
-    for (auto &child : this->children) {
+    for (auto child : this->children) {
         child->generateAST(outStream, count);
         *outStream << "n" << this->getId() << " -> n" << child->getId() << ";" << endl;
     }
@@ -91,10 +91,9 @@ void Node::buildST(std::ofstream *outStream) {
 }
 
 std::optional<string> Node::generateST() {  // NOLINT
-    for (auto &child : this->children) {
+    for (auto child : this->children) {
         child->generateST();
     }
-
     return std::nullopt;
 }
 
@@ -104,9 +103,8 @@ void Node::semanticAnalysis() {
 }
 
 std::optional<string> Node::checkSemantics() {  // NOLINT
-    for (auto &child : this->children) {
+    for (auto child : this->children) {
         child->checkSemantics();
     }
-
     return std::nullopt;
 }

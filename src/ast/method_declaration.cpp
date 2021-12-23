@@ -53,7 +53,7 @@ std::optional<string> MethodDeclaration::generateST() {
 std::optional<std::string> MethodDeclaration::checkSemantics() {
     // Enter method scope
     MethodDeclaration::st.enterScope();
-    for (auto &child : this->children) {
+    for (auto child : this->children) {
         if (child->getType() == "MethodBody" || child->getType() == "Return") {
             child->checkSemantics();
         }

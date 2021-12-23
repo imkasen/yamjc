@@ -14,7 +14,7 @@ Goal::Goal(string t, string v) : Node(std::move(t), std::move(v)) {}
 std::optional<string> Goal::generateST() {
     Goal::st.setScopeTitle("Program");
 
-    for (auto &child : this->children) {
+    for (auto child : this->children) {
         // Enter class scope
         Goal::st.enterScope();
         child->generateST();
@@ -25,7 +25,7 @@ std::optional<string> Goal::generateST() {
 }
 
 std::optional<std::string> Goal::checkSemantics() {
-    for (auto &child : this->children) {
+    for (auto child : this->children) {
         // Enter class scope
         Goal::st.enterScope();
         child->checkSemantics();

@@ -22,7 +22,7 @@ std::optional<string> Expression::checkSemantics() {
         // Check parameters
         string parameter_type_list;
 
-        for (auto &child : this->children) {
+        for (auto child : this->children) {
             parameter_type_list += child->checkSemantics().value_or("") + " ";
         }
 

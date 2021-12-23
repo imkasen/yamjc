@@ -41,9 +41,8 @@ std::optional<string> Statement::checkSemantics() {
             auto record_ptr = Statement::st.lookupRecord(lhs_name).value_or(nullptr);
             if (record_ptr) {
                 if (pos_type != "int") {
-                    cerr
-                        << R"([Semantic Analysis] - Error: only "int" can be used to access array's position in scope ")"
-                        << Statement::st.getScopeTitle() << "\"!" << endl;
+                    cerr << R"([Semantic Analysis] - Error: only "int" can be used to access array's position in scope ")"
+                         << Statement::st.getScopeTitle() << "\"!" << endl;
                     exit(EXIT_FAILURE);
                 }
                 string lhs_record_type = record_ptr->getType();
