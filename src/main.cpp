@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     root->saveAST(&ast_text_stream);
     ast_text_stream.close();
 
-    // Create the symbol table, generate "st.dot"
+    // Create a symbol table, generate "st.dot"
     std::ofstream st_dot_stream;
     st_dot_stream.open("st.dot", std::ios::out);
     st_dot_stream << "graph {" << endl;

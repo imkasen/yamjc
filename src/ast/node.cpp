@@ -90,6 +90,17 @@ void Node::buildST(std::ofstream *outStream) {
     Node::st.printST(outStream);
 }
 
+/*
+ * Default behavior,
+ * this behavior is used by following nodes:
+ * "Declarations", "Expression", "PrimaryExpression", "Return", "Statement"
+ *
+ * All abstract syntax trees start with node "Goal",
+ * review "parser.yy" for more details.
+ *
+ * @brief: Traverse children nodes.
+ * @return: std::nullopt
+ */
 std::optional<string> Node::generateST() {  // NOLINT
     for (auto child : this->children) {
         child->generateST();

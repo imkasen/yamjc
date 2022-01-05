@@ -3,26 +3,24 @@ using std::string;
 
 VarDeclaration::VarDeclaration() : Node() {}
 VarDeclaration::VarDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
+
 /*
- * 1.
- * Create records in the current "Class" || "Method" scope.
- * Scope add:
- *     Variable: <name>
- *
- * 2.
- * Get the "Class" || "Method" record in the "Program" || "Class" scope.
- * Add variables into "Class" || "Method".
- *
+ * @brief:
+ *   1. Create "Variable" records in the current "Class" || "Method" scope.
+ *      Add into the current scope:
+ *          Variable: <variable name>
+ *   2. Get the "Class" || "Method" ptr in the "Program" || "Class" scope.
+ *      Add "Variable" ptr into "Class" || "Method" ptr.
  * @return: std::nullopt
  */
 std::optional<string> VarDeclaration::generateST() {
-    // Create variable records
+    // 1.
     string variable_type = this->children.at(0)->generateST().value_or("Unknown");
     string variable_name = this->children.at(1)->generateST().value_or("Unknown");
     std::shared_ptr<Variable> variable_ptr = std::make_shared<Variable>(variable_name, variable_type);
     VarDeclaration::st.addRecord(variable_name, variable_ptr);
 
-    // Add variable records into "Class" || "Method"
+    // 2.
     string scope_name = VarDeclaration::st.getScopeTitle();
     string scope_type = VarDeclaration::st.getScopeType();
     auto record_ptr = VarDeclaration::st.lookupRecord(scope_name).value_or(nullptr);  // std::shared_ptr<Record>
