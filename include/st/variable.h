@@ -6,6 +6,7 @@
 #include <utility>
 #include "record.h"
 
+// local variables in "Class" and "Method"
 class Variable : public Record {
 protected:
     std::unordered_map<std::string, std::shared_ptr<Variable>> variables;

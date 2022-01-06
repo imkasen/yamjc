@@ -6,6 +6,7 @@
 
 class Method : public Parameter {
 private:
+    // use "deque" to keep formal parameters in order
     std::deque<std::shared_ptr<Parameter>> parameters;
 
 public:

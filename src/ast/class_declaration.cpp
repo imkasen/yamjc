@@ -15,9 +15,11 @@ ClassDeclaration::ClassDeclaration(string t, string v) : Node(std::move(t), std:
  *      Add "this" record which listed above into "Class" record.
  *      Add into the parent scope:
  *          Class: <name>
- *   3. If Class extends Class,
- *      Traverse children first,
- *      Then copy variables and methods.
+ *   3. If "Class" extends from "Class",
+ *          Traverse children first,
+ *          Then copy "Variables" and "Methods" from father "Class" record.
+ *      If no extends,
+ *          Traverse children directly.
  * @return: std::nullopt
  */
 std::optional<string> ClassDeclaration::generateST() {
@@ -34,22 +36,28 @@ std::optional<string> ClassDeclaration::generateST() {
     ClassDeclaration::st.getParentScope()->addRecord(class_name, class_ptr);
 
     // 3.
-    // "Class" extends
-    if (this->children.size() > 1 && this->children.at(1)->getType() == "Identifier") {
-        for (size_t i = 2; i < this->children.size(); ++i)  // Declarations
+    // "Class" extends from "Class"
+    // if "Class" contains nothing, `this->children.size() == 2`,
+    // else `this->children.size() >= 2`
+    if (this->children.size() >= 2 && this->children.at(1)->getType() == "Identifier") {
+        // Traverse "Declarations"
+        for (size_t i = 2; i < this->children.size(); ++i)
         {
             this->children.at(i)->generateST();
         }
 
         string parent_class_name = this->children.at(1)->getValue();
-        class_ptr->setType(class_type + " " + parent_class_name);
+        // child "Class" -> parent "Class",
+        // graphviz uses HTML labels, so ">" needs to be escaped.
+        class_ptr->setType(class_type + "-&gt;" + parent_class_name);
 
         auto c_record_ptr = ClassDeclaration::st.lookupRecord(parent_class_name).value_or(nullptr);
         if (c_record_ptr) {
             std::shared_ptr<STClass> parent_class_ptr = std::dynamic_pointer_cast<STClass>(c_record_ptr);
 
-            // Deep copy variables in Class
+            // Deep copy "Variables" in "Class"
             for (const auto &pair : parent_class_ptr->getVariables()) {
+                // "Variables" that need to be inherited but not overwritten
                 if (pair.first != "this" && !ClassDeclaration::st.lookupRecord(pair.first).has_value()) {
                     std::shared_ptr<Variable> variable_ptr = std::make_shared<Variable>(*(pair.second));
                     ClassDeclaration::st.addRecord(variable_ptr->getName(), variable_ptr);
@@ -57,15 +65,15 @@ std::optional<string> ClassDeclaration::generateST() {
                 }
             }
 
-            // Deep copy methods in Class
+            // Deep copy "Methods" in "Class"
             for (const auto &pair : parent_class_ptr->getMethods()) {
-                // Methods that need to be inherited but not overwritten
+                // "Methods" that need to be inherited but not overwritten
                 if (!ClassDeclaration::st.lookupChildScope(pair.first).value_or(nullptr)) {
                     std::shared_ptr<Method> method_ptr = std::make_shared<Method>(*(pair.second));
                     ClassDeclaration::st.addRecord(method_ptr->getName(), method_ptr);
                     class_ptr->addMethod(method_ptr);
 
-                    // Enter method scope, generate st only
+                    // Enter "Method" scope, generate st only
                     ClassDeclaration::st.enterScope();
                     ClassDeclaration::st.setScopeTitle("Method: " + method_ptr->getName());
                     for (const auto &v_pair : method_ptr->getVariables()) {
@@ -78,7 +86,7 @@ std::optional<string> ClassDeclaration::generateST() {
                 }
             }
         }
-    } else {  // No "Class" extends
+    } else {  // No extends
         // Traverse "Declarations"
         for (size_t i = 1; i < this->children.size(); ++i) {
             this->children.at(i)->generateST();

@@ -3,6 +3,7 @@
 
 #include "variable.h"
 
+// formal parameters in "Method"
 class Parameter : public Variable {
 public:
     Parameter();

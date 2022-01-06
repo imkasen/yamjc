@@ -9,8 +9,8 @@
 /*
  * The basic class in tree-based symbol table implementation.
  *
- * Variable : record
- * Parameter : Variable  // parameter is variable
+ * Variable : Record     // means local variables
+ * Parameter : Variable  // means formal parameters
  * Method : Variable
  * STClass : Variable
  */
