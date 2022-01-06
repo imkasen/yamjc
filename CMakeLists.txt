@@ -11,11 +11,11 @@ endif()
 configure_file(graph.sh ${PROJECT_BINARY_DIR}/graph.sh COPYONLY)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-    message(STATUS "Setting build type to 'RelWithDebInfo' as none was specified.")
+    message(STATUS "Setting build type to 'Release' as none was specified.")
     set(
-            CMAKE_BUILD_TYPE RelWithDebInfo
+            CMAKE_BUILD_TYPE Release
             CACHE
-            STRING "Set default build type: RelWithDebInfo"
+            STRING "Set default build type: Release"
             FORCE
     )
     set_property(
@@ -25,6 +25,8 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
             STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo"
     )
 endif()
+
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # FLEX and BISON
 find_package(BISON 3.5 REQUIRED)
