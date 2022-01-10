@@ -7,7 +7,18 @@ using std::string;
 Statement::Statement() : Node() {}
 Statement::Statement(string t, string v) : Node(std::move(t), std::move(v)) {}
 
+/*
+ * @brief:
+ *   1. Node: "Statement: ="
+ *   2. Node: "Statement: S.O.PRINTLN"
+ *        Traverse child nodes, and check the return value.
+ *        The grammar restricts that only integers can be print,
+ *        so the return value must be "int".
+ *   3. Node: "Statement: IF" || "Statement: WHILE"
+ * @return: std::nullopt
+ */
 std::optional<string> Statement::checkSemantics() {
+    // 1.
     if (this->getValue() == "=") {
         // e.g. xxx = 123;
         // etc...
@@ -58,7 +69,15 @@ std::optional<string> Statement::checkSemantics() {
                 exit(EXIT_FAILURE);
             }
         }
-    } else if (this->getValue() == "S.O.PRINTLN") {
+    }
+    // 2.
+    else if (this->getValue() == "S.O.PRINTLN") {
+        /*
+         * Expectation:
+         *   the returned string is "int", do nothing.
+         * Non-expectation:
+         *   the returned string is not "int", print the error message.
+         */
         string type = this->children.at(0)->checkSemantics().value_or("");
 
         if (type != "int") {
@@ -66,7 +85,9 @@ std::optional<string> Statement::checkSemantics() {
                  << Statement::st.getScopeTitle() << "\"!" << endl;
             exit(EXIT_FAILURE);
         }
-    } else if (this->getValue() == "IF" || this->getValue() == "WHILE") {
+    }
+    // 3.
+    else if (this->getValue() == "IF" || this->getValue() == "WHILE") {
         string type = this->children.at(0)->checkSemantics().value_or("");
         if (type != "boolean") {
             cerr << R"([Semantic Analysis] - Error: IF WHILE condition should be "boolean" in scope ")"

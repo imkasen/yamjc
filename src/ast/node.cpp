@@ -108,11 +108,20 @@ std::optional<string> Node::generateST() {  // NOLINT
     return std::nullopt;
 }
 
+// Check semantic analysis
 void Node::semanticAnalysis() {
     this->checkSemantics();
     Node::st.resetTable();
 }
 
+/*
+ * Default behavior,
+ * this behavior is used by following nodes:
+ * "Declarations", "FormalParameter"
+ *
+ * @brief: Traverse children nodes.
+ * @return: std::nullopt
+ */
 std::optional<string> Node::checkSemantics() {  // NOLINT
     for (auto child : this->children) {
         child->checkSemantics();

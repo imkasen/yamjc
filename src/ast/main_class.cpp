@@ -60,13 +60,15 @@ std::optional<string> MainClass::generateST() {
     return std::nullopt;
 }
 
+/*
+ * @brief: Traverse children nodes of "MethodBody"
+ * @return: std::nullopt
+ */
 std::optional<std::string> MainClass::checkSemantics() {
-    // Enter method scope
-    MainClass::st.enterScope();
-    // "MethodBody"
+    MainClass::st.enterScope();  // Enter "Method" scope
     for (size_t i = 2; i < this->children.size(); ++i) {
         this->children.at(i)->checkSemantics();
     }
-    MainClass::st.exitScope();
+    MainClass::st.exitScope();   // Exit "Method" scope
     return std::nullopt;
 }

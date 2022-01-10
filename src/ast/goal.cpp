@@ -27,13 +27,15 @@ std::optional<string> Goal::generateST() {
     return std::nullopt;
 }
 
+/*
+ * @brief: Traverse children nodes.
+ * @return: std::nullopt
+ */
 std::optional<std::string> Goal::checkSemantics() {
     for (auto child : this->children) {
-        // Enter class scope
-        Goal::st.enterScope();
+        Goal::st.enterScope();  // Enter "Class" scope
         child->checkSemantics();
-        Goal::st.exitScope();  // Exit class scope
+        Goal::st.exitScope();   // Exit "Class" scope
     }
-
     return std::nullopt;
 }

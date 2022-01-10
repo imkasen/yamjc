@@ -4,6 +4,9 @@ using std::string;
 Type::Type() : Node() {}
 Type::Type(string t, string v) : Node(std::move(t), std::move(v)) {}
 
+/*
+ * @return: std::nullopt || string
+ */
 std::optional<string> Type::generateST() {
     // Has value && no children
     if (!this->getValue().empty() && this->children.empty()) {
@@ -17,12 +20,20 @@ std::optional<string> Type::generateST() {
     return std::nullopt;
 }
 
+/*
+ * @brief:
+ *   1.    "Type"
+ *           |
+ *      "Identifier"
+ *   2. "Type:int" or "Type:boolean" or "Type:int[]"
+ * @return: std::nullopt || string
+ */
 std::optional<std::string> Type::checkSemantics() {
-    // "Type" -> "Identifier"
+    // 1.
     if (this->children.size() == 1 && this->getValue().empty()) {
         return this->children.at(0)->checkSemantics();
     }
-    // "Type:int", "Type:boolean", "Type:int[]"
+    // 2.
     else if (this->children.empty() && !this->getValue().empty()) {
         return this->getValue();
     }

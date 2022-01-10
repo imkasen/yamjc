@@ -8,6 +8,36 @@ using std::string;
 Expression::Expression() : Node() {}
 Expression::Expression(string t, string v) : Node(std::move(t), std::move(v)) {}
 
+/*
+ * @brief:
+ *   1. "ExpressionList"
+ *
+ *   2.    "Expression"
+ *              |
+ *      "PrimaryExpression"
+ *
+ *   3. "Expression:!"
+ *            |
+ *      "Expression"
+ *
+ *   4. "Expression"   or  "Expression"    or   "Expression"
+ *          |                   |                   |
+ *        "int"             "boolean"             "this"
+ *
+ *   5.                   "Expression"                or                       "Expression"
+ *                       /           \                                     /        |        \
+ *      "PrimaryExpression"           "Identifier"         "PrimaryExpression"  "Identifier"  "ExpressionList"
+ *
+ *   6.  "Expression"             or                 "Expression"
+ *         /     \                                /       |        \
+ *      "this"  "Identifier"                  "this"  "Identifier"  "ExpressionList"
+ *
+ *   7.       "Expression"
+ *             /       \
+ *      "Expression"    ...
+ *
+ * @return: std::nullopt || string
+ */
 std::optional<string> Expression::checkSemantics() {
     string class_name;
     string method_name;
@@ -17,17 +47,19 @@ std::optional<string> Expression::checkSemantics() {
     std::shared_ptr<Record> m_record_ptr;
     std::shared_ptr<STClass> class_ptr;
 
+    // 1.
     // "ExpressionList"
     if (this->getType() == "ExpressionList") {
-        // Check parameters
         string parameter_type_list;
 
+        // Splice formal parameter types, "xxx xxx ..."
         for (auto child : this->children) {
             parameter_type_list += child->checkSemantics().value_or("") + " ";
         }
 
         return parameter_type_list;
     }
+    // 2.
     // "Expression" -> "PrimaryExpression"
     else if (this->children.size() == 1 && this->children.at(0)->getType() == "PrimaryExpression") {
         // "PrimaryExpression:NEW"
@@ -69,11 +101,15 @@ std::optional<string> Expression::checkSemantics() {
             }
         }
     }
+    // 3.
     // "Expression:!" -> "Expression"
     else if (this->children.size() == 1 && this->getValue() == "!") {
         return this->children.at(0)->checkSemantics();
     }
-    // "Expression" -> "int", "boolean", "this"
+    // 4.
+    // "Expression" -> "int"
+    // "Expression" -> "boolean"
+    // "Expression" -> "this"
     else if (this->children.size() == 1) {
         string type = this->children.at(0)->getType();
         if (type == "this") {
@@ -82,11 +118,12 @@ std::optional<string> Expression::checkSemantics() {
                 return v_record_ptr->getType();
             }
         }
-        // "int", "boolean"
+        // type == "int" || type == "boolean"
         else {
             return type;
         }
     }
+    // 5.
     // "Expression" -> "PrimaryExpression", "Identifier"
     // "Expression" -> "PrimaryExpression", "Identifier", "ExpressionList"
     else if (this->children.size() <= 3 && this->children.at(0)->getType() == "PrimaryExpression") {
@@ -151,6 +188,7 @@ std::optional<string> Expression::checkSemantics() {
             return m_record_ptr->getType();
         }
     }
+    // 6.
     // "Expression" -> "this", "Identifier"
     // "Expression" -> "this", "Identifier", "ExpressionList"
     else if (this->children.size() <= 3 && this->children.at(0)->getType() == "this") {
@@ -168,6 +206,7 @@ std::optional<string> Expression::checkSemantics() {
 
         return m_record_ptr->getType();
     }
+    // 7.
     // "Expression" -> "Expression", ...
     else if (this->children.size() <= 3 && this->children.at(0)->getType() == "Expression") {
         // "Expression:!" -> "Expression", "Identifier"
@@ -243,32 +282,37 @@ std::optional<string> Expression::checkSemantics() {
     return std::nullopt;
 }
 
+/*
+ * @brief: Check whether formal parameters meet the syntax requirements, e.g. order, number...
+ * @return: Boolean
+ */
 bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr) {
     std::shared_ptr<Method> method_ptr;
     std::deque<string> p_deque;
 
     if (this->children.size() == 3) {
-        if (m_record_ptr) {
-            method_ptr = std::dynamic_pointer_cast<Method>(m_record_ptr);
-        }
+        method_ptr = std::dynamic_pointer_cast<Method>(m_record_ptr);
 
         string parameter_type_list = this->children.at(2)->checkSemantics().value_or("");
         // Split string
         Expression::strSplit(p_deque, parameter_type_list, " ");
 
+        // check number
         if (p_deque.size() != method_ptr->getParameters().size()) {
             cerr << "[Semantic Analysis] - Error: Parameter numbers do not match in scope \""
                  << Expression::st.getScopeTitle() << "\"!" << endl;
             return false;
         }
 
+        // check order
         for (size_t i = 0; i < method_ptr->getParameters().size(); ++i) {
             string type_from_m = method_ptr->getParameters().at(i)->getType();
             string type_from_p = p_deque.at(i);
 
             if (type_from_p != type_from_m) {
-                // Extends
-                // MyVisitor = MyVisitor Visitor, Visitor = MyVisitor Visitor
+                // "Class" extends "Class" situation
+                // e.g. Visitor = Visitor Parent_Visitor
+                // warning: not a rigorous judgment...
                 auto c_record_ptr = Expression::st.lookupRecordInRoot(type_from_p).value_or(nullptr);
                 string c_record_ptr_type = c_record_ptr->getType();
                 if (c_record_ptr_type.find(type_from_m) != string::npos) {
@@ -299,3 +343,8 @@ void Expression::strSplit(std::deque<std::string> &deque, const std::string &tex
         text_str.erase(0, pos + delimiter.length());
     }
 }
+
+// ---------
+// TODO: Refactor
+// TODO: reduce IF nesting
+// TODO: reduce ERROR message
