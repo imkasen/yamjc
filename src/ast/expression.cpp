@@ -310,13 +310,15 @@ bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr) {
             string type_from_p = p_deque.at(i);
 
             if (type_from_p != type_from_m) {
-                // "Class" extends "Class" situation
-                // e.g. Visitor = Visitor Parent_Visitor
-                // warning: not a rigorous judgment...
                 auto c_record_ptr = Expression::st.lookupRecordInRoot(type_from_p).value_or(nullptr);
-                string c_record_ptr_type = c_record_ptr->getType();
-                if (c_record_ptr_type.find(type_from_m) != string::npos) {
-                    return true;
+                if (c_record_ptr) {
+                    string c_record_ptr_type = c_record_ptr->getType();
+                    // "Class" extends "Class" situation
+                    // e.g. Visitor = Visitor Parent_Visitor
+                    // warning: not a rigorous judgment...
+                    if (c_record_ptr_type.find(type_from_m) != string::npos) {
+                        return true;
+                    }
                 }
 
                 cerr << "[Semantic Analysis] - Error: Parameter types (\"" << type_from_m << "\" - \"" << type_from_p

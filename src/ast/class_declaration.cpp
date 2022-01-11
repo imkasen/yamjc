@@ -37,8 +37,10 @@ std::optional<string> ClassDeclaration::generateST() {
 
     // 3.
     // "Class" extends from "Class"
-    // if "Class" contains nothing, `this->children.size() == 2`,
-    // else `this->children.size() >= 2`
+    //   if "Class" contains nothing
+    //      `this->children.size() == 2`
+    //   else
+    //      `this->children.size() >= 3`
     if (this->children.size() >= 2 && this->children.at(1)->getType() == "Identifier") {
         // Traverse "Declarations"
         for (size_t i = 2; i < this->children.size(); ++i)
@@ -85,7 +87,13 @@ std::optional<string> ClassDeclaration::generateST() {
                 }
             }
         }
-    } else {  // No extends
+    }
+    // No "Class" extends
+    //   if "Class" contains nothing
+    //      `this->children.size() == 1`
+    //   else
+    //      `this->children.size() >= 2`
+    else {
         // Traverse "Declarations"
         for (size_t i = 1; i < this->children.size(); ++i) {
             this->children.at(i)->generateST();
@@ -95,15 +103,29 @@ std::optional<string> ClassDeclaration::generateST() {
     return std::nullopt;
 }
 
+/*
+ * @brief: Traverse child nodes.
+ * @return: std::nullopt
+ */
 std::optional<std::string> ClassDeclaration::checkSemantics() {
-    // "Class" extends
-    if (this->children.size() > 1 && this->children.at(1)->getType() == "Identifier") {
-        // Declarations
+    // "Class" extends from "Class"
+    //   if "Class" contains nothing
+    //      `this->children.size() == 2`
+    //   else
+    //      `this->children.size() >= 3`
+    if (this->children.size() >= 2 && this->children.at(1)->getType() == "Identifier") {
+        // Traverse "Declarations"
         for (size_t i = 2; i < this->children.size(); ++i) {
             this->children.at(i)->checkSemantics();
         }
-    } else {  // No "Class" extends
-        // Declarations
+    }
+    // No "Class" extends
+    //   if "Class" contains nothing,
+    //      `this->children.size() == 1`
+    //   else
+    //      `this->children.size() >= 2`
+    else {
+        // Traverse "Declarations"
         for (size_t i = 1; i < this->children.size(); ++i) {
             this->children.at(i)->checkSemantics();
         }

@@ -45,15 +45,18 @@ std::optional<string> MethodDeclaration::generateST() {
     return std::nullopt;
 }
 
+/*
+ * @brief: Traverse child nodes of "MethodBody" or "Return".
+ * @return: std::nullopt
+ */
 std::optional<std::string> MethodDeclaration::checkSemantics() {
-    // Enter method scope
-    MethodDeclaration::st.enterScope();
+    MethodDeclaration::st.enterScope();  // Enter "Method" scope
     for (auto child : this->children) {
         if (child->getType() == "MethodBody" || child->getType() == "Return") {
             child->checkSemantics();
         }
     }
-    MethodDeclaration::st.exitScope();  // Exit method scope
+    MethodDeclaration::st.exitScope();   // Exit "Method" scope
 
     return std::nullopt;
 }

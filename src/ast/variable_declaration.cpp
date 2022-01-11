@@ -35,6 +35,10 @@ std::optional<string> VarDeclaration::generateST() {
     return std::nullopt;
 }
 
+/*
+ * @brief: Check if a custom "Class" type exists.
+ * @return: std::nullopt
+ */
 std::optional<std::string> VarDeclaration::checkSemantics() {
     string type_name = this->children.at(0)->checkSemantics().value_or("");
     if (type_name != "int" && type_name != "boolean" && type_name != "int[]") {

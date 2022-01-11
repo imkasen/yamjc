@@ -10,6 +10,7 @@ Statement::Statement(string t, string v) : Node(std::move(t), std::move(v)) {}
 /*
  * @brief:
  *   1. Node: "Statement: ="
+ *        Compare types of lhs and rhs.
  *   2. Node: "Statement: S.O.PRINTLN"
  *        Traverse child nodes, and check the return value.
  *        The grammar restricts that only integers can be print,
@@ -21,6 +22,7 @@ std::optional<string> Statement::checkSemantics() {
     // 1.
     if (this->getValue() == "=") {
         // e.g. xxx = 123;
+        //      xxx = NEW ...;
         // etc...
         if (this->children.size() == 2) {
             string lhs_name = this->children.at(0)->checkSemantics().value_or("");  // "Identifier"
@@ -30,7 +32,8 @@ std::optional<string> Statement::checkSemantics() {
             if (record_ptr) {
                 string lhs_record_type = record_ptr->getType();
 
-                // "Extends"
+                // lhs and rhs are different types,
+                // or "Class" extends from "Class".
                 if (lhs_record_type != rhs_type && rhs_type.find(lhs_record_type) == string::npos) {
                     cerr << "[Semantic Analysis] - Error: Can not assign \"" << rhs_type << "\" (rhs) to \""
                          << lhs_record_type << "\" (lhs) in the scope \"" << Statement::st.getScopeTitle() << "\"!"

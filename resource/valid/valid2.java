@@ -18,6 +18,7 @@ class TV {
 
         ntb = root.Init(1);        // OK
         // ntb = root.Init(root);  // parameter type does not match
+        // ntb = root.Init(true);  // parameter type does not match
 
         return num1;
     }
