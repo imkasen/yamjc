@@ -92,7 +92,7 @@ std::optional<string> Expression::checkSemantics() {
                 return var_name;
             }
             v_record_ptr = Expression::st.lookupRecord(var_name).value_or(nullptr);
-            if (v_record_ptr) {
+            if (v_record_ptr && (v_record_ptr->getRecord() == "Variable" || v_record_ptr->getRecord() == "Parameter")) {
                 return v_record_ptr->getType();
             } else {
                 cerr << "[Semantic Analysis] - Error: Variable \"" << var_name << "\" does not exist in scope \""
@@ -147,9 +147,7 @@ std::optional<string> Expression::checkSemantics() {
                 }
             }
 
-            if (!this->checkParameters(m_record_ptr)) {
-                exit(EXIT_FAILURE);
-            }
+            this->checkParameters(m_record_ptr);
 
             return m_record_ptr->getType();
         }
@@ -181,9 +179,7 @@ std::optional<string> Expression::checkSemantics() {
                 }
             }
 
-            if (!this->checkParameters(m_record_ptr)) {
-                exit(EXIT_FAILURE);
-            }
+            this->checkParameters(m_record_ptr);
 
             return m_record_ptr->getType();
         }
@@ -200,9 +196,7 @@ std::optional<string> Expression::checkSemantics() {
             exit(EXIT_FAILURE);
         }
 
-        if (!this->checkParameters(m_record_ptr)) {
-            exit(EXIT_FAILURE);
-        }
+        this->checkParameters(m_record_ptr);
 
         return m_record_ptr->getType();
     }
@@ -238,9 +232,7 @@ std::optional<string> Expression::checkSemantics() {
                 }
             }
 
-            if (!this->checkParameters(m_record_ptr)) {
-                exit(EXIT_FAILURE);
-            }
+            this->checkParameters(m_record_ptr);
 
             return m_record_ptr->getType();
         }
@@ -286,7 +278,7 @@ std::optional<string> Expression::checkSemantics() {
  * @brief: Check whether formal parameters meet the syntax requirements, e.g. order, number...
  * @return: Boolean
  */
-bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr) {
+void Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr) {
     std::shared_ptr<Method> method_ptr;
     std::deque<string> p_deque;
 
@@ -301,7 +293,7 @@ bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr) {
         if (p_deque.size() != method_ptr->getParameters().size()) {
             cerr << "[Semantic Analysis] - Error: Parameter numbers do not match in scope \""
                  << Expression::st.getScopeTitle() << "\"!" << endl;
-            return false;
+            exit(EXIT_FAILURE);
         }
 
         // check order
@@ -311,24 +303,27 @@ bool Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr) {
 
             if (type_from_p != type_from_m) {
                 auto c_record_ptr = Expression::st.lookupRecordInRoot(type_from_p).value_or(nullptr);
+                /*
                 if (c_record_ptr) {
                     string c_record_ptr_type = c_record_ptr->getType();
                     // "Class" extends "Class" situation
                     // e.g. Visitor = Visitor Parent_Visitor
                     // warning: not a rigorous judgment...
                     if (c_record_ptr_type.find(type_from_m) != string::npos) {
-                        return true;
+                        return;
                     }
                 }
+                print error
+                */
 
-                cerr << "[Semantic Analysis] - Error: Parameter types (\"" << type_from_m << "\" - \"" << type_from_p
-                     << "\") do not match in scope \"" << Expression::st.getScopeTitle() << "\"!" << endl;
-                return false;
+                if (!c_record_ptr || c_record_ptr->getType().find(type_from_m) == string::npos) {
+                    cerr << "[Semantic Analysis] - Error: Parameter types (\"" << type_from_m << "\" - \"" << type_from_p
+                         << "\") do not match in scope \"" << Expression::st.getScopeTitle() << "\"!" << endl;
+                    exit(EXIT_FAILURE);
+                }
             }
         }
     }
-
-    return true;
 }
 
 void Expression::strSplit(std::deque<std::string> &deque, const std::string &text, const std::string &delimiter) {
