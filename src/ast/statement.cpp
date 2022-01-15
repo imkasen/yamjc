@@ -1,7 +1,4 @@
 #include "ast/statement.h"
-using std::cerr;
-using std::endl;
-using std::exit;
 using std::string;
 
 Statement::Statement() : Node() {}
@@ -35,15 +32,14 @@ std::optional<string> Statement::checkSemantics() {
                 // lhs and rhs are different types,
                 // or "Class" extends from "Class".
                 if (lhs_record_type != rhs_type && rhs_type.find(lhs_record_type) == string::npos) {
-                    cerr << "[Semantic Analysis] - Error: Can not assign \"" << rhs_type << "\" (rhs) to \""
-                         << lhs_record_type << "\" (lhs) in the scope \"" << Statement::st.getScopeTitle() << "\"!"
-                         << endl;
-                    exit(EXIT_FAILURE);
+                    string msg = "[Semantic Analysis] - Error: Can not assign \"" + rhs_type + "\" (rhs) to \""
+                         + lhs_record_type + "\" (lhs) in the scope \"" + Statement::st.getScopeTitle() + "\"!";
+                    Statement::printErrMsg(msg);
                 }
             } else {
-                cerr << "[Semantic Analysis] - Error: Variable \"" << lhs_name << "\" does not exist in scope \""
-                     << Statement::st.getScopeTitle() << "\"!" << endl;
-                exit(EXIT_FAILURE);
+                string msg = "[Semantic Analysis] - Error: Variable \"" + lhs_name + "\" does not exist in scope \""
+                     + Statement::st.getScopeTitle() + "\"!";
+                Statement::printErrMsg(msg);
             }
         }
         // e.g. number[0] = 20;
@@ -55,21 +51,20 @@ std::optional<string> Statement::checkSemantics() {
             auto record_ptr = Statement::st.lookupRecord(lhs_name).value_or(nullptr);
             if (record_ptr) {
                 if (pos_type != "int") {
-                    cerr << R"([Semantic Analysis] - Error: only "int" can be used to access array's position in scope ")"
-                         << Statement::st.getScopeTitle() << "\"!" << endl;
-                    exit(EXIT_FAILURE);
+                    string msg = R"([Semantic Analysis] - Error: only "int" can be used to access array's position in scope ")"
+                         + Statement::st.getScopeTitle() + "\"!";
+                    Statement::printErrMsg(msg);
                 }
                 string lhs_record_type = record_ptr->getType();
                 if (lhs_record_type != "int[]" || rhs_type != "int") {
-                    cerr << "[Semantic Analysis] - Error: Can not assign \"" << rhs_type << "\" (rhs) to \""
-                         << lhs_record_type << "\" (lhs) in the scope \"" << Statement::st.getScopeTitle() << "\"!"
-                         << endl;
-                    exit(EXIT_FAILURE);
+                    string msg = "[Semantic Analysis] - Error: Can not assign \"" + rhs_type + "\" (rhs) to \""
+                         + lhs_record_type + "\" (lhs) in the scope \"" + Statement::st.getScopeTitle() + "\"!";
+                    Statement::printErrMsg(msg);
                 }
             } else {
-                cerr << "[Semantic Analysis] - Error: Variable \"" << lhs_name << "\" does not exist in scope \""
-                     << Statement::st.getScopeTitle() << "\"!" << endl;
-                exit(EXIT_FAILURE);
+                string msg = "[Semantic Analysis] - Error: Variable \"" + lhs_name + "\" does not exist in scope \""
+                     + Statement::st.getScopeTitle() + "\"!";
+                Statement::printErrMsg(msg);
             }
         }
     }
@@ -84,18 +79,18 @@ std::optional<string> Statement::checkSemantics() {
         string type = this->children.at(0)->checkSemantics().value_or("");
 
         if (type != "int") {
-            cerr << R"([Semantic Analysis] - Error: only "int" can be print in scope ")"
-                 << Statement::st.getScopeTitle() << "\"!" << endl;
-            exit(EXIT_FAILURE);
+            string msg = R"([Semantic Analysis] - Error: only "int" can be print in scope ")"
+                 + Statement::st.getScopeTitle() + "\"!";
+            Statement::printErrMsg(msg);
         }
     }
     // 3.
     else if (this->getValue() == "IF" || this->getValue() == "WHILE") {
         string type = this->children.at(0)->checkSemantics().value_or("");
         if (type != "boolean") {
-            cerr << R"([Semantic Analysis] - Error: IF WHILE condition should be "boolean" in scope ")"
-                 << Statement::st.getScopeTitle() << "\"!" << endl;
-            exit(EXIT_FAILURE);
+            string msg = R"([Semantic Analysis] - Error: IF WHILE condition should be "boolean" in scope ")"
+                 + Statement::st.getScopeTitle() + "\"!";
+            Statement::printErrMsg(msg);
         }
 
         for (std::size_t i = 1; i < this->children.size(); ++i) {

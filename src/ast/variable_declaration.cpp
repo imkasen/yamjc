@@ -44,8 +44,8 @@ std::optional<std::string> VarDeclaration::checkSemantics() {
     if (type_name != "int" && type_name != "boolean" && type_name != "int[]") {
         auto c_record_ptr = VarDeclaration::st.lookupRecordInRoot(type_name).value_or(nullptr);
         if (!c_record_ptr) {
-            std::cerr << "[Semantic Analysis] - Error: Class \"" << type_name << "\" does not exist!" << std::endl;
-            exit(EXIT_FAILURE);
+            string msg = "[Semantic Analysis] - Error: Class \"" + type_name + "\" does not exist!";
+            VarDeclaration::printErrMsg(msg);
         }
     }
 

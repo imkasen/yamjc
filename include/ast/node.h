@@ -59,6 +59,8 @@ public:
     void semanticAnalysis();
     virtual std::optional<std::string> checkSemantics();
 
+    static void printErrMsg(const std::string &message);
+
     virtual ~Node();
 };
 

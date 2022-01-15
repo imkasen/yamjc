@@ -18,7 +18,7 @@ class TV {
         // number[0] = test;        // no test variable
         // number[true] = 1;        // can not be "true"
         // n = number.length;       // OK
-        // root = number.length;    // different type
+        // root = number.length;    // no root
 
         return num;
     }

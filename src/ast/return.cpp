@@ -1,7 +1,4 @@
 #include "ast/return.h"
-using std::cerr;
-using std::endl;
-using std::exit;
 using std::string;
 
 Return::Return() : Node() {}
@@ -18,13 +15,13 @@ std::optional<string> Return::checkSemantics() {
     if (record_ptr) {
         string record_ptr_type = record_ptr->getType();
         if (record_ptr_type != return_type) {
-            cerr << "[Semantic Analysis] - Error: return type \"" << return_type
-                 << "\" does not match the declaration (\"" << record_ptr_type << "\")!" << endl;
-            exit(EXIT_FAILURE);
+            string msg = "[Semantic Analysis] - Error: return type \"" + return_type
+                 + "\" does not match the declaration (\"" + record_ptr_type + "\")!";
+            Return::printErrMsg(msg);
         }
     } else {
-        cerr << "[Semantic Analysis] - Error: Can not find \"" << method_name << "\"!" << endl;
-        exit(EXIT_FAILURE);
+        string msg = "[Semantic Analysis] - Error: Can not find \"" + method_name + "\"!";
+        Return::printErrMsg(msg);
     }
 
     return std::nullopt;

@@ -1,7 +1,4 @@
 #include "ast/expression.h"
-using std::cerr;
-using std::endl;
-using std::exit;
 using std::size_t;
 using std::string;
 
@@ -67,8 +64,8 @@ std::optional<string> Expression::checkSemantics() {
             class_name = this->children.at(0)->checkSemantics().value_or("");
             c_record_ptr = Expression::st.lookupRecordInRoot(class_name).value_or(nullptr);
             if (!c_record_ptr) {
-                cerr << "[Semantic Analysis] - Error: Class \"" << class_name << "\" does not exist!" << endl;
-                exit(EXIT_FAILURE);
+                string msg = "[Semantic Analysis] - Error: Class \"" + class_name + "\" does not exist!";
+                Expression::printErrMsg(msg);
             }
 
             return c_record_ptr->getType();
@@ -77,9 +74,9 @@ std::optional<string> Expression::checkSemantics() {
         else if (this->children.at(0)->getValue() == "NEW int[]") {
             string type = this->children.at(0)->checkSemantics().value_or("");
             if (type != "int") {
-                cerr << R"([Semantic Analysis] - Error: only "int" can be used to create "NEW int[]" in scope ")"
-                     << Expression::st.getScopeTitle() << "\"!" << endl;
-                exit(EXIT_FAILURE);
+                string msg = R"([Semantic Analysis] - Error: only "int" can be used to create "NEW int[]" in scope )"
+                                 + Expression::st.getScopeType() + "\"!";
+                Expression::printErrMsg(msg);
             }
 
             return "int[]";
@@ -95,9 +92,9 @@ std::optional<string> Expression::checkSemantics() {
             if (v_record_ptr && (v_record_ptr->getRecord() == "Variable" || v_record_ptr->getRecord() == "Parameter")) {
                 return v_record_ptr->getType();
             } else {
-                cerr << "[Semantic Analysis] - Error: Variable \"" << var_name << "\" does not exist in scope \""
-                     << Expression::st.getScopeTitle() << "\"!" << endl;
-                exit(EXIT_FAILURE);
+                string msg = "[Semantic Analysis] - Error: Variable \"" + var_name + "\" does not exist in scope \""
+                             + Expression::st.getScopeTitle() + "\"!";
+                Expression::printErrMsg(msg);
             }
         }
     }
@@ -136,14 +133,14 @@ std::optional<string> Expression::checkSemantics() {
             class_ptr = std::dynamic_pointer_cast<STClass>(c_record_ptr);
 
             if (!class_ptr) {
-                cerr << "[Semantic Analysis] - Error: Class \"" << class_name << "\" does not exist!" << endl;
-                exit(EXIT_FAILURE);
+                string msg = "[Semantic Analysis] - Error: Class \"" + class_name + "\" does not exist!";
+                Expression::printErrMsg(msg);
             } else {
                 m_record_ptr = class_ptr->lookupMethod(method_name).value_or(nullptr);
                 if (!m_record_ptr) {
-                    cerr << "[Semantic Analysis] - Error: Method \"" << method_name << "\" does not exist in scope \""
-                         << Expression::st.getScopeTitle() << "\"!" << endl;
-                    exit(EXIT_FAILURE);
+                    string msg = "[Semantic Analysis] - Error: Method \"" + method_name + "\" does not exist in scope \""
+                                 + class_ptr->getType() + "\"!";
+                    Expression::printErrMsg(msg);
                 }
             }
 
@@ -158,9 +155,9 @@ std::optional<string> Expression::checkSemantics() {
 
             v_record_ptr = Expression::st.lookupRecord(var_name).value_or(nullptr);
             if (!v_record_ptr) {
-                cerr << "[Semantic Analysis] - Error: Variable \"" << var_name << "\" does not exist in scope \""
-                     << Expression::st.getScopeTitle() << "\"!" << endl;
-                exit(EXIT_FAILURE);
+                string msg = "[Semantic Analysis] - Error: Variable \"" + var_name + "\" does not exist in scope \""
+                     + Expression::st.getScopeTitle() + "\"!";
+                Expression::printErrMsg(msg);
             }
 
             class_name = v_record_ptr->getType();
@@ -168,14 +165,14 @@ std::optional<string> Expression::checkSemantics() {
             class_ptr = std::dynamic_pointer_cast<STClass>(c_record_ptr);
 
             if (!class_ptr) {
-                cerr << "[Semantic Analysis] - Error: Class \"" << class_name << "\" does not exist!" << endl;
-                exit(EXIT_FAILURE);
+                string msg = "[Semantic Analysis] - Error: Class \"" + class_name + "\" does not exist!";
+                Expression::printErrMsg(msg);
             } else {
                 m_record_ptr = class_ptr->lookupMethod(method_name).value_or(nullptr);
                 if (!m_record_ptr) {
-                    cerr << "[Semantic Analysis] - Error: Method \"" << method_name << "\" does not exist in scope \""
-                         << Expression::st.getScopeTitle() << "\"!" << endl;
-                    exit(EXIT_FAILURE);
+                    string msg = "[Semantic Analysis] - Error: Method \"" + method_name + "\" does not exist in scope \""
+                         + Expression::st.getScopeTitle() + "\"!";
+                    Expression::printErrMsg(msg);
                 }
             }
 
@@ -191,9 +188,9 @@ std::optional<string> Expression::checkSemantics() {
         method_name = this->children.at(1)->checkSemantics().value_or("");
         m_record_ptr = Expression::st.lookupRecord(method_name).value_or(nullptr);
         if (!m_record_ptr) {
-            cerr << "[Semantic Analysis] - Error: Method \"" << method_name << "\" does not exist in scope \""
-                 << Expression::st.getScopeTitle() << "\"!" << endl;
-            exit(EXIT_FAILURE);
+            string msg = "[Semantic Analysis] - Error: Method \"" + method_name + "\" does not exist in scope \""
+                 + Expression::st.getScopeTitle() + "\"!";
+            Expression::printErrMsg(msg);
         }
 
         this->checkParameters(m_record_ptr);
@@ -211,9 +208,9 @@ std::optional<string> Expression::checkSemantics() {
 
             v_record_ptr = Expression::st.lookupRecord(var_name).value_or(nullptr);
             if (!v_record_ptr) {
-                cerr << "[Semantic Analysis] - Error: Variable \"" << var_name << "\" does not exist in scope \""
-                     << Expression::st.getScopeTitle() << "\"!" << endl;
-                exit(EXIT_FAILURE);
+                string msg = "[Semantic Analysis] - Error: Variable \"" + var_name + "\" does not exist in scope \""
+                     + Expression::st.getScopeTitle() + "\"!";
+                Expression::printErrMsg(msg);
             }
 
             class_name = v_record_ptr->getType();
@@ -221,14 +218,14 @@ std::optional<string> Expression::checkSemantics() {
             class_ptr = std::dynamic_pointer_cast<STClass>(c_record_ptr);
 
             if (!class_ptr) {
-                cerr << "[Semantic Analysis] - Error: Class \"" << class_name << "\" does not exist!" << endl;
-                exit(EXIT_FAILURE);
+                string msg = "[Semantic Analysis] - Error: Class \"" + class_name + "\" does not exist!";
+                Expression::printErrMsg(msg);
             } else {
                 m_record_ptr = class_ptr->lookupMethod(method_name).value_or(nullptr);
                 if (!m_record_ptr) {
-                    cerr << "[Semantic Analysis] - Error: Method \"" << method_name << "\" does not exist in scope \""
-                         << Expression::st.getScopeTitle() << "\"!" << endl;
-                    exit(EXIT_FAILURE);
+                    string msg = "[Semantic Analysis] - Error: Method \"" + method_name + "\" does not exist in scope \""
+                         + Expression::st.getScopeTitle() + "\"!";
+                    Expression::printErrMsg(msg);
                 }
             }
 
@@ -248,10 +245,9 @@ std::optional<string> Expression::checkSemantics() {
                 }
                 return lhs;
             } else {
-                cerr << "[Semantic Analysis] - Error: lhs (\"" << lhs << "\") and rhs (\"" << rhs
-                     << "\") variable types are different in scope \"" << Expression::st.getScopeTitle() << "\"!"
-                     << endl;
-                exit(EXIT_FAILURE);
+                string msg = "[Semantic Analysis] - Error: lhs (\"" + lhs + "\") and rhs (\"" + rhs
+                     + "\") variable types are different in scope \"" + Expression::st.getScopeTitle() + "\"!";
+                Expression::printErrMsg(msg);
             }
         }
         // "Expression:." -> "Expression", "Length"
@@ -263,9 +259,9 @@ std::optional<string> Expression::checkSemantics() {
                 if (!lhs.empty() && !rhs.empty() && lhs == "int[]") {
                     return rhs;
                 } else {
-                    cerr << R"([Semantic Analysis] - Error: ".length" can only be applied to "int[]" in scope ")"
-                         << Expression::st.getScopeTitle() << "\"!" << endl;
-                    exit(EXIT_FAILURE);
+                    string msg = R"([Semantic Analysis] - Error: ".length" can only be applied to "int[]" in scope ")"
+                         + Expression::st.getScopeTitle() + "\"!";
+                    Expression::printErrMsg(msg);
                 }
             }
         }
@@ -291,9 +287,9 @@ void Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr) {
 
         // check number
         if (p_deque.size() != method_ptr->getParameters().size()) {
-            cerr << "[Semantic Analysis] - Error: Parameter numbers do not match in scope \""
-                 << Expression::st.getScopeTitle() << "\"!" << endl;
-            exit(EXIT_FAILURE);
+            string msg = "[Semantic Analysis] - Error: Parameter numbers do not match in scope \""
+                 + Expression::st.getScopeTitle() + "\"!";
+            Expression::printErrMsg(msg);
         }
 
         // check order
@@ -317,9 +313,11 @@ void Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr) {
                 */
 
                 if (!c_record_ptr || c_record_ptr->getType().find(type_from_m) == string::npos) {
-                    cerr << "[Semantic Analysis] - Error: Parameter types (\"" << type_from_m << "\" - \"" << type_from_p
-                         << "\") do not match in scope \"" << Expression::st.getScopeTitle() << "\"!" << endl;
-                    exit(EXIT_FAILURE);
+                    string msg = "[Semantic Analysis] - Error: Parameter types (\"";
+                    msg += type_from_m + "\" - \"";
+                    msg += type_from_p + "\") do not match in scope \"";
+                    msg += Expression::st.getScopeTitle() + "\"!";
+                    Expression::printErrMsg(msg);
                 }
             }
         }
@@ -344,4 +342,3 @@ void Expression::strSplit(std::deque<std::string> &deque, const std::string &tex
 // ---------
 // TODO: Refactor
 // TODO: reduce IF nesting
-// TODO: reduce ERROR message

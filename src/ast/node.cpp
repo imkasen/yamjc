@@ -1,5 +1,7 @@
 #include "ast/node.h"
 using std::cout;
+using std::cerr;
+using std::exit;
 using std::endl;
 using std::size_t;
 using std::string;
@@ -127,4 +129,9 @@ std::optional<string> Node::checkSemantics() {  // NOLINT
         child->checkSemantics();
     }
     return std::nullopt;
+}
+
+void Node::printErrMsg(const std::string &message) {
+    cerr << message << endl;
+    exit(EXIT_FAILURE);
 }

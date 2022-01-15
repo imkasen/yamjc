@@ -35,12 +35,13 @@
 %token END 0 "end of file"
 
 %right ASSIGN
-%left DOT
-%left AND OR LT GT
+%left OR
+%left AND
+%left LT GT
 %left ADD SUB
 %left MUL DIV
 %right NOT
-%left LBRACKET LBRACE LPARENTHESE
+%left LBRACKET LBRACE LPARENTHESE DOT
 
 %start Goal
 
