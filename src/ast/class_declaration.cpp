@@ -43,8 +43,7 @@ std::optional<string> ClassDeclaration::generateST() {
     //      `this->children.size() >= 3`
     if (this->children.size() >= 2 && this->children.at(1)->getType() == "Identifier") {
         // Traverse "Declarations"
-        for (size_t i = 2; i < this->children.size(); ++i)
-        {
+        for (size_t i = 2; i < this->children.size(); ++i) {
             this->children.at(i)->generateST();
         }
 

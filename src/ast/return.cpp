@@ -15,8 +15,8 @@ std::optional<string> Return::checkSemantics() {
     if (record_ptr) {
         string record_ptr_type = record_ptr->getType();
         if (record_ptr_type != return_type) {
-            string msg = "[Semantic Analysis] - Error: return type \"" + return_type
-                 + "\" does not match the declaration (\"" + record_ptr_type + "\")!";
+            string msg = "[Semantic Analysis] - Error: return type \"" + return_type +
+                         "\" does not match the declaration (\"" + record_ptr_type + "\")!";
             Return::printErrMsg(msg);
         }
     } else {

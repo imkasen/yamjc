@@ -2,8 +2,7 @@
 using std::string;
 
 STClass::STClass() : Variable() {}
-STClass::STClass(string name, string type)
-    : Variable(std::move(name), std::move(type), "Class") {}
+STClass::STClass(string name, string type) : Variable(std::move(name), std::move(type), "Class") {}
 
 std::unordered_map<std::string, std::shared_ptr<Method>> STClass::getMethods() const {
     return this->methods;

@@ -1,8 +1,8 @@
 #include "ast/node.h"
-using std::cout;
 using std::cerr;
-using std::exit;
+using std::cout;
 using std::endl;
+using std::exit;
 using std::size_t;
 using std::string;
 

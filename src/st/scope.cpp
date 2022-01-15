@@ -86,9 +86,9 @@ void Scope::addRecord(const string &key, const std::shared_ptr<Record> &item) {
 std::optional<std::shared_ptr<Scope>> Scope::lookupChildScope(const string &key) const {
     // iterator: std::deque<std::shared_ptr<Scope>>::iterator
     auto iterator = std::find_if(this->childrenScopes.begin(), this->childrenScopes.end(),
-                             [&key](const std::shared_ptr<Scope> &scope_ptr) {
-                                 return scope_ptr->getScopeTitle() == key;
-                             });
+                                 [&key](const std::shared_ptr<Scope> &scope_ptr) {
+                                     return scope_ptr->getScopeTitle() == key;
+                                 });
     if (iterator != this->childrenScopes.end()) {
         return *iterator;
     }

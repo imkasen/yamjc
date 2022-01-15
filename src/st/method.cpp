@@ -2,8 +2,7 @@
 using std::string;
 
 Method::Method() : Parameter() {}
-Method::Method(string name, string type)
-    : Parameter(std::move(name), std::move(type), "Method") {}
+Method::Method(string name, string type) : Parameter(std::move(name), std::move(type), "Method") {}
 
 std::deque<std::shared_ptr<Parameter>> Method::getParameters() const {
     return this->parameters;
