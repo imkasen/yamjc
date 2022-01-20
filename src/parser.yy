@@ -24,7 +24,7 @@
 %token <std::string> IF ELSE WHILE
 %token <std::string> SOPRINTLN
 %token <std::string> INT BOOLEAN
-%token <std::string> AND OR NOT
+%token <std::string> AND OR NOT EQUAL
 %token <std::string> TRUE FALSE
 %token <std::string> LT GT
 %token <std::string> ADD SUB MUL DIV
@@ -37,6 +37,7 @@
 %right ASSIGN
 %left OR
 %left AND
+%left EQUAL
 %left LT GT
 %left ADD SUB
 %left MUL DIV
@@ -146,6 +147,7 @@ Expression : Expression AND Expression                                        { 
            | Expression OR Expression                                         { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression LT Expression                                         { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression GT Expression                                         { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression EQUAL Expression                                      { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression ADD Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression SUB Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression MUL Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }

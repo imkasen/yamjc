@@ -31,6 +31,7 @@
 "&&"                       { return yy::parser::make_AND(yytext); }
 "||"                       { return yy::parser::make_OR(yytext); }
 "!"                        { return yy::parser::make_NOT(yytext); }
+"=="                       { return yy::parser::make_EQUAL(yytext); }
 
 "true"                     { return yy::parser::make_TRUE(yytext); }
 "false"                    { return yy::parser::make_FALSE(yytext); }
