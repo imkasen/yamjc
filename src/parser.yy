@@ -24,9 +24,9 @@
 %token <std::string> IF ELSE WHILE
 %token <std::string> SOPRINTLN
 %token <std::string> INT BOOLEAN
-%token <std::string> AND OR NOT EQUAL
+%token <std::string> AND OR NOT EQUAL NOTEQUAL
 %token <std::string> TRUE FALSE
-%token <std::string> LT GT
+%token <std::string> LT LET GT GET
 %token <std::string> ADD SUB MUL DIV
 %token <std::string> LPARENTHESE RPARENTHESE LBRACKET RBRACKET LBRACE RBRACE
 %token <std::string> SEMI COMMA ASSIGN DOT
@@ -37,8 +37,8 @@
 %right ASSIGN
 %left OR
 %left AND
-%left EQUAL
-%left LT GT
+%left EQUAL NOTEQUAL
+%left LT LET GT GET
 %left ADD SUB
 %left MUL DIV
 %right NOT
@@ -146,8 +146,11 @@ ElseStatement : ELSE Statement { $$ = new Statement("Statement", "ELSE"); $$->ch
 Expression : Expression AND Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression OR Expression                                         { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression LT Expression                                         { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression LET Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression GT Expression                                         { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression GET Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression EQUAL Expression                                      { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+           | Expression NOTEQUAL Expression                                   { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression ADD Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression SUB Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }
            | Expression MUL Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }

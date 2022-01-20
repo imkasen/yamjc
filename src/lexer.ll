@@ -32,12 +32,15 @@
 "||"                       { return yy::parser::make_OR(yytext); }
 "!"                        { return yy::parser::make_NOT(yytext); }
 "=="                       { return yy::parser::make_EQUAL(yytext); }
+"!="                       { return yy::parser::make_NOTEQUAL(yytext); }
 
 "true"                     { return yy::parser::make_TRUE(yytext); }
 "false"                    { return yy::parser::make_FALSE(yytext); }
 
 "<"                        { return yy::parser::make_LT(yytext); }
+"<="                       { return yy::parser::make_LET(yytext); }
 ">"                        { return yy::parser::make_GT(yytext); }
+">="                       { return yy::parser::make_GET(yytext); }
 
 "+"                        { return yy::parser::make_ADD(yytext); }
 "-"                        { return yy::parser::make_SUB(yytext); }

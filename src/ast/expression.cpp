@@ -240,7 +240,8 @@ std::optional<string> Expression::checkSemantics() {
             string rhs = this->children.at(1)->checkSemantics().value_or("");
             if (!lhs.empty() && !rhs.empty() && lhs == rhs) {
                 // "IF", "WHILE"
-                if (this->getValue() == ">" || this->getValue() == "<") {
+                if (this->getValue() == ">" || this->getValue() == ">=" ||
+                    this->getValue() == "<" || this->getValue() == "<=") {
                     return "boolean";
                 }
                 return lhs;
