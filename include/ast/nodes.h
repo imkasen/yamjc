@@ -7,7 +7,7 @@
  */
 #include "class_declaration.h"
 #include "declarations.h"
-#include "expression.h"
+#include "ast/expressions/expression.h"
 #include "formal_parameter_list.h"
 #include "goal.h"
 #include "identifier.h"
@@ -17,7 +17,7 @@
 #include "node.h"
 #include "primary_expression.h"
 #include "return.h"
-#include "statement.h"
+#include "ast/statements/statement.h"
 #include "type.h"
 #include "variable_declaration.h"
 

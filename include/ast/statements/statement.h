@@ -1,7 +1,7 @@
 #ifndef STATEMENT_H
 #define STATEMENT_H
 
-#include "node.h"
+#include "ast/node.h"
 
 class Statement : public Node {
 public:

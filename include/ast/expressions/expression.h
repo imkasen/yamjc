@@ -1,7 +1,7 @@
 #ifndef EXPRESSION_H
 #define EXPRESSION_H
 
-#include "node.h"
+#include "ast/node.h"
 
 class Expression : public Node {
 private:
