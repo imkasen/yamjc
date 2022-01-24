@@ -68,6 +68,7 @@
 %type <ArithExpression *> ArithExpression
 %type <ArraySearchExpression *> ArraySearchExpression
 %type <ArrayLengthExpression *> ArrayLengthExpression
+
 %type <PrimaryExpression *> PrimaryExpression
 %type <ArrayAllocExpression *> ArrayAllocExpression
 %type <AllocExpression *> AllocExpression

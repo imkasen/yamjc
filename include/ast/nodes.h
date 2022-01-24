@@ -27,10 +27,11 @@
 #include "ast/expressions/arith_expression.h"
 #include "ast/expressions/array_search_expression.h"
 #include "ast/expressions/array_length_expression.h"
-#include "ast/expressions/primary_expression.h"
-#include "ast/expressions/array_alloc_expression.h"
-#include "ast/expressions/alloc_expression.h"
-#include "ast/expressions/unary_expression.h"
+
+#include "ast/primary_expressions/primary_expression.h"
+#include "ast/primary_expressions/array_alloc_expression.h"
+#include "ast/primary_expressions/alloc_expression.h"
+#include "ast/primary_expressions/unary_expression.h"
 
 #include "ast/statements/statement.h"
 #include "ast/statements/assign_statement.h"

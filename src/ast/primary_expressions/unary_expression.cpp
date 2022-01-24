@@ -1,4 +1,4 @@
-#include "ast/expressions/unary_expression.h"
+#include "ast/primary_expressions/unary_expression.h"
 using std::string;
 
 UnaryExpression::UnaryExpression() : PrimaryExpression() {}

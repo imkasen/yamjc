@@ -1,4 +1,4 @@
-#include "ast/expressions/array_alloc_expression.h"
+#include "ast/primary_expressions/array_alloc_expression.h"
 using std::string;
 
 ArrayAllocExpression::ArrayAllocExpression() : PrimaryExpression() {}
