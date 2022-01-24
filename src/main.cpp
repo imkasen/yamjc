@@ -43,11 +43,13 @@ int main(int argc, char *argv[]) {
     // root.printAST();
 
     // Generate "ast.txt"
+    /*
     std::ofstream ast_text_stream;
     ast_text_stream.open("ast.txt", std::ios::out);
     ast_text_stream << "Built a parse-tree in text:" << endl;
     root->saveAST(&ast_text_stream);
     ast_text_stream.close();
+    */
 
     // Create a symbol table, generate "st.dot"
     /*

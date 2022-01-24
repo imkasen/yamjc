@@ -1,9 +1,9 @@
 #ifndef ARRAY_ASSIGN_STATEMENT_H
 #define ARRAY_ASSIGN_STATEMENT_H
 
-#include "ast/node.h"
+#include "statement.h"
 
-class ArrayAssignStatement : public Node {
+class ArrayAssignStatement : public Statement {
 public:
     ArrayAssignStatement();
     ArrayAssignStatement(std::string t, std::string v);

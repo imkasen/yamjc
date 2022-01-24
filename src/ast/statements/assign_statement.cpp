@@ -1,5 +1,5 @@
 #include "ast/statements/assign_statement.h"
 using std::string;
 
-AssignStatement::AssignStatement() : Node() {}
-AssignStatement::AssignStatement(string t, string v) : Node(std::move(t), std::move(v)) {}
+AssignStatement::AssignStatement() : Statement() {}
+AssignStatement::AssignStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}

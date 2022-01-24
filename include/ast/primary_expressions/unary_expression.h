@@ -1,9 +1,9 @@
 #ifndef UNARY_EXPRESSION_H
 #define UNARY_EXPRESSION_H
 
-#include "ast/node.h"
+#include "primary_expression.h"
 
-class UnaryExpression : public Node {
+class UnaryExpression : public PrimaryExpression {
 public:
     UnaryExpression();
     UnaryExpression(std::string t, std::string v);

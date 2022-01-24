@@ -1,9 +1,9 @@
 #ifndef ARRAY_SEARCH_EXPRESSION_H
 #define ARRAY_SEARCH_EXPRESSION_H
 
-#include "ast/node.h"
+#include "expression.h"
 
-class ArraySearchExpression : public Node {
+class ArraySearchExpression : public Expression {
 public:
     ArraySearchExpression();
     ArraySearchExpression(std::string t, std::string v);

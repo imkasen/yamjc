@@ -1,9 +1,9 @@
 #ifndef ALLOC_EXPRESSION_H
 #define ALLOC_EXPRESSION_H
 
-#include "ast/node.h"
+#include "primary_expression.h"
 
-class AllocExpression : public Node {
+class AllocExpression : public PrimaryExpression {
 public:
     AllocExpression();
     AllocExpression(std::string t, std::string v);
