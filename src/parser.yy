@@ -168,14 +168,14 @@ ArrayAssignStatement : Identifier LBRACKET Expression RBRACKET ASSIGN Expression
 IfStatement : IF LPARENTHESE Expression RPARENTHESE Statement ElseStatement           { $$ = new IfStatement("IfStatement", $1); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($6); }
             ;
 
+ElseStatement : ELSE Statement { $$ = new ElseStatement("ElseStatement", $1); $$->children.push_back($2); }
+              ;
+
 WhileStatement : WHILE LPARENTHESE Expression RPARENTHESE Statement                   { $$ = new WhileStatement("WhileStatement", $1); $$->children.push_back($3); $$->children.push_back($5); }
                ;
 
 PrintStatement : SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI                    { $$ = new PrintStatement("PrintStatement", $1); $$->children.push_back($3); }
                ;
-
-ElseStatement : ELSE Statement { $$ = new ElseStatement("ElseStatement", $1); $$->children.push_back($2); }
-              ;
 
 Expression : PrimaryExpression                                                { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
            | Expression DOT Identifier LPARENTHESE RPARENTHESE                { $$ = $1; $$->children.push_back($3); }
