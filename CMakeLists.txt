@@ -26,7 +26,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     )
 endif()
 
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 
 # FLEX and BISON
 find_package(BISON 3.5 REQUIRED)
@@ -49,14 +49,14 @@ ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
 
 
 aux_source_directory(src/ast/ ASTS)
-aux_source_directory(src/ast/expressions EXPRESSIONS)
 aux_source_directory(src/ast/statements STATEMENTS)
+aux_source_directory(src/ast/expressions EXPRESSIONS)
 aux_source_directory(src/st/ STS)
 
 add_executable(
         compiler
         src/main.cpp
-        ${ASTS} ${EXPRESSIONS} ${STATEMENTS}
+        ${ASTS} ${STATEMENTS} ${EXPRESSIONS}
         ${STS}
         ${BISON_MyParser_OUTPUTS}
         ${FLEX_MyScanner_OUTPUTS}
