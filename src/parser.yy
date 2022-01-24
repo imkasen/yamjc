@@ -57,11 +57,20 @@
 %type <MethodDeclaration *> MethodDeclaration
 %type <FormalParameterList *> FormalParameterList
 %type <Type *> Type
-%type <Statement *> Statements Statement ElseStatement
-%type <Expression *> Expression ExpressionList
 %type <PrimaryExpression *> PrimaryExpression
 %type <Return *> Return
 %type <Identifier *> Identifier
+
+%type <Expression *> Expression ExpressionList
+
+
+%type <Statement *> Statements Statement
+%type <AssignStatement *> AssignStatement
+%type <ArrayAssignStatement *> ArrayAssignStatement
+%type <IfStatement *> IfStatement
+%type <ElseStatement *> ElseStatement
+%type <WhileStatement *> WhileStatement
+%type <PrintStatement *> PrintStatement
 
 %%
 
@@ -133,14 +142,29 @@ Statements : Statement            { $$ = new Statement("Statements", ""); $$->ch
 
 Statement : LBRACE RBRACE                                                  { $$ = new Statement("Statement", "EMPTY"); }
           | LBRACE Statements RBRACE                                       { $$ = new Statement("Statement", ""); $$->children.push_back($2); }
-          | Identifier ASSIGN Expression SEMI                              { $$ = new Statement("Statement", "="); $$->children.push_back($1); $$->children.push_back($3); }
-          | Identifier LBRACKET Expression RBRACKET ASSIGN Expression SEMI { $$ = new Statement("Statement", "="); $$->children.push_back($1); $$->children.push_back($3); $$->children.push_back($6); }
-          | IF LPARENTHESE Expression RPARENTHESE Statement ElseStatement  { $$ = new Statement("Statement", "IF"); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($6); }
-          | WHILE LPARENTHESE Expression RPARENTHESE Statement             { $$ = new Statement("Statement", "WHILE"); $$->children.push_back($3); $$->children.push_back($5); }
-          | SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI              { $$ = new Statement("Statement", "S.O.PRINTLN"); $$->children.push_back($3); }
+          | AssignStatement                                                { $$ = $1; }
+          | ArrayAssignStatement                                           { $$ = $1; }
+          | IfStatement                                                    { $$ = $1; }
+          | WhileStatement                                                 { $$ = $1; }
+          | PrintStatement                                                 { $$ = $1; }
           ;
 
-ElseStatement : ELSE Statement { $$ = new Statement("Statement", "ELSE"); $$->children.push_back($2); }
+AssignStatement : Identifier ASSIGN Expression SEMI                                   { $$ = new AssignStatement("AssignStatement", $2); $$->children.push_back($1); $$->children.push_back($3); }
+                ;
+
+ArrayAssignStatement : Identifier LBRACKET Expression RBRACKET ASSIGN Expression SEMI { $$ = new ArrayAssignStatement("ArrayAssignStatement", $2+$4+$5); $$->children.push_back($1); $$->children.push_back($3); $$->children.push_back($6); }
+                     ;
+
+IfStatement : IF LPARENTHESE Expression RPARENTHESE Statement ElseStatement           { $$ = new IfStatement("IfStatement", $1); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($6); }
+            ;
+
+WhileStatement : WHILE LPARENTHESE Expression RPARENTHESE Statement                   { $$ = new WhileStatement("WhileStatement", $1); $$->children.push_back($3); $$->children.push_back($5); }
+               ;
+
+PrintStatement : SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI                    { $$ = new PrintStatement("PrintStatement", $1); $$->children.push_back($3); }
+               ;
+
+ElseStatement : ELSE Statement { $$ = new ElseStatement("ElseStatement", $1); $$->children.push_back($2); }
               ;
 
 Expression : Expression AND Expression                                        { $$ = new Expression("Expression", $2); $$->children.push_back($1); $$->children.push_back($3); }

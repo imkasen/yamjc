@@ -7,7 +7,6 @@
  */
 #include "class_declaration.h"
 #include "declarations.h"
-#include "ast/expressions/expression.h"
 #include "formal_parameter_list.h"
 #include "goal.h"
 #include "identifier.h"
@@ -17,8 +16,17 @@
 #include "node.h"
 #include "primary_expression.h"
 #include "return.h"
-#include "ast/statements/statement.h"
 #include "type.h"
 #include "variable_declaration.h"
+
+#include "ast/expressions/expression.h"
+
+#include "ast/statements/statement.h"
+#include "ast/statements/assign_statement.h"
+#include "ast/statements/array_assign_statement.h"
+#include "ast/statements/if_statement.h"
+#include "ast/statements/else_statement.h"
+#include "ast/statements/while_statement.h"
+#include "ast/statements/print_statement.h"
 
 #endif
