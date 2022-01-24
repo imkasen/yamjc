@@ -1,7 +1,7 @@
 #ifndef METHOD_DECLARATION_H
 #define METHOD_DECLARATION_H
 
-#include "node.h"
+#include "ast/node.h"
 
 class MethodDeclaration : public Node {
 public:

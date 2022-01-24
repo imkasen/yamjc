@@ -46,19 +46,20 @@
 
 %start Goal
 
-%type <Node *> ClassDeclarations
-
 %type <Goal *> Goal
 %type <MainClass *> MainClass
 %type <MethodBody *> MethodBody
-%type <ClassDeclaration *> ClassDeclaration ClassExtendsDeclaration
-%type <Declarations *> Declarations
-%type <VarDeclaration *> VarDeclaration
-%type <MethodDeclaration *> MethodDeclaration
 %type <FormalParameterList *> FormalParameterList
 %type <Type *> Type
 %type <Return *> Return
 %type <Identifier *> Identifier
+
+%type <Node *> ClassDeclarations
+%type <ClassDeclaration *> ClassDeclaration
+%type <ClassExtendsDeclaration *> ClassExtendsDeclaration
+%type <Declarations *> Declarations
+%type <VarDeclaration *> VarDeclaration
+%type <MethodDeclaration *> MethodDeclaration
 
 %type <Expression *> Expression
 %type <ExpressionList *> ExpressionList
@@ -101,8 +102,8 @@ ClassDeclaration : CLASS Identifier LBRACE RBRACE              { $$ = new ClassD
                  | CLASS Identifier LBRACE Declarations RBRACE { $$ = new ClassDeclaration("ClassDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); }
                  ;
 
-ClassExtendsDeclaration : CLASS Identifier EXTENDS Identifier LBRACE RBRACE              { $$ = new ClassDeclaration("ClassDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); }
-                        | CLASS Identifier EXTENDS Identifier LBRACE Declarations RBRACE { $$ = new ClassDeclaration("ClassDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); $$->children.push_back($6); }
+ClassExtendsDeclaration : CLASS Identifier EXTENDS Identifier LBRACE RBRACE              { $$ = new ClassExtendsDeclaration("ClassExtendsDeclaration", $3); $$->children.push_back($2); $$->children.push_back($4); }
+                        | CLASS Identifier EXTENDS Identifier LBRACE Declarations RBRACE { $$ = new ClassExtendsDeclaration("ClassExtendsDeclaration", $3); $$->children.push_back($2); $$->children.push_back($4); $$->children.push_back($6); }
                         ;
 
 Declarations : VarDeclaration                 { $$ = new Declarations("Declarations", ""); $$->children.push_back($1); }

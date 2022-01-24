@@ -5,18 +5,20 @@
  * Include all head files in the "ast" folder.
  * "parser.yy" needs this file.
  */
-#include "class_declaration.h"
-#include "declarations.h"
 #include "formal_parameter_list.h"
 #include "goal.h"
 #include "identifier.h"
 #include "main_class.h"
 #include "method_body.h"
-#include "method_declaration.h"
 #include "node.h"
 #include "return.h"
 #include "type.h"
-#include "variable_declaration.h"
+
+#include "ast/declarations/class_declaration.h"
+#include "ast/declarations/class_extends_declaration.h"
+#include "ast/declarations/declarations.h"
+#include "ast/declarations/variable_declaration.h"
+#include "ast/declarations/method_declaration.h"
 
 #include "ast/expressions/expression.h"
 #include "ast/expressions/expression_list.h"

@@ -1,7 +1,7 @@
 #ifndef DECLARATIONS_H
 #define DECLARATIONS_H
 
-#include "node.h"
+#include "ast/node.h"
 
 class Declarations : public Node {
 public:

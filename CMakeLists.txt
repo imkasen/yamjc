@@ -49,6 +49,7 @@ ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
 
 
 aux_source_directory(src/ast/ ASTS)
+aux_source_directory(src/ast/declarations DECLARATIONS)
 aux_source_directory(src/ast/statements STATEMENTS)
 aux_source_directory(src/ast/expressions EXPRESSIONS)
 aux_source_directory(src/st/ STS)
@@ -56,7 +57,7 @@ aux_source_directory(src/st/ STS)
 add_executable(
         compiler
         src/main.cpp
-        ${ASTS} ${STATEMENTS} ${EXPRESSIONS}
+        ${ASTS} ${DECLARATIONS} ${STATEMENTS} ${EXPRESSIONS}
         ${STS}
         ${BISON_MyParser_OUTPUTS}
         ${FLEX_MyScanner_OUTPUTS}

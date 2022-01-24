@@ -1,4 +1,4 @@
-#include "ast/class_declaration.h"
+#include "ast/declarations/class_declaration.h"
 using std::size_t;
 using std::string;
 

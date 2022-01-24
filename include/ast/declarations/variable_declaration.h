@@ -1,7 +1,7 @@
 #ifndef VARIABLE_DECLARATION_H
 #define VARIABLE_DECLARATION_H
 
-#include "node.h"
+#include "ast/node.h"
 
 class VarDeclaration : public Node {
 public:
