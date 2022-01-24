@@ -1,9 +1,9 @@
 #ifndef LOGIC_EXPRESSION_H
 #define LOGIC_EXPRESSION_H
 
-#include "expression.h"
+#include "ast/node.h"
 
-class LogicExpression : public Expression {
+class LogicExpression : public Node {
 public:
     LogicExpression();
     LogicExpression(std::string t, std::string v);

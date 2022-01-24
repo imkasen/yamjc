@@ -1,5 +1,5 @@
 #include "ast/expressions/expression_list.h"
 using std::string;
 
-ExpressionList::ExpressionList() : Expression() {}
-ExpressionList::ExpressionList(string t, string v) : Expression(std::move(t), std::move(v)) {}
+ExpressionList::ExpressionList() : Node() {}
+ExpressionList::ExpressionList(string t, string v) : Node(std::move(t), std::move(v)) {}

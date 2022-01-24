@@ -1,5 +1,5 @@
 #include "ast/statements/else_statement.h"
 using std::string;
 
-ElseStatement::ElseStatement() : Statement() {}
-ElseStatement::ElseStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
+ElseStatement::ElseStatement() : Node() {}
+ElseStatement::ElseStatement(string t, string v) : Node(std::move(t), std::move(v)) {}

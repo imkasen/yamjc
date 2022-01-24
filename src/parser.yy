@@ -152,11 +152,11 @@ Statements : Statement            { $$ = new Statement("Statements", ""); $$->ch
 
 Statement : LBRACE RBRACE              { $$ = new Statement("Statement", "EMPTY"); }
           | LBRACE Statements RBRACE   { $$ = new Statement("Statement", ""); $$->children.push_back($2); }
-          | AssignStatement            { $$ = $1; }
-          | ArrayAssignStatement       { $$ = $1; }
-          | IfStatement                { $$ = $1; }
-          | WhileStatement             { $$ = $1; }
-          | PrintStatement             { $$ = $1; }
+          | AssignStatement            { $$ = new Statement("Statement", ""); $$->children.push_back($1); }
+          | ArrayAssignStatement       { $$ = new Statement("Statement", ""); $$->children.push_back($1); }
+          | IfStatement                { $$ = new Statement("Statement", ""); $$->children.push_back($1); }
+          | WhileStatement             { $$ = new Statement("Statement", ""); $$->children.push_back($1); }
+          | PrintStatement             { $$ = new Statement("Statement", ""); $$->children.push_back($1); }
           ;
 
 AssignStatement : Identifier ASSIGN Expression SEMI                                   { $$ = new AssignStatement("AssignStatement", $2); $$->children.push_back($1); $$->children.push_back($3); }
@@ -165,33 +165,27 @@ AssignStatement : Identifier ASSIGN Expression SEMI                             
 ArrayAssignStatement : Identifier LBRACKET Expression RBRACKET ASSIGN Expression SEMI { $$ = new ArrayAssignStatement("ArrayAssignStatement", $2+$4+$5); $$->children.push_back($1); $$->children.push_back($3); $$->children.push_back($6); }
                      ;
 
-IfStatement : IF LPARENTHESE Expression RPARENTHESE Statement ElseStatement           { $$ = new IfStatement("IfStatement", $1); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($6); }
+IfStatement : IF LPARENTHESE Expression RPARENTHESE Statement ElseStatement           { $$ = new IfStatement("IfStatement", ""); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($6); }
             ;
 
-ElseStatement : ELSE Statement { $$ = new ElseStatement("ElseStatement", $1); $$->children.push_back($2); }
+ElseStatement : ELSE Statement { $$ = new ElseStatement("ElseStatement", ""); $$->children.push_back($2); }
               ;
 
-WhileStatement : WHILE LPARENTHESE Expression RPARENTHESE Statement                   { $$ = new WhileStatement("WhileStatement", $1); $$->children.push_back($3); $$->children.push_back($5); }
+WhileStatement : WHILE LPARENTHESE Expression RPARENTHESE Statement                   { $$ = new WhileStatement("WhileStatement", ""); $$->children.push_back($3); $$->children.push_back($5); }
                ;
 
 PrintStatement : SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI                    { $$ = new PrintStatement("PrintStatement", $1); $$->children.push_back($3); }
                ;
 
-Expression : PrimaryExpression                                                { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
+Expression : LogicExpression                                                  { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
+           | CompareExpression                                                { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
+           | ArithExpression                                                  { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
+           | ArraySearchExpression                                            { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
+           | ArrayLengthExpression                                            { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
            | Expression DOT Identifier LPARENTHESE RPARENTHESE                { $$ = $1; $$->children.push_back($3); }
            | Expression DOT Identifier LPARENTHESE ExpressionList RPARENTHESE { $$ = $1; $$->children.push_back($3); $$->children.push_back($5); }
-           | ArraySearchExpression                                            { $$ = $1; }
-           | ArrayLengthExpression                                            { $$ = $1; }
-           | LogicExpression                                                  { $$ = $1; }
-           | CompareExpression                                                { $$ = $1; }
-           | ArithExpression                                                  { $$ = $1; }
+           | PrimaryExpression                                                { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
            ;
-
-ArraySearchExpression : Expression LBRACKET Expression RBRACKET   { $$ = new ArraySearchExpression("ArraySearchExpression", $2+$4); $$->children.push_back($1); $$->children.push_back($3); }
-                      ;
-
-ArrayLengthExpression : Expression DOT LENGTH                     { $$ = new ArrayLengthExpression("ArrayLengthExpression", $2+$3); $$->children.push_back($1); }
-                      ;
 
 LogicExpression : Expression AND Expression                       { $$ = new LogicExpression("LogicExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
                 | Expression OR Expression                        { $$ = new LogicExpression("LogicExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
@@ -211,15 +205,21 @@ ArithExpression : Expression ADD Expression                       { $$ = new Ari
                 | Expression DIV Expression                       { $$ = new ArithExpression("ArithExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
                 ;
 
+ArraySearchExpression : Expression LBRACKET Expression RBRACKET   { $$ = new ArraySearchExpression("ArraySearchExpression", $2+$4); $$->children.push_back($1); $$->children.push_back($3); }
+                      ;
+
+ArrayLengthExpression : Expression DOT LENGTH                     { $$ = new ArrayLengthExpression("ArrayLengthExpression", $2+$3); $$->children.push_back($1); }
+                      ;
+
 ExpressionList : Expression                      { $$ = new ExpressionList("ExpressionList", ""); $$->children.push_back($1); }
                | ExpressionList COMMA Expression { $$ = $1; $$->children.push_back($3); }
                ;
 
 PrimaryExpression : LPARENTHESE Expression RPARENTHESE     { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($2); }
                   | Identifier                             { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($1); }
-                  | ArrayAllocExpression                   { $$ = $1; }
-                  | AllocExpression                        { $$ = $1; }
-                  | UnaryExpression                        { $$ = $1; }
+                  | ArrayAllocExpression                   { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($1); }
+                  | AllocExpression                        { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($1); }
+                  | UnaryExpression                        { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($1); }
                   | NUM                                    { $$ = new PrimaryExpression("int", $1); }
                   | TRUE                                   { $$ = new PrimaryExpression("boolean", $1); }
                   | FALSE                                  { $$ = new PrimaryExpression("boolean", $1); }

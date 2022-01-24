@@ -1,9 +1,9 @@
 #ifndef WHILE_STATEMENT_H
 #define WHILE_STATEMENT_H
 
-#include "statement.h"
+#include "ast/node.h"
 
-class WhileStatement : public Statement {
+class WhileStatement : public Node {
 public:
     WhileStatement();
     WhileStatement(std::string t, std::string v);

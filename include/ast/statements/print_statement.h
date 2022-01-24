@@ -1,9 +1,9 @@
 #ifndef PRINT_STATEMENT_H
 #define PRINT_STATEMENT_H
 
-#include "statement.h"
+#include "ast/node.h"
 
-class PrintStatement : public Statement {
+class PrintStatement : public Node {
 public:
     PrintStatement();
     PrintStatement(std::string t, std::string v);

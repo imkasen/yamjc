@@ -1,9 +1,9 @@
 #ifndef ASSIGN_STATEMENT_H
 #define ASSIGN_STATEMENT_H
 
-#include "statement.h"
+#include "ast/node.h"
 
-class AssignStatement : public Statement {
+class AssignStatement : public Node {
 public:
     AssignStatement();
     AssignStatement(std::string t, std::string v);

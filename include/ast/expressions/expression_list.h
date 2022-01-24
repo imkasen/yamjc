@@ -1,9 +1,9 @@
 #ifndef EXPRESSION_LIST_H
 #define EXPRESSION_LIST_H
 
-#include "expression.h"
+#include "ast/node.h"
 
-class ExpressionList : public Expression {
+class ExpressionList : public Node {
 public:
     ExpressionList();
     ExpressionList(std::string t, std::string v);
