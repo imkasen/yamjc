@@ -1,7 +1,7 @@
 #ifndef FORMAL_PARAMETER_LIST_H
 #define FORMAL_PARAMETER_LIST_H
 
-#include "node.h"
+#include "ast/node.h"
 
 class FormalParameterList : public Node {
 public:

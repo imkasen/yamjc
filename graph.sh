@@ -10,11 +10,10 @@ st() {
   dot -T svg st.dot -o st.svg
 }
 
-if [ $# -eq 0 ]; then
+if [[ -e ast.dot ]]; then
   ast
-  st
-elif [[ $# -eq 1 && $1 == "ast" ]]; then
-  ast
-elif [[ $# -eq 1 && $1 == "st" ]]; then
+fi
+
+if [[ -e st.dot ]]; then
   st
 fi

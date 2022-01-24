@@ -49,7 +49,6 @@
 %type <Goal *> Goal
 %type <MainClass *> MainClass
 %type <MethodBody *> MethodBody
-%type <FormalParameterList *> FormalParameterList
 %type <Type *> Type
 %type <Return *> Return
 %type <Identifier *> Identifier
@@ -60,6 +59,9 @@
 %type <Declarations *> Declarations
 %type <VarDeclaration *> VarDeclaration
 %type <MethodDeclaration *> MethodDeclaration
+
+%type <FormalParameterList *> FormalParameterList
+%type <FormalParameter *> FormalParameter
 
 %type <Expression *> Expression
 %type <ExpressionList *> ExpressionList
@@ -136,9 +138,12 @@ MethodBody : VarDeclaration            { $$ = new MethodBody("MethodBody", ""); 
 Return : RETURN Expression { $$ = new Return("Return", ""); $$->children.push_back($2); }
        ;
 
-FormalParameterList : Type Identifier                           { $$ = new FormalParameterList("FormalParameterList", ""); $$->children.push_back($1); $$->children.push_back($2); }
-                    | FormalParameterList COMMA Type Identifier { $$ = $1; $$->children.push_back($3); $$->children.push_back($4); }
+FormalParameterList : FormalParameter                           { $$ = new FormalParameterList("FormalParameterList", ""); $$->children.push_back($1); }
+                    | FormalParameterList COMMA FormalParameter { $$ = $1; $$->children.push_back($3); }
                     ;
+
+FormalParameter : Type Identifier { $$ = new FormalParameter("FormalParameter", ""); $$->children.push_back($1); $$->children.push_back($2); }
+                ;
 
 Type : INT LBRACKET RBRACKET { $$ = new Type("Type", $1+$2+$3); }
      | BOOLEAN               { $$ = new Type("Type", $1); }

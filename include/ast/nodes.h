@@ -5,7 +5,6 @@
  * Include all head files in the "ast" folder.
  * "parser.yy" needs this file.
  */
-#include "formal_parameter_list.h"
 #include "goal.h"
 #include "identifier.h"
 #include "main_class.h"
@@ -19,6 +18,9 @@
 #include "ast/declarations/declarations.h"
 #include "ast/declarations/variable_declaration.h"
 #include "ast/declarations/method_declaration.h"
+
+#include "ast/formal_parameters/formal_parameter_list.h"
+#include "ast/formal_parameters/formal_parameter.h"
 
 #include "ast/expressions/expression.h"
 #include "ast/expressions/expression_list.h"
