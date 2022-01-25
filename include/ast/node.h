@@ -26,19 +26,12 @@ protected:
     std::string type, value;
 
 public:
-    /*
-     * An awkward design,
-     * smart pointers should be used here,
-     * but Bison does not support them very well.
-     * -----
-     * TODO: Try to use smart pointers to replace raw pointers.
-     */
-    std::deque<Node *> children;
+    std::deque<std::shared_ptr<Node>> children;
     inline static SymbolTable st = SymbolTable();  // NOLINT
 
     Node();
     Node(std::string t, std::string v);
-    virtual ~Node();
+    virtual ~Node() = default;
 
     void setId(std::size_t n_id);
     void setType(std::string n_type);

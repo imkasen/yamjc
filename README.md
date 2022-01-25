@@ -19,7 +19,7 @@ A Mini-Java Compiler Practice.
 * Linux (Ubuntu 20.04 LTS)
 * CMake 3.16.3
 * g++ 9.3.0 (build-essential)
-* graphviz 2.43.0
+* Graphviz 2.43.0
 * flex 2.6.4
 * Bison 3.5.1
 
@@ -53,8 +53,7 @@ $ cd .. && rm -rf build/
 
 # Flaws
 
-* Mix use of raw pointers and smart pointers.
-* Math operations only support non-negative integer literals.
+* Math operations only support non-negative integer.
 
 # LICENSE
 

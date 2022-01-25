@@ -6,31 +6,35 @@
 %define api.value.type variant
 %define api.token.constructor
 
-%code requires{
+%code requires {
   #include "ast/nodes.h"
+
+  using std::string;
+  using std::shared_ptr;
+  using std::make_shared;
 }
 
 %code provides {
   extern FILE *yyin;
 }
 
-%code{
+%code {
   #include "main.h"
-  
-  Node *root;
+
+  shared_ptr<Node> root;
 }
 
-%token <std::string> CLASS PUBLIC STATIC VOID MAIN STRING EXTENDS LENGTH NEW THIS RETURN
-%token <std::string> IF ELSE WHILE
-%token <std::string> SOPRINTLN
-%token <std::string> INT BOOLEAN
-%token <std::string> AND OR NOT EQUAL NOTEQUAL
-%token <std::string> TRUE FALSE
-%token <std::string> LT LET GT GET
-%token <std::string> ADD SUB MUL DIV
-%token <std::string> LPARENTHESE RPARENTHESE LBRACKET RBRACKET LBRACE RBRACE
-%token <std::string> SEMI COMMA ASSIGN DOT
-%token <std::string> NUM IDENTIFIER
+%token <string> CLASS PUBLIC STATIC VOID MAIN STRING EXTENDS LENGTH NEW THIS RETURN
+%token <string> IF ELSE WHILE
+%token <string> SOPRINTLN
+%token <string> INT BOOLEAN
+%token <string> AND OR NOT EQUAL NOTEQUAL
+%token <string> TRUE FALSE
+%token <string> LT LET GT GET
+%token <string> ADD SUB MUL DIV
+%token <string> LPARENTHESE RPARENTHESE LBRACKET RBRACKET LBRACE RBRACE
+%token <string> SEMI COMMA ASSIGN DOT
+%token <string> NUM IDENTIFIER
 
 %token END 0 "end of file"
 
@@ -46,117 +50,117 @@
 
 %start Goal
 
-%type <Goal *> Goal
-%type <MainClass *> MainClass
-%type <MethodBody *> MethodBody
-%type <Type *> Type
-%type <Return *> Return
-%type <Identifier *> Identifier
+%type <shared_ptr<Goal>> Goal
+%type <shared_ptr<MainClass>> MainClass
+%type <shared_ptr<MethodBody>> MethodBody
+%type <shared_ptr<Type>> Type
+%type <shared_ptr<Return>> Return
+%type <shared_ptr<Identifier>> Identifier
 
-%type <Node *> ClassDeclarations
-%type <ClassDeclaration *> ClassDeclaration
-%type <ClassExtendsDeclaration *> ClassExtendsDeclaration
-%type <Declarations *> Declarations
-%type <VarDeclaration *> VarDeclaration
-%type <MethodDeclaration *> MethodDeclaration
+%type <shared_ptr<Node>> ClassDeclarations
+%type <shared_ptr<ClassDeclaration>> ClassDeclaration
+%type <shared_ptr<ClassExtendsDeclaration>> ClassExtendsDeclaration
+%type <shared_ptr<Declarations>> Declarations
+%type <shared_ptr<VarDeclaration>> VarDeclaration
+%type <shared_ptr<MethodDeclaration>> MethodDeclaration
 
-%type <FormalParameterList *> FormalParameterList
-%type <FormalParameter *> FormalParameter
+%type <shared_ptr<FormalParameterList>> FormalParameterList
+%type <shared_ptr<FormalParameter>> FormalParameter
 
-%type <Expression *> Expression
-%type <ExpressionList *> ExpressionList
-%type <LogicExpression *> LogicExpression
-%type <CompareExpression *> CompareExpression
-%type <ArithExpression *> ArithExpression
-%type <ArraySearchExpression *> ArraySearchExpression
-%type <ArrayLengthExpression *> ArrayLengthExpression
+%type <shared_ptr<Expression>> Expression
+%type <shared_ptr<ExpressionList>> ExpressionList
+%type <shared_ptr<LogicExpression>> LogicExpression
+%type <shared_ptr<CompareExpression>> CompareExpression
+%type <shared_ptr<ArithExpression>> ArithExpression
+%type <shared_ptr<ArraySearchExpression>> ArraySearchExpression
+%type <shared_ptr<ArrayLengthExpression>> ArrayLengthExpression
 
-%type <PrimaryExpression *> PrimaryExpression
-%type <ArrayAllocExpression *> ArrayAllocExpression
-%type <AllocExpression *> AllocExpression
-%type <UnaryExpression *> UnaryExpression
+%type <shared_ptr<PrimaryExpression>> PrimaryExpression
+%type <shared_ptr<ArrayAllocExpression>> ArrayAllocExpression
+%type <shared_ptr<AllocExpression>> AllocExpression
+%type <shared_ptr<UnaryExpression>> UnaryExpression
 
-%type <Statement *> Statements Statement
-%type <AssignStatement *> AssignStatement
-%type <ArrayAssignStatement *> ArrayAssignStatement
-%type <IfStatement *> IfStatement
-%type <ElseStatement *> ElseStatement
-%type <WhileStatement *> WhileStatement
-%type <PrintStatement *> PrintStatement
+%type <shared_ptr<Statement>> Statements Statement
+%type <shared_ptr<AssignStatement>> AssignStatement
+%type <shared_ptr<ArrayAssignStatement>> ArrayAssignStatement
+%type <shared_ptr<IfStatement>> IfStatement
+%type <shared_ptr<ElseStatement>> ElseStatement
+%type <shared_ptr<WhileStatement>> WhileStatement
+%type <shared_ptr<PrintStatement>> PrintStatement
 
 %%
 
-Goal : MainClass              { $$ = new Goal("Goal", ""); $$->children.push_back($1); root = $$; }
+Goal : MainClass              { $$ = make_shared<Goal>("Goal", ""); $$->children.push_back($1); root = $$; }
      | Goal ClassDeclarations { $$ = $1; $$->children.push_back($2); root = $$; }
-     | END                    { $$ = new Goal("Goal", "EOF"); root = $$; }
+     | END                    { $$ = make_shared<Goal>("Goal", "EOF"); root = $$; }
      ;
 
 MainClass : CLASS Identifier LBRACE PUBLIC STATIC VOID MAIN LPARENTHESE STRING LBRACKET RBRACKET Identifier RPARENTHESE LBRACE RBRACE RBRACE
-              { $$ = new MainClass("MainClass", ""); $$->children.push_back($2); $$->children.push_back($12); }
+              { $$ = make_shared<MainClass>("MainClass", ""); $$->children.push_back($2); $$->children.push_back($12); }
           | CLASS Identifier LBRACE PUBLIC STATIC VOID MAIN LPARENTHESE STRING LBRACKET RBRACKET Identifier RPARENTHESE LBRACE MethodBody RBRACE RBRACE
-              { $$ = new MainClass("MainClass", ""); $$->children.push_back($2); $$->children.push_back($12); $$->children.push_back($15); }
+              { $$ = make_shared<MainClass>("MainClass", ""); $$->children.push_back($2); $$->children.push_back($12); $$->children.push_back($15); }
           ;
 
 ClassDeclarations : ClassDeclaration        { $$ = $1; }
                   | ClassExtendsDeclaration { $$ = $1; }
                   ;
 
-ClassDeclaration : CLASS Identifier LBRACE RBRACE              { $$ = new ClassDeclaration("ClassDeclaration", ""); $$->children.push_back($2); }
-                 | CLASS Identifier LBRACE Declarations RBRACE { $$ = new ClassDeclaration("ClassDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); }
+ClassDeclaration : CLASS Identifier LBRACE RBRACE              { $$ = make_shared<ClassDeclaration>("ClassDeclaration", ""); $$->children.push_back($2); }
+                 | CLASS Identifier LBRACE Declarations RBRACE { $$ = make_shared<ClassDeclaration>("ClassDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); }
                  ;
 
-ClassExtendsDeclaration : CLASS Identifier EXTENDS Identifier LBRACE RBRACE              { $$ = new ClassExtendsDeclaration("ClassExtendsDeclaration", $3); $$->children.push_back($2); $$->children.push_back($4); }
-                        | CLASS Identifier EXTENDS Identifier LBRACE Declarations RBRACE { $$ = new ClassExtendsDeclaration("ClassExtendsDeclaration", $3); $$->children.push_back($2); $$->children.push_back($4); $$->children.push_back($6); }
+ClassExtendsDeclaration : CLASS Identifier EXTENDS Identifier LBRACE RBRACE              { $$ = make_shared<ClassExtendsDeclaration>("ClassExtendsDeclaration", $3); $$->children.push_back($2); $$->children.push_back($4); }
+                        | CLASS Identifier EXTENDS Identifier LBRACE Declarations RBRACE { $$ = make_shared<ClassExtendsDeclaration>("ClassExtendsDeclaration", $3); $$->children.push_back($2); $$->children.push_back($4); $$->children.push_back($6); }
                         ;
 
-Declarations : VarDeclaration                 { $$ = new Declarations("Declarations", ""); $$->children.push_back($1); }
-             | MethodDeclaration              { $$ = new Declarations("Declarations", ""); $$->children.push_back($1); }
+Declarations : VarDeclaration                 { $$ = make_shared<Declarations>("Declarations", ""); $$->children.push_back($1); }
+             | MethodDeclaration              { $$ = make_shared<Declarations>("Declarations", ""); $$->children.push_back($1); }
              | Declarations VarDeclaration    { $$ = $1; $$->children.push_back($2); }
              | Declarations MethodDeclaration { $$ = $1; $$->children.push_back($2); }
              ;
 
-VarDeclaration : Type Identifier SEMI { $$ = new VarDeclaration("VarDeclaration", ""); $$->children.push_back($1); $$->children.push_back($2); }
+VarDeclaration : Type Identifier SEMI { $$ = make_shared<VarDeclaration>("VarDeclaration", ""); $$->children.push_back($1); $$->children.push_back($2); }
                ;
 
 MethodDeclaration : PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE Return SEMI RBRACE
-                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); }
+                    { $$ = make_shared<MethodDeclaration>("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); }
                   | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE Return SEMI RBRACE
-                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); }
+                    { $$ = make_shared<MethodDeclaration>("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); }
                   | PUBLIC Type Identifier LPARENTHESE RPARENTHESE LBRACE MethodBody SEMI RBRACE
-                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); }
+                    { $$ = make_shared<MethodDeclaration>("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($7); }
                   | PUBLIC Type Identifier LPARENTHESE FormalParameterList RPARENTHESE LBRACE MethodBody SEMI RBRACE
-                    { $$ = new MethodDeclaration("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); }
+                    { $$ = make_shared<MethodDeclaration>("MethodDeclaration", ""); $$->children.push_back($2); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($8); }
                   ;
 
-MethodBody : VarDeclaration            { $$ = new MethodBody("MethodBody", ""); $$->children.push_back($1); }
-           | Statement                 { $$ = new MethodBody("MethodBody", ""); $$->children.push_back($1); }
+MethodBody : VarDeclaration            { $$ = make_shared<MethodBody>("MethodBody", ""); $$->children.push_back($1); }
+           | Statement                 { $$ = make_shared<MethodBody>("MethodBody", ""); $$->children.push_back($1); }
            | MethodBody VarDeclaration { $$ = $1; $$->children.push_back($2); }
            | MethodBody Statement      { $$ = $1; $$->children.push_back($2); }
            | MethodBody Return         { $$ = $1; $$->children.push_back($2); }
            ;
 
-Return : RETURN Expression { $$ = new Return("Return", ""); $$->children.push_back($2); }
+Return : RETURN Expression { $$ = make_shared<Return>("Return", ""); $$->children.push_back($2); }
        ;
 
-FormalParameterList : FormalParameter                           { $$ = new FormalParameterList("FormalParameterList", ""); $$->children.push_back($1); }
+FormalParameterList : FormalParameter                           { $$ = make_shared<FormalParameterList>("FormalParameterList", ""); $$->children.push_back($1); }
                     | FormalParameterList COMMA FormalParameter { $$ = $1; $$->children.push_back($3); }
                     ;
 
-FormalParameter : Type Identifier { $$ = new FormalParameter("FormalParameter", ""); $$->children.push_back($1); $$->children.push_back($2); }
+FormalParameter : Type Identifier { $$ = make_shared<FormalParameter>("FormalParameter", ""); $$->children.push_back($1); $$->children.push_back($2); }
                 ;
 
-Type : INT LBRACKET RBRACKET { $$ = new Type("Type", $1+$2+$3); }
-     | BOOLEAN               { $$ = new Type("Type", $1); }
-     | INT                   { $$ = new Type("Type", $1); }
-     | Identifier            { $$ = new Type("Type", ""); $$->children.push_back($1); }
+Type : INT LBRACKET RBRACKET { $$ = make_shared<Type>("Type", $1+$2+$3); }
+     | BOOLEAN               { $$ = make_shared<Type>("Type", $1); }
+     | INT                   { $$ = make_shared<Type>("Type", $1); }
+     | Identifier            { $$ = make_shared<Type>("Type", ""); $$->children.push_back($1); }
      ;
 
-Statements : Statement            { $$ = new Statement("Statements", ""); $$->children.push_back($1); }
+Statements : Statement            { $$ = make_shared<Statement>("Statements", ""); $$->children.push_back($1); }
            | Statements Statement { $$ = $1; $$->children.push_back($2); }
            ;
 
-Statement : LBRACE RBRACE              { $$ = new Statement("Statement", "EMPTY"); }
-          | LBRACE Statements RBRACE   { $$ = new Statement("Statement", ""); $$->children.push_back($2); }
+Statement : LBRACE RBRACE              { $$ = make_shared<Statement>("Statement", "EMPTY"); }
+          | LBRACE Statements RBRACE   { $$ = make_shared<Statement>("Statement", ""); $$->children.push_back($2); }
           | AssignStatement            { $$ = $1; }
           | ArrayAssignStatement       { $$ = $1; }
           | IfStatement                { $$ = $1; }
@@ -164,25 +168,25 @@ Statement : LBRACE RBRACE              { $$ = new Statement("Statement", "EMPTY"
           | PrintStatement             { $$ = $1; }
           ;
 
-AssignStatement : Identifier ASSIGN Expression SEMI                                   { $$ = new AssignStatement("AssignStatement", $2); $$->children.push_back($1); $$->children.push_back($3); }
+AssignStatement : Identifier ASSIGN Expression SEMI                                   { $$ = make_shared<AssignStatement>("AssignStatement", $2); $$->children.push_back($1); $$->children.push_back($3); }
                 ;
 
-ArrayAssignStatement : Identifier LBRACKET Expression RBRACKET ASSIGN Expression SEMI { $$ = new ArrayAssignStatement("ArrayAssignStatement", $2+$4+$5); $$->children.push_back($1); $$->children.push_back($3); $$->children.push_back($6); }
+ArrayAssignStatement : Identifier LBRACKET Expression RBRACKET ASSIGN Expression SEMI { $$ = make_shared<ArrayAssignStatement>("ArrayAssignStatement", $2+$4+$5); $$->children.push_back($1); $$->children.push_back($3); $$->children.push_back($6); }
                      ;
 
-IfStatement : IF LPARENTHESE Expression RPARENTHESE Statement ElseStatement           { $$ = new IfStatement("IfStatement", ""); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($6); }
+IfStatement : IF LPARENTHESE Expression RPARENTHESE Statement ElseStatement           { $$ = make_shared<IfStatement>("IfStatement", ""); $$->children.push_back($3); $$->children.push_back($5); $$->children.push_back($6); }
             ;
 
-ElseStatement : ELSE Statement { $$ = new ElseStatement("ElseStatement", ""); $$->children.push_back($2); }
+ElseStatement : ELSE Statement { $$ = make_shared<ElseStatement>("ElseStatement", ""); $$->children.push_back($2); }
               ;
 
-WhileStatement : WHILE LPARENTHESE Expression RPARENTHESE Statement                   { $$ = new WhileStatement("WhileStatement", ""); $$->children.push_back($3); $$->children.push_back($5); }
+WhileStatement : WHILE LPARENTHESE Expression RPARENTHESE Statement                   { $$ = make_shared<WhileStatement>("WhileStatement", ""); $$->children.push_back($3); $$->children.push_back($5); }
                ;
 
-PrintStatement : SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI                    { $$ = new PrintStatement("PrintStatement", $1); $$->children.push_back($3); }
+PrintStatement : SOPRINTLN LPARENTHESE Expression RPARENTHESE SEMI                    { $$ = make_shared<PrintStatement>("PrintStatement", $1); $$->children.push_back($3); }
                ;
 
-Expression : PrimaryExpression                                                { $$ = new Expression("Expression", ""); $$->children.push_back($1); }
+Expression : PrimaryExpression                                                { $$ = make_shared<Expression>("Expression", ""); $$->children.push_back($1); }
            | LogicExpression                                                  { $$ = $1; }
            | CompareExpression                                                { $$ = $1; }
            | ArithExpression                                                  { $$ = $1; }
@@ -192,54 +196,54 @@ Expression : PrimaryExpression                                                { 
            | Expression DOT Identifier LPARENTHESE ExpressionList RPARENTHESE { $$ = $1; $$->children.push_back($3); $$->children.push_back($5); }
            ;
 
-LogicExpression : Expression AND Expression                       { $$ = new LogicExpression("LogicExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-                | Expression OR Expression                        { $$ = new LogicExpression("LogicExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+LogicExpression : Expression AND Expression                       { $$ = make_shared<LogicExpression>("LogicExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+                | Expression OR Expression                        { $$ = make_shared<LogicExpression>("LogicExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
                 ;
 
-CompareExpression : Expression LT Expression                      { $$ = new CompareExpression("CompareExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-                  | Expression LET Expression                     { $$ = new CompareExpression("CompareExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-                  | Expression GT Expression                      { $$ = new CompareExpression("CompareExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-                  | Expression GET Expression                     { $$ = new CompareExpression("CompareExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-                  | Expression EQUAL Expression                   { $$ = new CompareExpression("CompareExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-                  | Expression NOTEQUAL Expression                { $$ = new CompareExpression("CompareExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+CompareExpression : Expression LT Expression                      { $$ = make_shared<CompareExpression>("CompareExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+                  | Expression LET Expression                     { $$ = make_shared<CompareExpression>("CompareExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+                  | Expression GT Expression                      { $$ = make_shared<CompareExpression>("CompareExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+                  | Expression GET Expression                     { $$ = make_shared<CompareExpression>("CompareExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+                  | Expression EQUAL Expression                   { $$ = make_shared<CompareExpression>("CompareExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+                  | Expression NOTEQUAL Expression                { $$ = make_shared<CompareExpression>("CompareExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
                   ;
 
-ArithExpression : Expression ADD Expression                       { $$ = new ArithExpression("ArithExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-                | Expression SUB Expression                       { $$ = new ArithExpression("ArithExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-                | Expression MUL Expression                       { $$ = new ArithExpression("ArithExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
-                | Expression DIV Expression                       { $$ = new ArithExpression("ArithExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+ArithExpression : Expression ADD Expression                       { $$ = make_shared<ArithExpression>("ArithExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+                | Expression SUB Expression                       { $$ = make_shared<ArithExpression>("ArithExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+                | Expression MUL Expression                       { $$ = make_shared<ArithExpression>("ArithExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
+                | Expression DIV Expression                       { $$ = make_shared<ArithExpression>("ArithExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
                 ;
 
-ArraySearchExpression : Expression LBRACKET Expression RBRACKET   { $$ = new ArraySearchExpression("ArraySearchExpression", $2+$4); $$->children.push_back($1); $$->children.push_back($3); }
+ArraySearchExpression : Expression LBRACKET Expression RBRACKET   { $$ = make_shared<ArraySearchExpression>("ArraySearchExpression", $2+$4); $$->children.push_back($1); $$->children.push_back($3); }
                       ;
 
-ArrayLengthExpression : Expression DOT LENGTH                     { $$ = new ArrayLengthExpression("ArrayLengthExpression", $2+$3); $$->children.push_back($1); }
+ArrayLengthExpression : Expression DOT LENGTH                     { $$ = make_shared<ArrayLengthExpression>("ArrayLengthExpression", $2+$3); $$->children.push_back($1); }
                       ;
 
-ExpressionList : Expression                      { $$ = new ExpressionList("ExpressionList", ""); $$->children.push_back($1); }
+ExpressionList : Expression                      { $$ = make_shared<ExpressionList>("ExpressionList", ""); $$->children.push_back($1); }
                | ExpressionList COMMA Expression { $$ = $1; $$->children.push_back($3); }
                ;
 
-PrimaryExpression : LPARENTHESE Expression RPARENTHESE     { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($2); }
-                  | Identifier                             { $$ = new PrimaryExpression("PrimaryExpression", ""); $$->children.push_back($1); }
+PrimaryExpression : LPARENTHESE Expression RPARENTHESE     { $$ = make_shared<PrimaryExpression>("PrimaryExpression", ""); $$->children.push_back($2); }
+                  | Identifier                             { $$ = make_shared<PrimaryExpression>("PrimaryExpression", ""); $$->children.push_back($1); }
                   | ArrayAllocExpression                   { $$ = $1; }
                   | AllocExpression                        { $$ = $1; }
                   | UnaryExpression                        { $$ = $1; }
-                  | NUM                                    { $$ = new PrimaryExpression("int", $1); }
-                  | TRUE                                   { $$ = new PrimaryExpression("boolean", $1); }
-                  | FALSE                                  { $$ = new PrimaryExpression("boolean", $1); }
-                  | THIS                                   { $$ = new PrimaryExpression("keyword", $1); }
+                  | NUM                                    { $$ = make_shared<PrimaryExpression>("int", $1); }
+                  | TRUE                                   { $$ = make_shared<PrimaryExpression>("boolean", $1); }
+                  | FALSE                                  { $$ = make_shared<PrimaryExpression>("boolean", $1); }
+                  | THIS                                   { $$ = make_shared<PrimaryExpression>("keyword", $1); }
                   ;
 
-ArrayAllocExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = new ArrayAllocExpression("ArrayAllocExpression", $1+" "+$2+$3+$5); $$->children.push_back($4); }
+ArrayAllocExpression : NEW INT LBRACKET Expression RBRACKET   { $$ = make_shared<ArrayAllocExpression>("ArrayAllocExpression", $1+" "+$2+$3+$5); $$->children.push_back($4); }
                      ;
 
-AllocExpression : NEW Identifier LPARENTHESE RPARENTHESE      { $$ = new AllocExpression("AllocExpression", $1); $$->children.push_back($2); }
+AllocExpression : NEW Identifier LPARENTHESE RPARENTHESE      { $$ = make_shared<AllocExpression>("AllocExpression", $1); $$->children.push_back($2); }
                 ;
 
-UnaryExpression : NOT Expression                              { $$ = new UnaryExpression("UnaryExpression", $1); $$->children.push_back($2); }
+UnaryExpression : NOT Expression                              { $$ = make_shared<UnaryExpression>("UnaryExpression", $1); $$->children.push_back($2); }
                 ;
 
-Identifier : IDENTIFIER { $$ = new Identifier("Identifier", $1); }
+Identifier : IDENTIFIER { $$ = make_shared<Identifier>("Identifier", $1); }
            ;
 %%

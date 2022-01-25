@@ -14,13 +14,6 @@ Node::Node() {
 
 Node::Node(string t, string v) : type(std::move(t)), value(std::move(v)) {}
 
-Node::~Node() {
-    for (auto child : this->children) {
-        delete child;
-    }
-    this->children.clear();
-}
-
 void Node::setId(size_t n_id) {
     this->id = n_id;
 }
