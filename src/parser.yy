@@ -242,6 +242,7 @@ AllocExpression : NEW Identifier LPARENTHESE RPARENTHESE      { $$ = make_shared
                 ;
 
 UnaryExpression : NOT Expression                              { $$ = make_shared<UnaryExpression>("UnaryExpression", $1); $$->children.push_back($2); }
+                | SUB Expression                              { $$ = make_shared<UnaryExpression>("UnaryExpression", $1); $$->children.push_back($2); }
                 ;
 
 Identifier : IDENTIFIER { $$ = make_shared<Identifier>("Identifier", $1); }

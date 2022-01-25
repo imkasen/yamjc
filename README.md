@@ -1,4 +1,4 @@
-MiniJava Compiler
+The Mini-Java Compiler
 ======
 
 A Mini-Java Compiler Practice.
@@ -46,14 +46,10 @@ $ mkdir build/ && cd build/
 $ cmake ..
 $ make  # or cmake --build .
 $ ./compiler <file_path>  # e.g. "../resource/examples/factorial.java"
-$ sh graph.sh # args: [ast] [st]
+$ sh graph.sh
 $ make clean
 $ cd .. && rm -rf build/
 ```
-
-# Flaws
-
-* Math operations only support non-negative integer.
 
 # LICENSE
 
