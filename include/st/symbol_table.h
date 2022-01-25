@@ -10,6 +10,7 @@ private:
 
 public:
     SymbolTable();
+    virtual ~SymbolTable() = default;
 
     void enterScope();
     void exitScope();
@@ -27,8 +28,6 @@ public:
 
     void printST(std::ofstream *outStream);
     void resetTable();
-
-    virtual ~SymbolTable() = default;
 };
 
 #endif

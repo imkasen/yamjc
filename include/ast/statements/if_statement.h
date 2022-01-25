@@ -7,6 +7,7 @@ class IfStatement : public Statement {
 public:
     IfStatement();
     IfStatement(std::string t, std::string v);
+    ~IfStatement() override = default;
 };
 
 #endif

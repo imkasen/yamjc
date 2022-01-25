@@ -12,6 +12,7 @@ private:
 public:
     Method();
     Method(std::string name, std::string type);
+    ~Method() override = default;
 
     std::deque<std::shared_ptr<Parameter>> getParameters() const;
     void addParameter(const std::shared_ptr<Parameter> &parameter);

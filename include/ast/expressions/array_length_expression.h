@@ -7,6 +7,7 @@ class ArrayLengthExpression : public Expression {
 public:
     ArrayLengthExpression();
     ArrayLengthExpression(std::string t, std::string v);
+    ~ArrayLengthExpression() override = default;
 };
 
 #endif

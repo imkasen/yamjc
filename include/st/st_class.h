@@ -10,6 +10,7 @@ private:
 public:
     STClass();
     STClass(std::string name, std::string type);
+    ~STClass() override = default;
 
     std::unordered_map<std::string, std::shared_ptr<Method>> getMethods() const;
 

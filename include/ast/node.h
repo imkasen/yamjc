@@ -38,6 +38,7 @@ public:
 
     Node();
     Node(std::string t, std::string v);
+    virtual ~Node();
 
     void setId(std::size_t n_id);
     void setType(std::string n_type);
@@ -60,8 +61,6 @@ public:
     virtual std::optional<std::string> checkSemantics();
 
     static void printErrMsg(const std::string &message);
-
-    virtual ~Node();
 };
 
 #endif

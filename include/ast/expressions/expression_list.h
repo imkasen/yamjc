@@ -7,6 +7,7 @@ class ExpressionList : public Node {
 public:
     ExpressionList();
     ExpressionList(std::string t, std::string v);
+    ~ExpressionList() override = default;
 };
 
 #endif

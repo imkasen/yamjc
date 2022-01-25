@@ -9,6 +9,7 @@ public:
     Parameter();
     Parameter(std::string name, std::string type);
     Parameter(std::string name, std::string type, std::string record);
+    ~Parameter() override = default;
 };
 
 #endif

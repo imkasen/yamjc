@@ -7,6 +7,7 @@ class Return : public Node {
 public:
     Return();
     Return(std::string t, std::string v);
+    ~Return() override = default;
 
     std::optional<std::string> checkSemantics() override;
 };

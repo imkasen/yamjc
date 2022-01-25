@@ -7,6 +7,7 @@ class AllocExpression : public PrimaryExpression {
 public:
     AllocExpression();
     AllocExpression(std::string t, std::string v);
+    ~AllocExpression() override = default;
 };
 
 #endif

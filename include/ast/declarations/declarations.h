@@ -7,6 +7,7 @@ class Declarations : public Node {
 public:
     Declarations();
     Declarations(std::string t, std::string v);
+    ~Declarations() override = default;
 };
 
 #endif

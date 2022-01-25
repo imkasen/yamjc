@@ -19,6 +19,7 @@ private:
 public:
     Scope();
     explicit Scope(std::shared_ptr<Scope> parent);
+    virtual ~Scope() = default;
 
     void setScopeTitle(const std::string &title);
     std::string getScopeTitle() const;
@@ -34,8 +35,6 @@ public:
 
     void resetScope();
     void printST(std::size_t index, std::ofstream *outStream);
-
-    virtual ~Scope() = default;
 };
 
 #endif

@@ -7,6 +7,7 @@ class WhileStatement : public Statement {
 public:
     WhileStatement();
     WhileStatement(std::string t, std::string v);
+    ~WhileStatement() override = default;
 };
 
 #endif

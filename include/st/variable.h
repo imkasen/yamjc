@@ -15,6 +15,7 @@ public:
     Variable();
     Variable(std::string name, std::string type);
     Variable(std::string name, std::string type, std::string record);
+    ~Variable() override = default;
 
     std::unordered_map<std::string, std::shared_ptr<Variable>> getVariables() const;
 

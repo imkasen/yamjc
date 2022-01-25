@@ -23,6 +23,7 @@ protected:
 public:
     Record();
     Record(std::string name, std::string type, std::string record);
+    virtual ~Record() = default;
 
     void setName(const std::string &r_name);
     void setRecord(const std::string &r_record);
@@ -33,8 +34,6 @@ public:
     [[nodiscard]] std::string getType() const;
 
     [[nodiscard]] std::string printRecord() const;
-
-    virtual ~Record() = default;
 };
 
 #endif

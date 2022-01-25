@@ -7,6 +7,7 @@ class ArrayAssignStatement : public Statement {
 public:
     ArrayAssignStatement();
     ArrayAssignStatement(std::string t, std::string v);
+    ~ArrayAssignStatement() override = default;
 };
 
 #endif

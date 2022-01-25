@@ -7,6 +7,7 @@ class ArraySearchExpression : public Expression {
 public:
     ArraySearchExpression();
     ArraySearchExpression(std::string t, std::string v);
+    ~ArraySearchExpression() override = default;
 };
 
 #endif

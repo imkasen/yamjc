@@ -7,6 +7,7 @@ class FormalParameter : public Node {
 public:
     FormalParameter();
     FormalParameter(std::string t, std::string v);
+    ~FormalParameter() override = default;
 };
 
 #endif

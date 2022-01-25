@@ -11,6 +11,7 @@ protected:
 public:
     Expression();
     Expression(std::string t, std::string v);
+    ~Expression() override = default;
 
     std::optional<std::string> checkSemantics() override;
 };
