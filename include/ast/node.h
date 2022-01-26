@@ -2,10 +2,7 @@
 #define NODE_H
 
 #include <cstdlib>
-#include <deque>
 #include <fstream>
-#include <iostream>
-#include <string>
 #include "st/method.h"
 #include "st/parameter.h"
 #include "st/st_class.h"
