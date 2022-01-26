@@ -1,8 +1,6 @@
 #include "ast/node.h"
-using std::cerr;
 using std::cout;
 using std::endl;
-using std::exit;
 using std::size_t;
 using std::string;
 
@@ -57,7 +55,7 @@ void Node::saveAST(std::ofstream *outStream, size_t depth) {  // NOLINT
         *outStream << "  ";
     }
     *outStream << this->getType() << ":" << this->getValue() << endl;
-    for (auto child : this->children) {
+    for (const auto &child : this->children) {
         child->saveAST(outStream, depth + 1);
     }
 }
@@ -71,7 +69,7 @@ void Node::generateAST(std::ofstream *outStream, size_t &count) {  // NOLINT
     } else {
         *outStream << "n" << this->getId() << " [label=\"" << this->getType() << "\"];" << endl;
     }
-    for (auto child : this->children) {
+    for (const auto &child : this->children) {
         child->generateAST(outStream, count);
         *outStream << "n" << this->getId() << " -> n" << child->getId() << ";" << endl;
     }
@@ -86,9 +84,7 @@ void Node::buildST(std::ofstream *outStream) {
 }
 
 /*
- * Default behavior,
- * this behavior is used by following nodes:
- * "Declarations", "Expression", "PrimaryExpression", "Return", "Statement"
+ * Default behavior
  *
  * All abstract syntax trees start with node "Goal",
  * review "parser.yy" for more details.
@@ -97,7 +93,7 @@ void Node::buildST(std::ofstream *outStream) {
  * @return: std::nullopt
  */
 std::optional<string> Node::generateST() {  // NOLINT
-    for (auto child : this->children) {
+    for (const auto &child : this->children) {
         child->generateST();
     }
     return std::nullopt;
@@ -118,13 +114,13 @@ void Node::semanticAnalysis() {
  * @return: std::nullopt
  */
 std::optional<string> Node::checkSemantics() {  // NOLINT
-    for (auto child : this->children) {
+    for (const auto &child : this->children) {
         child->checkSemantics();
     }
     return std::nullopt;
 }
 
 void Node::printErrMsg(const std::string &message) {
-    cerr << message << endl;
-    exit(EXIT_FAILURE);
+    std::cerr << message << endl;
+    std::exit(EXIT_FAILURE);
 }

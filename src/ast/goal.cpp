@@ -18,7 +18,7 @@ std::optional<string> Goal::generateST() {
     Goal::st.setScopeTitle("Program");
 
     // 2.
-    for (auto child : this->children) {
+    for (const auto &child : this->children) {
         Goal::st.enterScope();  // Enter each "Class" scope
         child->generateST();
         Goal::st.exitScope();   // Exit "Class" scope
@@ -32,7 +32,7 @@ std::optional<string> Goal::generateST() {
  * @return: std::nullopt
  */
 std::optional<std::string> Goal::checkSemantics() {
-    for (auto child : this->children) {
+    for (const auto &child : this->children) {
         Goal::st.enterScope();  // Enter "Class" scope
         child->checkSemantics();
         Goal::st.exitScope();   // Exit "Class" scope

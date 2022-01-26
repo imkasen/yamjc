@@ -52,14 +52,12 @@ int main(int argc, char *argv[]) {
     */
 
     // Create a symbol table, generate "st.dot"
-    /*
     std::ofstream st_dot_stream;
     st_dot_stream.open("st.dot", std::ios::out);
     st_dot_stream << "graph {" << endl;
     root->buildST(&st_dot_stream);
     st_dot_stream << "}" << endl;
     st_dot_stream.close();
-     */
 
     // Check semantic analysis
     // root->semanticAnalysis();
