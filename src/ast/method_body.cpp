@@ -4,11 +4,21 @@ MethodBody::MethodBody() : Node() {}
 MethodBody::MethodBody(std::string t, std::string v) : Node(std::move(t), std::move(v)) {}
 
 /*
+ *      "MethodBody"
+ *           |
+ * "PrintStatement:System.out.println"
+ *
+ * @brief: Do nothing.
+ *
+ *      "MethodBody"
+ *           |
+ *    "VarDeclaration"
+ *
  * @brief: Traverse nodes.
- * @return: nullopt
+ * @return: std::nullopt
  */
 std::optional<std::string> MethodBody::generateST() {
-    for (auto child : this->children) {
+    for (const auto &child : this->children) {
         if (child->getType() == "VarDeclaration") {
             child->generateST();
         }

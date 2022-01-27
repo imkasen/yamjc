@@ -84,7 +84,7 @@ void Node::buildST(std::ofstream *outStream) {
 }
 
 /*
- * Default behavior
+ * Default behavior.
  *
  * All abstract syntax trees start with node "Goal",
  * review "parser.yy" for more details.

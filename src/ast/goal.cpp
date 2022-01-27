@@ -5,6 +5,10 @@ Goal::Goal() : Node() {}
 Goal::Goal(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
+ *             "Goal"
+ *             /   \
+ *   "MainClass"   "ClassDeclaration"
+ *
  * Note: Records in the current "Program" scope are added
  * by children scopes("MainClass" || "ClassDeclaration").
  *
