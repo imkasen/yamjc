@@ -6,12 +6,16 @@ MethodDeclaration::MethodDeclaration() : Node() {}
 MethodDeclaration::MethodDeclaration(std::string t, std::string v) : Node(std::move(t), std::move(v)) {}
 
 /*
+ *                "MethodDeclaration"
+ *      /        /              \                 \
+ * "Type"  "Identifier"  "FormalParameterList"  "MethodBody"
+ *
  * @brief:
  *   1. Create "Method" records in the current "Class" scope.
  *      Add into the current scope:
  *          Method: <name>
  *   2. Get the "Class" ptr in the "Program" scope.
- *      Add the "Methods" ptr into the "Class" ptr.
+ *      Add the "Method" ptr into the "Class" ptr.
  *   3. Enter "Method" scope
  *      Traverse children.
  * @return: std::nullopt

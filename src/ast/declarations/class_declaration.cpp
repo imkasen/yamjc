@@ -6,6 +6,10 @@ ClassDeclaration::ClassDeclaration() : Node() {}
 ClassDeclaration::ClassDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
+ *      "ClassDeclaration"              "ClassDeclaration"
+ *         /        \                           |
+ * "Identifier"  "Declarations"            "Identifier"
+ *
  * @brief:
  *   1. Create records in the current "Class" scope.
  *      Set the scope title.
@@ -15,11 +19,14 @@ ClassDeclaration::ClassDeclaration(string t, string v) : Node(std::move(t), std:
  *      Add "this" record which listed above into "Class" record.
  *      Add into the parent scope:
  *          Class: <name>
- *   3. If "Class" extends from "Class",
- *          Traverse children first,
- *          Then copy "Variables" and "Methods" from father "Class" record.
- *      If no extends,
- *          Traverse children directly.
+ *   3. Traverse children.
+ *
+// *   3. If "Class" extends from "Class",
+// *          Traverse children first,
+// *          Then copy "Variables" and "Methods" from father "Class" record.
+// *      If no extends,
+// *          Traverse children directly.
+ *
  * @return: std::nullopt
  */
 std::optional<string> ClassDeclaration::generateST() {
@@ -41,6 +48,7 @@ std::optional<string> ClassDeclaration::generateST() {
     //      `this->children.size() == 2`
     //   else
     //      `this->children.size() >= 3`
+    /*
     if (this->children.size() >= 2 && this->children.at(1)->getType() == "Identifier") {
         // Traverse "Declarations"
         for (size_t i = 2; i < this->children.size(); ++i) {
@@ -87,16 +95,15 @@ std::optional<string> ClassDeclaration::generateST() {
             }
         }
     }
-    // No "Class" extends
-    //   if "Class" contains nothing
-    //      `this->children.size() == 1`
-    //   else
-    //      `this->children.size() >= 2`
-    else {
-        // Traverse "Declarations"
-        for (size_t i = 1; i < this->children.size(); ++i) {
-            this->children.at(i)->generateST();
-        }
+     */
+
+    // if "Class" contains nothing
+    //     `this->children.size() == 1`
+    // else
+    //     `this->children.size() >= 2`
+    // Traverse "Declarations"
+    for (size_t i = 1; i < this->children.size(); ++i) {
+        this->children.at(i)->generateST();
     }
 
     return std::nullopt;

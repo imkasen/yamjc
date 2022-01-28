@@ -5,14 +5,8 @@ MethodBody::MethodBody(std::string t, std::string v) : Node(std::move(t), std::m
 
 /*
  *      "MethodBody"
- *           |
- * "PrintStatement:System.out.println"
- *
- * @brief: Do nothing.
- *
- *      "MethodBody"
- *           |
- *    "VarDeclaration"
+ *           |          \
+ *    "VarDeclaration"  ...
  *
  * @brief: Traverse nodes.
  * @return: std::nullopt

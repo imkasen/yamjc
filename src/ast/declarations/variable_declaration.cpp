@@ -5,6 +5,10 @@ VarDeclaration::VarDeclaration() : Node() {}
 VarDeclaration::VarDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
+ *  "VarDeclaration"
+ *     /     \
+ * "Type"  "Identifier"
+ *
  * @brief:
  *   1. Create "Variable" records in the current "Class" || "Method" scope.
  *      Add into the current scope:

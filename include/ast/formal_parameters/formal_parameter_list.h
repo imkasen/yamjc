@@ -8,8 +8,6 @@ public:
     FormalParameterList();
     FormalParameterList(std::string t, std::string v);
     ~FormalParameterList() override = default;
-
-    std::optional<std::string> generateST() override;
 };
 
 #endif

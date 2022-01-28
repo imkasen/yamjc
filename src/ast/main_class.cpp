@@ -32,10 +32,6 @@ std::optional<string> MainClass::generateST() {
     // 1.
     string class_name, class_type;
     class_name = class_type = this->children.at(0)->generateST().value_or("Unknown");
-    if ("Unknown" == class_name) {
-        string msg = "[Symbol Table Generation] - Error: Could not get the name of main class!";
-        MainClass::printErrMsg(msg);
-    }
     MainClass::st.setScopeTitle("Class: " + class_name);  // Set the current scope title
     // Used as type here
     std::shared_ptr<Variable> variable_this_ptr = std::make_shared<Variable>("this", class_type);
@@ -55,10 +51,6 @@ std::optional<string> MainClass::generateST() {
     // "Method: main" is grammar-restricted.
     MainClass::st.setScopeTitle("Method: main");  // Set the child scope title
     string parameter_name = this->children.at(1)->generateST().value_or("Unknown");
-    if ("Unknown" == parameter_name) {
-        string msg = "[Symbol Table Generation] - Error: Could not get the parameter name of main method!";
-        MainClass::printErrMsg(msg);
-    }
     // "String[]" is grammar-restricted.
     std::shared_ptr<Parameter> parameter_ptr = std::make_shared<Parameter>(parameter_name, "String[]");
     method_main_ptr->addParameter(parameter_ptr);
