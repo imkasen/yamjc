@@ -70,17 +70,24 @@ std::optional<string> ClassExtendsDeclaration::generateST() {
         for (const auto &pair : parent_class_ptr->getMethods()) {
             // "Methods" that need to be inherited but not overwritten
             if (!ClassExtendsDeclaration::st.lookupChildScope(pair.first).value_or(nullptr)) {
-                std::shared_ptr<Method> method_ptr = std::make_shared<Method>(*(pair.second));
+                std::shared_ptr<Method> method_ptr =
+                    std::make_shared<Method>(pair.first, pair.second->getType());
                 ClassExtendsDeclaration::st.addRecord(method_ptr->getName(), method_ptr);
                 class_ptr->addMethod(method_ptr);
                 // Enter "Method" scope, deep copy variables and parameters
                 ClassExtendsDeclaration::st.enterScope();
                 ClassExtendsDeclaration::st.setScopeTitle("Method: " + method_ptr->getName());
-                for (const auto &v_pair : method_ptr->getVariables()) {
-                    ClassExtendsDeclaration::st.addRecord(v_pair.first, std::make_shared<Variable>(*(v_pair.second)));
+                for (const auto &var_pair : pair.second->getVariables()) {
+                    std::shared_ptr<Variable> v_ptr =
+                        std::make_shared<Variable>(var_pair.first, var_pair.second->getType());
+                    method_ptr->addVariable(v_ptr);
+                    ClassExtendsDeclaration::st.addRecord(v_ptr->getName(), v_ptr);
                 }
-                for (const auto &p_ptr : method_ptr->getParameters()) {
-                    ClassExtendsDeclaration::st.addRecord(p_ptr->getName(), std::make_shared<Parameter>(*(p_ptr)));
+                for (const auto &par_ptr : pair.second->getParameters()) {
+                    std::shared_ptr<Parameter> p_ptr =
+                        std::make_shared<Parameter>(par_ptr->getName(), par_ptr->getType());
+                    method_ptr->addParameter(p_ptr);
+                    ClassExtendsDeclaration::st.addRecord(p_ptr->getName(), p_ptr);
                 }
                 ClassExtendsDeclaration::st.exitScope();
             }
