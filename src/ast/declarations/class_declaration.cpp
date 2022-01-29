@@ -6,9 +6,9 @@ ClassDeclaration::ClassDeclaration() : Node() {}
 ClassDeclaration::ClassDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
- *      "ClassDeclaration"              "ClassDeclaration"
- *         /        \                           |
- * "Identifier"  "Declarations"            "Identifier"
+ *      "ClassDeclaration"
+ *         /        \
+ * "Identifier"  ["Declarations"]
  *
  * @brief:
  *   1. Create records in the current "Class" scope.

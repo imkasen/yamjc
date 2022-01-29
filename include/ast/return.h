@@ -9,6 +9,7 @@ public:
     Return(std::string t, std::string v);
     ~Return() override = default;
 
+    std::optional<std::string> generateST() final;
     std::optional<std::string> checkSemantics() override;
 };
 

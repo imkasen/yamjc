@@ -8,7 +8,7 @@ MainClass::MainClass(string t, string v) : Node(std::move(t), std::move(v)) {}
 /*
  *                 "MainClass"
  *             /       |        \
- *  "Identifier"  "Identifier"  "MethodBody"
+ *  "Identifier"  "Identifier"  ["MethodBody"]
  *
  * @brief:
  *   1. Create records in the current "Class" scope.

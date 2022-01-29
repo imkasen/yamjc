@@ -9,6 +9,7 @@ public:
     PrimaryExpression(std::string t, std::string v);
     ~PrimaryExpression() override = default;
 
+    std::optional<std::string> generateST() final;
     std::optional<std::string> checkSemantics() override;
 };
 

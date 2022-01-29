@@ -8,7 +8,7 @@ MethodDeclaration::MethodDeclaration(std::string t, std::string v) : Node(std::m
 /*
  *                "MethodDeclaration"
  *      /        /              \                 \
- * "Type"  "Identifier"  "FormalParameterList"  "MethodBody"
+ * "Type"  "Identifier"  ["FormalParameterList"]  "MethodBody"
  *
  * @brief:
  *   1. Create "Method" records in the current "Class" scope.
@@ -40,7 +40,7 @@ std::optional<string> MethodDeclaration::generateST() {
     // 3.
     MethodDeclaration::st.enterScope();  // Enter each "Method" scope
     MethodDeclaration::st.setScopeTitle("Method: " + method_name);
-    // Traverse "FormalParameterList", "MethodBody"
+    // Traverse ["FormalParameterList"], "MethodBody"
     for (size_t i = 2; i < this->children.size(); ++i) {
         this->children.at(i)->generateST();
     }

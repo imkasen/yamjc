@@ -5,6 +5,14 @@ Return::Return() : Node() {}
 Return::Return(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
+ * @brief: It will not be called at all, do nothing.
+ * @return: std::nullopt
+ */
+std::optional<string> Return::generateST() {
+    return std::nullopt;
+}
+
+/*
  * @brief: Check if the return value type matches the class declaration.
  * @return: std::nullopt
  */

@@ -13,6 +13,7 @@ public:
     Expression(std::string t, std::string v);
     ~Expression() override = default;
 
+    std::optional<std::string> generateST() final;
     std::optional<std::string> checkSemantics() override;
 };
 

@@ -6,6 +6,14 @@ Expression::Expression() : Node() {}
 Expression::Expression(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
+ * @brief: It will not be called at all, do nothing.
+ * @return: std::nullopt
+ */
+std::optional<string> Expression::generateST() {
+    return std::nullopt;
+}
+
+/*
  * @brief:
  *   1. "ExpressionList"
  *

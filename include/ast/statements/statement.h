@@ -9,6 +9,7 @@ public:
     Statement(std::string t, std::string v);
     ~Statement() override = default;
 
+    std::optional<std::string> generateST() final;
     std::optional<std::string> checkSemantics() override;
 };
 
