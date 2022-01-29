@@ -13,6 +13,7 @@ std::optional<string> Type::generateST() {
         return this->getValue();
     }
     // No value && has one "Identifier" child
+    // User-defined type
     else if (this->getValue().empty() && this->children.size() == 1) {
         return this->children.at(0)->generateST().value_or("Unknown");
     }

@@ -8,6 +8,6 @@ std::optional<string> Identifier::generateST() {
     return this->getValue();
 }
 
-std::optional<std::string> Identifier::checkSemantics() {
+std::optional<string> Identifier::checkSemantics() {
     return this->getValue();
 }

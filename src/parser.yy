@@ -105,8 +105,8 @@ ClassDeclaration : CLASS Identifier LBRACE RBRACE              { $$ = std::make_
                  | CLASS Identifier LBRACE Declarations RBRACE { $$ = std::make_shared<ClassDeclaration>("ClassDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); }
                  ;
 
-ClassExtendsDeclaration : CLASS Identifier EXTENDS Identifier LBRACE RBRACE              { $$ = std::make_shared<ClassExtendsDeclaration>("ClassExtendsDeclaration", $3); $$->children.push_back($2); $$->children.push_back($4); }
-                        | CLASS Identifier EXTENDS Identifier LBRACE Declarations RBRACE { $$ = std::make_shared<ClassExtendsDeclaration>("ClassExtendsDeclaration", $3); $$->children.push_back($2); $$->children.push_back($4); $$->children.push_back($6); }
+ClassExtendsDeclaration : CLASS Identifier EXTENDS Identifier LBRACE RBRACE              { $$ = std::make_shared<ClassExtendsDeclaration>("ClassExtendsDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); }
+                        | CLASS Identifier EXTENDS Identifier LBRACE Declarations RBRACE { $$ = std::make_shared<ClassExtendsDeclaration>("ClassExtendsDeclaration", ""); $$->children.push_back($2); $$->children.push_back($4); $$->children.push_back($6); }
                         ;
 
 Declarations : VarDeclaration                 { $$ = std::make_shared<Declarations>("Declarations", ""); $$->children.push_back($1); }

@@ -6,11 +6,11 @@ Goal::Goal(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  *             "Goal"
- *             /   \
- *   "MainClass"   ["ClassDeclaration"]
+ *             /   \                      \
+ *   "MainClass"   ["ClassDeclaration"]  ["ClassExtendsDeclaration"]
  *
  * Note: Records in the current "Program" scope are added
- * by children scopes("MainClass" || "ClassDeclaration").
+ * by children scopes.
  *
  * @brief:
  *   1. Set the current scope title.

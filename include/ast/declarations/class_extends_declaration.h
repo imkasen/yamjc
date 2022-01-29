@@ -8,6 +8,8 @@ public:
     ClassExtendsDeclaration();
     ClassExtendsDeclaration(std::string t, std::string v);
     ~ClassExtendsDeclaration() override = default;
+
+    std::optional<std::string> generateST() override;
 };
 
 #endif
