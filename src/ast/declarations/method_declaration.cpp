@@ -2,8 +2,8 @@
 using std::size_t;
 using std::string;
 
-MethodDeclaration::MethodDeclaration() : Node() {}
-MethodDeclaration::MethodDeclaration(std::string t, std::string v) : Node(std::move(t), std::move(v)) {}
+MethodDeclaration::MethodDeclaration() : Declarations() {}
+MethodDeclaration::MethodDeclaration(std::string t, std::string v) : Declarations(std::move(t), std::move(v)) {}
 
 /*
  *                "MethodDeclaration"

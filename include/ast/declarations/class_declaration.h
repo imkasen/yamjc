@@ -1,9 +1,9 @@
 #ifndef CLASS_DECLARATION_H
 #define CLASS_DECLARATION_H
 
-#include "ast/node.h"
+#include "declarations.h"
 
-class ClassDeclaration : public Node {
+class ClassDeclaration : public Declarations {
 public:
     ClassDeclaration();
     ClassDeclaration(std::string t, std::string v);

@@ -1,9 +1,9 @@
 #ifndef METHOD_DECLARATION_H
 #define METHOD_DECLARATION_H
 
-#include "ast/node.h"
+#include "declarations.h"
 
-class MethodDeclaration : public Node {
+class MethodDeclaration : public Declarations {
 public:
     MethodDeclaration();
     MethodDeclaration(std::string t, std::string v);

@@ -1,9 +1,9 @@
 #ifndef VARIABLE_DECLARATION_H
 #define VARIABLE_DECLARATION_H
 
-#include "ast/node.h"
+#include "declarations.h"
 
-class VarDeclaration : public Node {
+class VarDeclaration : public Declarations {
 public:
     VarDeclaration();
     VarDeclaration(std::string t, std::string v);

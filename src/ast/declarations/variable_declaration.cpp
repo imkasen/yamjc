@@ -1,8 +1,8 @@
 #include "ast/declarations/variable_declaration.h"
 using std::string;
 
-VarDeclaration::VarDeclaration() : Node() {}
-VarDeclaration::VarDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
+VarDeclaration::VarDeclaration() : Declarations() {}
+VarDeclaration::VarDeclaration(string t, string v) : Declarations(std::move(t), std::move(v)) {}
 
 /*
  *  "VarDeclaration"
