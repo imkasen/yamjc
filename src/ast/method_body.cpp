@@ -17,17 +17,5 @@ std::optional<std::string> MethodBody::generateST() {
             child->generateST();
         }
     }
-
-    return std::nullopt;
-}
-
-/*
- * @brief: Traverse nodes.
- * @return: nullopt
- */
-std::optional<std::string> MethodBody::checkSemantics() {
-    for (auto child : this->children) {
-        child->checkSemantics();
-    }
     return std::nullopt;
 }

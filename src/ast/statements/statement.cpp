@@ -16,10 +16,6 @@ std::optional<string> Statement::generateST() {
  * @brief:
  *   1. Node: "Statement: ="
  *        Compare types of lhs and rhs.
- *   2. Node: "Statement: S.O.PRINTLN"
- *        Traverse child nodes, and check the return value.
- *        The grammar restricts that only integers can be print,
- *        so the return value must be "int".
  *   3. Node: "Statement: IF" || "Statement: WHILE"
  * @return: std::nullopt
  */
@@ -75,22 +71,6 @@ std::optional<string> Statement::checkSemantics() {
                              Statement::st.getScopeTitle() + "\"!";
                 Statement::printErrMsg(msg);
             }
-        }
-    }
-    // 2.
-    else if (this->getValue() == "S.O.PRINTLN") {
-        /*
-         * Expectation:
-         *   the returned string is "int", do nothing.
-         * Non-expectation:
-         *   the returned string is not "int", print the error message.
-         */
-        string type = this->children.at(0)->checkSemantics().value_or("");
-
-        if (type != "int") {
-            string msg = R"([Semantic Analysis] - Error: only "int" can be print in scope ")" +
-                         Statement::st.getScopeTitle() + "\"!";
-            Statement::printErrMsg(msg);
         }
     }
     // 3.

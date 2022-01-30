@@ -15,7 +15,71 @@ std::optional<string> Expression::generateST() {
 
 /*
  * @brief:
- *   1. "ExpressionList"
+ *   4. "Expression"   or  "Expression"    or   "Expression"
+ *          |                   |                   |
+ *        "int"             "boolean"          "keyword:this"
+ *   5.                   "Expression"
+ *                 /           |          \
+ *    "AllocExpression"  "Identifier"  "ExpressionList"
+ * @return: std::nullopt || string
+ */
+std::optional<string> Expression::checkSemantics() {
+    string class_name;
+    string method_name;
+    string var_name;
+    std::shared_ptr<Record> c_record_ptr;
+    std::shared_ptr<Record> v_record_ptr;
+    std::shared_ptr<Record> m_record_ptr;
+    std::shared_ptr<STClass> class_ptr;
+
+    // 4.
+    // "Expression" -> "int"
+    // "Expression" -> "boolean"
+    // "Expression" -> "keyword:this"
+    if (this->children.size() == 1) {
+        string type = this->children.at(0)->getType();
+        if (type == "keyword") {
+            v_record_ptr = Expression::st.lookupRecord(this->children.at(0)->getValue()).value_or(nullptr);
+            if (v_record_ptr) {
+                return v_record_ptr->getType();
+            }
+        }
+        // type == "int" || type == "boolean"
+        else {
+            return type;
+        }
+    }
+    // 5.
+    // "Expression" -> "AllocExpression", "Identifier", "ExpressionList"
+    else if (this->children.size() <= 3 && this->children.at(0)->getType() == "AllocExpression") {
+        class_name = this->children.at(0)->checkSemantics().value_or("");
+        method_name = this->children.at(1)->checkSemantics().value_or("");
+
+        c_record_ptr = Expression::st.lookupRecordInRoot(class_name).value_or(nullptr);
+        class_ptr = std::dynamic_pointer_cast<STClass>(c_record_ptr);
+
+        if (!class_ptr) {
+            string msg = "[Semantic Analysis] - Error: Class \"" + class_name + "\" does not exist!";
+            Expression::printErrMsg(msg);
+        } else {
+            m_record_ptr = class_ptr->lookupMethod(method_name).value_or(nullptr);
+            if (!m_record_ptr) {
+                string msg = "[Semantic Analysis] - Error: Method \"" + method_name +
+                             "\" does not exist in scope \"" + class_ptr->getType() + "\"!";
+                Expression::printErrMsg(msg);
+            }
+        }
+
+        this->checkParameters(m_record_ptr);
+
+        return m_record_ptr->getType();
+    }
+
+    return std::nullopt;
+}
+
+/*
+ * @brief:
  *
  *   2.    "Expression"
  *              |
@@ -24,10 +88,6 @@ std::optional<string> Expression::generateST() {
  *   3. "Expression:!"
  *            |
  *      "Expression"
- *
- *   4. "Expression"   or  "Expression"    or   "Expression"
- *          |                   |                   |
- *        "int"             "boolean"             "this"
  *
  *   5.                   "Expression"                or                       "Expression"
  *                       /           \                                     /        |        \
@@ -43,6 +103,7 @@ std::optional<string> Expression::generateST() {
  *
  * @return: std::nullopt || string
  */
+/*
 std::optional<string> Expression::checkSemantics() {
     string class_name;
     string method_name;
@@ -52,18 +113,6 @@ std::optional<string> Expression::checkSemantics() {
     std::shared_ptr<Record> m_record_ptr;
     std::shared_ptr<STClass> class_ptr;
 
-    // 1.
-    // "ExpressionList"
-    if (this->getType() == "ExpressionList") {
-        string parameter_type_list;
-
-        // Splice formal parameter types, "xxx xxx ..."
-        for (auto child : this->children) {
-            parameter_type_list += child->checkSemantics().value_or("") + " ";
-        }
-
-        return parameter_type_list;
-    }
     // 2.
     // "Expression" -> "PrimaryExpression"
     else if (this->children.size() == 1 && this->children.at(0)->getType() == "PrimaryExpression") {
@@ -110,23 +159,6 @@ std::optional<string> Expression::checkSemantics() {
     // "Expression:!" -> "Expression"
     else if (this->children.size() == 1 && this->getValue() == "!") {
         return this->children.at(0)->checkSemantics();
-    }
-    // 4.
-    // "Expression" -> "int"
-    // "Expression" -> "boolean"
-    // "Expression" -> "this"
-    else if (this->children.size() == 1) {
-        string type = this->children.at(0)->getType();
-        if (type == "this") {
-            v_record_ptr = Expression::st.lookupRecord(type).value_or(nullptr);
-            if (v_record_ptr) {
-                return v_record_ptr->getType();
-            }
-        }
-        // type == "int" || type == "boolean"
-        else {
-            return type;
-        }
     }
     // 5.
     // "Expression" -> "PrimaryExpression", "Identifier"
@@ -278,6 +310,7 @@ std::optional<string> Expression::checkSemantics() {
 
     return std::nullopt;
 }
+ */
 
 /*
  * @brief: Check whether formal parameters meet the syntax requirements, e.g. order, number...
@@ -287,7 +320,7 @@ void Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr) {
     std::shared_ptr<Method> method_ptr;
     std::deque<string> p_deque;
 
-    if (this->children.size() == 3) {
+    if (this->children.size() == 3 && this->children.at(2)->getType() == "ExpressionList") {
         method_ptr = std::dynamic_pointer_cast<Method>(m_record_ptr);
 
         string parameter_type_list = this->children.at(2)->checkSemantics().value_or("");
@@ -333,18 +366,17 @@ void Expression::checkParameters(const std::shared_ptr<Record> &m_record_ptr) {
     }
 }
 
-void Expression::strSplit(std::deque<std::string> &deque, const std::string &text, const std::string &delimiter) {
+void Expression::strSplit(std::deque<std::string> &deque, std::string &text, const std::string &delimiter) {
     size_t pos;
-    string text_str = text;
 
-    // Not end with the delimiter
-    if (text_str.rfind(delimiter) != (text_str.length() - delimiter.length())) {
-        text_str += delimiter;
+    // string is not end with the delimiter
+    if (text.rfind(delimiter) != (text.length() - delimiter.length())) {
+        text += delimiter;
     }
 
-    while ((pos = text_str.find(delimiter)) != string::npos) {
-        deque.push_back(text_str.substr(0, pos));
-        text_str.erase(0, pos + delimiter.length());
+    while ((pos = text.find(delimiter)) != string::npos) {
+        deque.push_back(text.substr(0, pos));
+        text.erase(0, pos + delimiter.length());
     }
 }
 

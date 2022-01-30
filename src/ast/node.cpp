@@ -109,7 +109,7 @@ void Node::semanticAnalysis() {
 /*
  * Default behavior,
  * this behavior is used by following nodes:
- * "Declarations", "FormalParameter"
+ * "MethodBody"
  *
  * @brief: Traverse children nodes.
  * @return: std::nullopt
