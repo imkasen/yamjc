@@ -9,7 +9,7 @@ public:
     FormalParameter(std::string t, std::string v);
     ~FormalParameter() override = default;
 
-    std::optional<std::string> generateST() override;
+    std::optional<std::string> generateST() final;
 };
 
 #endif

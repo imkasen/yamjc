@@ -43,7 +43,7 @@ std::optional<string> VarDeclaration::generateST() {
  * @brief: Check if a custom "Class" type exists.
  * @return: std::nullopt
  */
-std::optional<std::string> VarDeclaration::checkSemantics() {
+std::optional<string> VarDeclaration::checkSemantics() {
     string type_name = this->children.at(0)->checkSemantics().value_or("");
     if (type_name != "int" && type_name != "boolean" && type_name != "int[]") {
         auto c_record_ptr = VarDeclaration::st.lookupRecordInRoot(type_name).value_or(nullptr);

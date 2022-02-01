@@ -16,9 +16,9 @@ std::optional<string> Statement::generateST() {
  * @brief:
  *   1. Node: "Statement: ="
  *        Compare types of lhs and rhs.
- *   3. Node: "Statement: IF" || "Statement: WHILE"
  * @return: std::nullopt
  */
+/*
 std::optional<string> Statement::checkSemantics() {
     // 1.
     if (this->getValue() == "=") {
@@ -73,19 +73,7 @@ std::optional<string> Statement::checkSemantics() {
             }
         }
     }
-    // 3.
-    else if (this->getValue() == "IF" || this->getValue() == "WHILE") {
-        string type = this->children.at(0)->checkSemantics().value_or("");
-        if (type != "boolean") {
-            string msg = R"([Semantic Analysis] - Error: IF WHILE condition should be "boolean" in scope ")" +
-                         Statement::st.getScopeTitle() + "\"!";
-            Statement::printErrMsg(msg);
-        }
-
-        for (std::size_t i = 1; i < this->children.size(); ++i) {
-            this->children.at(i)->checkSemantics();
-        }
-    }
 
     return std::nullopt;
 }
+*/

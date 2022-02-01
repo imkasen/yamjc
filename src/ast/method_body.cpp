@@ -1,7 +1,8 @@
 #include "ast/method_body.h"
+using std::string;
 
 MethodBody::MethodBody() : Node() {}
-MethodBody::MethodBody(std::string t, std::string v) : Node(std::move(t), std::move(v)) {}
+MethodBody::MethodBody(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  *      "MethodBody"
@@ -11,7 +12,7 @@ MethodBody::MethodBody(std::string t, std::string v) : Node(std::move(t), std::m
  * @brief: Traverse nodes.
  * @return: std::nullopt
  */
-std::optional<std::string> MethodBody::generateST() {
+std::optional<string> MethodBody::generateST() {
     for (const auto &child : this->children) {
         if (child->getType() == "VarDeclaration") {
             child->generateST();

@@ -7,7 +7,7 @@ ExpressionList::ExpressionList(string t, string v) : Node(std::move(t), std::mov
 /*
  * @return: string
  */
-std::optional<std::string> ExpressionList::checkSemantics() {
+std::optional<string> ExpressionList::checkSemantics() {
     string parameter_type_list;
 
     // Splice formal parameter types, "xxx xxx ..."

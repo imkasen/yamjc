@@ -9,7 +9,7 @@ public:
     ExpressionList(std::string t, std::string v);
     ~ExpressionList() override = default;
 
-    std::optional<std::string> checkSemantics() override;
+    std::optional<std::string> checkSemantics() final;
 };
 
 #endif

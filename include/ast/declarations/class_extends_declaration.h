@@ -9,7 +9,8 @@ public:
     ClassExtendsDeclaration(std::string t, std::string v);
     ~ClassExtendsDeclaration() override = default;
 
-    std::optional<std::string> generateST() override;
+    std::optional<std::string> generateST() final;
+    std::optional<std::string> checkSemantics() final;
 };
 
 #endif

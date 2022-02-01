@@ -35,7 +35,7 @@ std::optional<string> Goal::generateST() {
  * @brief: Traverse children nodes.
  * @return: std::nullopt
  */
-std::optional<std::string> Goal::checkSemantics() {
+std::optional<string> Goal::checkSemantics() {
     for (const auto &child : this->children) {
         Goal::st.enterScope();  // Enter "Class" scope
         child->checkSemantics();

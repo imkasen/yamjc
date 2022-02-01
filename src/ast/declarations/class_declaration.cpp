@@ -54,28 +54,15 @@ std::optional<string> ClassDeclaration::generateST() {
  * @brief: Traverse child nodes.
  * @return: std::nullopt
  */
-std::optional<std::string> ClassDeclaration::checkSemantics() {
-    // "Class" extends from "Class"
-    //   if "Class" contains nothing
-    //      `this->children.size() == 2`
-    //   else
-    //      `this->children.size() >= 3`
-    if (this->children.size() >= 2 && this->children.at(1)->getType() == "Identifier") {
-        // Traverse "Declarations"
-        for (size_t i = 2; i < this->children.size(); ++i) {
-            this->children.at(i)->checkSemantics();
-        }
-    }
-    // No "Class" extends
+std::optional<string> ClassDeclaration::checkSemantics() {
     //   if "Class" contains nothing,
     //      `this->children.size() == 1`
     //   else
     //      `this->children.size() >= 2`
-    else {
-        // Traverse "Declarations"
-        for (size_t i = 1; i < this->children.size(); ++i) {
-            this->children.at(i)->checkSemantics();
-        }
+
+    // Traverse "Declarations"
+    for (size_t i = 1; i < this->children.size(); ++i) {
+        this->children.at(i)->checkSemantics();
     }
 
     return std::nullopt;

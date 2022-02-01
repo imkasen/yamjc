@@ -68,7 +68,7 @@ std::optional<string> MainClass::generateST() {
  * @brief: Traverse children nodes of "MethodBody"
  * @return: std::nullopt
  */
-std::optional<std::string> MainClass::checkSemantics() {
+std::optional<string> MainClass::checkSemantics() {
     MainClass::st.enterScope();  // Enter "Method" scope
     for (size_t i = 2; i < this->children.size(); ++i) {
         this->children.at(i)->checkSemantics();

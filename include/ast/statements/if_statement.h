@@ -8,6 +8,8 @@ public:
     IfStatement();
     IfStatement(std::string t, std::string v);
     ~IfStatement() override = default;
+
+    std::optional<std::string> checkSemantics() final;
 };
 
 #endif

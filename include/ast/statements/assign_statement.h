@@ -8,6 +8,8 @@ public:
     AssignStatement();
     AssignStatement(std::string t, std::string v);
     ~AssignStatement() override = default;
+
+    std::optional<std::string> checkSemantics() final;
 };
 
 #endif

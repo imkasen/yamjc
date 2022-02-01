@@ -29,7 +29,7 @@ std::optional<string> Type::generateST() {
  *   2. "Type:int" or "Type:boolean" or "Type:int[]"
  * @return: std::nullopt || string
  */
-std::optional<std::string> Type::checkSemantics() {
+std::optional<string> Type::checkSemantics() {
     // 1.
     if (this->children.size() == 1 && this->getValue().empty()) {
         return this->children.at(0)->checkSemantics();

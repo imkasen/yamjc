@@ -8,6 +8,8 @@ public:
     WhileStatement();
     WhileStatement(std::string t, std::string v);
     ~WhileStatement() override = default;
+
+    std::optional<std::string> checkSemantics() final;
 };
 
 #endif

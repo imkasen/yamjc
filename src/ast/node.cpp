@@ -109,7 +109,7 @@ void Node::semanticAnalysis() {
 /*
  * Default behavior,
  * this behavior is used by following nodes:
- * "MethodBody"
+ * "MethodBody", "Declarations", "Statement", "ElseStatement"
  *
  * @brief: Traverse children nodes.
  * @return: std::nullopt
@@ -121,7 +121,7 @@ std::optional<string> Node::checkSemantics() {  // NOLINT
     return std::nullopt;
 }
 
-void Node::printErrMsg(const std::string &message) {
+void Node::printErrMsg(const string &message) {
     std::cerr << message << endl;
     std::exit(EXIT_FAILURE);
 }

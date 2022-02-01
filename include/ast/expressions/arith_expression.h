@@ -8,6 +8,8 @@ public:
     ArithExpression();
     ArithExpression(std::string t, std::string v);
     ~ArithExpression() override = default;
+
+    std::optional<std::string> checkSemantics() final;
 };
 
 #endif
