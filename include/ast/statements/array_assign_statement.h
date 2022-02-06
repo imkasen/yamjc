@@ -8,6 +8,8 @@ public:
     ArrayAssignStatement();
     ArrayAssignStatement(std::string t, std::string v);
     ~ArrayAssignStatement() override = default;
+
+    std::optional<std::string> checkSemantics() final;
 };
 
 #endif

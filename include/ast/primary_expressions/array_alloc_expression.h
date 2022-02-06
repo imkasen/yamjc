@@ -8,6 +8,8 @@ public:
     ArrayAllocExpression();
     ArrayAllocExpression(std::string t, std::string v);
     ~ArrayAllocExpression() override = default;
+
+    std::optional<std::string> checkSemantics() final;
 };
 
 #endif

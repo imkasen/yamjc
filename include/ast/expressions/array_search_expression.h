@@ -8,6 +8,8 @@ public:
     ArraySearchExpression();
     ArraySearchExpression(std::string t, std::string v);
     ~ArraySearchExpression() override = default;
+
+    std::optional<std::string> checkSemantics() final;
 };
 
 #endif

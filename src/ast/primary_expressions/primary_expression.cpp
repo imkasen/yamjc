@@ -13,7 +13,6 @@ std::optional<string> PrimaryExpression::generateST() {
 }
 
 /*
- * @brief: also used by "AllocExpression"
  * @return: std::nullopt || string
  */
 std::optional<string> PrimaryExpression::checkSemantics() {

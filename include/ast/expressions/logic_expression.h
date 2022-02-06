@@ -8,6 +8,8 @@ public:
     LogicExpression();
     LogicExpression(std::string t, std::string v);
     ~LogicExpression() override = default;
+
+    std::optional<std::string> checkSemantics() final;
 };
 
 #endif

@@ -8,6 +8,8 @@ public:
     ArrayLengthExpression();
     ArrayLengthExpression(std::string t, std::string v);
     ~ArrayLengthExpression() override = default;
+
+    std::optional<std::string> checkSemantics() final;
 };
 
 #endif

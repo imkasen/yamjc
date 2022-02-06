@@ -8,6 +8,8 @@ public:
     AllocExpression();
     AllocExpression(std::string t, std::string v);
     ~AllocExpression() override = default;
+
+    std::optional<std::string> checkSemantics() final;
 };
 
 #endif
