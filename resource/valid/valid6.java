@@ -1,5 +1,4 @@
 // check assignment
-
 class TreeVisitor {
     public static void main(String[] a) {
         System.out.println(new TV().Start(3));  // OK
@@ -17,6 +16,9 @@ class TV {
         // number[0] = true;        // can not be "true"
         // number[0] = test;        // no test variable
         // number[true] = 1;        // can not be "true"
+        // n = number[1];           // OK
+        // n = number[true];        // can not be "true"
+        // n = n[1];                // n is not an array
         // n = number.length;       // OK
         // root = number.length;    // no root
 

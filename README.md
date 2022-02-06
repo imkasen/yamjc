@@ -9,7 +9,7 @@ A Mini-Java Compiler Practice.
 
 > Overloading is not allowed in MiniJava. The MiniJava statement `System.out.println( ... );` can only print integers. The MiniJava expression `e.length` only applies to expressions of type `int []`.
 
-# Gammar
+# Grammar
 
 1. [BNF for MiniJava](https://www.cambridge.org/us/features/052182060X/grammar.html)
 2. [BNF for MiniJava](https://web.cs.ucla.edu/classes/spring11/cs132/cs132/mj/minijava.html)
