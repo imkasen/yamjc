@@ -19,6 +19,10 @@ std::optional<string> Expression::generateST() {
  *              |
  *      "PrimaryExpression"
  *
+ *      "Expression"
+ *           |
+ *      "AllocExpression"
+ *
  *   4. "Expression"   or  "Expression"    or   "Expression"
  *          |                   |                   |
  *        "int"             "boolean"          "keyword:this"
@@ -26,6 +30,10 @@ std::optional<string> Expression::generateST() {
  *   5.                   "Expression"
  *                 /           |          \
  *    "AllocExpression"  "Identifier"  "ExpressionList"
+ *
+ *                              "Expression"
+ *                     /              |         \
+ *          "PrimaryExpression"  "Identifier"  ["ExpressionList"]
  *
  *   6.            "Expression"
  *          /             |        \
@@ -56,6 +64,17 @@ std::optional<string> Expression::checkSemantics() {
         } else {
             string msg = "[Semantic Analysis] - Error: Variable \"" + var_name + "\" does not exist in scope \"" +
                          Expression::st.getScopeTitle() + "\"!";
+            Expression::printErrMsg(msg);
+        }
+    }
+    // "Expression" -> "AllocExpression"
+    else if (this->children.size() == 1 && this->children.at(0)->getType() == "AllocExpression") {
+        class_name = this->children.at(0)->checkSemantics().value_or("");
+        c_record_ptr = Expression::st.lookupRecordInRoot(class_name).value_or(nullptr);
+        if (c_record_ptr && c_record_ptr->getRecord() == "Class") {
+            return c_record_ptr->getType();
+        } else {
+            string msg = "[Semantic Analysis] - Error: Class \"" + class_name + "\" does not exist!";
             Expression::printErrMsg(msg);
         }
     }
@@ -93,6 +112,39 @@ std::optional<string> Expression::checkSemantics() {
             if (!m_record_ptr) {
                 string msg = "[Semantic Analysis] - Error: Method \"" + method_name +
                              "\" does not exist in scope \"" + class_ptr->getType() + "\"!";
+                Expression::printErrMsg(msg);
+            }
+        }
+
+        this->checkParameters(m_record_ptr);
+
+        return m_record_ptr->getType();
+    }
+    // "Expression" -> "PrimaryExpression", "Identifier"
+    // "Expression" -> "PrimaryExpression", "Identifier", "ExpressionList"
+    else if (this->children.size() <= 3 && this->children.at(0)->getType() == "PrimaryExpression") {
+        var_name = this->children.at(0)->checkSemantics().value_or("");
+        method_name = this->children.at(1)->checkSemantics().value_or("");
+
+        v_record_ptr = Expression::st.lookupRecord(var_name).value_or(nullptr);
+        if (!v_record_ptr) {
+            string msg = "[Semantic Analysis] - Error: Variable \"" + var_name + "\" does not exist in scope \"" +
+                         Expression::st.getScopeTitle() + "\"!";
+            Expression::printErrMsg(msg);
+        }
+
+        class_name = v_record_ptr->getType();
+        c_record_ptr = Expression::st.lookupRecordInRoot(class_name).value_or(nullptr);
+        class_ptr = std::dynamic_pointer_cast<STClass>(c_record_ptr);
+
+        if (!class_ptr) {
+            string msg = "[Semantic Analysis] - Error: Class \"" + class_name + "\" does not exist!";
+            Expression::printErrMsg(msg);
+        } else {
+            m_record_ptr = class_ptr->lookupMethod(method_name).value_or(nullptr);
+            if (!m_record_ptr) {
+                string msg = "[Semantic Analysis] - Error: Method \"" + method_name +
+                             "\" does not exist in scope \"" + Expression::st.getScopeTitle() + "\"!";
                 Expression::printErrMsg(msg);
             }
         }
