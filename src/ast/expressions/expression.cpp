@@ -50,9 +50,12 @@ std::optional<string> Expression::checkSemantics() {
     std::shared_ptr<Record> m_record_ptr;
     std::shared_ptr<STClass> class_ptr;
 
+    size_t size = this->children.size();
+    string type = this->children.at(0)->getType();
+
     // 1.
     // "Expression" -> "PrimaryExpression"
-    if (this->children.size() == 1 && this->children.at(0)->getType() == "PrimaryExpression") {
+    if (size == 1 && type == "PrimaryExpression") {
         // Check parameters
         var_name = this->children.at(0)->checkSemantics().value_or("");
         if (var_name == "int" || var_name == "boolean") {
@@ -71,17 +74,14 @@ std::optional<string> Expression::checkSemantics() {
     // "Expression" -> "AllocExpression"
     // "Expression" -> "ArrayAllocExpression"
     // "Expression" -> "UnaryExpression"
-    else if (this->children.size() == 1 && (this->children.at(0)->getType() == "AllocExpression" ||
-                                            this->children.at(0)->getType() == "ArrayAllocExpression" ||
-                                            this->children.at(0)->getType() == "UnaryExpression")) {
+    else if (size == 1 && (type == "AllocExpression" || type == "ArrayAllocExpression" || type == "UnaryExpression")) {
         return this->children.at(0)->checkSemantics();
     }
     // 3.
     // "Expression" -> "int"
     // "Expression" -> "boolean"
     // "Expression" -> "keyword:this"
-    else if (this->children.size() == 1) {
-        string type = this->children.at(0)->checkSemantics().value_or("");
+    else if (size == 1) {
         if (type == "keyword") {
             v_record_ptr = Expression::st.lookupRecord(this->children.at(0)->getValue()).value_or(nullptr);
             if (v_record_ptr) {
@@ -95,7 +95,7 @@ std::optional<string> Expression::checkSemantics() {
     }
     // 4.
     // "Expression" -> "AllocExpression", "Identifier", "ExpressionList"
-    else if (this->children.size() <= 3 && this->children.at(0)->getType() == "AllocExpression") {
+    else if (size <= 3 && type == "AllocExpression") {
         class_name = this->children.at(0)->checkSemantics().value_or("");  // return class type actually
         method_name = this->children.at(1)->checkSemantics().value_or("");
 
@@ -116,7 +116,7 @@ std::optional<string> Expression::checkSemantics() {
     // 5.
     // "Expression" -> "PrimaryExpression", "Identifier"
     // "Expression" -> "PrimaryExpression", "Identifier", "ExpressionList"
-    else if (this->children.size() <= 3 && this->children.at(0)->getType() == "PrimaryExpression") {
+    else if (size <= 3 && type == "PrimaryExpression") {
         var_name = this->children.at(0)->checkSemantics().value_or("");
         method_name = this->children.at(1)->checkSemantics().value_or("");
 
@@ -150,7 +150,7 @@ std::optional<string> Expression::checkSemantics() {
     // 6.
     // "Expression" -> "keyword:this", "Identifier"
     // "Expression" -> "keyword:this", "Identifier", "ExpressionList"
-    else if (this->children.size() <= 3 && this->children.at(0)->getValue() == "this") {
+    else if (size <= 3 && type == "keyword") {
         method_name = this->children.at(1)->checkSemantics().value_or("");
         m_record_ptr = Expression::st.lookupRecord(method_name).value_or(nullptr);
         if (!m_record_ptr) {
@@ -234,6 +234,3 @@ void Expression::strSplit(std::deque<std::string> &deque, std::string &text, con
         text.erase(0, pos + delimiter.length());
     }
 }
-
-// ---------
-// TODO: UnaryExpression

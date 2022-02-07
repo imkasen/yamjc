@@ -19,6 +19,9 @@ class TV {
         // if (true && 1)     // not boolean
         // if (root.Init(1))  // OK
         // if (1)             // not boolean
+        // if (!false)        // OK
+        // if (!1)            // not boolean
+        // if (!root.Init(1)) // OK
         {}
         else {}
 
