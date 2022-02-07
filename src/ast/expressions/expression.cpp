@@ -15,25 +15,25 @@ std::optional<string> Expression::generateST() {
 
 /*
  * @brief:
- *   2.    "Expression"
+ *   1.    "Expression"
  *              |
  *      "PrimaryExpression"
  *
- *        "Expression"       or   "Expression"
- *           |                        |
- *      "AllocExpression"       "ArrayAllocExpression"
+ *   2.     "Expression"       or   "Expression"          or    "Expression"
+ *              |                        |                            |
+ *        "AllocExpression"       "ArrayAllocExpression"       "UnaryExpression"
  *
- *   4. "Expression"   or  "Expression"    or   "Expression"
+ *   3. "Expression"   or  "Expression"    or   "Expression"
  *          |                   |                   |
  *        "int"             "boolean"          "keyword:this"
  *
- *   5.                   "Expression"
- *                 /           |          \
- *    "AllocExpression"  "Identifier"  "ExpressionList"
+ *   4.                   "Expression"
+ *                   /           |          \
+ *      "AllocExpression"  "Identifier"  "ExpressionList"
  *
- *                        "Expression"
- *            /              |         \
- *   "PrimaryExpression"  "Identifier"  ["ExpressionList"]
+ *   5.                     "Expression"
+ *               /              |         \
+ *     "PrimaryExpression"  "Identifier"  ["ExpressionList"]
  *
  *   6.            "Expression"
  *          /             |        \
@@ -50,7 +50,7 @@ std::optional<string> Expression::checkSemantics() {
     std::shared_ptr<Record> m_record_ptr;
     std::shared_ptr<STClass> class_ptr;
 
-    // 2.
+    // 1.
     // "Expression" -> "PrimaryExpression"
     if (this->children.size() == 1 && this->children.at(0)->getType() == "PrimaryExpression") {
         // Check parameters
@@ -67,18 +67,21 @@ std::optional<string> Expression::checkSemantics() {
             Expression::printErrMsg(msg);
         }
     }
+    // 2.
     // "Expression" -> "AllocExpression"
     // "Expression" -> "ArrayAllocExpression"
+    // "Expression" -> "UnaryExpression"
     else if (this->children.size() == 1 && (this->children.at(0)->getType() == "AllocExpression" ||
-                                            this->children.at(0)->getType() == "ArrayAllocExpression")) {
+                                            this->children.at(0)->getType() == "ArrayAllocExpression" ||
+                                            this->children.at(0)->getType() == "UnaryExpression")) {
         return this->children.at(0)->checkSemantics();
     }
-    // 4.
+    // 3.
     // "Expression" -> "int"
     // "Expression" -> "boolean"
     // "Expression" -> "keyword:this"
     else if (this->children.size() == 1) {
-        string type = this->children.at(0)->getType();
+        string type = this->children.at(0)->checkSemantics().value_or("");
         if (type == "keyword") {
             v_record_ptr = Expression::st.lookupRecord(this->children.at(0)->getValue()).value_or(nullptr);
             if (v_record_ptr) {
@@ -90,7 +93,7 @@ std::optional<string> Expression::checkSemantics() {
             return type;
         }
     }
-    // 5.
+    // 4.
     // "Expression" -> "AllocExpression", "Identifier", "ExpressionList"
     else if (this->children.size() <= 3 && this->children.at(0)->getType() == "AllocExpression") {
         class_name = this->children.at(0)->checkSemantics().value_or("");  // return class type actually
@@ -110,6 +113,7 @@ std::optional<string> Expression::checkSemantics() {
 
         return m_record_ptr->getType();
     }
+    // 5.
     // "Expression" -> "PrimaryExpression", "Identifier"
     // "Expression" -> "PrimaryExpression", "Identifier", "ExpressionList"
     else if (this->children.size() <= 3 && this->children.at(0)->getType() == "PrimaryExpression") {
@@ -162,76 +166,6 @@ std::optional<string> Expression::checkSemantics() {
 
     return std::nullopt;
 }
-
-/*
- * @brief:
- *
- *   3. "Expression:!"
- *            |
- *      "Expression"
- *
- *   7.       "Expression"
- *             /       \
- *      "Expression"    ...
- *
- * @return: std::nullopt || string
- */
-/*
-std::optional<string> Expression::checkSemantics() {
-    string class_name;
-    string method_name;
-    string var_name;
-    std::shared_ptr<Record> c_record_ptr;
-    std::shared_ptr<Record> v_record_ptr;
-    std::shared_ptr<Record> m_record_ptr;
-    std::shared_ptr<STClass> class_ptr;
-
-    // 3.
-    // "Expression:!" -> "Expression"
-    else if (this->children.size() == 1 && this->getValue() == "!") {
-        return this->children.at(0)->checkSemantics();
-    }
-    // 7.
-    // "Expression" -> "Expression", ...
-    else if (this->children.size() <= 3 && this->children.at(0)->getType() == "Expression") {
-        // "Expression:!" -> "Expression", "Identifier"
-        // "Expression:!" -> "Expression", "Identifier", "ExpressionList"
-        if (this->getValue() == "!" && this->children.at(1)->getType() == "Identifier") {
-            var_name = this->children.at(0)->checkSemantics().value_or("");
-            method_name = this->children.at(1)->checkSemantics().value_or("");
-
-            v_record_ptr = Expression::st.lookupRecord(var_name).value_or(nullptr);
-            if (!v_record_ptr) {
-                string msg = "[Semantic Analysis] - Error: Variable \"" + var_name + "\" does not exist in scope \"" +
-                             Expression::st.getScopeTitle() + "\"!";
-                Expression::printErrMsg(msg);
-            }
-
-            class_name = v_record_ptr->getType();
-            c_record_ptr = Expression::st.lookupRecordInRoot(class_name).value_or(nullptr);
-            class_ptr = std::dynamic_pointer_cast<STClass>(c_record_ptr);
-
-            if (!class_ptr) {
-                string msg = "[Semantic Analysis] - Error: Class \"" + class_name + "\" does not exist!";
-                Expression::printErrMsg(msg);
-            } else {
-                m_record_ptr = class_ptr->lookupMethod(method_name).value_or(nullptr);
-                if (!m_record_ptr) {
-                    string msg = "[Semantic Analysis] - Error: Method \"" + method_name +
-                                 "\" does not exist in scope \"" + Expression::st.getScopeTitle() + "\"!";
-                    Expression::printErrMsg(msg);
-                }
-            }
-
-            this->checkParameters(m_record_ptr);
-
-            return m_record_ptr->getType();
-        }
-    }
-
-    return std::nullopt;
-}
- */
 
 /*
  * @brief: Check whether formal parameters meet the syntax requirements, e.g. order, number...

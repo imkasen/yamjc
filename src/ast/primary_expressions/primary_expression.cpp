@@ -13,12 +13,21 @@ std::optional<string> PrimaryExpression::generateST() {
 }
 
 /*
+ * @brief:
+ *   1. "PrimaryExpression"  or  "PrimaryExpression"
+ *              |                       |
+ *         "Identifier"             "Expression"
+ *   2. "int:xx", "boolean:xxx", "keyword:this"
  * @return: std::nullopt || string
  */
 std::optional<string> PrimaryExpression::checkSemantics() {
+    // 1.
     if (this->children.size() == 1) {
         return this->children.at(0)->checkSemantics();
     }
-
+    // 2.
+    else if (this->children.empty()) {
+        return this->getType();
+    }
     return std::nullopt;
 }
