@@ -1,4 +1,4 @@
-#include "st/parameter.h"
+#include "parameter.h"
 using std::string;
 
 Parameter::Parameter() : Variable() {}

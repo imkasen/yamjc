@@ -1,4 +1,4 @@
-#include "st/record.h"
+#include "record.h"
 using std::string;
 
 Record::Record() {

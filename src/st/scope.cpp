@@ -1,4 +1,4 @@
-#include "st/scope.h"
+#include "scope.h"
 using std::endl;
 using std::size_t;
 using std::string;

@@ -1,4 +1,4 @@
-#include "st/st_class.h"
+#include "st_class.h"
 using std::string;
 
 STClass::STClass() : Variable() {}

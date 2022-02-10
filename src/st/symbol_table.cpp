@@ -1,4 +1,4 @@
-#include "st/symbol_table.h"
+#include "symbol_table.h"
 using std::endl;
 using std::string;
 
