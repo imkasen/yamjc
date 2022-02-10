@@ -1,17 +1,7 @@
 # generated compiler files
 
-parser.tab.*
-lex.yy.c*
-/compiler
-stack.hh
-/*.dot
-/*.svg
-/*.txt
-/test/
-
-# CMake
-!CMakeLists.txt
-/build/
+/*build*/
+*.bak
 
 # Created macos,linux,windows,vim,visualstudiocode,cmake,jetbrains+all
 
