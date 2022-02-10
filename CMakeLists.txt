@@ -47,25 +47,12 @@ FLEX_TARGET(
 
 ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
 
-aux_source_directory(src/ast/ AST)
-aux_source_directory(src/ast/declarations DECLARATIONS)
-aux_source_directory(src/ast/formal_parameters PARAMETERS)
-aux_source_directory(src/ast/statements STATEMENTS)
-aux_source_directory(src/ast/expressions EXPRESSIONS)
-aux_source_directory(src/ast/primary_expressions PRIMARY_EXPRESSIONS)
-
+add_subdirectory(src/ast)
 add_subdirectory(src/st)
 
 add_executable(
         compiler
         src/main.cpp
-
-        ${AST}
-        ${DECLARATIONS}
-        ${PARAMETERS}
-        ${STATEMENTS}
-        ${EXPRESSIONS}
-        ${PRIMARY_EXPRESSIONS}
 
         ${BISON_MyParser_OUTPUTS}
         ${FLEX_MyScanner_OUTPUTS}
@@ -74,6 +61,7 @@ add_executable(
 target_link_libraries(
         compiler
         ${FLEX_LIBRARIES}
+        AST
         ST
 )
 
