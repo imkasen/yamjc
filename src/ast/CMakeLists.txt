@@ -1,19 +1,19 @@
-aux_source_directory(declarations DECLARATIONS)
-aux_source_directory(formal_parameters PARAMETERS)
-aux_source_directory(statements STATEMENTS)
-aux_source_directory(expressions EXPRESSIONS)
-aux_source_directory(primary_expressions PRIMARY_EXPRESSIONS)
+add_subdirectory(declarations)
+add_subdirectory(expressions)
+add_subdirectory(formal_parameters)
+add_subdirectory(primary_expressions)
+add_subdirectory(statements)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} DIR_SOURCES)
-add_library(
-        AST
-        ${DIR_SOURCES}
+add_library(AST ${DIR_SOURCES})
 
-        ${DECLARATIONS}
-        ${PARAMETERS}
-        ${STATEMENTS}
-        ${EXPRESSIONS}
-        ${PRIMARY_EXPRESSIONS}
+target_link_libraries(
+        AST
+        AST_DECLARATIONS
+        AST_EXPRESSIONS
+        AST_FORMAL_PARAMETERS
+        AST_PRIMARY_EXPRESSIONS
+        AST_STATEMENTS
 )
 
 target_include_directories(
