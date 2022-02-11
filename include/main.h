@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include <cstdio>
 #include "ast/node.h"
 #include "parser.tab.hh"  // ${PROJECT_BINARY_DIR}
 

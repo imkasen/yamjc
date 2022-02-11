@@ -11,14 +11,14 @@ A Mini-Java Compiler Practice.
 
 # Grammar
 
-1. [BNF for MiniJava](https://www.cambridge.org/us/features/052182060X/grammar.html)
-2. [BNF for MiniJava](https://web.cs.ucla.edu/classes/spring11/cs132/cs132/mj/minijava.html)
+* [BNF for MiniJava](https://www.cambridge.org/us/features/052182060X/grammar.html)
+* [BNF for MiniJava](https://web.cs.ucla.edu/classes/spring11/cs132/cs132/mj/minijava.html)
 
 # Environments
 
-* Linux (Ubuntu 20.04 LTS)
+* Ubuntu 20.04 LTS x86_64
 * CMake 3.16.3
-* g++ 9.3.0 (build-essential)
+* g++ 9.3.0
 * Graphviz 2.43.0
 * flex 2.6.4
 * Bison 3.5.1

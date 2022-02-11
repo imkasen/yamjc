@@ -50,7 +50,7 @@ void Node::printAST(size_t depth) {
 */
 
 // Save ast in "ast.txt"
-void Node::saveAST(std::ofstream *outStream, size_t depth) {  // NOLINT
+void Node::saveAST(std::ofstream* outStream, size_t depth) {  // NOLINT
     for (size_t i = 0; i < depth; ++i) {
         *outStream << "  ";
     }
@@ -61,7 +61,7 @@ void Node::saveAST(std::ofstream *outStream, size_t depth) {  // NOLINT
 }
 
 // Generate ast in "ast.dot"
-void Node::generateAST(std::ofstream *outStream, size_t &count) {  // NOLINT
+void Node::generateAST(std::ofstream* outStream, size_t &count) {  // NOLINT
     this->setId(count++);
     if (!this->getValue().empty()) {
         *outStream << "n" << this->getId() << " [label=\"" << this->getType() << ":" << this->getValue() << "\"];"
@@ -76,7 +76,7 @@ void Node::generateAST(std::ofstream *outStream, size_t &count) {  // NOLINT
 }
 
 // Generate the symbol table
-void Node::buildST(std::ofstream *outStream) {
+void Node::buildST(std::ofstream* outStream) {
     this->generateST();
     Node::st.resetTable();
     // Generate "st.dot"

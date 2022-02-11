@@ -10,10 +10,10 @@ void yy::parser::error(const string &err) {
     std::cerr << "Cannot generate a syntax tree for this input: " << err << endl;
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     // Read file from cmd
     if (argc > 1) {
-        FILE *file = std::fopen(argv[1], "r");
+        FILE* file = std::fopen(argv[1], "r");
         if (file) {
             yyin = file;
         } else {

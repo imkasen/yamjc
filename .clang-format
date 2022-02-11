@@ -9,6 +9,7 @@ DerivePointerAlignment: false
 IncludeBlocks: Merge
 IndentWidth: 4
 Language: Cpp
-PointerAlignment: Right
+PointerAlignment: Left
+ReferenceAlignment: Right
 SpaceBeforeCpp11BracedList: true
 TabWidth: 4

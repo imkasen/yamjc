@@ -11,7 +11,7 @@
 }
 
 %code provides {
-  extern FILE *yyin;
+  extern FILE* yyin;
 }
 
 %code {
