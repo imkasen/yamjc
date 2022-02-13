@@ -2,14 +2,16 @@
 using std::size_t;
 using std::string;
 
+/*
+         "ClassDeclaration"
+            /        \
+    "Identifier"  ["Declarations"]
+ */
+
 ClassDeclaration::ClassDeclaration() : Declarations() {}
 ClassDeclaration::ClassDeclaration(string t, string v) : Declarations(std::move(t), std::move(v)) {}
 
 /*
- *      "ClassDeclaration"
- *         /        \
- * "Identifier"  ["Declarations"]
- *
  * @brief:
  *   1. Create records in the current "Class" scope.
  *      Set the scope title.

@@ -2,14 +2,16 @@
 using std::size_t;
 using std::string;
 
+/*
+                  "MainClass"
+               /       |        \
+     "Identifier"  "Identifier"  ["MethodBody"]
+ */
+
 MainClass::MainClass() : Node() {}
 MainClass::MainClass(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
- *                 "MainClass"
- *             /       |        \
- *  "Identifier"  "Identifier"  ["MethodBody"]
- *
  * @brief:
  *   1. Create records in the current "Class" scope.
  *      Set the scope title.

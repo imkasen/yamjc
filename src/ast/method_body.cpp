@@ -1,14 +1,16 @@
 #include "ast/method_body.h"
 using std::string;
 
+/*
+       "MethodBody"
+            |          \
+      "VarDeclaration"  ...
+ */
+
 MethodBody::MethodBody() : Node() {}
 MethodBody::MethodBody(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
- *      "MethodBody"
- *           |          \
- *    "VarDeclaration"  ...
- *
  * @brief: Traverse nodes.
  * @return: std::nullopt
  */

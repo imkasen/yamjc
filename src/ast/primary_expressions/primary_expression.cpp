@@ -1,6 +1,14 @@
 #include "ast/primary_expressions/primary_expression.h"
 using std::string;
 
+/*
+      "PrimaryExpression"  or  "PrimaryExpression"
+              |                        |
+          "Identifier"             "Expression"
+
+      "int:xxx" or "boolean:xxx" or "keyword:this"
+ */
+
 PrimaryExpression::PrimaryExpression() : Node() {}
 PrimaryExpression::PrimaryExpression(string t, string v) : Node(std::move(t), std::move(v)) {}
 
@@ -13,14 +21,10 @@ std::optional<string> PrimaryExpression::generateST() {
 }
 
 /*
- * @brief:
- *   1. "PrimaryExpression"  or  "PrimaryExpression"
- *              |                       |
- *         "Identifier"             "Expression"
+ * @brief: Execute when "this->type" is "PrimaryExpression"
  * @return: std::nullopt || string
  */
 std::optional<string> PrimaryExpression::checkSemantics() {
-    // 1.
     if (this->children.size() == 1) {
         return this->children.at(0)->checkSemantics();
     }

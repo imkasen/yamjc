@@ -1,14 +1,17 @@
 #include "ast/expressions/logic_expression.h"
 using std::string;
 
+/*
+         "LogicExpression"
+           /           \
+     "Expression"  "Expression"
+ */
+
 LogicExpression::LogicExpression() : Expression() {}
 LogicExpression::LogicExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
 
 /*
- * @brief:
- *       "LogicExpression"
- *         /           \
- *   "Expression"  "Expression"
+ * @brief: Compare lhs and rhs
  * @return: std::nullopt
  */
 std::optional<string> LogicExpression::checkSemantics() {

@@ -1,14 +1,17 @@
 #include "ast/expressions/compare_expression.h"
 using std::string;
 
+/*
+         "CompareExpression"
+           /           \
+      "Expression"  "Expression"
+ */
+
 CompareExpression::CompareExpression() : Expression() {}
 CompareExpression::CompareExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
 
 /*
- * @brief:
- *       "CompareExpression"
- *         /           \
- *   "Expression"  "Expression"
+ * @brief: Compare lhs and rhs
  * @return: std::nullopt
  */
 std::optional<string> CompareExpression::checkSemantics() {

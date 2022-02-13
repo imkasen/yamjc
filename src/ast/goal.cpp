@@ -1,14 +1,16 @@
 #include "ast/goal.h"
 using std::string;
 
+/*
+                       "Goal"
+              /          |                      \
+     "MainClass"   ["ClassDeclaration"]  ["ClassExtendsDeclaration"]
+ */
+
 Goal::Goal() : Node() {}
 Goal::Goal(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
- *             "Goal"
- *             /   \                      \
- *   "MainClass"   ["ClassDeclaration"]  ["ClassExtendsDeclaration"]
- *
  * Note: Records in the current "Program" scope are added
  * by children scopes.
  *

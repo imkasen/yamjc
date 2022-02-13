@@ -6,6 +6,7 @@ WhileStatement::WhileStatement(string t, string v) : Statement(std::move(t), std
 
 /*
  *  Node: "WhileStatement"
+ *  @brief: Same like "IfStatement"
  */
 std::optional<string> WhileStatement::checkSemantics() {
     string type = this->children.at(0)->checkSemantics().value_or("");

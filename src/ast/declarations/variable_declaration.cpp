@@ -1,14 +1,16 @@
 #include "ast/declarations/variable_declaration.h"
 using std::string;
 
+/*
+       "VarDeclaration"
+          /     \
+      "Type"  "Identifier"
+ */
+
 VarDeclaration::VarDeclaration() : Declarations() {}
 VarDeclaration::VarDeclaration(string t, string v) : Declarations(std::move(t), std::move(v)) {}
 
 /*
- *  "VarDeclaration"
- *     /     \
- * "Type"  "Identifier"
- *
  * @brief:
  *   1. Create "Variable" records in the current "Class" || "Method" scope.
  *      Add into the current scope:

@@ -1,14 +1,16 @@
 #include "ast/formal_parameters/formal_parameter.h"
 using std::string;
 
+/*
+    "FormalParameter"
+         /   \
+    "Type"  "Identifier"
+ */
+
 FormalParameter::FormalParameter() : FormalParameterList() {}
 FormalParameter::FormalParameter(string t, string v) : FormalParameterList(std::move(t), std::move(v)) {}
 
 /*
- * "FormalParameter"
- *      /   \
- * "Type"  "Identifier"
- *
  *@brief:
  *   1. Create "Parameter" records in the current "Method" scope.
  *      Add into the current scope:

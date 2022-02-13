@@ -1,7 +1,7 @@
-The Mini-Java Compiler
+Yet Another Mini-Java Compiler
 ======
 
-A Mini-Java Compiler Practice.
+A compiler practice.
 
 # What is Mini-Java?
 

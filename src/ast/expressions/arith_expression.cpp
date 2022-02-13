@@ -1,14 +1,17 @@
 #include "ast/expressions/arith_expression.h"
 using std::string;
 
+/*
+        "ArithExpression"
+          /           \
+     "Expression"  "Expression"
+ */
+
 ArithExpression::ArithExpression() : Expression() {}
 ArithExpression::ArithExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
 
 /*
- * @brief:
- *       "ArithExpression"
- *         /           \
- *   "Expression"  "Expression"
+ * @brief: Compare lhs and rhs
  * @return: std::nullopt
  */
 std::optional<std::string> ArithExpression::checkSemantics() {

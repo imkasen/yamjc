@@ -1,6 +1,14 @@
 #include "ast/type.h"
 using std::string;
 
+/*
+         "Type"
+           |
+       "Identifier"
+
+    "Type:int" or "Type:boolean" or "Type:int[]"
+ */
+
 Type::Type() : Node() {}
 Type::Type(string t, string v) : Node(std::move(t), std::move(v)) {}
 
@@ -23,18 +31,14 @@ std::optional<string> Type::generateST() {
 
 /*
  * @brief:
- *   1.    "Type"
- *           |
- *      "Identifier"
- *   2. "Type:int" or "Type:boolean" or "Type:int[]"
  * @return: std::nullopt || string
  */
 std::optional<string> Type::checkSemantics() {
-    // 1.
+    // 1. "Type" -> "Identifier"
     if (this->children.size() == 1 && this->getValue().empty()) {
         return this->children.at(0)->checkSemantics();
     }
-    // 2.
+    // 2. "Type:int" or "Type:boolean" or "Type:int[]"
     else if (this->children.empty() && !this->getValue().empty()) {
         return this->getValue();
     }

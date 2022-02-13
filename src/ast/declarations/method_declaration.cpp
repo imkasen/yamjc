@@ -2,14 +2,16 @@
 using std::size_t;
 using std::string;
 
+/*
+                  "MethodDeclaration"
+         /          /           \                 \
+     "Type"  "Identifier"  ["FormalParameterList"]  "MethodBody"
+ */
+
 MethodDeclaration::MethodDeclaration() : Declarations() {}
 MethodDeclaration::MethodDeclaration(std::string t, std::string v) : Declarations(std::move(t), std::move(v)) {}
 
 /*
- *                "MethodDeclaration"
- *      /        /              \                 \
- * "Type"  "Identifier"  ["FormalParameterList"]  "MethodBody"
- *
  * @brief:
  *   1. Create "Method" records in the current "Class" scope.
  *      Add into the current scope:

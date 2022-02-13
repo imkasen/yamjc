@@ -1,14 +1,16 @@
 #include "ast/declarations/class_extends_declaration.h"
 using std::string;
 
+/*
+              "ClassDeclaration"
+             /        |        \
+    "Identifier"  "Identifier"  ["Declarations"]
+ */
+
 ClassExtendsDeclaration::ClassExtendsDeclaration() : Declarations() {}
 ClassExtendsDeclaration::ClassExtendsDeclaration(string t, string v) : Declarations(std::move(t), std::move(v)) {}
 
 /*
- *      "ClassDeclaration"
- *         /        \         \
- * "Identifier"  "Identifier"  ["Declarations"]
- *
  * @brief:
  *   1. Create records in the current "Class" scope.
  *      Set the scope title.

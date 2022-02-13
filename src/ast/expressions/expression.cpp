@@ -2,6 +2,32 @@
 using std::size_t;
 using std::string;
 
+/*
+         "Expression"
+               |
+       "PrimaryExpression"
+
+          "Expression"       or   "Expression"          or    "Expression"
+               |                        |                            |
+         "AllocExpression"       "ArrayAllocExpression"       "UnaryExpression"
+
+      "Expression"   or  "Expression"    or   "Expression"
+          |                   |                   |
+        "int"             "boolean"          "keyword:this"
+
+                     "Expression"
+                /           |          \
+       "AllocExpression"  "Identifier"  "ExpressionList"
+
+                        "Expression"
+                /              |         \
+      "PrimaryExpression"  "Identifier"  ["ExpressionList"]
+
+                   "Expression"
+               /        |           \
+      "keyword:this"  "Identifier"  ["ExpressionList"]
+ */
+
 Expression::Expression() : Node() {}
 Expression::Expression(string t, string v) : Node(std::move(t), std::move(v)) {}
 
@@ -14,31 +40,6 @@ std::optional<string> Expression::generateST() {
 }
 
 /*
- * @brief:
- *   1.    "Expression"
- *              |
- *      "PrimaryExpression"
- *
- *   2.     "Expression"       or   "Expression"          or    "Expression"
- *              |                        |                            |
- *        "AllocExpression"       "ArrayAllocExpression"       "UnaryExpression"
- *
- *   3. "Expression"   or  "Expression"    or   "Expression"
- *          |                   |                   |
- *        "int"             "boolean"          "keyword:this"
- *
- *   4.                   "Expression"
- *                   /           |          \
- *      "AllocExpression"  "Identifier"  "ExpressionList"
- *
- *   5.                     "Expression"
- *               /              |         \
- *     "PrimaryExpression"  "Identifier"  ["ExpressionList"]
- *
- *   6.            "Expression"
- *          /             |        \
- *     "keyword:this"  "Identifier"  ["ExpressionList"]
- *
  * @return: std::nullopt || string
  */
 std::optional<string> Expression::checkSemantics() {
