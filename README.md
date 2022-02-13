@@ -26,7 +26,7 @@ A compiler practice.
 # Compiler Phases
 
 <div align="center">
-    <img src="resource/phases.svg" 
+    <img src="resource/phases.png" 
         width="600" height="auto" alt="Compiler Phases">
 </div>
 
