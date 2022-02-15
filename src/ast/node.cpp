@@ -1,4 +1,6 @@
 #include "ast/node.h"
+
+#include <utility>
 using std::cout;
 using std::endl;
 using std::size_t;
@@ -12,16 +14,16 @@ Node::Node() {
 
 Node::Node(string t, string v) : type(std::move(t)), value(std::move(v)) {}
 
-void Node::setId(size_t n_id) {
-    this->id = n_id;
+void Node::setId(size_t _id) {
+    this->id = _id;
 }
 
-void Node::setType(string n_type) {
-    this->type = std::move(n_type);
+void Node::setType(string _type) {
+    this->type = std::move(_type);
 }
 
-void Node::setValue(string n_value) {
-    this->value = std::move(n_value);
+void Node::setValue(string _value) {
+    this->value = std::move(_value);
 }
 
 size_t Node::getId() const {

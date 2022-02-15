@@ -24,17 +24,17 @@ public:
     TAC(std::string op, std::string lhs, std::string rhs, std::string result);
     virtual ~TAC() = default;
 
-    void setOP(const std::string &_op);
-    void setLHS(const std::string &_lhs);
-    void setRHS(const std::string &_rhs);
-    void setResult(const std::string &_result);
+    void setOP(std::string _op);
+    void setLHS(std::string _lhs);
+    void setRHS(std::string _rhs);
+    void setResult(std::string _result);
 
     [[nodiscard]] std::string getOP() const;
     [[nodiscard]] std::string getLHS() const;
     [[nodiscard]] std::string getRHS() const;
     [[nodiscard]] std::string getResult() const;
 
-    [[nodiscard]] std::string print() const;
+    [[nodiscard]] std::string printInfo() const;
 };
 
 #endif

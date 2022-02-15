@@ -12,20 +12,20 @@ TAC::TAC() {
 TAC::TAC(string op, string lhs, string rhs, string result)
     : op(std::move(op)), lhs(std::move(lhs)), rhs(std::move(rhs)), result(std::move(result)) {}
 
-void TAC::setOP(const std::string &_op) {
-    this->op = _op;
+void TAC::setOP(std::string _op) {
+    this->op = std::move(_op);
 }
 
-void TAC::setLHS(const std::string &_lhs) {
-    this->lhs = _lhs;
+void TAC::setLHS(std::string _lhs) {
+    this->lhs = std::move(_lhs);
 }
 
-void TAC::setRHS(const std::string &_rhs) {
-    this->rhs = _rhs;
+void TAC::setRHS(std::string _rhs) {
+    this->rhs = std::move(_rhs);
 }
 
-void TAC::setResult(const std::string &_result) {
-    this->result = _result;
+void TAC::setResult(std::string _result) {
+    this->result = std::move(_result);
 }
 
 std::string TAC::getOP() const {
@@ -44,6 +44,6 @@ std::string TAC::getResult() const {
     return this->result;
 }
 
-std::string TAC::print() const {
+std::string TAC::printInfo() const {
     return this->result + " := " + this->lhs + " " + this->op + " " + this->rhs;
 }
