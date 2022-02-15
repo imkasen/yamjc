@@ -49,6 +49,7 @@ ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
 
 add_subdirectory(src/ast)
 add_subdirectory(src/st)
+add_subdirectory(src/cfg)
 
 add_executable(
         compiler
