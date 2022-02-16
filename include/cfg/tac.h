@@ -1,5 +1,5 @@
-#ifndef TAC_H
-#define TAC_H
+#ifndef CFG_TAC_H
+#define CFG_TAC_H
 
 #include <string>
 
@@ -13,16 +13,16 @@
  *      |    |      |
  *   result lhs    rhs
  */
-class TAC {
+class Tac {
 protected:
     std::string op;
     std::string lhs, rhs;
     std::string result;
 
 public:
-    TAC();
-    TAC(std::string op, std::string lhs, std::string rhs, std::string result);
-    virtual ~TAC() = default;
+    Tac();
+    Tac(std::string op, std::string lhs, std::string rhs, std::string result);
+    virtual ~Tac() = default;
 
     void setOP(std::string _op);
     void setLHS(std::string _lhs);

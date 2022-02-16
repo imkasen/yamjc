@@ -1,5 +1,5 @@
-#ifndef PARAMETER_H
-#define PARAMETER_H
+#ifndef ST_PARAMETER_H
+#define ST_PARAMETER_H
 
 #include "variable.h"
 

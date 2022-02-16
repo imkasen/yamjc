@@ -1,5 +1,5 @@
-#ifndef IDENTIFIER_H
-#define IDENTIFIER_H
+#ifndef AST_IDENTIFIER_H
+#define AST_IDENTIFIER_H
 
 #include "node.h"
 

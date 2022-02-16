@@ -1,5 +1,5 @@
-#ifndef DECLARATIONS_H
-#define DECLARATIONS_H
+#ifndef AST_DECLARATIONS_DECLARATIONS_H
+#define AST_DECLARATIONS_DECLARATIONS_H
 
 #include "ast/node.h"
 

@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef AST_NODE_H
+#define AST_NODE_H
 
 #include <cstdlib>
 #include <fstream>

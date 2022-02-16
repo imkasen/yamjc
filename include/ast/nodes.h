@@ -1,5 +1,5 @@
-#ifndef NODES_H
-#define NODES_H
+#ifndef AST_NODES_H
+#define AST_NODES_H
 
 /*
  * Include all head files in the "ast" folder.

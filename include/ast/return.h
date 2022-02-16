@@ -1,5 +1,5 @@
-#ifndef RETURN_H
-#define RETURN_H
+#ifndef AST_RETURN_H
+#define AST_RETURN_H
 
 #include "node.h"
 

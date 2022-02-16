@@ -1,5 +1,5 @@
-#ifndef RECORD_H
-#define RECORD_H
+#ifndef ST_RECORD_H
+#define ST_RECORD_H
 
 #include <iostream>
 #include <memory>

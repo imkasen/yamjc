@@ -1,5 +1,5 @@
-#ifndef PRINT_STATEMENT_H
-#define PRINT_STATEMENT_H
+#ifndef AST_STATEMENTS_PRINT_STATEMENT_H
+#define AST_STATEMENTS_PRINT_STATEMENT_H
 
 #include "statement.h"
 

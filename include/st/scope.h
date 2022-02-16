@@ -1,5 +1,5 @@
-#ifndef SCOPE_H
-#define SCOPE_H
+#ifndef ST_SCOPE_H
+#define ST_SCOPE_H
 
 #include <algorithm>
 #include <deque>

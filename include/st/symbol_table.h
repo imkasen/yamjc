@@ -1,5 +1,5 @@
-#ifndef SYMBOL_TABLE_H
-#define SYMBOL_TABLE_H
+#ifndef ST_SYMBOL_TABLE_H
+#define ST_SYMBOL_TABLE_H
 
 #include "scope.h"
 

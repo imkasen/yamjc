@@ -1,5 +1,5 @@
-#ifndef METHOD_H
-#define METHOD_H
+#ifndef ST_METHOD_H
+#define ST_METHOD_H
 
 #include <deque>
 #include "parameter.h"

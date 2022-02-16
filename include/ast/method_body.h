@@ -1,5 +1,5 @@
-#ifndef METHOD_BODY_H
-#define METHOD_BODY_H
+#ifndef AST_METHOD_BODY_H
+#define AST_METHOD_BODY_H
 
 #include "node.h"
 

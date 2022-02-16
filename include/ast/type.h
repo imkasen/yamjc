@@ -1,5 +1,5 @@
-#ifndef TYPE_H
-#define TYPE_H
+#ifndef AST_TYPE_H
+#define AST_TYPE_H
 
 #include "node.h"
 

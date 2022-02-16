@@ -1,5 +1,5 @@
-#ifndef WHILE_STATEMENT_H
-#define WHILE_STATEMENT_H
+#ifndef AST_STATEMENTS_WHILE_STATEMENT_H
+#define AST_STATEMENTS_WHILE_STATEMENT_H
 
 #include "statement.h"
 

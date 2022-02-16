@@ -1,5 +1,5 @@
-#ifndef IF_STATEMENT_H
-#define IF_STATEMENT_H
+#ifndef AST_STATEMENTS_IF_STATEMENT_H
+#define AST_STATEMENTS_IF_STATEMENT_H
 
 #include "statement.h"
 

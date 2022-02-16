@@ -1,5 +1,5 @@
-#ifndef VARIABLE_H
-#define VARIABLE_H
+#ifndef ST_VARIABLE_H
+#define ST_VARIABLE_H
 
 #include <optional>
 #include <unordered_map>

@@ -1,5 +1,5 @@
-#ifndef MAIN_CLASS_H
-#define MAIN_CLASS_H
+#ifndef AST_MAIN_CLASS_H
+#define AST_MAIN_CLASS_H
 
 #include "node.h"
 

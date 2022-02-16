@@ -1,5 +1,5 @@
-#ifndef GOAL_H
-#define GOAL_H
+#ifndef AST_GOAL_H
+#define AST_GOAL_H
 
 #include "node.h"
 

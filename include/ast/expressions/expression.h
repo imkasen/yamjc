@@ -1,5 +1,5 @@
-#ifndef EXPRESSION_H
-#define EXPRESSION_H
+#ifndef AST_EXPRESSIONS_EXPRESSION_H
+#define AST_EXPRESSIONS_EXPRESSION_H
 
 #include "ast/node.h"
 
