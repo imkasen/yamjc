@@ -1,4 +1,5 @@
 #include "ast/method_body.h"
+using ast::MethodBody;
 using std::string;
 
 /*

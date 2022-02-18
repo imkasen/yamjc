@@ -1,4 +1,5 @@
 #include "ast/statements/while_statement.h"
+using ast::WhileStatement;
 using std::string;
 
 WhileStatement::WhileStatement() : Statement() {}

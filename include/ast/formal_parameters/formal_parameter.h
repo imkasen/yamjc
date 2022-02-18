@@ -3,6 +3,8 @@
 
 #include "formal_parameter_list.h"
 
+namespace ast {
+
 class FormalParameter : public FormalParameterList {
 public:
     FormalParameter();
@@ -11,5 +13,7 @@ public:
 
     std::optional<std::string> generateST() final;
 };
+
+}  // namespace ast
 
 #endif

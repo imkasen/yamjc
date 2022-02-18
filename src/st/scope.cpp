@@ -1,4 +1,6 @@
 #include "scope.h"
+using st::Record;
+using st::Scope;
 using std::endl;
 using std::size_t;
 using std::string;
@@ -103,7 +105,7 @@ void Scope::resetScope() {  // NOLINT
     this->next = 0;
 }
 
-void Scope::printST(std::size_t index, std::ofstream *outStream) {  // NOLINT
+void Scope::printST(std::size_t index, std::ofstream* outStream) {  // NOLINT
     static size_t count = index;
     string content = "<U><B>" + this->scope_title + "</B></U><BR/><BR/>\n";
     for (const auto &record_pair : this->records) {

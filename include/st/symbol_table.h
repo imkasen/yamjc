@@ -3,6 +3,8 @@
 
 #include "scope.h"
 
+namespace st {
+
 class SymbolTable {
 private:
     std::shared_ptr<Scope> root;
@@ -26,8 +28,10 @@ public:
 
     [[nodiscard]] std::optional<std::shared_ptr<Scope>> lookupChildScope(const std::string &key) const;
 
-    void printST(std::ofstream *outStream);
+    void printST(std::ofstream* outStream);
     void resetTable();
 };
+
+}  // namespace st
 
 #endif

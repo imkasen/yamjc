@@ -5,6 +5,8 @@
 #include <unordered_map>
 #include "record.h"
 
+namespace st {
+
 // local variables in "Class" and "Method"
 class Variable : public Record {
 protected:
@@ -21,5 +23,7 @@ public:
     void addVariable(const std::shared_ptr<Variable> &variable);
     std::optional<std::shared_ptr<Variable>> lookupVariable(const std::string &name) const;
 };
+
+}  // namespace st
 
 #endif

@@ -3,9 +3,11 @@
 
 #include "ast/node.h"
 
+namespace ast {
+
 class Expression : public Node {
 private:
-    void checkParameters(const std::shared_ptr<Record> &m_record_ptr);
+    void checkParameters(const std::shared_ptr<st::Record> &m_record_ptr);
     static void strSplit(std::deque<std::string> &deque, std::string &text, const std::string &delimiter);
 
 public:
@@ -16,5 +18,7 @@ public:
     std::optional<std::string> generateST() final;
     std::optional<std::string> checkSemantics() override;
 };
+
+}  // namespace ast
 
 #endif

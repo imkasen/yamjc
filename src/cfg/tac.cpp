@@ -1,4 +1,5 @@
 #include "tac.h"
+using cfg::Tac;
 using std::string;
 
 Tac::Tac() {

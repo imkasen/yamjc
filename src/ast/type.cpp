@@ -1,4 +1,5 @@
 #include "ast/type.h"
+using ast::Type;
 using std::string;
 
 /*

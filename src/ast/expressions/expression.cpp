@@ -1,4 +1,8 @@
 #include "ast/expressions/expression.h"
+using ast::Expression;
+using st::Method;
+using st::Record;
+using st::STClass;
 using std::size_t;
 using std::string;
 

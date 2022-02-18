@@ -3,11 +3,10 @@
 
 #include <cstdlib>
 #include <fstream>
-#include "st/method.h"
-#include "st/parameter.h"
 #include "st/st_class.h"
 #include "st/symbol_table.h"
-#include "st/variable.h"
+
+namespace ast {
 
 /*
  * The basic class in abstract syntax tree.
@@ -24,7 +23,7 @@ protected:
 
 public:
     std::deque<std::shared_ptr<Node>> children;
-    inline static SymbolTable st = SymbolTable();  // NOLINT
+    inline static st::SymbolTable st = st::SymbolTable();  // NOLINT
 
     Node();
     Node(std::string t, std::string v);
@@ -52,5 +51,7 @@ public:
 
     static void printErrMsg(const std::string &message);
 };
+
+}  // namespace ast
 
 #endif

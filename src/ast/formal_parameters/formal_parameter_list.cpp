@@ -1,4 +1,5 @@
 #include "ast/formal_parameters/formal_parameter_list.h"
+using ast::FormalParameterList;
 using std::size_t;
 using std::string;
 

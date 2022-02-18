@@ -1,4 +1,7 @@
 #include "symbol_table.h"
+using st::Record;
+using st::Scope;
+using st::SymbolTable;
 using std::endl;
 using std::string;
 
@@ -56,7 +59,7 @@ std::optional<std::shared_ptr<Scope>> SymbolTable::lookupChildScope(const string
     return this->current->lookupChildScope(key);
 }
 
-void SymbolTable::printST(std::ofstream *outStream) {
+void SymbolTable::printST(std::ofstream* outStream) {
     // Graphviz grammar
     *outStream << "label=\"Symbol Table\";" << endl;
     *outStream << "labelloc=\"t\";\n" << endl;

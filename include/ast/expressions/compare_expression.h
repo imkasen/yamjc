@@ -3,6 +3,8 @@
 
 #include "expression.h"
 
+namespace ast {
+
 class CompareExpression : public Expression {
 public:
     CompareExpression();
@@ -11,5 +13,7 @@ public:
 
     std::optional<std::string> checkSemantics() final;
 };
+
+}  // namespace ast
 
 #endif

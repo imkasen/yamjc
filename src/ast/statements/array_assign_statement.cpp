@@ -1,4 +1,5 @@
 #include "ast/statements/array_assign_statement.h"
+using ast::ArrayAssignStatement;
 using std::string;
 
 /*

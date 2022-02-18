@@ -1,4 +1,5 @@
 #include "ast/statements/if_statement.h"
+using ast::IfStatement;
 using std::string;
 
 /*

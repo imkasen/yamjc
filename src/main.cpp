@@ -4,7 +4,7 @@ using std::endl;
 using std::size_t;
 using std::string;
 
-extern std::shared_ptr<Node> root;
+extern std::shared_ptr<ast::Node> root;
 
 void yy::parser::error(const string &err) {
     std::cerr << "Cannot generate a syntax tree for this input: " << err << endl;

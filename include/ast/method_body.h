@@ -3,6 +3,8 @@
 
 #include "node.h"
 
+namespace ast {
+
 class MethodBody : public Node {
 public:
     MethodBody();
@@ -11,5 +13,7 @@ public:
 
     std::optional<std::string> generateST() override;
 };
+
+}  // namespace ast
 
 #endif

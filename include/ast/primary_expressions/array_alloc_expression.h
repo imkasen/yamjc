@@ -3,6 +3,8 @@
 
 #include "primary_expression.h"
 
+namespace ast {
+
 class ArrayAllocExpression : public PrimaryExpression {
 public:
     ArrayAllocExpression();
@@ -11,5 +13,7 @@ public:
 
     std::optional<std::string> checkSemantics() final;
 };
+
+}  // namespace ast
 
 #endif

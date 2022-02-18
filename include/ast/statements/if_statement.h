@@ -3,6 +3,8 @@
 
 #include "statement.h"
 
+namespace ast {
+
 class IfStatement : public Statement {
 public:
     IfStatement();
@@ -11,5 +13,7 @@ public:
 
     std::optional<std::string> checkSemantics() final;
 };
+
+}  // namespace ast
 
 #endif

@@ -3,6 +3,8 @@
 
 #include "method.h"
 
+namespace st {
+
 class STClass : public Variable {
 private:
     std::unordered_map<std::string, std::shared_ptr<Method>> methods;
@@ -17,5 +19,7 @@ public:
     void addMethod(const std::shared_ptr<Method> &method);
     std::optional<std::shared_ptr<Method>> lookupMethod(const std::string &name) const;
 };
+
+}  // namespace st
 
 #endif

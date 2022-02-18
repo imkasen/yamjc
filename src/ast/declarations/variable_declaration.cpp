@@ -1,4 +1,8 @@
 #include "ast/declarations/variable_declaration.h"
+using ast::VarDeclaration;
+using st::Method;
+using st::STClass;
+using st::Variable;
 using std::string;
 
 /*

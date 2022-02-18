@@ -3,11 +3,15 @@
 
 #include "ast/node.h"
 
+namespace ast {
+
 class Declarations : public Node {
 public:
     Declarations();
     Declarations(std::string t, std::string v);
     ~Declarations() override = default;
 };
+
+}  // namespace ast
 
 #endif

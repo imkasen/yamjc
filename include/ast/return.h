@@ -3,6 +3,8 @@
 
 #include "node.h"
 
+namespace ast {
+
 class Return : public Node {
 public:
     Return();
@@ -12,5 +14,7 @@ public:
     std::optional<std::string> generateST() final;
     std::optional<std::string> checkSemantics() override;
 };
+
+}  // namespace ast
 
 #endif

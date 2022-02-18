@@ -1,4 +1,5 @@
 #include "ast/statements/assign_statement.h"
+using ast::AssignStatement;
 using std::string;
 
 /*

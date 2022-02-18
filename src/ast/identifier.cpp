@@ -1,4 +1,5 @@
 #include "ast/identifier.h"
+using ast::Identifier;
 using std::string;
 
 Identifier::Identifier() : Node() {}

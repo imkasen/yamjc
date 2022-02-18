@@ -3,6 +3,8 @@
 
 #include "expression.h"
 
+namespace ast {
+
 class LogicExpression : public Expression {
 public:
     LogicExpression();
@@ -11,5 +13,7 @@ public:
 
     std::optional<std::string> checkSemantics() final;
 };
+
+}  // namespace ast
 
 #endif

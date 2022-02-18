@@ -3,6 +3,8 @@
 
 #include "declarations.h"
 
+namespace ast {
+
 class ClassExtendsDeclaration : public Declarations {
 public:
     ClassExtendsDeclaration();
@@ -12,5 +14,7 @@ public:
     std::optional<std::string> generateST() final;
     std::optional<std::string> checkSemantics() final;
 };
+
+}  // namespace ast
 
 #endif

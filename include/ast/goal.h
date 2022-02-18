@@ -3,6 +3,8 @@
 
 #include "node.h"
 
+namespace ast {
+
 class Goal : public Node {
 public:
     Goal();
@@ -12,5 +14,7 @@ public:
     std::optional<std::string> generateST() override;
     std::optional<std::string> checkSemantics() override;
 };
+
+}  // namespace ast
 
 #endif

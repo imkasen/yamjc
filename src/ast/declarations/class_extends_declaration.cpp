@@ -1,4 +1,9 @@
 #include "ast/declarations/class_extends_declaration.h"
+using ast::ClassExtendsDeclaration;
+using st::Method;
+using st::Parameter;
+using st::STClass;
+using st::Variable;
 using std::string;
 
 /*

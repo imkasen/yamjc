@@ -3,6 +3,8 @@
 
 #include "variable.h"
 
+namespace st {
+
 // formal parameters in "Method"
 class Parameter : public Variable {
 public:
@@ -11,5 +13,7 @@ public:
     Parameter(std::string name, std::string type, std::string record);
     ~Parameter() override = default;
 };
+
+}  // namespace st
 
 #endif

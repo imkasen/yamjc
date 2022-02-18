@@ -3,6 +3,8 @@
 
 #include "primary_expression.h"
 
+namespace ast {
+
 class AllocExpression : public PrimaryExpression {
 public:
     AllocExpression();
@@ -11,5 +13,7 @@ public:
 
     std::optional<std::string> checkSemantics() final;
 };
+
+}  // namespace ast
 
 #endif

@@ -1,4 +1,5 @@
 #include "ast/expressions/expression_list.h"
+using ast::ExpressionList;
 using std::string;
 
 ExpressionList::ExpressionList() : Node() {}

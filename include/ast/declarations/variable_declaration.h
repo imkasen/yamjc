@@ -3,6 +3,8 @@
 
 #include "declarations.h"
 
+namespace ast {
+
 class VarDeclaration : public Declarations {
 public:
     VarDeclaration();
@@ -12,5 +14,7 @@ public:
     std::optional<std::string> generateST() final;
     std::optional<std::string> checkSemantics() final;
 };
+
+}  // namespace ast
 
 #endif

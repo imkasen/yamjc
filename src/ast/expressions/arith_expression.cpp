@@ -1,4 +1,5 @@
 #include "ast/expressions/arith_expression.h"
+using ast::ArithExpression;
 using std::string;
 
 /*

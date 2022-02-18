@@ -1,4 +1,7 @@
 #include "ast/formal_parameters/formal_parameter.h"
+using ast::FormalParameter;
+using st::Method;
+using st::Parameter;
 using std::string;
 
 /*

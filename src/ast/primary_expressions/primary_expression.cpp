@@ -1,4 +1,5 @@
 #include "ast/primary_expressions/primary_expression.h"
+using ast::PrimaryExpression;
 using std::string;
 
 /*

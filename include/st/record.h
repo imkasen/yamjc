@@ -6,6 +6,8 @@
 #include <string>
 #include <utility>
 
+namespace st {
+
 /*
  * The basic class in tree-based symbol table implementation.
  *
@@ -35,5 +37,7 @@ public:
 
     [[nodiscard]] std::string printRecord() const;
 };
+
+}  // namespace st
 
 #endif

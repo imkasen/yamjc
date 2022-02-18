@@ -1,4 +1,5 @@
 #include "ast/primary_expressions/array_alloc_expression.h"
+using ast::ArrayAllocExpression;
 using std::string;
 
 /*

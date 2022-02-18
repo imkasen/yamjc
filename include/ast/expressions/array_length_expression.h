@@ -3,6 +3,8 @@
 
 #include "expression.h"
 
+namespace ast {
+
 class ArrayLengthExpression : public Expression {
 public:
     ArrayLengthExpression();
@@ -11,5 +13,7 @@ public:
 
     std::optional<std::string> checkSemantics() final;
 };
+
+}
 
 #endif

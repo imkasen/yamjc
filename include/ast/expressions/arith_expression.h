@@ -3,6 +3,8 @@
 
 #include "expression.h"
 
+namespace ast {
+
 class ArithExpression : public Expression {
 public:
     ArithExpression();
@@ -11,5 +13,7 @@ public:
 
     std::optional<std::string> checkSemantics() final;
 };
+
+}
 
 #endif

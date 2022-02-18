@@ -3,6 +3,8 @@
 
 #include "ast/node.h"
 
+namespace ast {
+
 class PrimaryExpression : public Node {
 public:
     PrimaryExpression();
@@ -12,5 +14,7 @@ public:
     std::optional<std::string> generateST() final;
     std::optional<std::string> checkSemantics() override;
 };
+
+}  // namespace ast
 
 #endif

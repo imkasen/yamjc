@@ -1,4 +1,5 @@
 #include "ast/statements/print_statement.h"
+using ast::PrintStatement;
 using std::string;
 
 PrintStatement::PrintStatement() : Statement() {}

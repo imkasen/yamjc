@@ -1,4 +1,5 @@
 #include "ast/statements/statement.h"
+using ast::Statement;
 using std::string;
 
 Statement::Statement() : Node() {}

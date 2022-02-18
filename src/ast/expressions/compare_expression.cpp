@@ -1,4 +1,5 @@
 #include "ast/expressions/compare_expression.h"
+using ast::CompareExpression;
 using std::string;
 
 /*

@@ -3,6 +3,8 @@
 
 #include "declarations.h"
 
+namespace ast {
+
 class MethodDeclaration : public Declarations {
 public:
     MethodDeclaration();
@@ -12,5 +14,7 @@ public:
     std::optional<std::string> generateST() final;
     std::optional<std::string> checkSemantics() final;
 };
+
+}  // namespace ast
 
 #endif

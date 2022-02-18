@@ -1,4 +1,7 @@
 #include "ast/declarations/method_declaration.h"
+using ast::MethodDeclaration;
+using st::Method;
+using st::STClass;
 using std::size_t;
 using std::string;
 
@@ -62,7 +65,7 @@ std::optional<string> MethodDeclaration::checkSemantics() {
             child->checkSemantics();
         }
     }
-    MethodDeclaration::st.exitScope();   // Exit "Method" scope
+    MethodDeclaration::st.exitScope();  // Exit "Method" scope
 
     return std::nullopt;
 }

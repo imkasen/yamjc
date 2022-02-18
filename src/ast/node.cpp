@@ -1,4 +1,5 @@
 #include "ast/node.h"
+using ast::Node;
 using std::cout;
 using std::endl;
 using std::size_t;

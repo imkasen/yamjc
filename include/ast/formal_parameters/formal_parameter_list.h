@@ -3,11 +3,15 @@
 
 #include "ast/node.h"
 
+namespace ast {
+
 class FormalParameterList : public Node {
 public:
     FormalParameterList();
     FormalParameterList(std::string t, std::string v);
     ~FormalParameterList() override = default;
 };
+
+}  // namespace ast
 
 #endif

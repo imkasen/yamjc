@@ -1,4 +1,7 @@
 #include "ast/declarations/class_declaration.h"
+using ast::ClassDeclaration;
+using st::STClass;
+using st::Variable;
 using std::size_t;
 using std::string;
 

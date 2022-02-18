@@ -3,6 +3,8 @@
 
 #include "ast/node.h"
 
+namespace ast {
+
 class ExpressionList : public Node {
 public:
     ExpressionList();
@@ -11,5 +13,7 @@ public:
 
     std::optional<std::string> checkSemantics() final;
 };
+
+}  // namespace ast
 
 #endif

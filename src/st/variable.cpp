@@ -1,4 +1,5 @@
 #include "variable.h"
+using st::Variable;
 using std::string;
 
 Variable::Variable() : Record() {}

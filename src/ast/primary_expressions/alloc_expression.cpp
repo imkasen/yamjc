@@ -1,4 +1,6 @@
 #include "ast/primary_expressions/alloc_expression.h"
+using ast::AllocExpression;
+using st::Record;
 using std::string;
 
 AllocExpression::AllocExpression() : PrimaryExpression() {}

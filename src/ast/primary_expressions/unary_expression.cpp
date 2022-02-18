@@ -1,4 +1,5 @@
 #include "ast/primary_expressions/unary_expression.h"
+using ast::UnaryExpression;
 using std::string;
 
 /*

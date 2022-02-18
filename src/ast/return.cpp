@@ -1,4 +1,5 @@
 #include "ast/return.h"
+using ast::Return;
 using std::string;
 
 Return::Return() : Node() {}

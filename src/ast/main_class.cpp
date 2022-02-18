@@ -1,4 +1,9 @@
 #include "ast/main_class.h"
+using ast::MainClass;
+using st::Method;
+using st::Parameter;
+using st::STClass;
+using st::Variable;
 using std::size_t;
 using std::string;
 
@@ -75,6 +80,6 @@ std::optional<string> MainClass::checkSemantics() {
     for (size_t i = 2; i < this->children.size(); ++i) {
         this->children.at(i)->checkSemantics();
     }
-    MainClass::st.exitScope();   // Exit "Method" scope
+    MainClass::st.exitScope();  // Exit "Method" scope
     return std::nullopt;
 }

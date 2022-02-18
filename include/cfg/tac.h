@@ -4,6 +4,8 @@
 #include <string>
 #include <utility>
 
+namespace cfg {
+
 /*
  * Three Address Code
  *
@@ -37,5 +39,7 @@ public:
 
     [[nodiscard]] std::string printInfo() const;
 };
+
+}  // namespace cfg
 
 #endif

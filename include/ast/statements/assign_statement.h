@@ -3,6 +3,8 @@
 
 #include "statement.h"
 
+namespace ast {
+
 class AssignStatement : public Statement {
 public:
     AssignStatement();
@@ -11,5 +13,7 @@ public:
 
     std::optional<std::string> checkSemantics() final;
 };
+
+}
 
 #endif

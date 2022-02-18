@@ -1,4 +1,6 @@
 #include "st_class.h"
+using st::Method;
+using st::STClass;
 using std::string;
 
 STClass::STClass() : Variable() {}

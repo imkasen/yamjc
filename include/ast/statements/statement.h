@@ -3,6 +3,8 @@
 
 #include "ast/node.h"
 
+namespace ast {
+
 class Statement : public Node {
 public:
     Statement();
@@ -11,5 +13,7 @@ public:
 
     std::optional<std::string> generateST() final;
 };
+
+}  // namespace ast
 
 #endif

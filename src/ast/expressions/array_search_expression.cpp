@@ -1,4 +1,5 @@
 #include "ast/expressions/array_search_expression.h"
+using ast::ArraySearchExpression;
 using std::string;
 
 /*

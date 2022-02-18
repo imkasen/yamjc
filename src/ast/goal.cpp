@@ -1,4 +1,5 @@
 #include "ast/goal.h"
+using ast::Goal;
 using std::string;
 
 /*

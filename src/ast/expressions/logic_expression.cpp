@@ -1,4 +1,5 @@
 #include "ast/expressions/logic_expression.h"
+using ast::LogicExpression;
 using std::string;
 
 /*

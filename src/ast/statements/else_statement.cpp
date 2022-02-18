@@ -1,4 +1,5 @@
 #include "ast/statements/else_statement.h"
+using ast::ElseStatement;
 using std::string;
 
 ElseStatement::ElseStatement() : Node() {}

@@ -1,4 +1,5 @@
 #include "parameter.h"
+using st::Parameter;
 using std::string;
 
 Parameter::Parameter() : Variable() {}

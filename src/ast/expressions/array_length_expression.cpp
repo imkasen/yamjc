@@ -1,4 +1,5 @@
 #include "ast/expressions/array_length_expression.h"
+using ast::ArrayLengthExpression;
 using std::string;
 
 /*
