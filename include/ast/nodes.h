@@ -27,7 +27,7 @@
 #include "expressions/logic_expression.h"
 #include "expressions/compare_expression.h"
 #include "expressions/arith_expression.h"
-#include "expressions/array_search_expression.h"
+#include "expressions/array_access_expression.h"
 #include "expressions/array_length_expression.h"
 
 #include "primary_expressions/primary_expression.h"

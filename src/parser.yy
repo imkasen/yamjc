@@ -68,7 +68,7 @@
 %type <std::shared_ptr<ast::LogicExpression>> LogicExpression
 %type <std::shared_ptr<ast::CompareExpression>> CompareExpression
 %type <std::shared_ptr<ast::ArithExpression>> ArithExpression
-%type <std::shared_ptr<ast::ArraySearchExpression>> ArraySearchExpression
+%type <std::shared_ptr<ast::ArrayAccessExpression>> ArrayAccessExpression
 %type <std::shared_ptr<ast::ArrayLengthExpression>> ArrayLengthExpression
 
 %type <std::shared_ptr<ast::PrimaryExpression>> PrimaryExpression
@@ -186,7 +186,7 @@ Expression : PrimaryExpression                                                { 
            | LogicExpression                                                  { $$ = $1; }
            | CompareExpression                                                { $$ = $1; }
            | ArithExpression                                                  { $$ = $1; }
-           | ArraySearchExpression                                            { $$ = $1; }
+           | ArrayAccessExpression                                            { $$ = $1; }
            | ArrayLengthExpression                                            { $$ = $1; }
            | Expression DOT Identifier LPARENTHESE RPARENTHESE                { $$ = $1; $$->children.push_back($3); }
            | Expression DOT Identifier LPARENTHESE ExpressionList RPARENTHESE { $$ = $1; $$->children.push_back($3); $$->children.push_back($5); }
@@ -210,7 +210,7 @@ ArithExpression : Expression ADD Expression                       { $$ = std::ma
                 | Expression DIV Expression                       { $$ = std::make_shared<ast::ArithExpression>("ArithExpression", $2); $$->children.push_back($1); $$->children.push_back($3); }
                 ;
 
-ArraySearchExpression : Expression LBRACKET Expression RBRACKET   { $$ = std::make_shared<ast::ArraySearchExpression>("ArraySearchExpression", $2+$4); $$->children.push_back($1); $$->children.push_back($3); }
+ArrayAccessExpression : Expression LBRACKET Expression RBRACKET   { $$ = std::make_shared<ast::ArrayAccessExpression>("ArrayAccessExpression", $2+$4); $$->children.push_back($1); $$->children.push_back($3); }
                       ;
 
 ArrayLengthExpression : Expression DOT LENGTH                     { $$ = std::make_shared<ast::ArrayLengthExpression>("ArrayLengthExpression", $2+$3); $$->children.push_back($1); }

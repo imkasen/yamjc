@@ -7,9 +7,8 @@
 namespace cfg {
 
 /*
- * Three Address Code
- *
- * e.g.
+ * Three Address Code.
+ * Example:
  *              op
  *              |
  *      x := y PLUS z
