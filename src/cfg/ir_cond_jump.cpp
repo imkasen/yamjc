@@ -3,5 +3,5 @@ using cfg::IRCondJump;
 using std::string;
 
 IRCondJump::IRCondJump() : Tac() {}
-IRCondJump::IRCondJump(string lhs, string rhs)
-    : Tac("goto", std::move(lhs), std::move(rhs), "") {}
+IRCondJump::IRCondJump(string lhs, string label)
+    : Tac("goto", std::move(lhs), "", std::move(label)) {}

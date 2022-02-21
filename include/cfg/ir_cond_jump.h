@@ -6,15 +6,15 @@
 namespace cfg {
 
 /*
- * @brief: If "x" is false, next execute the instruction labeled "L".
+ * @brief: Conditional jump, if "x" is false, next execute the instruction labeled "L".
  * TAC: if false x goto L
  *              /   |   |
- *            lhs  op  rhs
+ *            lhs  op  result(label)
  */
 class IRCondJump : public Tac {
 public:
     IRCondJump();
-    IRCondJump(std::string lhs, std::string rhs);
+    IRCondJump(std::string lhs, std::string label);
     ~IRCondJump() override = default;
 };
 

@@ -9,8 +9,8 @@ namespace cfg {
  * @brief: Call function "f", use "N" params from the stack.
  * Example: x  = this.f(y)
  * TAC:     x := call f, N
- *          |         |   \
- *         result    lhs  IRParameter
+ *         /      |   |   \
+ *      result   op  lhs  IRParameter
  */
 class IRMethodCall : public Tac {
 public:

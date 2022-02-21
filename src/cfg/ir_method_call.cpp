@@ -4,4 +4,4 @@ using std::string;
 
 IRMethodCall::IRMethodCall() : Tac() {}
 IRMethodCall::IRMethodCall(string lhs, string result)
-    : Tac("", std::move(lhs), "", std::move(result)) {}
+    : Tac("call", std::move(lhs), "", std::move(result)) {}
