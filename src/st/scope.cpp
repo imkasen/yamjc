@@ -105,7 +105,7 @@ void Scope::resetScope() {  // NOLINT
     this->next = 0;
 }
 
-void Scope::printST(std::size_t index, std::ofstream* outStream) {  // NOLINT
+void Scope::printST(std::size_t index, std::ofstream &ostream) {  // NOLINT
     static size_t count = index;
     string content = "<U><B>" + this->scope_title + "</B></U><BR/><BR/>\n";
     for (const auto &record_pair : this->records) {
@@ -113,9 +113,9 @@ void Scope::printST(std::size_t index, std::ofstream* outStream) {  // NOLINT
     }
 
     // Draw
-    *outStream << "n" << index << " [label=<" << content << ">];" << endl;  // HTML like labels
+    ostream << "n" << index << " [label=<" << content << ">];" << endl;  // HTML like labels
     for (const auto &childScope_ptr : this->childrenScopes) {
-        *outStream << "n" << index << " -- n" << count + 1 << ";" << endl;
-        childScope_ptr->printST(++count, outStream);
+        ostream << "n" << index << " -- n" << count + 1 << ";" << endl;
+        childScope_ptr->printST(++count, ostream);
     }
 }

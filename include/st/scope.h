@@ -36,7 +36,7 @@ public:
     std::optional<std::shared_ptr<Scope>> lookupChildScope(const std::string &key) const;
 
     void resetScope();
-    void printST(std::size_t index, std::ofstream* outStream);
+    void printST(std::size_t index, std::ofstream &ostream);
 };
 
 }  // namespace st

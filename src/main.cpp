@@ -34,7 +34,9 @@ int main(int argc, char* argv[]) {
     ast_dot_stream.open("ast.dot", std::ios::out);
     size_t ast_count = 0;
     ast_dot_stream << "digraph {" << endl;
-    root->generateAST(&ast_dot_stream, ast_count);
+    ast_dot_stream << "label=\"Abstract Syntax Tree\";" << endl;
+    ast_dot_stream << "labelloc=\"t\";\n" << endl;
+    root->generateAST(ast_dot_stream, ast_count);
     ast_dot_stream << "}" << endl;
     ast_dot_stream.close();
 
@@ -47,7 +49,7 @@ int main(int argc, char* argv[]) {
     std::ofstream ast_text_stream;
     ast_text_stream.open("ast.txt", std::ios::out);
     ast_text_stream << "Built a parse-tree in text:" << endl;
-    root->saveAST(&ast_text_stream);
+    root->saveAST(ast_text_stream);
     ast_text_stream.close();
     */
 
@@ -55,7 +57,10 @@ int main(int argc, char* argv[]) {
     std::ofstream st_dot_stream;
     st_dot_stream.open("st.dot", std::ios::out);
     st_dot_stream << "graph {" << endl;
-    root->buildST(&st_dot_stream);
+    st_dot_stream << "label=\"Symbol Table\";" << endl;
+    st_dot_stream << "labelloc=\"t\";\n" << endl;
+    st_dot_stream << "node [shape=rect, fontname=Arial, width=5];\n" << endl;
+    root->buildST(st_dot_stream);
     st_dot_stream << "}" << endl;
     st_dot_stream.close();
 

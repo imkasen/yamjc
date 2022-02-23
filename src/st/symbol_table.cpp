@@ -59,14 +59,9 @@ std::optional<std::shared_ptr<Scope>> SymbolTable::lookupChildScope(const string
     return this->current->lookupChildScope(key);
 }
 
-void SymbolTable::printST(std::ofstream* outStream) {
-    // Graphviz grammar
-    *outStream << "label=\"Symbol Table\";" << endl;
-    *outStream << "labelloc=\"t\";\n" << endl;
-    *outStream << "node [shape=rect, fontname=Arial, width=5];\n" << endl;
-
+void SymbolTable::printST(std::ofstream &ostream) {
     std::size_t index = 0;
-    this->root->printST(index, outStream);
+    this->root->printST(index, ostream);
 }
 
 void SymbolTable::resetTable() {

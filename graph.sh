@@ -9,3 +9,7 @@ fi
 if [[ -e st.dot ]]; then
   dot -T svg st.dot -o st.svg
 fi
+
+if [[ -e cfg.dot ]];then
+  dot -T svg cfg.dot -o cfg.svg
+fi

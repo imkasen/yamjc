@@ -38,14 +38,14 @@ public:
 
     // Functions related to the abstract syntax tree
     // void printAST(std::size_t depth = 0);
-    // void saveAST(std::ofstream* outStream, std::size_t depth = 0);
-    void generateAST(std::ofstream* outStream, std::size_t &count);
+    // void saveAST(std::ofstream &ostream, std::size_t depth = 0);
+    void generateAST(std::ofstream &ostream, std::size_t &count);
 
     // Functions related to the symbol table
-    void buildST(std::ofstream* outStream);
+    void buildST(std::ofstream &ostream);
     virtual std::optional<std::string> generateST();
 
-    // Functions related to the semantic Analysis
+    // Functions related to the semantic analysis
     void semanticAnalysis();
     virtual std::optional<std::string> checkSemantics();
 

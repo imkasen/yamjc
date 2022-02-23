@@ -52,38 +52,38 @@ void Node::printAST(size_t depth) {
 
 // Save ast in "ast.txt"
 /*
-void Node::saveAST(std::ofstream* outStream, size_t depth) {  // NOLINT
+void Node::saveAST(std::ofstream &ostream, size_t depth) {  // NOLINT
     for (size_t i = 0; i < depth; ++i) {
-        *outStream << "  ";
+        ostream << "  ";
     }
-    *outStream << this->getType() << ":" << this->getValue() << endl;
+    ostream << this->getType() << ":" << this->getValue() << endl;
     for (const auto &child : this->children) {
-        child->saveAST(outStream, depth + 1);
+        child->saveAST(ostream, depth + 1);
     }
 }
 */
 
 // Generate ast in "ast.dot"
-void Node::generateAST(std::ofstream* outStream, size_t &count) {  // NOLINT
+void Node::generateAST(std::ofstream &ostream, size_t &count) {  // NOLINT
     this->setId(count++);
     if (!this->getValue().empty()) {
-        *outStream << "n" << this->getId() << " [label=\"" << this->getType() << ":" << this->getValue() << "\"];"
+        ostream << "n" << this->getId() << " [label=\"" << this->getType() << ":" << this->getValue() << "\"];"
                    << endl;
     } else {
-        *outStream << "n" << this->getId() << " [label=\"" << this->getType() << "\"];" << endl;
+        ostream << "n" << this->getId() << " [label=\"" << this->getType() << "\"];" << endl;
     }
     for (const auto &child : this->children) {
-        child->generateAST(outStream, count);
-        *outStream << "n" << this->getId() << " -> n" << child->getId() << ";" << endl;
+        child->generateAST(ostream, count);
+        ostream << "n" << this->getId() << " -> n" << child->getId() << ";" << endl;
     }
 }
 
 // Generate the symbol table
-void Node::buildST(std::ofstream* outStream) {
+void Node::buildST(std::ofstream &ostream) {
     this->generateST();
     Node::st.resetTable();
     // Generate "st.dot"
-    Node::st.printST(outStream);
+    Node::st.printST(ostream);
 }
 
 /*

@@ -28,7 +28,7 @@ public:
 
     [[nodiscard]] std::optional<std::shared_ptr<Scope>> lookupChildScope(const std::string &key) const;
 
-    void printST(std::ofstream* outStream);
+    void printST(std::ofstream &ostream);
     void resetTable();
 };
 
