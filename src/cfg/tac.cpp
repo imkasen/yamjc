@@ -28,22 +28,22 @@ void Tac::setResult(std::string _result) {
     this->result = std::move(_result);
 }
 
-std::string Tac::getOP() const {
+string Tac::getOP() const {
     return this->op;
 }
 
-std::string Tac::getLHS() const {
+string Tac::getLHS() const {
     return this->lhs;
 }
 
-std::string Tac::getRHS() const {
+string Tac::getRHS() const {
     return this->rhs;
 }
 
-std::string Tac::getResult() const {
+string Tac::getResult() const {
     return this->result;
 }
 
-std::string Tac::printInfo() const {
+string Tac::printInfo() const {
     return this->result + " := " + this->lhs + " " + this->op + " " + this->rhs;
 }

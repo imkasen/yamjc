@@ -51,6 +51,7 @@ void Node::printAST(size_t depth) {
 */
 
 // Save ast in "ast.txt"
+/*
 void Node::saveAST(std::ofstream* outStream, size_t depth) {  // NOLINT
     for (size_t i = 0; i < depth; ++i) {
         *outStream << "  ";
@@ -60,6 +61,7 @@ void Node::saveAST(std::ofstream* outStream, size_t depth) {  // NOLINT
         child->saveAST(outStream, depth + 1);
     }
 }
+*/
 
 // Generate ast in "ast.dot"
 void Node::generateAST(std::ofstream* outStream, size_t &count) {  // NOLINT

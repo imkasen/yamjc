@@ -38,7 +38,7 @@ public:
 
     // Functions related to the abstract syntax tree
     // void printAST(std::size_t depth = 0);
-    void saveAST(std::ofstream* outStream, std::size_t depth = 0);
+    // void saveAST(std::ofstream* outStream, std::size_t depth = 0);
     void generateAST(std::ofstream* outStream, std::size_t &count);
 
     // Functions related to the symbol table

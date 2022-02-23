@@ -15,14 +15,18 @@ namespace cfg {
  */
 class BasicBlock {
 private:
-    std::string name;  // unique name
+    inline static std::size_t id = 0;  // unique id to generate different block name
+    std::string name;       // unique name
     std::list<Tac> tac_instructions;
     std::shared_ptr<Tac> condition;
     std::shared_ptr<BasicBlock> true_exit;
     std::shared_ptr<BasicBlock> false_exit;
+
 public:
     BasicBlock();
     virtual ~BasicBlock() = default;
+
+    [[nodiscard]] std::string getName() const;
 };
 
 }  // namespace cfg
