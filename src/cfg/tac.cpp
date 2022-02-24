@@ -28,6 +28,10 @@ void Tac::setResult(std::string _result) {
     this->result = std::move(_result);
 }
 
+void Tac::resetID() {
+    Tac::tmp_id = 0;
+}
+
 string Tac::getOP() const {
     return this->op;
 }
@@ -42,6 +46,10 @@ string Tac::getRHS() const {
 
 string Tac::getResult() const {
     return this->result;
+}
+
+string Tac::generateTmpVarName() {
+    return "_t" + std::to_string(Tac::tmp_id++);
 }
 
 string Tac::printInfo() const {

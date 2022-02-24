@@ -3,8 +3,18 @@
 
 #include <cstdlib>
 #include <fstream>
+#include <variant>
+#include "cfg/basic_block.h"
+#include "cfg/tac.h"
 #include "st/st_class.h"
 #include "st/symbol_table.h"
+
+/*
+ * Used as return value of "generateIR()".
+ * 1. return "string" in "Expression",
+ * 2. return "BasicBlock ptr" in "Statement".
+ */
+using IRReturnVal = std::variant<std::monostate, std::string, std::shared_ptr<cfg::BasicBlock>>;
 
 namespace ast {
 
@@ -23,7 +33,8 @@ protected:
 
 public:
     std::deque<std::shared_ptr<Node>> children;
-    inline static st::SymbolTable st = st::SymbolTable();  // NOLINT
+    inline static st::SymbolTable st = st::SymbolTable();         // NOLINT
+    inline static std::list<std::shared_ptr<cfg::BasicBlock>> cfg_list = {};  // store all entries of CFG
 
     Node();
     Node(std::string t, std::string v);
@@ -48,6 +59,10 @@ public:
     // Functions related to the semantic analysis
     void semanticAnalysis();
     virtual std::optional<std::string> checkSemantics();
+
+    // Functions related to the control flow graph
+    void buildCFG(std::ofstream &ostream);
+    virtual std::optional<IRReturnVal> generateIR();
 
     static void printErrMsg(const std::string &message);
 };

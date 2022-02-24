@@ -4,5 +4,5 @@ add_library(AST_DECLARATIONS ${DIR_SOURCES})
 target_include_directories(
         AST_DECLARATIONS
         PRIVATE
-        ${PROJECT_SOURCE_DIR}/include/
+        ${PROJECT_SOURCE_DIR}/include
 )

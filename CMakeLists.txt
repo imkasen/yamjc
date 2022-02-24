@@ -64,6 +64,7 @@ target_link_libraries(
         ${FLEX_LIBRARIES}
         AST
         ST
+        CFG
 )
 
 target_include_directories(

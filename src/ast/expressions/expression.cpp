@@ -239,3 +239,17 @@ void Expression::strSplit(std::deque<std::string> &deque, std::string &text, con
         text.erase(0, pos + delimiter.length());
     }
 }
+
+/*
+ * @return: std::nullopt || IRReturnVal
+ */
+std::optional<IRReturnVal> Expression::generateIR() {
+    size_t size = this->children.size();
+    // "Expression" -> "int"
+    // "Expression" -> "boolean"
+    // "Expression" -> "PrimaryExpression"
+    if (size == 1) {
+        return this->children.at(0)->generateIR();
+    }
+    return std::nullopt;
+}

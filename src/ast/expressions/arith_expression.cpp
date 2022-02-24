@@ -28,3 +28,32 @@ std::optional<std::string> ArithExpression::checkSemantics() {
 
     return std::nullopt;
 }
+
+/*
+ * @brief:
+ *   1. Obtain current BasicBlock.
+ *   2. Get the return value of lhs, rhs.
+ *      Add an instruction "IRExpression"
+ * @return: string
+ */
+std::optional<IRReturnVal> ArithExpression::generateIR() {
+    // 1.
+    std::shared_ptr<cfg::BasicBlock> cur_bb = ArithExpression::cfg_list.back();
+    // 2.
+    string lhs_name, rhs_name, tmp_name;
+    string op = this->getValue();
+    const auto lhs_vrt = this->children.at(0)->generateIR().value_or(std::monostate {});
+    if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
+        lhs_name = *s_ptr;
+    }
+    const auto rhs_vrt = this->children.at(1)->generateIR().value_or(std::monostate {});
+    if (auto s_ptr = std::get_if<string>(&rhs_vrt)) {
+        rhs_name = *s_ptr;
+    }
+    tmp_name = cfg::Tac::generateTmpVarName();
+    std::shared_ptr<cfg::Tac> instruction =
+        std::make_shared<cfg::IRExpression>(op, lhs_name, rhs_name, tmp_name);
+    cur_bb->addInstruction(instruction);
+
+    return tmp_name;
+}

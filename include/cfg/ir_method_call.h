@@ -10,12 +10,12 @@ namespace cfg {
  * Example: x  = this.f(y)
  * TAC:     x := call f, N
  *         /      |   |   \
- *      result   op  lhs  IRParameter
+ *      result   op  lhs  rhs
  */
 class IRMethodCall : public Tac {
 public:
     IRMethodCall();
-    IRMethodCall(std::string lhs, std::string result);
+    IRMethodCall(std::string lhs, std::string rhs, std::string result);
     ~IRMethodCall() override = default;
 };
 

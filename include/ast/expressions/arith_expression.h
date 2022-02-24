@@ -2,6 +2,7 @@
 #define AST_EXPRESSIONS_ARITH_EXPRESSION_H
 
 #include "expression.h"
+#include "cfg/ir_expression.h"
 
 namespace ast {
 
@@ -12,6 +13,7 @@ public:
     ~ArithExpression() override = default;
 
     std::optional<std::string> checkSemantics() final;
+    std::optional<IRReturnVal> generateIR() override;
 };
 
 }

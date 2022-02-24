@@ -4,5 +4,5 @@ add_library(AST_PRIMARY_EXPRESSIONS ${DIR_SOURCES})
 target_include_directories(
         AST_PRIMARY_EXPRESSIONS
         PRIVATE
-        ${PROJECT_SOURCE_DIR}/include/
+        ${PROJECT_SOURCE_DIR}/include
 )

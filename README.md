@@ -9,7 +9,7 @@ A compiler practice.
 
 > Overloading is not allowed in MiniJava. The MiniJava statement `System.out.println( ... );` can only print integers. The MiniJava expression `e.length` only applies to expressions of type `int []`.
 
-> There is no `for` loop or `do {...} while ()` in MiniJava, `if` statement must be followed by `else` statement, etc... Please refer to the _Grammar_ section below for the detailed grammar.
+> There is no `for` loop or `do {} while ()` in MiniJava, `if` statement must be followed by `else` statement, etc... Please refer to the _Grammar_ section below for the detailed grammar.
 
 # Grammar
 

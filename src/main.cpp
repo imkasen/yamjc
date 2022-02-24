@@ -67,5 +67,17 @@ int main(int argc, char* argv[]) {
     // Check semantic analysis
     root->semanticAnalysis();
 
+    // Intermediate representation, generate "cfg.dot"
+    std::ofstream cfg_dot_stream;
+    cfg_dot_stream.open("cfg.dot", std::ios::out);
+    cfg_dot_stream << "digraph {" << endl;
+    cfg_dot_stream << "label=\"Control Flow Graph\";" << endl;
+    cfg_dot_stream << "labelloc=\"t\";" << endl;
+    cfg_dot_stream << "graph [splines=ortho];" << endl;
+    cfg_dot_stream << "node [shape=box];\n" << endl;
+    root->buildCFG(cfg_dot_stream);
+    cfg_dot_stream << "}" << endl;
+    cfg_dot_stream.close();
+
     return EXIT_SUCCESS;
 }

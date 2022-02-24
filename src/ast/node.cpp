@@ -124,6 +124,29 @@ std::optional<string> Node::checkSemantics() {  // NOLINT
     return std::nullopt;
 }
 
+// Generate CFG
+void Node::buildCFG(std::ofstream &ostream) {
+    this->generateIR();
+    Node::st.resetTable();
+    // Generate "cfg.dot"
+}
+
+/*
+ * Default behavior for nodes:
+ *
+ * All abstract syntax trees start with node "Goal",
+ * review "parser.yy" for more details.
+ *
+ * @brief: Traverse children nodes.
+ * @return: std::nullopt
+ */
+std::optional<IRReturnVal> Node::generateIR() {  // NOLINT
+    for (const auto &child : this->children) {
+        child->generateIR();
+    }
+    return std::nullopt;
+}
+
 void Node::printErrMsg(const string &message) {
     std::cerr << message << endl;
     std::exit(EXIT_FAILURE);

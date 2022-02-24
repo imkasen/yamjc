@@ -83,3 +83,16 @@ std::optional<string> MainClass::checkSemantics() {
     MainClass::st.exitScope();  // Exit "Method" scope
     return std::nullopt;
 }
+
+/*
+ * @brief: Traverse children nodes of "MethodBody"
+ * @return: std::nullopt
+ */
+std::optional<IRReturnVal> MainClass::generateIR() {
+    MainClass::st.enterScope();  // Enter "Method" scope
+    for (size_t i = 2; i < this->children.size(); ++i) {
+        this->children.at(i)->generateIR();
+    }
+    MainClass::st.exitScope();  // Exit "Method" scope
+    return std::nullopt;
+}

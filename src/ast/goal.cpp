@@ -46,3 +46,16 @@ std::optional<string> Goal::checkSemantics() {
     }
     return std::nullopt;
 }
+
+/*
+ * @brief: Traverse children nodes.
+ * @return: std::nullopt
+ */
+std::optional<IRReturnVal> Goal::generateIR() {
+    for (const auto &child : this->children) {
+        Goal::st.enterScope();  // Enter "Class" scope
+        child->generateIR();
+        Goal::st.exitScope();   // Exit "Class" scope
+    }
+    return std::nullopt;
+}

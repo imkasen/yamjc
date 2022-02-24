@@ -4,5 +4,5 @@ add_library(AST_FORMAL_PARAMETERS ${DIR_SOURCES})
 target_include_directories(
         AST_FORMAL_PARAMETERS
         PRIVATE
-        ${PROJECT_SOURCE_DIR}/include/
+        ${PROJECT_SOURCE_DIR}/include
 )
