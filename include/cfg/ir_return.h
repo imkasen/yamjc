@@ -1,4 +1,4 @@
-#ifndef CFG_IR_RETURN_H
+ #ifndef CFG_IR_RETURN_H
 #define CFG_IR_RETURN_H
 
 #include "tac.h"
@@ -17,6 +17,8 @@ public:
     IRReturn();
     explicit IRReturn(std::string lhs);
     ~IRReturn() override = default;
+
+    [[nodiscard]] std::string printInfo() const;
 };
 
 }  // namespace cfg

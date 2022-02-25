@@ -17,6 +17,8 @@ public:
     IRArrayAlloc();
     IRArrayAlloc(std::string lhs, std::string rhs, std::string result);
     ~IRArrayAlloc() override = default;
+
+    [[nodiscard]] std::string printInfo() const;
 };
 
 }  // namespace cfg

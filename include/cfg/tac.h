@@ -39,7 +39,7 @@ public:
     [[nodiscard]] std::string getResult() const;
     static std::string generateTmpVarName() ;
 
-    [[nodiscard]] std::string printInfo() const;
+    [[nodiscard]] virtual std::string printInfo() const = 0;
 };
 
 }  // namespace cfg

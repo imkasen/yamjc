@@ -129,6 +129,9 @@ void Node::buildCFG(std::ofstream &ostream) {
     this->generateIR();
     Node::st.resetTable();
     // Generate "cfg.dot"
+    for (const auto &cfg_ptr : Node::cfg_list) {
+        ostream << cfg_ptr->printInfo() << endl;
+    }
 }
 
 /*

@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) {
     st_dot_stream << "graph {" << endl;
     st_dot_stream << "label=\"Symbol Table\";" << endl;
     st_dot_stream << "labelloc=\"t\";\n" << endl;
-    st_dot_stream << "node [shape=rect, fontname=Arial, width=5];\n" << endl;
+    st_dot_stream << "node [shape=box, fontname=Arial, width=5];\n" << endl;
     root->buildST(st_dot_stream);
     st_dot_stream << "}" << endl;
     st_dot_stream.close();
@@ -72,7 +72,7 @@ int main(int argc, char* argv[]) {
     cfg_dot_stream.open("cfg.dot", std::ios::out);
     cfg_dot_stream << "digraph {" << endl;
     cfg_dot_stream << "label=\"Control Flow Graph\";" << endl;
-    cfg_dot_stream << "labelloc=\"t\";" << endl;
+    cfg_dot_stream << "labelloc=\"t\";\n" << endl;
     cfg_dot_stream << "graph [splines=ortho];" << endl;
     cfg_dot_stream << "node [shape=box];\n" << endl;
     root->buildCFG(cfg_dot_stream);

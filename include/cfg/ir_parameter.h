@@ -17,6 +17,8 @@ public:
     IRParameter();
     explicit IRParameter(std::string lhs);
     ~IRParameter() override = default;
+
+    [[nodiscard]] std::string printInfo() const;
 };
 
 }  // namespace cfg

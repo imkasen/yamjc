@@ -17,6 +17,8 @@ public:
     IRArrayLength();
     IRArrayLength(std::string lhs, std::string result);
     ~IRArrayLength() override = default;
+
+    [[nodiscard]] std::string printInfo() const;
 };
 
 }  // namespace cfg

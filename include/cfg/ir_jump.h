@@ -16,6 +16,8 @@ public:
     IRJump();
     explicit IRJump(std::string label);
     ~IRJump() override = default;
+
+    [[nodiscard]] std::string printInfo() const;
 };
 
 }  // namespace cfg

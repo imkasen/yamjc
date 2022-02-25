@@ -10,8 +10,7 @@ namespace cfg {
 
 /*
  * @brief:
- *   1. "true_exit == nullptr": no true exit
- *   2. "true_exit": single exit arrow
+ *   Contains sequence of TAC.
  */
 class BasicBlock {
 private:
@@ -29,9 +28,12 @@ public:
     void setFalseExit(const std::shared_ptr<BasicBlock> &basic_block);
     void addInstruction(const std::shared_ptr<Tac> &instruction);
 
+    [[nodiscard]] std::string getName() const;
     [[nodiscard]] std::shared_ptr<BasicBlock> getTrueExit() const;
     [[nodiscard]] std::shared_ptr<BasicBlock> getFalseExit() const;
-    [[nodiscard]] std::string getName() const;
+    [[nodiscard]] std::list<std::shared_ptr<Tac>> getInstructions() const;
+
+    [[nodiscard]] std::string printInfo() const;
 };
 
 }  // namespace cfg

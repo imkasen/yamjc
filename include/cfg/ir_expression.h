@@ -17,6 +17,8 @@ public:
     IRExpression();
     IRExpression(std::string op, std::string lhs, std::string rhs, std::string result);
     ~IRExpression() override = default;
+
+    [[nodiscard]] std::string printInfo() const;
 };
 
 }  // namespace cfg

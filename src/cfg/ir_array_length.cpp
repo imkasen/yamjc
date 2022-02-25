@@ -5,3 +5,7 @@ using std::string;
 IRArrayLength::IRArrayLength() : Tac() {}
 IRArrayLength::IRArrayLength(string lhs, string result)
     : Tac("length", std::move(lhs), "", std::move(result)) {}
+
+std::string IRArrayLength::printInfo() const {
+    return this->result + " := " + this->op + " " + this->lhs;
+}

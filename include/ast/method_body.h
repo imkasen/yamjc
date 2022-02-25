@@ -11,8 +11,8 @@ public:
     MethodBody(std::string t, std::string v);
     ~MethodBody() override = default;
 
-    std::optional<std::string> generateST() override;
-    std::optional<IRReturnVal> generateIR() override;
+    std::optional<std::string> generateST() final;
+    std::optional<IRReturnVal> generateIR() final;
 };
 
 }  // namespace ast

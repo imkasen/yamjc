@@ -39,7 +39,7 @@ std::optional<IRReturnVal> PrintStatement::generateIR() {
         string tmp_name = *s_ptr;
         std::shared_ptr<cfg::Tac> param_ptr = std::make_shared<cfg::IRParameter>(tmp_name);
         std::shared_ptr<cfg::Tac> call_ptr =
-            std::make_shared<cfg::IRMethodCall>("PRINTLN", "1", cfg::Tac::generateTmpVarName());
+            std::make_shared<cfg::IRMethodCall>("PRINT", "1", cfg::Tac::generateTmpVarName());
         cur_bb->addInstruction(param_ptr);
         cur_bb->addInstruction(call_ptr);
     }

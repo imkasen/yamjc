@@ -17,6 +17,8 @@ public:
     IRUnaryExpression();
     IRUnaryExpression(std::string op, std::string lhs, std::string result);
     ~IRUnaryExpression() override = default;
+
+    [[nodiscard]] std::string printInfo() const;
 };
 
 }  // namespace cfg

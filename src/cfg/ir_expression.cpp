@@ -5,3 +5,7 @@ using std::string;
 IRExpression::IRExpression() : Tac() {}
 IRExpression::IRExpression(string op, string lhs, string rhs, string result)
     : Tac(std::move(op), std::move(lhs), std::move(rhs), std::move(result)) {}
+
+std::string IRExpression::printInfo() const {
+    return this->result + " := " + this->lhs + " " + this->op + " " + this->rhs;
+}

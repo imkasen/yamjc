@@ -11,8 +11,8 @@ public:
     Type(std::string t, std::string v);
     ~Type() override = default;
 
-    std::optional<std::string> generateST() override;
-    std::optional<std::string> checkSemantics() override;
+    std::optional<std::string> generateST() final;
+    std::optional<std::string> checkSemantics() final;
 };
 
 }  // namespace ast

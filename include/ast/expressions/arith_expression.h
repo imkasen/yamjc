@@ -13,7 +13,7 @@ public:
     ~ArithExpression() override = default;
 
     std::optional<std::string> checkSemantics() final;
-    std::optional<IRReturnVal> generateIR() override;
+    std::optional<IRReturnVal> generateIR() final;
 };
 
 }

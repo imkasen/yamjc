@@ -28,6 +28,8 @@ void Tac::setResult(std::string _result) {
     this->result = std::move(_result);
 }
 
+// prepare for a new "BasicBlock"
+// reset temp variable id as 0,
 void Tac::resetID() {
     Tac::tmp_id = 0;
 }
@@ -50,8 +52,4 @@ string Tac::getResult() const {
 
 string Tac::generateTmpVarName() {
     return "_t" + std::to_string(Tac::tmp_id++);
-}
-
-string Tac::printInfo() const {
-    return this->result + " := " + this->lhs + " " + this->op + " " + this->rhs;
 }
