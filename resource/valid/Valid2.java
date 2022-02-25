@@ -1,6 +1,6 @@
 // check parameters
 
-class TreeVisitor {
+class Valid2 {
     public static void main(String[] a) {
         Tree wood;
         System.out.println(new TV().Start(3, true, wood));     // OK

@@ -1,6 +1,6 @@
 // check System.out.println()
 
-class TreeVisitor {
+class Valid8 {
     public static void main(String[] a) {
         System.out.println(new TV().Start(3));  // OK
         // System.out.println(new TV());        // not int

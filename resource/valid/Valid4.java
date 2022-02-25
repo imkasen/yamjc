@@ -1,6 +1,6 @@
 // check declarations
 
-class TreeVisitor {
+class Valid4 {
     public static void main(String[] a) {
         System.out.println(new TV().Start(3));
     }

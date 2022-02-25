@@ -1,6 +1,6 @@
 // check Class.Method() exists or not
 
-class TreeVisitor {
+class Valid1 {
     public static void main(String[] a) {
         System.out.println(new TV().Start(3));       // OK
         // System.out.println(new Test());           // No Test class

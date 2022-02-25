@@ -1,4 +1,4 @@
-class Sum {
+class SumWhileIfAnd {
     public static void main(String[] a){
         System.out.println(new Test().Sum(100));
     }

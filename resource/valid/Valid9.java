@@ -1,6 +1,6 @@
 // check return
 
-class TreeVisitor {
+class Valid9 {
     public static void main(String[] a) {
         System.out.println(new TV().Start(3));
     }

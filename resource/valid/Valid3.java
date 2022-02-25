@@ -1,6 +1,6 @@
 // check "this"
 
-class Factorial {
+class Valid3 {
     public static void main(String[] a) {
         System.out.println(new Fac().ComputeFac(10));
     }

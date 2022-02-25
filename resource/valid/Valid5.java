@@ -1,6 +1,6 @@
 // check assignment
 
-class TreeVisitor {
+class Valid5 {
     public static void main(String[] a) {
         System.out.println(new TV().Start(3));           // OK
         // System.out.println(new TV().Start(1+2));      // OK

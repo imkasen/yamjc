@@ -1,4 +1,4 @@
-class Sum {
+class SumWhile {
     public static void main(String[] a){
         System.out.println(new Test().Sum(100));
     }
@@ -9,10 +9,7 @@ class Test {
         int sum;
         sum = 0;
         while (0 < num) {
-            if (sum < 100) {
-                sum = sum + num;
-            } else {
-            }
+            sum = sum + num;
             num = num - 1;
         }
         return sum;
