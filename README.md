@@ -29,7 +29,7 @@ A compiler practice.
 
 <div align="center">
     <img src="resource/phases.png" 
-        width="600" height="auto" alt="Compiler Phases">
+        width="800" height="auto" alt="Compiler Phases">
 </div>
 
 # File structure

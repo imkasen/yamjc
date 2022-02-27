@@ -18,7 +18,7 @@ public:
     IRMethodCall(std::string lhs, std::string rhs, std::string result);
     ~IRMethodCall() override = default;
 
-    [[nodiscard]] std::string printInfo() const;
+    [[nodiscard]] std::string printInfo() const final;
 };
 
 }  // namespace cfg

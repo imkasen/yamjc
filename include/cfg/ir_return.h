@@ -18,7 +18,7 @@ public:
     explicit IRReturn(std::string lhs);
     ~IRReturn() override = default;
 
-    [[nodiscard]] std::string printInfo() const;
+    [[nodiscard]] std::string printInfo() const final;
 };
 
 }  // namespace cfg

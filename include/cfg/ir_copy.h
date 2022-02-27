@@ -18,7 +18,7 @@ public:
     IRCopy(std::string lhs, std::string result);
     ~IRCopy() override = default;
 
-    [[nodiscard]] std::string printInfo() const;
+    [[nodiscard]] std::string printInfo() const final;
 };
 
 }  // namespace cfg

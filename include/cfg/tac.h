@@ -16,7 +16,7 @@ namespace cfg {
  *   result lhs    rhs
  */
 class Tac {
-protected:
+private:
     inline static int tmp_id = 0;  // used to create temporary variable names
     std::string op;
     std::string lhs, rhs;

@@ -17,7 +17,7 @@ public:
     IRCondJump(std::string lhs, std::string label);
     ~IRCondJump() override = default;
 
-    [[nodiscard]] std::string printInfo() const;
+    [[nodiscard]] std::string printInfo() const final;
 };
 
 }

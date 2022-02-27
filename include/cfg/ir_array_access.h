@@ -18,7 +18,7 @@ public:
     IRArrayAccess(std::string lhs, std::string result);
     ~IRArrayAccess() override = default;
 
-    [[nodiscard]] std::string printInfo() const;
+    [[nodiscard]] std::string printInfo() const final;
 };
 
 }  // namespace cfg

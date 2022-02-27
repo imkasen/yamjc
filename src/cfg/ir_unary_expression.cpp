@@ -7,5 +7,5 @@ IRUnaryExpression::IRUnaryExpression(string op, string lhs, string result)
     : Tac(std::move(op), std::move(lhs), "", std::move(result)) {}
 
 std::string IRUnaryExpression::printInfo() const {
-    return this->result + " := " + this->op + " " + this->lhs;
+    return this->getResult() + " := " + this->getOP() + " " + this->getLHS();
 }

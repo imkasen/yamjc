@@ -4,7 +4,7 @@ using cfg::Tac;
 using std::string;
 
 BasicBlock::BasicBlock() : tac_instructions(0), true_exit(nullptr), false_exit(nullptr) {
-    this->name = "block_" + std::to_string(BasicBlock::id++);
+    this->name = "L" + std::to_string(BasicBlock::id++);
 }
 
 void BasicBlock::setTrueExit(const std::shared_ptr<BasicBlock> &basic_block) {

@@ -9,7 +9,7 @@ namespace st {
 
 // local variables in "Class" and "Method"
 class Variable : public Record {
-protected:
+private:
     std::unordered_map<std::string, std::shared_ptr<Variable>> variables;
 
 public:

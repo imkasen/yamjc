@@ -7,5 +7,5 @@ IRExpression::IRExpression(string op, string lhs, string rhs, string result)
     : Tac(std::move(op), std::move(lhs), std::move(rhs), std::move(result)) {}
 
 std::string IRExpression::printInfo() const {
-    return this->result + " := " + this->lhs + " " + this->op + " " + this->rhs;
+    return this->getResult() + " := " + this->getLHS() + " " + this->getOP() + " " + this->getRHS();
 }

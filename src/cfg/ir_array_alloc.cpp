@@ -7,5 +7,5 @@ IRArrayAlloc::IRArrayAlloc(string lhs, string rhs, string result)
     : Tac("new", std::move(lhs), std::move(rhs), std::move(result)) {}
 
 std::string IRArrayAlloc::printInfo() const {
-    return this->result + " := " + this->op + " " + this->lhs + ", " + this->rhs;
+    return this->getResult() + " := " + this->getOP() + " " + this->getLHS() + ", " + this->getRHS();
 }

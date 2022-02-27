@@ -6,5 +6,5 @@ IRCopy::IRCopy() : Tac() {}
 IRCopy::IRCopy(string lhs, string result) : Tac("", std::move(lhs), "", std::move(result)) {}
 
 std::string IRCopy::printInfo() const {
-    return this->result + " := " + this->lhs;
+    return this->getResult() + " := " + this->getLHS();
 }

@@ -18,7 +18,7 @@ public:
     IRAlloc(std::string lhs, std::string result);
     ~IRAlloc() override = default;
 
-    [[nodiscard]] std::string printInfo() const;
+    [[nodiscard]] std::string printInfo() const final;
 };
 
 }  // namespace cfg

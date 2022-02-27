@@ -7,5 +7,5 @@ IRMethodCall::IRMethodCall(string lhs, string rhs, string result)
     : Tac("call", std::move(lhs), std::move(rhs), std::move(result)) {}
 
 std::string IRMethodCall::printInfo() const {
-    return this->result + " := " + this->op + " " + this->lhs + ", " + this->rhs;
+    return this->getResult() + " := " + this->getOP() + " " + this->getLHS() + ", " + this->getRHS();
 }

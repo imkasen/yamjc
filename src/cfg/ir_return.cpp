@@ -6,5 +6,5 @@ IRReturn::IRReturn() : Tac() {}
 IRReturn::IRReturn(string lhs) : Tac("return", std::move(lhs), "", "") {}
 
 std::string IRReturn::printInfo() const {
-    return this->op + " " + this->lhs;
+    return this->getOP() + " " + this->getLHS();
 }

@@ -17,7 +17,7 @@ namespace st {
  * STClass : Variable
  */
 class Record {
-protected:
+private:
     std::string name;
     std::string type;
     std::string record;

@@ -27,7 +27,7 @@ namespace ast {
  * Identifier : Node
  */
 class Node {
-protected:
+private:
     std::size_t id = 0;
     std::string type, value;
 
