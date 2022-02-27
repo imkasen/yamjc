@@ -12,3 +12,7 @@ std::optional<string> Identifier::generateST() {
 std::optional<string> Identifier::checkSemantics() {
     return this->getValue();
 }
+
+std::optional<IRReturnVal> Identifier::generateIR() {
+    return this->getValue();
+}

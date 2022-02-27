@@ -69,3 +69,24 @@ std::optional<string> MethodDeclaration::checkSemantics() {
 
     return std::nullopt;
 }
+
+/*
+ * @brief:
+ *   1. Create a BasicBlock ptr as the entry.
+ *   2. Traverse child nodes
+ * @return: std::nullopt
+ */
+std::optional<IRReturnVal> MethodDeclaration::generateIR() {
+    MethodDeclaration::st.enterScope();  // Enter "Method" scope
+
+    // 1.
+    MethodDeclaration::bb_lists.push_back(MethodDeclaration::createBB());
+    // 2.
+    for (const auto &child : this->children) {
+        child->generateIR();
+    }
+
+    MethodDeclaration::st.exitScope();  // Exit "Method" scope
+
+    return std::nullopt;
+}

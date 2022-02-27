@@ -129,13 +129,14 @@ void Node::buildCFG(std::ofstream &ostream) {
     this->generateIR();
     Node::st.resetTable();
     // Generate "cfg.dot"
-    for (const auto &cfg_ptr : Node::cfg_list) {
+    for (const auto &cfg_ptr : Node::bb_lists) {
         ostream << cfg_ptr->printInfo() << endl;
     }
 }
 
 /*
  * Default behavior for nodes:
+ * "Declarations"
  *
  * All abstract syntax trees start with node "Goal",
  * review "parser.yy" for more details.
@@ -148,6 +149,14 @@ std::optional<IRReturnVal> Node::generateIR() {  // NOLINT
         child->generateIR();
     }
     return std::nullopt;
+}
+
+std::shared_ptr<cfg::BasicBlock> Node::createBB() {
+    std::shared_ptr<cfg::BasicBlock> ptr = std::make_shared<cfg::BasicBlock>();
+    string method_name = Node::st.getScopeTitle();
+    string class_name = Node::st.getParentScope()->getScopeTitle();
+    Node::blk_links[class_name].try_emplace(method_name, ptr->getName());  // only store the entry of bb.
+    return ptr;
 }
 
 void Node::printErrMsg(const string &message) {

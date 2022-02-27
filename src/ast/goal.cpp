@@ -56,7 +56,6 @@ std::optional<IRReturnVal> Goal::generateIR() {
         Goal::st.enterScope();  // Enter "Class" scope
         child->generateIR();
         Goal::st.exitScope();   // Exit "Class" scope
-        cfg::Tac::resetID();
     }
     return std::nullopt;
 }

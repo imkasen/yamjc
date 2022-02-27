@@ -85,11 +85,16 @@ std::optional<string> MainClass::checkSemantics() {
 }
 
 /*
- * @brief: Traverse children nodes of "MethodBody"
+ * @brief:
+ *   1. Create a BasicBlock ptr as the entry.
+ *   2. Traverse children nodes of "MethodBody"
  * @return: std::nullopt
  */
 std::optional<IRReturnVal> MainClass::generateIR() {
     MainClass::st.enterScope();  // Enter "Method" scope
+    // 1.
+    MainClass::bb_lists.push_back(MainClass::createBB());
+    // 2.
     for (size_t i = 2; i < this->children.size(); ++i) {
         this->children.at(i)->generateIR();
     }

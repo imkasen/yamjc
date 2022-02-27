@@ -11,8 +11,9 @@
 
 /*
  * Used as return value of "generateIR()".
- * 1. return "string" in "Expression",
- * 2. return "BasicBlock ptr" in "Statement".
+ * 1. "std::monostate" is used as null.
+ * 2. return "string" in "Expression".
+ * 3. return "BasicBlock ptr" in "Statement".
  */
 using IRReturnVal = std::variant<std::monostate, std::string, std::shared_ptr<cfg::BasicBlock>>;
 
@@ -33,8 +34,10 @@ private:
 
 public:
     std::deque<std::shared_ptr<Node>> children;
-    inline static st::SymbolTable st = st::SymbolTable();         // NOLINT
-    inline static std::list<std::shared_ptr<cfg::BasicBlock>> cfg_list = {};  // store all entries of CFG
+    inline static st::SymbolTable st = st::SymbolTable();                     // NOLINT
+    inline static std::list<std::shared_ptr<cfg::BasicBlock>> bb_lists = {};  // store all "BasicBlock"
+    // link class, method with "BasicBlock", "<class_name, <method_name, entry_block_name>>"
+    inline static std::unordered_map<std::string, std::unordered_map<std::string, std::string>> blk_links = {};
 
     Node();
     Node(std::string t, std::string v);
@@ -63,6 +66,7 @@ public:
     // Functions related to the control flow graph
     void buildCFG(std::ofstream &ostream);
     virtual std::optional<IRReturnVal> generateIR();
+    static std::shared_ptr<cfg::BasicBlock> createBB();
 
     static void printErrMsg(const std::string &message);
 };

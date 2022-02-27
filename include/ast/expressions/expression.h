@@ -2,6 +2,8 @@
 #define AST_EXPRESSIONS_EXPRESSION_H
 
 #include "ast/node.h"
+#include "cfg/ir_method_call.h"
+#include "cfg/ir_parameter.h"
 
 namespace ast {
 

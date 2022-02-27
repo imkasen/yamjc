@@ -26,24 +26,25 @@ std::optional<string> MethodBody::generateST() {
 
 /*
  * @brief:
- *   1. Create a BasicBlock ptr as the entry, add it into the "cfg_list".
+ *   1. Obtain current "BasicBlock".
  *   2. Traverse nodes.
  *      If the return value of a child is "BasicBlock" ptr, add it into the entry.
- *      (Although it contains a 'for' loop, there is only one return value actually.)
+ *   3. reset temp variable id after each method
  * @return: std::nullopt;
  */
 std::optional<IRReturnVal> MethodBody::generateIR() {
     // 1.
-    std::shared_ptr<cfg::BasicBlock> entry_ptr = std::make_shared<cfg::BasicBlock>();
-    MethodBody::cfg_list.push_back(entry_ptr);
+    std::shared_ptr<cfg::BasicBlock> cur_bb = MethodBody::bb_lists.back();
     // 2.
     for (const auto &child : this->children) {
         const auto vrt = child->generateIR().value_or(std::monostate{});
         // if contains "BasicBlock" ptr
         if (auto bb_ptr = std::get_if<std::shared_ptr<cfg::BasicBlock>>(&vrt)) {
-            entry_ptr->setTrueExit(*bb_ptr);
+            cur_bb->setTrueExit(*bb_ptr);
         }
     }
+    // 3.
+    cfg::Tac::resetID();
 
     return std::nullopt;
 }

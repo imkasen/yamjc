@@ -122,3 +122,22 @@ std::optional<string> ClassExtendsDeclaration::checkSemantics() {
 
     return std::nullopt;
 }
+
+/*
+ * @brief: Traverse child nodes.
+ * @return: std::nullopt
+ */
+std::optional<IRReturnVal> ClassExtendsDeclaration::generateIR() {
+    //   if "Class" contains nothing
+    //      `this->children.size() == 2`
+    //   else
+    //      `this->children.size() >= 3`
+    if (this->children.size() >= 2 && this->children.at(1)->getType() == "Identifier") {
+        // Traverse "Declarations"
+        for (size_t i = 2; i < this->children.size(); ++i) {
+            this->children.at(i)->generateIR();
+        }
+    }
+
+    return std::nullopt;
+}

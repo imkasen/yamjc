@@ -2,6 +2,7 @@
 #define AST_EXPRESSIONS_EXPRESSION_LIST_H
 
 #include "ast/node.h"
+#include "cfg/ir_parameter.h"
 
 namespace ast {
 
@@ -12,6 +13,7 @@ public:
     ~ExpressionList() override = default;
 
     std::optional<std::string> checkSemantics() final;
+    std::optional<IRReturnVal> generateIR() final;
 };
 
 }  // namespace ast

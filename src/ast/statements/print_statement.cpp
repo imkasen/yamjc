@@ -32,7 +32,7 @@ std::optional<string> PrintStatement::checkSemantics() {
  */
 std::optional<IRReturnVal> PrintStatement::generateIR() {
     // 1.
-    std::shared_ptr<cfg::BasicBlock> cur_bb = PrintStatement::cfg_list.back();
+    std::shared_ptr<cfg::BasicBlock> cur_bb = PrintStatement::bb_lists.back();
     // 2.
     const auto vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
     if (auto s_ptr = std::get_if<string>(&vrt)) {

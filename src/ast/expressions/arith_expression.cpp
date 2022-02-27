@@ -31,14 +31,14 @@ std::optional<std::string> ArithExpression::checkSemantics() {
 
 /*
  * @brief:
- *   1. Obtain current BasicBlock.
+ *   1. Obtain current "BasicBlock".
  *   2. Get the return value of lhs, rhs.
  *      Add an instruction "IRExpression"
  * @return: string
  */
 std::optional<IRReturnVal> ArithExpression::generateIR() {
     // 1.
-    std::shared_ptr<cfg::BasicBlock> cur_bb = ArithExpression::cfg_list.back();
+    std::shared_ptr<cfg::BasicBlock> cur_bb = ArithExpression::bb_lists.back();
     // 2.
     string lhs_name, rhs_name, tmp_name;
     string op = this->getValue();
