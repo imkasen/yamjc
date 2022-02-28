@@ -14,9 +14,9 @@ namespace cfg {
  */
 class BasicBlock {
 private:
-    inline static std::size_t id = 0;  // unique id to generate different block name
-    std::string name;       // unique name
-    std::shared_ptr<BasicBlock> true_exit;
+    inline static std::size_t id = 0;     // unique id to generate different block name
+    std::string name;                     // unique name
+    std::weak_ptr<BasicBlock> true_exit;  // use weak_ptr to prevent memory leak, e.g. in "WhileStatement".
     std::shared_ptr<BasicBlock> false_exit;
     std::list<std::shared_ptr<Tac>> tac_instructions;
 

@@ -1,8 +1,8 @@
 #ifndef AST_EXPRESSIONS_LOGIC_EXPRESSION_H
 #define AST_EXPRESSIONS_LOGIC_EXPRESSION_H
 
-#include "expression.h"
 #include "cfg/ir_expression.h"
+#include "expression.h"
 
 namespace ast {
 

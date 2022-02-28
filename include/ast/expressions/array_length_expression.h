@@ -14,6 +14,6 @@ public:
     std::optional<std::string> checkSemantics() final;
 };
 
-}
+}  // namespace ast
 
 #endif

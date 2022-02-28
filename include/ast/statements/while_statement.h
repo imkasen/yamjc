@@ -1,6 +1,8 @@
 #ifndef AST_STATEMENTS_WHILE_STATEMENT_H
 #define AST_STATEMENTS_WHILE_STATEMENT_H
 
+#include "cfg/ir_cond_jump.h"
+#include "cfg/ir_jump.h"
 #include "statement.h"
 
 namespace ast {
@@ -12,6 +14,7 @@ public:
     ~WhileStatement() override = default;
 
     std::optional<std::string> checkSemantics() final;
+    std::optional<IRReturnVal> generateIR() final;
 };
 
 }  // namespace ast

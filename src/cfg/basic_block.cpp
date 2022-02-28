@@ -3,7 +3,7 @@ using cfg::BasicBlock;
 using cfg::Tac;
 using std::string;
 
-BasicBlock::BasicBlock() : tac_instructions(0), true_exit(nullptr), false_exit(nullptr) {
+BasicBlock::BasicBlock() : tac_instructions(0), false_exit(nullptr) {
     this->name = "L" + std::to_string(BasicBlock::id++);
 }
 
@@ -24,7 +24,7 @@ string BasicBlock::getName() const {
 }
 
 std::shared_ptr<BasicBlock> BasicBlock::getTrueExit() const {
-    return this->true_exit;
+    return this->true_exit.lock();
 }
 
 std::shared_ptr<BasicBlock> BasicBlock::getFalseExit() const {

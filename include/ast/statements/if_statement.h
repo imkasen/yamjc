@@ -1,8 +1,9 @@
 #ifndef AST_STATEMENTS_IF_STATEMENT_H
 #define AST_STATEMENTS_IF_STATEMENT_H
 
-#include "statement.h"
 #include "cfg/ir_cond_jump.h"
+#include "cfg/ir_jump.h"
+#include "statement.h"
 
 namespace ast {
 

@@ -66,6 +66,7 @@ std::optional<IRReturnVal> IfStatement::generateIR() {
     // 5.
     std::shared_ptr<cfg::BasicBlock> rej_ptr = IfStatement::createBB();
     IfStatement::bb_list.push_back(rej_ptr);
+    true_bb_ptr->addInstruction(std::make_shared<cfg::IRJump>(rej_ptr->getName()));
     true_bb_ptr->setTrueExit(rej_ptr);
     false_bb_ptr->setTrueExit(rej_ptr);
 

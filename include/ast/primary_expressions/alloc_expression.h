@@ -1,8 +1,8 @@
 #ifndef AST_PRIMARY_EXPRESSIONS_ALLOC_EXPRESSION_H
 #define AST_PRIMARY_EXPRESSIONS_ALLOC_EXPRESSION_H
 
-#include "primary_expression.h"
 #include "cfg/ir_alloc.h"
+#include "primary_expression.h"
 
 namespace ast {
 

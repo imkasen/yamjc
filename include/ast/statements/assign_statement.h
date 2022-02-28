@@ -1,8 +1,8 @@
 #ifndef AST_STATEMENTS_ASSIGN_STATEMENT_H
 #define AST_STATEMENTS_ASSIGN_STATEMENT_H
 
-#include "statement.h"
 #include "cfg/ir_copy.h"
+#include "statement.h"
 
 namespace ast {
 
@@ -16,6 +16,6 @@ public:
     std::optional<IRReturnVal> generateIR() final;
 };
 
-}
+}  // namespace ast
 
 #endif

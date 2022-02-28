@@ -1,8 +1,8 @@
 #ifndef AST_RETURN_H
 #define AST_RETURN_H
 
-#include "node.h"
 #include "cfg/ir_return.h"
+#include "node.h"
 
 namespace ast {
 
