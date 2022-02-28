@@ -129,14 +129,14 @@ void Node::buildCFG(std::ofstream &ostream) {
     this->generateIR();
     Node::st.resetTable();
     // Generate "cfg.dot"
-    for (const auto &cfg_ptr : Node::bb_lists) {
+    for (const auto &cfg_ptr : Node::bb_list) {
         ostream << cfg_ptr->printInfo() << endl;
     }
 }
 
 /*
  * Default behavior for nodes:
- * "Declarations"
+ * "Declarations", "Statement"
  *
  * All abstract syntax trees start with node "Goal",
  * review "parser.yy" for more details.

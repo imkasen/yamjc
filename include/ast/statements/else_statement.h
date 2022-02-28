@@ -10,6 +10,8 @@ public:
     ElseStatement();
     ElseStatement(std::string t, std::string v);
     ~ElseStatement() override = default;
+
+    std::optional<IRReturnVal> generateIR() final;
 };
 
 }  // namespace ast

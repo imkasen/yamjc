@@ -28,7 +28,7 @@ std::optional<string> ExpressionList::checkSemantics() {
  */
 std::optional<IRReturnVal> ExpressionList::generateIR() {
     // 1.
-    std::shared_ptr<cfg::BasicBlock> cur_bb = ExpressionList::bb_lists.back();
+    std::shared_ptr<cfg::BasicBlock> cur_bb = ExpressionList::bb_list.back();
     // 2.
     for (const auto &child : this->children) {
         string lhs;

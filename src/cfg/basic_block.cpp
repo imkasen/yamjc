@@ -39,13 +39,13 @@ std::string BasicBlock::printInfo() const {
     // Draw instructions
     string ins_content;
     for (const auto &tac_ptr : this->getInstructions()) {
-        ins_content += tac_ptr->printInfo() + "<BR/>\n";
+        ins_content += tac_ptr->printInfo() + "\n";
     }
 
     // Draw block
     string block_content;
     string cur_block_name = this->getName();
-    block_content += cur_block_name + " [label=<<B>" + cur_block_name + "</B><BR/><BR/>\n" + ins_content + ">];\n";
+    block_content += cur_block_name + " [label=\"" + cur_block_name + "\n" + ins_content + "\"];\n";
 
     if (this->getTrueExit()) {  // Draw true pointer
         string next_block_name = this->getTrueExit()->getName();

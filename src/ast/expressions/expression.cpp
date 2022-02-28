@@ -246,6 +246,7 @@ void Expression::strSplit(std::deque<std::string> &deque, std::string &text, con
 std::optional<IRReturnVal> Expression::generateIR() {
     size_t size = this->children.size();
     string type = this->children.at(0)->getType();
+    std::shared_ptr<cfg::BasicBlock> cur_bb = Expression::bb_list.back();
     // "Expression" -> "int"
     // "Expression" -> "boolean"
     // "Expression" -> "PrimaryExpression"
@@ -254,21 +255,46 @@ std::optional<IRReturnVal> Expression::generateIR() {
     }
     // "Expression" -> "AllocExpression", "Identifier", "ExpressionList"
     else if (size <= 3 && type == "AllocExpression") {
-        std::shared_ptr<cfg::BasicBlock> cur_bb = Expression::bb_lists.back();
-        string lhs, tmp_name, n;
-        // Get the return value of tmp name, create an instruction "IRParameter"
+        string tmp_name, lhs, n;
         // "AllocExpression:new"
+        // Get the return value of tmp name
         const auto par_vrt = this->children.at(0)->generateIR().value_or(std::monostate {});
         if (auto s_ptr = std::get_if<string>(&par_vrt)) {
             tmp_name = *s_ptr;
         }
-        // Create an instruction "IRMethodCall"
         // "Identifier"
         const auto lhs_vrt = this->children.at(1)->generateIR().value_or(std::monostate {});
         if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
             lhs = tmp_name + "." + *s_ptr;
         }
         // "ExpressionList"
+        // Create an instruction "IRMethodCall"
+        const auto n_vrt = this->children.at(2)->generateIR().value_or(std::monostate {});
+        if (auto szt_ptr = std::get_if<string>(&n_vrt)) {
+            n = *szt_ptr;
+        }
+        tmp_name = cfg::Tac::generateTmpVarName();
+        std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRMethodCall>(lhs, n, tmp_name);
+        cur_bb->addInstruction(instruction);
+
+        return tmp_name;
+    }
+    // "Expression" -> "keyword:this", "Identifier"
+    // "Expression" -> "keyword:this", "Identifier", "ExpressionList"
+    else if (size <= 3 && type == "keyword") {
+        string tmp_name, lhs, n;
+        // "keyword:this"
+        // turn "this" into instruction "IRAlloc"
+        string class_name = Expression::st.getParentScope()->getScopeTitle();
+        tmp_name = cfg::Tac::generateTmpVarName();
+        cur_bb->addInstruction(std::make_shared<cfg::IRAlloc>(class_name, tmp_name));
+        // "Identifier"
+        const auto lhs_vrt = this->children.at(1)->generateIR().value_or(std::monostate {});
+        if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
+            lhs = tmp_name + "." + *s_ptr;
+        }
+        // "ExpressionList"
+        // Create an instruction "IRMethodCall"
         const auto n_vrt = this->children.at(2)->generateIR().value_or(std::monostate {});
         if (auto szt_ptr = std::get_if<string>(&n_vrt)) {
             n = *szt_ptr;

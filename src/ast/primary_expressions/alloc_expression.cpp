@@ -36,7 +36,7 @@ std::optional<string> AllocExpression::checkSemantics() {
  */
 std::optional<IRReturnVal> AllocExpression::generateIR() {
     // 1.
-    std::shared_ptr<cfg::BasicBlock> cur_bb = AllocExpression::bb_lists.back();
+    std::shared_ptr<cfg::BasicBlock> cur_bb = AllocExpression::bb_list.back();
     // 2.
     string lhs, tmp_name;
     const auto lhs_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});

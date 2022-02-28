@@ -40,3 +40,28 @@ std::optional<string> AssignStatement::checkSemantics() {
 
     return std::nullopt;
 }
+
+/*
+ * @brief:
+ *   1. Obtain current "BasicBlock"
+ *   2. Create an instruction "IRExpression"
+ * @return: std::nullopt
+ */
+std::optional<IRReturnVal> AssignStatement::generateIR() {
+    // 1.
+    std::shared_ptr<cfg::BasicBlock> cur_bb = AssignStatement::bb_list.back();
+    // 2.
+    string result, lhs;
+    const auto r_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    if (auto s_ptr = std::get_if<string>(&r_vrt)) {
+        result = *s_ptr;
+    }
+    const auto lhs_vrt = this->children.at(1)->generateIR().value_or(std::monostate{});
+    if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
+        lhs = *s_ptr;
+    }
+    std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRCopy>(lhs, result);
+    cur_bb->addInstruction(instruction);
+
+    return std::nullopt;
+}

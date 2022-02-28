@@ -2,6 +2,7 @@
 #define AST_EXPRESSIONS_LOGIC_EXPRESSION_H
 
 #include "expression.h"
+#include "cfg/ir_expression.h"
 
 namespace ast {
 
@@ -12,6 +13,7 @@ public:
     ~LogicExpression() override = default;
 
     std::optional<std::string> checkSemantics() final;
+    std::optional<IRReturnVal> generateIR() final;
 };
 
 }  // namespace ast

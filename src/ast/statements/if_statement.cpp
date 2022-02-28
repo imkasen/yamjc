@@ -5,7 +5,7 @@ using std::string;
 /*
                        "IfStatement"
                /              |             \
-     "CompareExpression"  "Statement"  ["ElseStatement"]
+     "CompareExpression"  "Statement"  "ElseStatement"
  */
 
 IfStatement::IfStatement() : Statement() {}
@@ -27,4 +27,47 @@ std::optional<string> IfStatement::checkSemantics() {
     }
 
     return std::nullopt;
+}
+
+/*
+ * @brief:
+ *   1. Create a boolean condition "BasicBlock", add into boolean instruction
+ *   2. Create a true branch "BasicBlock", add into instruction
+ *   3. Create a false branch "BasicBlock", add into instruction
+ *   4. Add an instruction "IRCondJump" into boolean condition "BasicBlock"
+ *   5. Create a rejoinder "BasicBlock"
+ * @return: IRReturnVal
+ */
+std::optional<IRReturnVal> IfStatement::generateIR() {
+    // 1.
+    std::shared_ptr<cfg::BasicBlock> bl_bb_ptr = IfStatement::createBB();
+    IfStatement::bb_list.push_back(bl_bb_ptr);
+    const auto tmp_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    std::string cdi_tmp_name, label_name;
+    if (auto s_ptr = std::get_if<string>(&tmp_vrt)) {
+        cdi_tmp_name = *s_ptr;
+    }
+    // 2.
+    std::shared_ptr<cfg::BasicBlock> true_bb_ptr = IfStatement::createBB();
+    IfStatement::bb_list.push_back(true_bb_ptr);
+    bl_bb_ptr->setTrueExit(true_bb_ptr);
+    this->children.at(1)->generateIR();
+    // 3.
+    std::shared_ptr<cfg::BasicBlock> false_bb_ptr;
+    const auto false_vrt = this->children.at(2)->generateIR().value_or(std::monostate{});
+    if (auto ptr = std::get_if<std::shared_ptr<cfg::BasicBlock>>(&false_vrt)) {
+        false_bb_ptr = *ptr;
+    }
+    label_name = false_bb_ptr->getName();
+    bl_bb_ptr->setFalseExit(false_bb_ptr);
+    // 4.
+    std::shared_ptr<cfg::Tac> cdi_jmp_ins = std::make_shared<cfg::IRCondJump>(cdi_tmp_name, label_name);
+    bl_bb_ptr->addInstruction(cdi_jmp_ins);
+    // 5.
+    std::shared_ptr<cfg::BasicBlock> rej_ptr = IfStatement::createBB();
+    IfStatement::bb_list.push_back(rej_ptr);
+    true_bb_ptr->setTrueExit(rej_ptr);
+    false_bb_ptr->setTrueExit(rej_ptr);
+
+    return bl_bb_ptr;
 }

@@ -28,3 +28,30 @@ std::optional<string> LogicExpression::checkSemantics() {
 
     return std::nullopt;
 }
+
+/*
+ * @brief:
+ *   1. Obtain current "BasicBlock"
+ *   2. Create an instruction "IRExpression"
+ * @return: string
+ */
+std::optional<IRReturnVal> LogicExpression::generateIR() {
+    // 1.
+    std::shared_ptr<cfg::BasicBlock> cur_bb = LogicExpression::bb_list.back();
+    // 2.
+    std::string op = this->getValue();
+    std::string lhs, rhs;
+    const auto lhs_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
+        lhs = *s_ptr;
+    }
+    const auto rhs_vrt = this->children.at(1)->generateIR().value_or(std::monostate{});
+    if (auto s_ptr = std::get_if<string>(&rhs_vrt)) {
+        rhs = *s_ptr;
+    }
+    std::string tmp_name = cfg::Tac::generateTmpVarName();
+    std::shared_ptr<cfg::Tac> exp_ins = std::make_shared<cfg::IRExpression>(op, lhs, rhs, tmp_name);
+    cur_bb->addInstruction(exp_ins);
+
+    return tmp_name;
+}

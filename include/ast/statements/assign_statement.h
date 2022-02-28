@@ -2,6 +2,7 @@
 #define AST_STATEMENTS_ASSIGN_STATEMENT_H
 
 #include "statement.h"
+#include "cfg/ir_copy.h"
 
 namespace ast {
 
@@ -12,6 +13,7 @@ public:
     ~AssignStatement() override = default;
 
     std::optional<std::string> checkSemantics() final;
+    std::optional<IRReturnVal> generateIR() final;
 };
 
 }

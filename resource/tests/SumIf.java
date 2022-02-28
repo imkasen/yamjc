@@ -1,4 +1,4 @@
-class RecursiveSum {
+class SumIf {
     public static void main(String[] a){
         System.out.println(new Test().Sum(10000));
     }

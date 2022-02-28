@@ -10,7 +10,7 @@ class FacFib2 {
         int fib;
         int returnValue;
 
-        if (!(first < 1)  && !(second < 1)) {
+        if (!(first < 1) && !(second < 1)) {
             fac = this.ComputeFac(first);
             System.out.println(fac);
 

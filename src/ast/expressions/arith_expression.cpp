@@ -38,7 +38,7 @@ std::optional<std::string> ArithExpression::checkSemantics() {
  */
 std::optional<IRReturnVal> ArithExpression::generateIR() {
     // 1.
-    std::shared_ptr<cfg::BasicBlock> cur_bb = ArithExpression::bb_lists.back();
+    std::shared_ptr<cfg::BasicBlock> cur_bb = ArithExpression::bb_list.back();
     // 2.
     string lhs_name, rhs_name, tmp_name;
     string op = this->getValue();

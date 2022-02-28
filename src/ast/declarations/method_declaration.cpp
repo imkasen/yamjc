@@ -80,7 +80,7 @@ std::optional<IRReturnVal> MethodDeclaration::generateIR() {
     MethodDeclaration::st.enterScope();  // Enter "Method" scope
 
     // 1.
-    MethodDeclaration::bb_lists.push_back(MethodDeclaration::createBB());
+    MethodDeclaration::bb_list.push_back(MethodDeclaration::createBB());
     // 2.
     for (const auto &child : this->children) {
         child->generateIR();

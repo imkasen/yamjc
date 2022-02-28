@@ -35,7 +35,7 @@ private:
 public:
     std::deque<std::shared_ptr<Node>> children;
     inline static st::SymbolTable st = st::SymbolTable();                     // NOLINT
-    inline static std::list<std::shared_ptr<cfg::BasicBlock>> bb_lists = {};  // store all "BasicBlock"
+    inline static std::list<std::shared_ptr<cfg::BasicBlock>> bb_list = {};  // store all "BasicBlock"
     // link class, method with "BasicBlock", "<class_name, <method_name, entry_block_name>>"
     inline static std::unordered_map<std::string, std::unordered_map<std::string, std::string>> blk_links = {};
 

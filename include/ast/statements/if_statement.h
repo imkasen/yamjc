@@ -2,6 +2,7 @@
 #define AST_STATEMENTS_IF_STATEMENT_H
 
 #include "statement.h"
+#include "cfg/ir_cond_jump.h"
 
 namespace ast {
 
@@ -12,6 +13,7 @@ public:
     ~IfStatement() override = default;
 
     std::optional<std::string> checkSemantics() final;
+    std::optional<IRReturnVal> generateIR() final;
 };
 
 }  // namespace ast

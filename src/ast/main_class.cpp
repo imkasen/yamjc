@@ -93,7 +93,7 @@ std::optional<string> MainClass::checkSemantics() {
 std::optional<IRReturnVal> MainClass::generateIR() {
     MainClass::st.enterScope();  // Enter "Method" scope
     // 1.
-    MainClass::bb_lists.push_back(MainClass::createBB());
+    MainClass::bb_list.push_back(MainClass::createBB());
     // 2.
     for (size_t i = 2; i < this->children.size(); ++i) {
         this->children.at(i)->generateIR();
