@@ -136,7 +136,7 @@ void Node::buildCFG(std::ofstream &ostream) {
 
 /*
  * Default behavior for nodes:
- * "Declarations", "Statement"
+ * "Declarations"
  *
  * All abstract syntax trees start with node "Goal",
  * review "parser.yy" for more details.

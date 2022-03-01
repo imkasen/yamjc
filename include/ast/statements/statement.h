@@ -12,6 +12,7 @@ public:
     ~Statement() override = default;
 
     std::optional<std::string> generateST() final;
+    std::optional<IRReturnVal> generateIR() override;
 };
 
 }  // namespace ast

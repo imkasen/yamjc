@@ -12,3 +12,31 @@ Statement::Statement(string t, string v) : Node(std::move(t), std::move(v)) {}
 std::optional<string> Statement::generateST() {
     return std::nullopt;
 }
+
+/*
+ * @brief:
+ *   1. "Statement": Traverse child nodes
+ *   2. "Statements":
+ * @return: std::nulopt
+ */
+std::optional<IRReturnVal> Statement::generateIR() {
+    string type = this->getType();
+    // 1.
+    if (type == "Statement") {
+        for (const auto &child : this->children) {
+            child->generateIR();
+        }
+    }
+    // 2.
+    else {  // "Statements"
+        std::shared_ptr<cfg::BasicBlock> cur_bb = Statement::bb_list.back();
+        for (const auto &child : this->children) {
+            const auto vrt = child->generateIR().value_or(std::monostate{});
+            if (auto ptr = std::get_if<std::shared_ptr<cfg::BasicBlock>>(&vrt)) {
+                cur_bb->setTrueExit(*ptr);
+                cur_bb = Statement::bb_list.back();
+            }
+        }
+    }
+    return std::nullopt;
+}

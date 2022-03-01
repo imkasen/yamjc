@@ -45,9 +45,9 @@ std::optional<IRReturnVal> WhileStatement::generateIR() {
     std::shared_ptr<cfg::BasicBlock> true_bb_ptr = WhileStatement::createBB();
     WhileStatement::bb_list.push_back(true_bb_ptr);
     bl_bb_ptr->setTrueExit(true_bb_ptr);
-    true_bb_ptr->setTrueExit(bl_bb_ptr);
     this->children.at(1)->generateIR();
-    true_bb_ptr->addInstruction(std::make_shared<cfg::IRJump>(bl_bb_ptr->getName()));
+    WhileStatement::bb_list.back()->setTrueExit(bl_bb_ptr);
+    WhileStatement::bb_list.back()->addInstruction(std::make_shared<cfg::IRJump>(bl_bb_ptr->getName()));
     // 3.
     std::shared_ptr<cfg::BasicBlock> rej_ptr = WhileStatement::createBB();
     WhileStatement::bb_list.push_back(rej_ptr);
