@@ -7,12 +7,11 @@ using std::string;
 
 Scope::Scope() {
     this->next = 0;
-    this->parentScope = nullptr;
 }
 
-Scope::Scope(std::shared_ptr<Scope> parent) {
+Scope::Scope(const std::shared_ptr<Scope> &parent) {
     this->next = 0;
-    this->parentScope = std::move(parent);
+    this->parentScope = parent;
 }
 
 void Scope::setScopeTitle(const std::string &title) {
@@ -52,7 +51,7 @@ std::shared_ptr<Scope> Scope::getNextChild() {
 }
 
 std::shared_ptr<Scope> Scope::getParentScope() const {
-    return this->parentScope;
+    return this->parentScope.lock();
 }
 
 /*
@@ -66,8 +65,8 @@ std::optional<std::shared_ptr<Record>> Scope::lookupRecord(const string &key) co
         return iterator->second;
     }
     // Key doest not exist && parent scope != nullptr
-    else if (this->parentScope) {
-        return this->parentScope->lookupRecord(key);  // delegate the request to parent scope
+    else if (this->parentScope.lock()) {
+        return this->parentScope.lock()->lookupRecord(key);  // delegate the request to parent scope
     } else {
         return std::nullopt;
     }

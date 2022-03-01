@@ -13,14 +13,14 @@ namespace st {
 class Scope : public std::enable_shared_from_this<Scope> {
 private:
     std::string scope_title;
-    std::size_t next;                                                  // Next child to visit
-    std::shared_ptr<Scope> parentScope;                                // Parent scope
-    std::deque<std::shared_ptr<Scope>> childrenScopes;                 // Child scopes
+    std::size_t next;                                   // Next child to visit
+    std::weak_ptr<Scope> parentScope;                   // Parent scope, use weak_ptr to prevent memory leak
+    std::deque<std::shared_ptr<Scope>> childrenScopes;  // Child scopes
     std::unordered_map<std::string, std::shared_ptr<Record>> records;  // Symbol to record map
 
 public:
     Scope();
-    explicit Scope(std::shared_ptr<Scope> parent);
+    explicit Scope(const std::shared_ptr<Scope> &parent);
     virtual ~Scope() = default;
 
     void setScopeTitle(const std::string &title);
