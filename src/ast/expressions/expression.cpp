@@ -251,6 +251,7 @@ std::optional<IRReturnVal> Expression::generateIR() {
     // "Expression" -> "boolean"
     // "Expression" -> "PrimaryExpression"
     // "Expression" -> "UnaryExpression"
+    // "Expression" -> "ArrayAllocExpression"
     if (size == 1) {
         return this->children.at(0)->generateIR();
     }
