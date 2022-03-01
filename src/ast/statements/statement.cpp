@@ -17,6 +17,9 @@ std::optional<string> Statement::generateST() {
  * @brief:
  *   1. "Statement": Traverse child nodes
  *   2. "Statements":
+ *       (mainly used for "If-While" nested structure)
+ *       Get the returned "BasicBlock" from recursive call.
+ *       Set the returned "BasicBlock" as the true exit of last "BasicBlock".
  * @return: std::nulopt
  */
 std::optional<IRReturnVal> Statement::generateIR() {

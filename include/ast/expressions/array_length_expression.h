@@ -1,6 +1,7 @@
 #ifndef AST_EXPRESSIONS_ARRAY_LENGTH_EXPRESSION_H
 #define AST_EXPRESSIONS_ARRAY_LENGTH_EXPRESSION_H
 
+#include "cfg/ir_array_length.h"
 #include "expression.h"
 
 namespace ast {
@@ -12,6 +13,7 @@ public:
     ~ArrayLengthExpression() override = default;
 
     std::optional<std::string> checkSemantics() final;
+    std::optional<IRReturnVal> generateIR() final;
 };
 
 }  // namespace ast
