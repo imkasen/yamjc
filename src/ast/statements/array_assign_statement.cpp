@@ -43,3 +43,32 @@ std::optional<string> ArrayAssignStatement::checkSemantics() {
 
     return std::nullopt;
 }
+
+/*
+ * @brief:
+ *   1. Get current "BasicBlock"
+ *   2. Create an instruction "IRArrayAssign"
+ * @return: std::nullopt;
+ */
+std::optional<IRReturnVal> ArrayAssignStatement::generateIR() {
+    // 1.
+    std::shared_ptr<cfg::BasicBlock> cur_bb = ArrayAssignStatement::bb_list.back();
+    // 2.
+    string lhs, rhs, result;
+    const auto id_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    if (auto s_ptr = std::get_if<string>(&id_vrt)) {
+        lhs = *s_ptr;
+    }
+    const auto idx_vrt = this->children.at(1)->generateIR().value_or(std::monostate{});
+    if (auto s_ptr = std::get_if<string>(&idx_vrt)) {
+        rhs = *s_ptr;
+    }
+    const auto rst_vrt = this->children.at(2)->generateIR().value_or(std::monostate{});
+    if (auto s_ptr = std::get_if<string>(&rst_vrt)) {
+        result = *s_ptr;
+    }
+    std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRArrayAssign>(lhs, rhs, result);
+    cur_bb->addInstruction(instruction);
+
+    return std::nullopt;
+}

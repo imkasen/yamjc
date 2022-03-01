@@ -6,11 +6,11 @@
 namespace cfg {
 
 /*
- * @brief: Copy "y[i]" to "x"; Copy "x" to "y[i]".
- * Example: x  = y[i]    or    y[i]  = x
- * TAC:     x := y[i]          y[i] := x
- *          |    |  \            |      |
- *       result lhs rhs        result  lhs
+ * @brief: Copy "y[i]" to "x".
+ * Example: x  = y[i]
+ * TAC:     x := y[i]
+ *          |    |  \
+ *       result lhs rhs
  */
 class IRArrayAccess : public Tac {
 public:
