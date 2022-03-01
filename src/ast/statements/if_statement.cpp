@@ -52,6 +52,7 @@ std::optional<IRReturnVal> IfStatement::generateIR() {
     IfStatement::bb_list.push_back(true_bb_ptr);
     bl_bb_ptr->setTrueExit(true_bb_ptr);
     this->children.at(1)->generateIR();
+    true_bb_ptr = IfStatement::bb_list.back();
     // 3.
     std::shared_ptr<cfg::BasicBlock> false_bb_ptr;
     const auto false_vrt = this->children.at(2)->generateIR().value_or(std::monostate{});
@@ -60,6 +61,7 @@ std::optional<IRReturnVal> IfStatement::generateIR() {
     }
     label_name = false_bb_ptr->getName();
     bl_bb_ptr->setFalseExit(false_bb_ptr);
+    false_bb_ptr = IfStatement::bb_list.back();
     // 4.
     std::shared_ptr<cfg::Tac> cdi_jmp_ins = std::make_shared<cfg::IRCondJump>(cdi_tmp_name, label_name);
     bl_bb_ptr->addInstruction(cdi_jmp_ins);

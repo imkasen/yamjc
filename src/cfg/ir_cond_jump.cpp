@@ -7,5 +7,5 @@ IRCondJump::IRCondJump(string lhs, string label)
     : Tac("goto", std::move(lhs), "", std::move(label)) {}
 
 std::string IRCondJump::printInfo() const {
-    return "if false " + this->getLHS() + ", " + this->getOP() + " " + this->getResult();
+    return "if " + this->getLHS() + " == false, " + this->getOP() + " " + this->getResult();
 }
