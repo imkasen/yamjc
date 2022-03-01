@@ -9,13 +9,13 @@ namespace cfg {
  * @brief: Copy "y[i]" to "x"; Copy "x" to "y[i]".
  * Example: x  = y[i]    or    y[i]  = x
  * TAC:     x := y[i]          y[i] := x
- *          |      |            |      |
- *       result   lhs         result  lhs
+ *          |    |  \            |      |
+ *       result lhs rhs        result  lhs
  */
 class IRArrayAccess : public Tac {
 public:
     IRArrayAccess();
-    IRArrayAccess(std::string lhs, std::string result);
+    IRArrayAccess(std::string lhs, std::string rhs, std::string result);
     ~IRArrayAccess() override = default;
 
     [[nodiscard]] std::string printInfo() const final;
