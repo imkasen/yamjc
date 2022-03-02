@@ -21,7 +21,7 @@ private:
     std::string name;
     std::string type;
     std::string record;
-
+    std::string value;  // store a temporary variable name, used for "Variable" and "Parameter" in IR.
 public:
     Record();
     Record(std::string name, std::string type, std::string record);
@@ -30,10 +30,12 @@ public:
     void setName(std::string _name);
     void setRecord(std::string _record);
     void setType(std::string _type);
+    void setValue(std::string _value);
 
     [[nodiscard]] std::string getName() const;
     [[nodiscard]] std::string getRecord() const;
     [[nodiscard]] std::string getType() const;
+    [[nodiscard]] std::string getValue() const;
 
     [[nodiscard]] std::string printRecord() const;
 };

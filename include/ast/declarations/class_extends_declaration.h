@@ -1,11 +1,11 @@
 #ifndef AST_DECLARATIONS_CLASS_EXTENDS_DECLARATION_H
 #define AST_DECLARATIONS_CLASS_EXTENDS_DECLARATION_H
 
-#include "declarations.h"
+#include "ast/node.h"
 
 namespace ast {
 
-class ClassExtendsDeclaration : public Declarations {
+class ClassExtendsDeclaration : public Node {
 public:
     ClassExtendsDeclaration();
     ClassExtendsDeclaration(std::string t, std::string v);

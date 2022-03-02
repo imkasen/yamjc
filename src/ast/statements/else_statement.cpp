@@ -14,7 +14,11 @@ std::optional<IRReturnVal> ElseStatement::generateIR() {
     ElseStatement::bb_list.push_back(false_bb);
 
     for (const auto &child : this->children) {
-        child->generateIR();
+        const auto vrt = child->generateIR().value_or(std::monostate{});
+        // "... else if () {} ..."
+        if (auto ptr = std::get_if<std::shared_ptr<cfg::BasicBlock>>(&vrt)) {
+            false_bb->setTrueExit(*ptr);
+        }
     }
 
     return false_bb;

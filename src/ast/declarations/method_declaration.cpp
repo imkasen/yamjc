@@ -11,8 +11,8 @@ using std::string;
      "Type"  "Identifier"  ["FormalParameterList"]  "MethodBody"
  */
 
-MethodDeclaration::MethodDeclaration() : Declarations() {}
-MethodDeclaration::MethodDeclaration(std::string t, std::string v) : Declarations(std::move(t), std::move(v)) {}
+MethodDeclaration::MethodDeclaration() : Node() {}
+MethodDeclaration::MethodDeclaration(std::string t, std::string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * @brief:
@@ -72,16 +72,19 @@ std::optional<string> MethodDeclaration::checkSemantics() {
 
 /*
  * @brief:
- *   1. Create a BasicBlock ptr as the entry.
- *   2. Traverse child nodes
+ *   1. Reset id before traverse every method
+ *   2. Create a BasicBlock ptr as the entry.
+ *   3. Traverse child nodes
  * @return: std::nullopt
  */
 std::optional<IRReturnVal> MethodDeclaration::generateIR() {
     MethodDeclaration::st.enterScope();  // Enter "Method" scope
 
     // 1.
-    MethodDeclaration::bb_list.push_back(MethodDeclaration::createBB());
+    cfg::Tac::resetID();
     // 2.
+    MethodDeclaration::bb_list.push_back(MethodDeclaration::createBB());
+    // 3.
     for (const auto &child : this->children) {
         child->generateIR();
     }

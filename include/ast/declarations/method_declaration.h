@@ -1,11 +1,11 @@
 #ifndef AST_DECLARATIONS_METHOD_DECLARATION_H
 #define AST_DECLARATIONS_METHOD_DECLARATION_H
 
-#include "declarations.h"
+#include "ast/node.h"
 
 namespace ast {
 
-class MethodDeclaration : public Declarations {
+class MethodDeclaration : public Node {
 public:
     MethodDeclaration();
     MethodDeclaration(std::string t, std::string v);

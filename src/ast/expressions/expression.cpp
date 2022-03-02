@@ -119,8 +119,7 @@ std::optional<string> Expression::checkSemantics() {
         return m_record_ptr->getType();
     }
     // 5.
-    // "Expression" -> "PrimaryExpression", "Identifier"
-    // "Expression" -> "PrimaryExpression", "Identifier", "ExpressionList"
+    // "Expression" -> "PrimaryExpression", "Identifier", ["ExpressionList"]
     else if (size <= 3 && type == "PrimaryExpression") {
         var_name = this->children.at(0)->checkSemantics().value_or("");
         method_name = this->children.at(1)->checkSemantics().value_or("");
@@ -153,8 +152,7 @@ std::optional<string> Expression::checkSemantics() {
         return m_record_ptr->getType();
     }
     // 6.
-    // "Expression" -> "keyword:this", "Identifier"
-    // "Expression" -> "keyword:this", "Identifier", "ExpressionList"
+    // "Expression" -> "keyword:this", "Identifier", ["ExpressionList"]
     else if (size <= 3 && type == "keyword") {
         method_name = this->children.at(1)->checkSemantics().value_or("");
         m_record_ptr = Expression::st.lookupRecord(method_name).value_or(nullptr);
@@ -256,9 +254,10 @@ std::optional<IRReturnVal> Expression::generateIR() {
         return this->children.at(0)->generateIR();
     }
     // "Expression" -> "AllocExpression", "Identifier", ["ExpressionList"]
-    else if (size <= 3 && type == "AllocExpression") {
+    // "Expression" -> "PrimaryExpression", "Identifier", ["ExpressionList"]
+    else if (size <= 3 && (type == "AllocExpression" || type == "PrimaryExpression")) {
         string tmp_name, lhs, n = "0";
-        // "AllocExpression:new"
+        // "AllocExpression", "PrimaryExpression"
         // Get the return value of tmp name
         const auto par_vrt = this->children.at(0)->generateIR().value_or(std::monostate {});
         if (auto s_ptr = std::get_if<string>(&par_vrt)) {
@@ -267,7 +266,7 @@ std::optional<IRReturnVal> Expression::generateIR() {
         // "Identifier"
         const auto lhs_vrt = this->children.at(1)->generateIR().value_or(std::monostate {});
         if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
-            lhs = tmp_name + "." + *s_ptr;
+            lhs = tmp_name + "." + *s_ptr;  // "class_name.method_name"
         }
         if (size == 3) {
             // "ExpressionList"
@@ -283,15 +282,20 @@ std::optional<IRReturnVal> Expression::generateIR() {
 
         return tmp_name;
     }
-    // "Expression" -> "keyword:this", "Identifier"
-    // "Expression" -> "keyword:this", "Identifier", "ExpressionList"
+    // "Expression" -> "keyword:this", "Identifier", ["ExpressionList"]
     else if (size <= 3 && type == "keyword") {
-        string tmp_name, lhs, n;
+        string class_name, tmp_name, lhs, n = "0";
         // "keyword:this"
+        auto record = Expression::st.lookupRecord("this").value_or(nullptr);
         // turn "this" into instruction "IRCopy"
-        string class_name = Expression::st.getParentScope()->getScopeTitle();
-        tmp_name = cfg::Tac::generateTmpVarName();
-        cur_bb->addInstruction(std::make_shared<cfg::IRCopy>(class_name, tmp_name));
+        if (record->getValue().empty()) {
+            class_name = record->getType();
+            tmp_name = cfg::Tac::generateTmpVarName();
+            cur_bb->addInstruction(std::make_shared<cfg::IRCopy>(class_name, tmp_name));
+            record->setValue(tmp_name);
+        } else {
+            tmp_name = record->getValue();  // avoid setting multiple tmp variable
+        }
         // "Identifier"
         const auto lhs_vrt = this->children.at(1)->generateIR().value_or(std::monostate {});
         if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {

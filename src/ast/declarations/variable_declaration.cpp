@@ -11,8 +11,8 @@ using std::string;
       "Type"  "Identifier"
  */
 
-VarDeclaration::VarDeclaration() : Declarations() {}
-VarDeclaration::VarDeclaration(string t, string v) : Declarations(std::move(t), std::move(v)) {}
+VarDeclaration::VarDeclaration() : Node() {}
+VarDeclaration::VarDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * @brief:
@@ -56,6 +56,35 @@ std::optional<string> VarDeclaration::checkSemantics() {
         if (!c_record_ptr) {
             string msg = "[Semantic Analysis] - Error: Class \"" + type_name + "\" does not exist!";
             VarDeclaration::printErrMsg(msg);
+        }
+    }
+
+    return std::nullopt;
+}
+
+/*
+ * @brief:
+ *   1. Get current "BasicBlock"
+ *   2. Create an instruction "IRCopy"
+ *   3. Set tmp name into the Symbol Table
+ * @return: std::nullopt
+ */
+std::optional<IRReturnVal> VarDeclaration::generateIR() {
+    // 1.
+    std::shared_ptr<cfg::BasicBlock> cur_bb = VarDeclaration::bb_list.back();
+    // 2.
+    string lhs, tmp_name;
+    const auto vrt = this->children.at(1)->generateIR().value_or(std::monostate{});
+    if (auto ptr = std::get_if<string>(&vrt)) {
+        lhs = *ptr;
+    }
+    tmp_name = cfg::Tac::generateTmpVarName();
+    std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRCopy>(lhs, tmp_name);
+    cur_bb->addInstruction(instruction);
+    // 3.
+    if (auto ptr = VarDeclaration::st.lookupRecord(lhs).value_or(nullptr)) {
+        if (ptr->getValue().empty()) {
+            ptr->setValue(tmp_name);
         }
     }
 

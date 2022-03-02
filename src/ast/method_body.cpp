@@ -29,7 +29,6 @@ std::optional<string> MethodBody::generateST() {
  *   1. Obtain current "BasicBlock".
  *   2. Traverse nodes.
  *      If the return value of a child is "BasicBlock" ptr, add it into the entry.
- *   3. reset temp variable id after each method
  * @return: std::nullopt;
  */
 std::optional<IRReturnVal> MethodBody::generateIR() {
@@ -41,10 +40,9 @@ std::optional<IRReturnVal> MethodBody::generateIR() {
         // if contains "BasicBlock" ptr
         if (auto bb_ptr = std::get_if<std::shared_ptr<cfg::BasicBlock>>(&vrt)) {
             cur_bb->setTrueExit(*bb_ptr);
+            cur_bb = MethodBody::bb_list.back();
         }
     }
-    // 3.
-    cfg::Tac::resetID();
 
     return std::nullopt;
 }

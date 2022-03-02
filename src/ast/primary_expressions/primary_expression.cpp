@@ -42,6 +42,7 @@ std::optional<IRReturnVal> PrimaryExpression::generateIR() {
         return this->getValue();
     }
     // "PrimaryExpression" -> "[xxx]Expression"
+    // "PrimaryExpression" -> "Identifier"
     else {
         return this->children.at(0)->generateIR();
     }

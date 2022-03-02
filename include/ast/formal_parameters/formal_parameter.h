@@ -1,6 +1,7 @@
 #ifndef AST_FORMAL_PARAMETERS_FORMAL_PARAMETER_H
 #define AST_FORMAL_PARAMETERS_FORMAL_PARAMETER_H
 
+#include "cfg/ir_copy.h"
 #include "formal_parameter_list.h"
 
 namespace ast {
@@ -12,6 +13,7 @@ public:
     ~FormalParameter() override = default;
 
     std::optional<std::string> generateST() final;
+    std::optional<IRReturnVal> generateIR() final;
 };
 
 }  // namespace ast

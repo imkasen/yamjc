@@ -136,7 +136,7 @@ void Node::buildCFG(std::ofstream &ostream) {
 
 /*
  * Default behavior for nodes:
- * "Declarations"
+ * "FormalParameterList", "Type"
  *
  * All abstract syntax trees start with node "Goal",
  * review "parser.yy" for more details.
@@ -151,11 +151,21 @@ std::optional<IRReturnVal> Node::generateIR() {  // NOLINT
     return std::nullopt;
 }
 
+/*
+ * @brief: Create a "BasicBlock", if this "BasicBlock" is an entry, add it into the "blk_links".
+ * @return: "BasicBlock" ptr
+ */
 std::shared_ptr<cfg::BasicBlock> Node::createBB() {
     std::shared_ptr<cfg::BasicBlock> ptr = std::make_shared<cfg::BasicBlock>();
-    string method_name = Node::st.getScopeTitle();
-    string class_name = Node::st.getParentScope()->getScopeTitle();
-    Node::blk_links[class_name].try_emplace(method_name, ptr->getName());  // only store the entry of bb.
+    string method_name, class_name, cur_type = Node::st.getScopeType();
+    if (cur_type == "Method") {
+        method_name = Node::st.getScopeTitle();
+        class_name = Node::st.getParentScope()->getScopeTitle();
+    } else if (cur_type == "Class") {
+        method_name = "this";
+        class_name = Node::st.getScopeTitle();
+    }
+    Node::blk_links[class_name].try_emplace(method_name, ptr->getName());
     return ptr;
 }
 

@@ -17,7 +17,8 @@ namespace cfg {
  */
 class Tac {
 private:
-    inline static int tmp_id = 0;  // used to create temporary variable names
+    inline static int mid = 0;  // used to create temporary variable names
+    inline static int tid = 0;  // used to create temporary variable names
     std::string op;
     std::string lhs, rhs;
     std::string result;

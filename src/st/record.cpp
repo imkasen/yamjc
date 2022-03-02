@@ -6,6 +6,7 @@ Record::Record() {
     this->name = "uninitialised";
     this->type = "uninitialised";
     this->record = "Record";
+    // this->value = "";  // leave as empty
 }
 
 Record::Record(string name, string type, string record)
@@ -23,6 +24,10 @@ void Record::setType(string _type) {
     this->type = std::move(_type);
 }
 
+void Record::setValue(string _value) {
+    this->value = std::move(_value);
+}
+
 string Record::getName() const {
     return this->name;
 }
@@ -33,6 +38,10 @@ string Record::getType() const {
 
 string Record::getRecord() const {
     return this->record;
+}
+
+string Record::getValue() const {
+    return this->value;
 }
 
 string Record::printRecord() const {

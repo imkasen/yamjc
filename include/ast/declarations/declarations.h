@@ -10,6 +10,8 @@ public:
     Declarations();
     Declarations(std::string t, std::string v);
     ~Declarations() override = default;
+
+    std::optional<IRReturnVal> generateIR() final;
 };
 
 }  // namespace ast

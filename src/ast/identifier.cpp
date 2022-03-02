@@ -13,6 +13,19 @@ std::optional<string> Identifier::checkSemantics() {
     return this->getValue();
 }
 
+/*
+ * @brief:
+ *   Get the node value and search it in the records of Symbol Table,
+ *   if the record exists, and record's "Value" != "", return record->value
+ *   else return node->value
+ * @return IRReturnVal
+ */
 std::optional<IRReturnVal> Identifier::generateIR() {
-    return this->getValue();
+    string node_value = this->getValue();
+    if (auto ptr = Identifier::st.lookupRecord(node_value).value_or(nullptr)) {
+        if (!ptr->getValue().empty()) {
+            return ptr->getValue();
+        }
+    }
+    return node_value;
 }
