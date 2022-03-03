@@ -18,6 +18,7 @@ public:
     ~IRCondJump() override = default;
 
     [[nodiscard]] std::string printInfo() const final;
+    [[nodiscard]] std::string printBC() const final;
 };
 
 }

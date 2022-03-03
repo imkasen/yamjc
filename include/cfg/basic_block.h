@@ -34,6 +34,7 @@ public:
     [[nodiscard]] std::list<std::shared_ptr<Tac>> getInstructions() const;
 
     [[nodiscard]] std::string printInfo() const;
+    [[nodiscard]] std::string printBC() const;
 };
 
 }  // namespace cfg

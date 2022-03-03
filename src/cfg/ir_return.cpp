@@ -5,6 +5,28 @@ using std::string;
 IRReturn::IRReturn() : Tac() {}
 IRReturn::IRReturn(string lhs) : Tac("return", std::move(lhs), "", "") {}
 
-std::string IRReturn::printInfo() const {
+string IRReturn::printInfo() const {
     return this->getOP() + " " + this->getLHS();
+}
+
+/*
+ * TAC:
+ *   return y
+ * ByteCode:
+ *   "y":
+ *     iconst || iload y
+ *     ireturn
+ *   "":
+ *     return
+ */
+string IRReturn::printBC() const {
+    string context;
+    if (!this->getLHS().empty()) {
+        context += isNum(this->getLHS()) ? ("iconst " + this->getLHS()) : ("iload " + this->getLHS());
+        context += "\n";
+        context += "ireturn\n";
+    } else {
+        context += "return\n";
+    }
+    return context;
 }

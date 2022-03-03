@@ -9,3 +9,29 @@ IRUnaryExpression::IRUnaryExpression(string op, string lhs, string result)
 std::string IRUnaryExpression::printInfo() const {
     return this->getResult() + " := " + this->getOP() + " " + this->getLHS();
 }
+
+/*
+ * TAC:
+ *   x := op y
+ * ByteCode:
+ *   iconst || iload y
+ *   "!":
+ *     iconst 1
+ *     ixor
+ *   "-":
+ *     ineg
+ *   istrore x
+ */
+string IRUnaryExpression::printBC() const {
+    string context;
+    context += isNum(this->getLHS()) ? ("iconst " + this->getLHS()) : ("iload " + getLHS());
+    context += "\n";
+    if (this->getOP() == "!") {
+        context += "iconst 1\n";
+        context += "ixor\n";
+    } else if (this->getOP() == "-") {
+        context += "ineg\n";
+    }
+    context += "istore " + this->getResult() + "\n";
+    return context;
+}

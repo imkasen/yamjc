@@ -1,6 +1,7 @@
 #ifndef AST_MAIN_CLASS_H
 #define AST_MAIN_CLASS_H
 
+#include "cfg/ir_return.h"
 #include "node.h"
 
 namespace ast {

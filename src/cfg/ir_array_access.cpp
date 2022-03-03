@@ -6,6 +6,23 @@ IRArrayAccess::IRArrayAccess() : Tac() {}
 IRArrayAccess::IRArrayAccess(string lhs, string rhs, string result)
     : Tac("", std::move(lhs), std::move(rhs), std::move(result)) {}
 
-std::string IRArrayAccess::printInfo() const {
+string IRArrayAccess::printInfo() const {
     return this->getResult() + " := " + this->getLHS() + "[" + this->getRHS() + "]";
+}
+
+/*
+ * TAC:
+ *   x := y[i]
+ * ByteCode:
+ *   iconst || iload i
+ *   iaload y
+ *   istore x
+ */
+string IRArrayAccess::printBC() const {
+    string context;
+    context += isNum(this->getRHS()) ? ("iconst " + this->getRHS()) : ("iload " + this->getRHS());
+    context += "\n";
+    context += "iaload " + this->getLHS() + "\n";
+    context += "istore " + this->getResult() + "\n";
+    return context;
 }

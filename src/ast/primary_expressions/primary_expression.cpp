@@ -39,6 +39,14 @@ std::optional<string> PrimaryExpression::checkSemantics() {
 std::optional<IRReturnVal> PrimaryExpression::generateIR() {
     // "int:xxx", "boolean:xxx"
     if (this->children.empty()) {
+        // "boolean"
+        // optimize for the bytecode generation
+        if (this->getValue() == "true") {
+            return  "1";
+        } else if (this->getValue() == "false") {
+            return "0";
+        }
+        // "int"
         return this->getValue();
     }
     // "PrimaryExpression" -> "[xxx]Expression"

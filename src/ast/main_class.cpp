@@ -88,6 +88,7 @@ std::optional<string> MainClass::checkSemantics() {
  * @brief:
  *   1. Create a BasicBlock ptr as the entry.
  *   2. Traverse children nodes of "MethodBody"
+ *   3. Create an instruction "IRReturn"
  * @return: std::nullopt
  */
 std::optional<IRReturnVal> MainClass::generateIR() {
@@ -98,6 +99,7 @@ std::optional<IRReturnVal> MainClass::generateIR() {
     for (size_t i = 2; i < this->children.size(); ++i) {
         this->children.at(i)->generateIR();
     }
+    MainClass::bb_list.back()->addInstruction(std::make_shared<cfg::IRReturn>(""));
     MainClass::st.exitScope();  // Exit "Method" scope
     return std::nullopt;
 }

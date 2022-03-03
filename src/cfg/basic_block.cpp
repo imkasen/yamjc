@@ -35,14 +35,14 @@ std::list<std::shared_ptr<Tac>> BasicBlock::getInstructions() const {
     return this->tac_instructions;
 }
 
-std::string BasicBlock::printInfo() const {
+string BasicBlock::printInfo() const {
     // Draw instructions
     string ins_content;
     for (const auto &tac_ptr : this->getInstructions()) {
         ins_content += tac_ptr->printInfo() + "\n";
     }
 
-    // Draw block
+    // Draw blocks
     string block_content;
     string cur_block_name = this->getName();
     block_content += cur_block_name + " [label=\"" + cur_block_name + "\n" + ins_content + "\"];\n";
@@ -55,6 +55,21 @@ std::string BasicBlock::printInfo() const {
         string next_block_name = this->getFalseExit()->getName();
         block_content += cur_block_name + " -> " + next_block_name + " [xlabel=\"false\"];\n";
     }
+
+    return block_content;
+}
+
+string BasicBlock::printBC() const {
+    // Draw instructions
+    string ins_content;
+    for (const auto &tac_ptr : this->getInstructions()) {
+        ins_content += tac_ptr->printBC();
+    }
+
+    // Draw blocks
+    string block_content;
+    block_content += this->getName() + ":\n";
+    block_content += ins_content;
 
     return block_content;
 }

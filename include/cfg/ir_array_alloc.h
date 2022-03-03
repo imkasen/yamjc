@@ -21,6 +21,7 @@ public:
     ~IRArrayAlloc() override = default;
 
     [[nodiscard]] std::string printInfo() const final;
+    [[nodiscard]] std::string printBC() const final;
 };
 
 }  // namespace cfg

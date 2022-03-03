@@ -9,3 +9,21 @@ IRArrayAssign::IRArrayAssign(string lhs, string rhs, string result)
 string IRArrayAssign::printInfo() const {
     return this->getLHS() + "[" + this->getRHS() + "] := " + this->getResult();
 }
+
+/*
+ * TAC:
+ *   y[i] := x
+ * ByteCode:
+ *   iconst || iload x
+ *   iconst || iload i
+ *   iastore y
+ */
+string IRArrayAssign::printBC() const {
+    string context;
+    context += isNum(this->getResult()) ? ("iconst " + this->getResult()) : ("iload " + this->getResult());
+    context += "\n";
+    context += isNum(this->getRHS()) ? ("iconst " + this->getRHS()) : ("iload " + this->getRHS());
+    context += "\n";
+    context += "iastore " + this->getLHS() + "\n";
+    return context;
+}

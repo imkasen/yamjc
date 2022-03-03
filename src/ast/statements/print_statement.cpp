@@ -14,7 +14,7 @@ PrintStatement::PrintStatement(string t, string v) : Statement(std::move(t), std
  */
 std::optional<string> PrintStatement::checkSemantics() {
     string type = this->children.at(0)->checkSemantics().value_or("");
-    if (type != "int") {
+    if (type != "int" && type != "boolean") {  // boolean can be turned into int during the back end stage
         string msg = R"([Semantic Analysis] - Error: only "int" can be print in scope ")" +
                      PrintStatement::st.getScopeTitle() + "\"!";
         PrintStatement::printErrMsg(msg);
@@ -39,7 +39,7 @@ std::optional<IRReturnVal> PrintStatement::generateIR() {
         string tmp_name = *s_ptr;
         std::shared_ptr<cfg::Tac> param_ptr = std::make_shared<cfg::IRParameter>(tmp_name);
         std::shared_ptr<cfg::Tac> call_ptr =
-            std::make_shared<cfg::IRMethodCall>("PRINT", "1", cfg::Tac::generateTmpVarName());
+            std::make_shared<cfg::IRMethodCall>("__PRINT__", "1", cfg::Tac::generateTmpVarName());
         cur_bb->addInstruction(param_ptr);
         cur_bb->addInstruction(call_ptr);
     }

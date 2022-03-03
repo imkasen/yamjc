@@ -169,6 +169,18 @@ std::shared_ptr<cfg::BasicBlock> Node::createBB() {
     return ptr;
 }
 
+/*
+ * Generate some simplified readable Java bytecode
+ * Referenced from real instructions, but only similar, not the same.
+ *
+ * Ref: https://en.wikipedia.org/wiki/List_of_Java_bytecode_instructions
+ */
+void Node::buildRBC(std::ofstream &ostream) {
+    for (const auto &cfg_ptr : Node::bb_list) {
+        ostream << cfg_ptr->printBC() << endl;
+    }
+}
+
 void Node::printErrMsg(const string &message) {
     std::cerr << message << endl;
     std::exit(EXIT_FAILURE);

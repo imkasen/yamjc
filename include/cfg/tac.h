@@ -1,6 +1,8 @@
 #ifndef CFG_TAC_H
 #define CFG_TAC_H
 
+#include <algorithm>
+#include <cctype>
 #include <string>
 #include <utility>
 
@@ -38,9 +40,12 @@ public:
     [[nodiscard]] std::string getLHS() const;
     [[nodiscard]] std::string getRHS() const;
     [[nodiscard]] std::string getResult() const;
-    static std::string generateTmpVarName() ;
+
+    static std::string generateTmpVarName();
+    [[nodiscard]] static bool isNum(const std::string &str);
 
     [[nodiscard]] virtual std::string printInfo() const = 0;
+    [[nodiscard]] virtual std::string printBC() const = 0;
 };
 
 }  // namespace cfg

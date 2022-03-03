@@ -54,3 +54,7 @@ string Tac::getResult() const {
 string Tac::generateTmpVarName() {
     return "_" + std::to_string(Tac::mid) + "t" + std::to_string(Tac::tid++);
 }
+
+bool Tac::isNum(const string &str) {
+     return std::all_of(str.cbegin(), str.cend(), [](unsigned char c){return std::isdigit(c);});
+}

@@ -79,5 +79,11 @@ int main(int argc, char* argv[]) {
     cfg_dot_stream << "}" << endl;
     cfg_dot_stream.close();
 
+    // Generate "rbc.class", a simplified readable Java bytecode file
+    std::ofstream rbc_stream;
+    rbc_stream.open("rbc.class", std::ios::out);
+    root->buildRBC(rbc_stream);
+    rbc_stream.close();
+
     return EXIT_SUCCESS;
 }

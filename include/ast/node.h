@@ -68,6 +68,9 @@ public:
     virtual std::optional<IRReturnVal> generateIR();
     static std::shared_ptr<cfg::BasicBlock> createBB();
 
+    // Functions related to the bytecode generation
+    static void buildRBC(std::ofstream &ostream);
+
     static void printErrMsg(const std::string &message);
 };
 
