@@ -46,3 +46,10 @@ std::optional<string> Type::checkSemantics() {
 
     return std::nullopt;
 }
+
+/*
+ * @return: IRReturnVal
+ */
+std::optional<IRReturnVal> Type::generateIR() {
+    return this->getValue();
+}

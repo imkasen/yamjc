@@ -19,8 +19,13 @@ namespace cfg {
  */
 class Tac {
 private:
-    inline static int mid = 0;  // used to create temporary variable names
-    inline static int tid = 0;  // used to create temporary variable names
+    // used to create temporary variable names
+    inline static int iid = 0;  // int
+    inline static int bid = 0;  // boolean
+    inline static int aid = 0;  // array
+    inline static int rid = 0;  // self-defined class
+    inline static int vid = 0;  // default
+
     std::string op;
     std::string lhs, rhs;
     std::string result;
@@ -41,7 +46,7 @@ public:
     [[nodiscard]] std::string getRHS() const;
     [[nodiscard]] std::string getResult() const;
 
-    static std::string generateTmpVarName();
+    static std::string generateTmpVarName(const char &type);
     [[nodiscard]] static bool isNum(const std::string &str);
 
     [[nodiscard]] virtual std::string printInfo() const = 0;

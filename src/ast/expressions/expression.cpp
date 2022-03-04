@@ -255,13 +255,19 @@ std::optional<IRReturnVal> Expression::generateIR() {
     }
     // "Expression" -> "AllocExpression", "Identifier", ["ExpressionList"]
     // "Expression" -> "PrimaryExpression", "Identifier", ["ExpressionList"]
-    else if (size <= 3 && (type == "AllocExpression" || type == "PrimaryExpression")) {
+    // "Expression" -> "keyword:this", "Identifier", ["ExpressionList"]
+    else if (size <= 3) {
         string tmp_name, lhs, n = "0";
-        // "AllocExpression", "PrimaryExpression"
-        // Get the return value of tmp name
-        const auto par_vrt = this->children.at(0)->generateIR().value_or(std::monostate {});
-        if (auto s_ptr = std::get_if<string>(&par_vrt)) {
-            tmp_name = *s_ptr;
+        if (type == "keyword") {  // "keyword:this"
+            if (const auto &record = Expression::st.lookupRecord("this").value_or(nullptr)) {
+                tmp_name = record->getType();
+            }
+        } else {  // "AllocExpression", "PrimaryExpression"
+            // Get the return value of tmp name
+            const auto par_vrt = this->children.at(0)->generateIR().value_or(std::monostate {});
+            if (auto s_ptr = std::get_if<string>(&par_vrt)) {
+                tmp_name = *s_ptr;
+            }
         }
         // "Identifier"
         const auto lhs_vrt = this->children.at(1)->generateIR().value_or(std::monostate {});
@@ -276,40 +282,7 @@ std::optional<IRReturnVal> Expression::generateIR() {
                 n = *szt_ptr;
             }
         }
-        tmp_name = cfg::Tac::generateTmpVarName();
-        std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRMethodCall>(lhs, n, tmp_name);
-        cur_bb->addInstruction(instruction);
-
-        return tmp_name;
-    }
-    // "Expression" -> "keyword:this", "Identifier", ["ExpressionList"]
-    else if (size <= 3 && type == "keyword") {
-        string class_name, tmp_name, lhs, n = "0";
-        // "keyword:this"
-        auto record = Expression::st.lookupRecord("this").value_or(nullptr);
-        // turn "this" into instruction "IRCopy"
-        if (record->getValue().empty()) {
-            class_name = record->getType();
-            tmp_name = cfg::Tac::generateTmpVarName();
-            cur_bb->addInstruction(std::make_shared<cfg::IRCopy>(class_name, tmp_name));
-            record->setValue(tmp_name);
-        } else {
-            tmp_name = record->getValue();  // avoid setting multiple tmp variable
-        }
-        // "Identifier"
-        const auto lhs_vrt = this->children.at(1)->generateIR().value_or(std::monostate {});
-        if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
-            lhs = tmp_name + "." + *s_ptr;
-        }
-        if (size == 3) {
-            // "ExpressionList"
-            // Create an instruction "IRMethodCall"
-            const auto n_vrt = this->children.at(2)->generateIR().value_or(std::monostate {});
-            if (auto szt_ptr = std::get_if<string>(&n_vrt)) {
-                n = *szt_ptr;
-            }
-        }
-        tmp_name = cfg::Tac::generateTmpVarName();
+        tmp_name = cfg::Tac::generateTmpVarName('i');
         std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRMethodCall>(lhs, n, tmp_name);
         cur_bb->addInstruction(instruction);
 

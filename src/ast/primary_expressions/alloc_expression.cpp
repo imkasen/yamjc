@@ -43,7 +43,7 @@ std::optional<IRReturnVal> AllocExpression::generateIR() {
     if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
         lhs = *s_ptr;
     }
-    tmp_name = cfg::Tac::generateTmpVarName();
+    tmp_name = cfg::Tac::generateTmpVarName('r');
     std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRAlloc>(lhs, tmp_name);
     cur_bb->addInstruction(instruction);
 

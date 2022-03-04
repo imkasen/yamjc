@@ -50,7 +50,7 @@ std::optional<IRReturnVal> ArithExpression::generateIR() {
     if (auto s_ptr = std::get_if<string>(&rhs_vrt)) {
         rhs_name = *s_ptr;
     }
-    tmp_name = cfg::Tac::generateTmpVarName();
+    tmp_name = cfg::Tac::generateTmpVarName('i');
     std::shared_ptr<cfg::Tac> instruction =
         std::make_shared<cfg::IRExpression>(op, lhs_name, rhs_name, tmp_name);
     cur_bb->addInstruction(instruction);

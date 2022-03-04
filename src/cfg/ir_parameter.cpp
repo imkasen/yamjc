@@ -13,11 +13,20 @@ string IRParameter::printInfo() const {
  * TAC:
  *   param y
  * ByteCode:
- *   iconst || iload y
+ *   "param 10" || "param _i0":
+ *     iconst || iload y
+ *   "param _r0":
+ *     aload y
  */
 string IRParameter::printBC() const {
     string context;
-    context += isNum(this->getLHS()) ? ("iconst " + this->getLHS()) : ("iload " + this->getLHS());
-    context += "\n";
+    if (Tac::isNum(this->getLHS())) {
+        context += "iconst ";
+    } else if (this->getLHS().find("_i") != string::npos) {
+        context += "iload ";
+    } else {
+        context += "aload ";
+    }
+    context += this->getLHS() + "\n";
     return context;
 }

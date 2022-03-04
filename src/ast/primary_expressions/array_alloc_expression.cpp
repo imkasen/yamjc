@@ -40,7 +40,7 @@ std::optional<IRReturnVal> ArrayAllocExpression::generateIR() {
     if (auto s_ptr = std::get_if<string>(&vrt)) {
         n = *s_ptr;
     }
-    tmp_name = cfg::Tac::generateTmpVarName();
+    tmp_name = cfg::Tac::generateTmpVarName('a');
     std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRArrayAlloc>(n, tmp_name);
     cur_bb->addInstruction(instruction);
 

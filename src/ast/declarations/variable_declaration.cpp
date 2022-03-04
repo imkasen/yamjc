@@ -66,27 +66,29 @@ std::optional<string> VarDeclaration::checkSemantics() {
  * @brief:
  *   1. Get current "BasicBlock"
  *   2. Create an instruction "IRCopy"
- *   3. Set tmp name into the Symbol Table
  * @return: std::nullopt
  */
 std::optional<IRReturnVal> VarDeclaration::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = VarDeclaration::bb_list.back();
     // 2.
-    string lhs, tmp_name;
+    string type, lhs, tmp_name;
+    const auto tp_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    if (auto ptr = std::get_if<string>(&tp_vrt)) {
+        type = *ptr;
+    }
     const auto vrt = this->children.at(1)->generateIR().value_or(std::monostate{});
     if (auto ptr = std::get_if<string>(&vrt)) {
         lhs = *ptr;
     }
-    tmp_name = cfg::Tac::generateTmpVarName();
-    std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRCopy>(lhs, tmp_name);
-    cur_bb->addInstruction(instruction);
-    // 3.
-    if (auto ptr = VarDeclaration::st.lookupRecord(lhs).value_or(nullptr)) {
-        if (ptr->getValue().empty()) {
-            ptr->setValue(tmp_name);
-        }
+    // initialize local variables
+    std::shared_ptr<cfg::Tac> instruction;
+    if (type == "int" || type == "boolean") {
+        instruction = std::make_shared<cfg::IRCopy>("0", lhs);
+    } else {  // self-defined class, int[]
+        instruction = std::make_shared<cfg::IRCopy>("null", lhs);
     }
+    cur_bb->addInstruction(instruction);
 
     return std::nullopt;
 }

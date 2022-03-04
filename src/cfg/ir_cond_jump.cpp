@@ -14,10 +14,14 @@ string IRCondJump::printInfo() const {
  * TAC:
  *   if false x goto L
  * ByteCode:
- *   ifeq x goto L
+ *   iconst || iload x
+ *   ifeq
+ *   goto L
  */
 string IRCondJump::printBC() const {
     string context;
-    context += "ifeq " + this->getLHS() + " goto " + this->getResult() + "\n";
+    context += Tac::isNum(this->getLHS()) ? ("iconst " + this->getLHS()) : ("iload " + this->getLHS());
+    context += "\n";
+    context += "goto " + this->getResult() + "\n";
     return context;
 }

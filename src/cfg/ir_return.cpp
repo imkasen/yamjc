@@ -22,7 +22,7 @@ string IRReturn::printInfo() const {
 string IRReturn::printBC() const {
     string context;
     if (!this->getLHS().empty()) {
-        context += isNum(this->getLHS()) ? ("iconst " + this->getLHS()) : ("iload " + this->getLHS());
+        context += Tac::isNum(this->getLHS()) ? ("iconst " + this->getLHS()) : ("iload " + this->getLHS());
         context += "\n";
         context += "ireturn\n";
     } else {

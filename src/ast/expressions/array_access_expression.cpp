@@ -51,7 +51,7 @@ std::optional<IRReturnVal> ArrayAccessExpression::generateIR() {
     if (auto s_ptr = std::get_if<string>(&idx_vrt)) {
         idx = *s_ptr;
     }
-    tmp_name = cfg::Tac::generateTmpVarName();
+    tmp_name = cfg::Tac::generateTmpVarName('i');
     std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRArrayAccess>(arr_name, idx, tmp_name);
     cur_bb->addInstruction(instruction);
 

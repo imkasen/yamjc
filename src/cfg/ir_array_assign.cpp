@@ -20,9 +20,9 @@ string IRArrayAssign::printInfo() const {
  */
 string IRArrayAssign::printBC() const {
     string context;
-    context += isNum(this->getResult()) ? ("iconst " + this->getResult()) : ("iload " + this->getResult());
+    context += Tac::isNum(this->getResult()) ? ("iconst " + this->getResult()) : ("iload " + this->getResult());
     context += "\n";
-    context += isNum(this->getRHS()) ? ("iconst " + this->getRHS()) : ("iload " + this->getRHS());
+    context += Tac::isNum(this->getRHS()) ? ("iconst " + this->getRHS()) : ("iload " + this->getRHS());
     context += "\n";
     context += "iastore " + this->getLHS() + "\n";
     return context;

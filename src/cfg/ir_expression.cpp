@@ -26,9 +26,9 @@ string IRExpression::printInfo() const {
 string IRExpression::printBC() const {
     string op = this->getOP();
     string context;
-    context += isNum(this->getLHS()) ? ("iconst " + this->getLHS()) : ("iload " + this->getLHS());
+    context += Tac::isNum(this->getLHS()) ? ("iconst " + this->getLHS()) : ("iload " + this->getLHS());
     context += "\n";
-    context += isNum(this->getRHS()) ? ("iconst " + this->getRHS()) : ("iload " + this->getRHS());
+    context += Tac::isNum(this->getRHS()) ? ("iconst " + this->getRHS()) : ("iload " + this->getRHS());
     context += "\n";
 
     if (op == "+") {

@@ -20,7 +20,7 @@ string IRArrayAccess::printInfo() const {
  */
 string IRArrayAccess::printBC() const {
     string context;
-    context += isNum(this->getRHS()) ? ("iconst " + this->getRHS()) : ("iload " + this->getRHS());
+    context += Tac::isNum(this->getRHS()) ? ("iconst " + this->getRHS()) : ("iload " + this->getRHS());
     context += "\n";
     context += "iaload " + this->getLHS() + "\n";
     context += "istore " + this->getResult() + "\n";

@@ -8,7 +8,7 @@ Declarations::Declarations(string t, string v) : Node(std::move(t), std::move(v)
 /*
  * @brief:
  *   1. reset id before traverse every class
- *   2. Create a BasicBlock ptr as the entry.
+ *   2. Create a BasicBlock ptr as the entry for class, used to store class variable IR.
  *   3. Traverse child nodes
  * @return: std::nullopt
  */

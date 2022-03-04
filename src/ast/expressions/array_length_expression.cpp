@@ -42,7 +42,7 @@ std::optional<IRReturnVal> ArrayLengthExpression::generateIR() {
     if (auto s_ptr = std::get_if<string>(&vrt)) {
         lhs = *s_ptr;
     }
-    tmp_name = cfg::Tac::generateTmpVarName();
+    tmp_name = cfg::Tac::generateTmpVarName('i');
     std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRArrayLength>(lhs, tmp_name);
     cur_bb->addInstruction(instruction);
 

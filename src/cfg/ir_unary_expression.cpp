@@ -14,17 +14,18 @@ std::string IRUnaryExpression::printInfo() const {
  * TAC:
  *   x := op y
  * ByteCode:
- *   iconst || iload y
  *   "!":
+ *     iconst || iload y
  *     iconst 1
  *     ixor
  *   "-":
+ *     iconst || iload y
  *     ineg
  *   istrore x
  */
 string IRUnaryExpression::printBC() const {
     string context;
-    context += isNum(this->getLHS()) ? ("iconst " + this->getLHS()) : ("iload " + getLHS());
+    context += Tac::isNum(this->getLHS()) ? ("iconst " + this->getLHS()) : ("iload " + getLHS());
     context += "\n";
     if (this->getOP() == "!") {
         context += "iconst 1\n";

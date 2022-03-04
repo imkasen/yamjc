@@ -49,7 +49,7 @@ std::optional<IRReturnVal> CompareExpression::generateIR() {
     if (auto s_ptr = std::get_if<string>(&rhs_vrt)) {
         rhs = *s_ptr;
     }
-    std::string tmp_name = cfg::Tac::generateTmpVarName();
+    std::string tmp_name = cfg::Tac::generateTmpVarName('b');
     std::shared_ptr<cfg::Tac> exp_ins = std::make_shared<cfg::IRExpression>(op, lhs, rhs, tmp_name);
     cur_bb->addInstruction(exp_ins);
 

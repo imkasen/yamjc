@@ -29,10 +29,12 @@ void Tac::setResult(std::string _result) {
 }
 
 // prepare for a new entry "BasicBlock"
-// reset temp variable id as 0, mid + 1
 void Tac::resetID() {
-    Tac::mid++;
-    Tac::tid = 0;
+    Tac::iid = 0;
+    Tac::bid = 0;
+    Tac::aid = 0;
+    Tac::rid = 0;
+    Tac::vid = 0;
 }
 
 string Tac::getOP() const {
@@ -51,8 +53,20 @@ string Tac::getResult() const {
     return this->result;
 }
 
-string Tac::generateTmpVarName() {
-    return "_" + std::to_string(Tac::mid) + "t" + std::to_string(Tac::tid++);
+string Tac::generateTmpVarName(const char &type) {
+    switch (type) {
+        case 'i': // int
+            return "_i" + std::to_string(iid++);
+        case 'b': // boolean
+            return "_b" + std::to_string(bid++);
+        case 'a': // array
+            return "_a" + std::to_string(aid++);
+        case 'r': // self-defined class
+            return "_r" + std::to_string(rid++);
+        case 'v': // void
+        default:
+            return "_v" + std::to_string(vid++);
+    }
 }
 
 bool Tac::isNum(const string &str) {
