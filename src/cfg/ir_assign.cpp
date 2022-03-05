@@ -19,7 +19,7 @@ string IRAssign::printInfo() const {
  *   "x := _i0" || "x := _b0":
  *     iload y
  *     istore x
- *   "x := _a0" || "x := _r0" || "x := Class" || "x := null":
+ *   "x := _a0" || "x := _r0" || "x := null":
  *     aload y
  *     astore x
  */

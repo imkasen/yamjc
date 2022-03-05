@@ -37,10 +37,10 @@ std::optional<IRReturnVal> PrintStatement::generateIR() {
     const auto vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
     if (auto s_ptr = std::get_if<string>(&vrt)) {
         string tmp_name = *s_ptr;
-        std::shared_ptr<cfg::Tac> param_ptr = std::make_shared<cfg::IRParameter>(tmp_name);
+        std::shared_ptr<cfg::Tac> arg_ptr = std::make_shared<cfg::IRArgument>(tmp_name);
         std::shared_ptr<cfg::Tac> call_ptr =
             std::make_shared<cfg::IRMethodCall>("__PRINT__", "1", cfg::Tac::generateTmpVarName('v'));
-        cur_bb->addInstruction(param_ptr);
+        cur_bb->addInstruction(arg_ptr);
         cur_bb->addInstruction(call_ptr);
     }
     return std::nullopt;

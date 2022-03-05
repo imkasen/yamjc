@@ -2,7 +2,7 @@
 #define AST_STATEMENTS_PRINT_STATEMENT_H
 
 #include "cfg/ir_method_call.h"
-#include "cfg/ir_parameter.h"
+#include "cfg/ir_argument.h"
 #include "statement.h"
 
 namespace ast {

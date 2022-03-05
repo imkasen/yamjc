@@ -22,7 +22,7 @@ std::optional<string> ExpressionList::checkSemantics() {
 /*
  * @brief:
  *   1. Obtain the current "BasicBlock".
- *   2. Get the return value, add an instruction "IRParameter"
+ *   2. Get the return value, add an instruction "IRArgument"
  *   3. return the size of "Expression"
  * @return: string
  */
@@ -36,7 +36,7 @@ std::optional<IRReturnVal> ExpressionList::generateIR() {
         if (auto s_vrt = std::get_if<string>(&lhs_vrt)) {
             lhs = *s_vrt;
         }
-        std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRParameter>(lhs);
+        std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRArgument>(lhs);
         cur_bb->addInstruction(instruction);
     }
     // 3.

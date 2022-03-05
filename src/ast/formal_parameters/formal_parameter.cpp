@@ -44,7 +44,7 @@ std::optional<string> FormalParameter::generateST() {
 /*
  * @brief:
  *   1. Get current "BasicBlock"
- *   2. Create an instruction "IRCopy"
+ *   2. Create an instruction "IRParameter"
  * @return: std::nullopt
  */
 std::optional<IRReturnVal> FormalParameter::generateIR() {
@@ -52,12 +52,25 @@ std::optional<IRReturnVal> FormalParameter::generateIR() {
     std::shared_ptr<cfg::BasicBlock> cur_bb = FormalParameter::bb_list.back();
     // 2.
     string lhs;
+    char type;
+    const auto t_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    if (auto ptr = std::get_if<string>(&t_vrt)) {
+        if (*ptr == "int") {
+            type = 'i';
+        } else if (*ptr == "boolean"){
+            type = 'b';
+        } else if (*ptr == "int[]") {
+            type = 'a';
+        } else { // self-defined class
+            type = 'r';
+        }
+    }
     const auto vrt = this->children.at(1)->generateIR().value_or(std::monostate{});
     if (auto ptr = std::get_if<string>(&vrt)) {
         lhs = *ptr;
     }
     // initialize formal parameters
-    std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRAssign>("null", lhs);
+    std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRParameter>(lhs, type);
     cur_bb->addInstruction(instruction);
 
     return std::nullopt;

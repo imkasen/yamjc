@@ -22,9 +22,17 @@ string IRReturn::printInfo() const {
 string IRReturn::printBC() const {
     string context;
     if (!this->getLHS().empty()) {
-        context += Tac::isNum(this->getLHS()) ? ("iconst " + this->getLHS()) : ("iload " + this->getLHS());
-        context += "\n";
-        context += "ireturn\n";
+        if (Tac::isNum(this->getLHS())) {
+            context += "iconst " + this->getLHS() + "\n";
+            context += "ireturn\n";
+        } else if ((this->getLHS().find("_i") != string::npos) ||
+                   (this->getLHS().find("_r") != string::npos)) {
+            context += "iload " + this->getLHS() + "\n";
+            context += "ireturn\n";
+        } else {
+            context += "aload " + this->getLHS() + "\n";
+            context += "areturn\n";
+        }
     } else {
         context += "return\n";
     }

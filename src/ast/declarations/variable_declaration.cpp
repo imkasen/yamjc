@@ -65,7 +65,7 @@ std::optional<string> VarDeclaration::checkSemantics() {
 /*
  * @brief:
  *   1. Get current "BasicBlock"
- *   2. Create an instruction "IRCopy"
+ *   2. Create an instruction "IRAssign"
  * @return: std::nullopt
  */
 std::optional<IRReturnVal> VarDeclaration::generateIR() {

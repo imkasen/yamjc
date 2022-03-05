@@ -6,16 +6,18 @@
 namespace cfg {
 
 /*
- * @brief: Push param "y" to the stack.
- * Example: x = this.f(y)
- * TAC:          param y
- *                |    |
- *               op    lhs
+ * @brief: Push parameter "y" to the stack.
+ * Example: f(y)
+ * TAC:     argument y
+ *             |     |
+ *             op    lhs
  */
 class IRParameter : public Tac {
+private:
+    char para_type; // i-int, b-boolean, a-int[], r-self-defined class
 public:
     IRParameter();
-    explicit IRParameter(std::string lhs);
+    IRParameter(std::string lhs, char t);
     ~IRParameter() override = default;
 
     [[nodiscard]] std::string printInfo() const final;

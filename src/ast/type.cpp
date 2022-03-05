@@ -26,7 +26,6 @@ std::optional<string> Type::generateST() {
     else if (this->getValue().empty() && this->children.size() == 1) {
         return this->children.at(0)->generateST().value_or("Unknown");
     }
-
     return std::nullopt;
 }
 
@@ -43,7 +42,6 @@ std::optional<string> Type::checkSemantics() {
     else if (this->children.empty() && !this->getValue().empty()) {
         return this->getValue();
     }
-
     return std::nullopt;
 }
 
@@ -51,5 +49,13 @@ std::optional<string> Type::checkSemantics() {
  * @return: IRReturnVal
  */
 std::optional<IRReturnVal> Type::generateIR() {
-    return this->getValue();
+    // 1. "Type" -> "Identifier"
+    if (this->children.size() == 1 && this->getValue().empty()) {
+        return this->children.at(0)->generateIR();
+    }
+    // 2. "Type:int" or "Type:boolean" or "Type:int[]"
+    else if (this->children.empty() && !this->getValue().empty()) {
+        return this->getValue();
+    }
+    return std::nullopt;
 }

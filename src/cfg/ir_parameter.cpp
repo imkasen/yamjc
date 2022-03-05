@@ -1,9 +1,15 @@
 #include "ir_parameter.h"
+
+#include <utility>
 using cfg::IRParameter;
 using std::string;
 
-IRParameter::IRParameter() : Tac() {}
-IRParameter::IRParameter(string lhs) : Tac("param", std::move(lhs), "", "") {}
+IRParameter::IRParameter() : Tac() {
+    this->para_type = 0;
+}
+IRParameter::IRParameter(string lhs, char t) : Tac("param", std::move(lhs), "", "") {
+    this->para_type = t;
+}
 
 string IRParameter::printInfo() const {
     return this->getOP() + " " + this->getLHS();
@@ -13,19 +19,23 @@ string IRParameter::printInfo() const {
  * TAC:
  *   param y
  * ByteCode:
- *   "param 10" || "param _i0":
- *     iconst || iload y
- *   "param _r0":
- *     aload y
+ *   "arg num" || "arg boolean":
+ *     istore num
+ *   "arg a[]" || "arg class":
+ *     astore xxx
  */
 string IRParameter::printBC() const {
     string context;
-    if (Tac::isNum(this->getLHS())) {
-        context += "iconst ";
-    } else if (this->getLHS().find("_i") != string::npos) {
-        context += "iload ";
-    } else {
-        context += "aload ";
+    switch (this->para_type) {
+        case 'i':
+        case 'b':
+            context += "istore ";
+            break;
+        case 'a':
+        case 'r':
+        default:
+            context += "astore ";
+            break;
     }
     context += this->getLHS() + "\n";
     return context;

@@ -27,7 +27,7 @@ A compiler practice implemented in C++ with poor structure and bad design.
 ## Compiler Phases
 
 <div align="center">
-    <img src="resource/phases.png" 
+    <img src="resource/phases.png"
         width="800" height="auto" alt="Compiler Phases">
 </div>
 
