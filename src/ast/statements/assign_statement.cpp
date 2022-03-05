@@ -60,7 +60,7 @@ std::optional<IRReturnVal> AssignStatement::generateIR() {
     if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
         lhs = *s_ptr;
     }
-    std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRCopy>(lhs, result);
+    std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRAssign>(lhs, result);
     cur_bb->addInstruction(instruction);
 
     return std::nullopt;

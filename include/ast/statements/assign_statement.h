@@ -1,7 +1,7 @@
 #ifndef AST_STATEMENTS_ASSIGN_STATEMENT_H
 #define AST_STATEMENTS_ASSIGN_STATEMENT_H
 
-#include "cfg/ir_copy.h"
+#include "cfg/ir_assign.h"
 #include "statement.h"
 
 namespace ast {

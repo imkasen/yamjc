@@ -51,17 +51,13 @@ std::optional<IRReturnVal> FormalParameter::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = FormalParameter::bb_list.back();
     // 2.
-    string type, lhs, tmp_name;
-    const auto tp_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
-    if (auto ptr = std::get_if<string>(&tp_vrt)) {
-        type = *ptr;
-    }
+    string lhs;
     const auto vrt = this->children.at(1)->generateIR().value_or(std::monostate{});
     if (auto ptr = std::get_if<string>(&vrt)) {
         lhs = *ptr;
     }
     // initialize formal parameters
-    std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRCopy>("null", lhs);
+    std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRAssign>("null", lhs);
     cur_bb->addInstruction(instruction);
 
     return std::nullopt;

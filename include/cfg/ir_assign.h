@@ -1,22 +1,22 @@
-#ifndef CFG_IR_COPY_H
-#define CFG_IR_COPY_H
+#ifndef CFG_IR_ASSIGN_H
+#define CFG_IR_ASSIGN_H
 
 #include "tac.h"
 
 namespace cfg {
 
 /*
- * @brief: Copy "y" to "x".
+ * @brief: Assign "y" to "x".
  * Example: x  = y
  * TAC    : x := y
  *          |    |
  *        result lhs
  */
-class IRCopy : public Tac {
+class IRAssign : public Tac {
 public:
-    IRCopy();
-    IRCopy(std::string lhs, std::string result);
-    ~IRCopy() override = default;
+    IRAssign();
+    IRAssign(std::string lhs, std::string result);
+    ~IRAssign() override = default;
 
     [[nodiscard]] std::string printInfo() const final;
     [[nodiscard]] std::string printBC() const final;

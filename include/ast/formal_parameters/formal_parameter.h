@@ -1,7 +1,7 @@
 #ifndef AST_FORMAL_PARAMETERS_FORMAL_PARAMETER_H
 #define AST_FORMAL_PARAMETERS_FORMAL_PARAMETER_H
 
-#include "cfg/ir_copy.h"
+#include "cfg/ir_assign.h"
 #include "formal_parameter_list.h"
 
 namespace ast {

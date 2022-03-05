@@ -2,7 +2,7 @@
 #define AST_DECLARATIONS_VARIABLE_DECLARATION_H
 
 #include "ast/node.h"
-#include "cfg/ir_copy.h"
+#include "cfg/ir_assign.h"
 
 namespace ast {
 

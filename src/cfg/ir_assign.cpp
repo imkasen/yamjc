@@ -1,11 +1,11 @@
-#include "ir_copy.h"
-using cfg::IRCopy;
+#include "ir_assign.h"
+using cfg::IRAssign;
 using std::string;
 
-IRCopy::IRCopy() : Tac() {}
-IRCopy::IRCopy(string lhs, string result) : Tac("", std::move(lhs), "", std::move(result)) {}
+IRAssign::IRAssign() : Tac() {}
+IRAssign::IRAssign(string lhs, string result) : Tac("", std::move(lhs), "", std::move(result)) {}
 
-string IRCopy::printInfo() const {
+string IRAssign::printInfo() const {
     return this->getResult() + " := " + this->getLHS();
 }
 
@@ -19,18 +19,19 @@ string IRCopy::printInfo() const {
  *   "x := _i0" || "x := _b0":
  *     iload y
  *     istore x
- *   "x := _a0" || "x := _r0" || "x := Class":
+ *   "x := _a0" || "x := _r0" || "x := Class" || "x := null":
  *     aload y
  *     astore x
  */
-string IRCopy::printBC() const {
+string IRAssign::printBC() const {
     string context;
     string lhs = this->getLHS();
     string rst = this->getResult();
     if (Tac::isNum(lhs)) {
         context += "iconst " + lhs + "\n";
         context += "istore " + rst + "\n";
-    } else if (lhs.find("_i") != string::npos) {
+    } else if ((lhs.find("_i") != string::npos) ||
+               (lhs.find("_b") != string::npos)) {
         context += "iload " + lhs + "\n";
         context += "istore " + rst + "\n";
     } else {

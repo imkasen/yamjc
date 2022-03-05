@@ -72,7 +72,7 @@ std::optional<IRReturnVal> VarDeclaration::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = VarDeclaration::bb_list.back();
     // 2.
-    string type, lhs, tmp_name;
+    string type, lhs;
     const auto tp_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
     if (auto ptr = std::get_if<string>(&tp_vrt)) {
         type = *ptr;
@@ -84,9 +84,9 @@ std::optional<IRReturnVal> VarDeclaration::generateIR() {
     // initialize local variables
     std::shared_ptr<cfg::Tac> instruction;
     if (type == "int" || type == "boolean") {
-        instruction = std::make_shared<cfg::IRCopy>("0", lhs);
+        instruction = std::make_shared<cfg::IRAssign>("0", lhs);
     } else {  // self-defined class, int[]
-        instruction = std::make_shared<cfg::IRCopy>("null", lhs);
+        instruction = std::make_shared<cfg::IRAssign>("null", lhs);
     }
     cur_bb->addInstruction(instruction);
 
