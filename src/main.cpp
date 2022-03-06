@@ -85,5 +85,7 @@ int main(int argc, char* argv[]) {
     root->buildRBC(rbc_stream);
     rbc_stream.close();
 
+    // Stack machine interpreter
+
     return EXIT_SUCCESS;
 }

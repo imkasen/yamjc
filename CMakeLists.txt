@@ -50,6 +50,7 @@ ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
 add_subdirectory(src/ast)
 add_subdirectory(src/st)
 add_subdirectory(src/cfg)
+add_subdirectory(src/smi)
 
 add_executable(
         compiler
@@ -65,6 +66,7 @@ target_link_libraries(
         AST
         ST
         CFG
+        SMI
 )
 
 target_include_directories(
