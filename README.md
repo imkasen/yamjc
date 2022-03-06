@@ -7,15 +7,15 @@ A compiler practice implemented in C++ with poor structure and bad design.
 > MiniJava is a subset of Java. The meaning of a MiniJava program is given by its meaning as a Java program.  
 >
 > Overloading is not allowed in MiniJava. The MiniJava statement `System.out.println( ... );` can only print integers. The MiniJava expression `e.length` only applies to expressions of type `int []`.
->
-> There is no `for` loop or `do {} while ()` in MiniJava, `if` statement must be followed by `else` statement, etc... Please refer to the _Grammar_ section below for the detailed grammar.
+
+There are four types only, which are `int`, `boolean`, `int[]`, and user-defined class. There is no `for` loop or `do {} while ()` in MiniJava, `if` statement must be followed by `else` statement, etc... Please refer to the _Grammar_ section below for the detailed grammar.
 
 ## Grammar
 
 * [BNF for MiniJava](https://www.cambridge.org/us/features/052182060X/grammar.html)
 * [BNF for MiniJava](https://web.cs.ucla.edu/classes/spring11/cs132/cs132/mj/minijava.html)
 
-## Environments
+## System Requirements
 
 * Ubuntu 20.04 LTS x86_64
 * CMake 3.16.3
@@ -39,17 +39,37 @@ A compiler practice implemented in C++ with poor structure and bad design.
   * `tests/` : files used for back-end stage
   * `valid/` : files used for testing semantic analysis
 * `src/` : source files
+  * `ast/` : abstract syntax tree
+  * `cfg/` : intermediate representation
+  * `smi/` : stack machine interpreter
+  * `st/` : symbol table
+  * `main.cpp`
+  * `lexer.ll` : flex file
+  * `parser.yy` : Bison file
 
 ## Usage
 
 ``` shell
-mkdir build/ && cd build/
-cmake ..
-make  # or cmake --build .
-./compiler <file_path>  # e.g. "../resource/examples/factorial.java"
-sh graph.sh
-make clean
-cd .. && rm -rf build/
+# Build:
+$ mkdir build/ && cd build/
+$ cmake ..
+$ make  # or: cmake --build .
+# generated file:
+# compiler
+
+# Run:
+$ ./compiler <file_path>  # e.g. "../resource/tests/Minimal.java"
+# generated files:
+# ast.dot, st.dot, cfg.dot
+# rbc.class
+
+# Visualize:
+$ sh graph.sh
+# generated files:
+# ast.svg, st.svg, cfg.svg
+
+# Clean:
+$ make clean  # or: cd .. && rm -rf build/
 ```
 
 ## LICENSE
