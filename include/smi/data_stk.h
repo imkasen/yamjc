@@ -23,7 +23,7 @@ public:
 
     [[nodiscard]] std::size_t size() const;
     [[nodiscard]] std::optional<DataTypes> top() const;
-    std::optional<DataTypes> pop();
+    void pop();
 };
 
 }  // namespace smi

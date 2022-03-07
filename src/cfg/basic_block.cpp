@@ -68,7 +68,7 @@ string BasicBlock::printBC() const {
 
     // Draw blocks
     string block_content;
-    block_content += this->getName() + ":\n";
+    block_content += this->getName() + "\n";
     block_content += ins_content;
 
     return block_content;

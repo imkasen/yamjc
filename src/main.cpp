@@ -86,6 +86,8 @@ int main(int argc, char* argv[]) {
     rbc_stream.close();
 
     // Stack machine interpreter
+    smi::Interpreter interpreter = smi::Interpreter(root->blk_links);
+    interpreter.run("rbc.class");
 
     return EXIT_SUCCESS;
 }

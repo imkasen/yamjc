@@ -59,6 +59,7 @@ $ make  # or: cmake --build .
 
 # Run:
 $ ./compiler <file_path>  # e.g. "../resource/tests/Minimal.java"
+# output result
 # generated files:
 # ast.dot, st.dot, cfg.dot
 # rbc.class

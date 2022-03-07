@@ -22,7 +22,8 @@ string IRArgument::printBC() const {
     string context;
     if (Tac::isNum(this->getLHS())) {
         context += "iconst ";
-    } else if (this->getLHS().find("_i") != string::npos) {
+    } else if ((this->getLHS().find("_i") != string::npos) ||
+               (this->getLHS().find("_b") != string::npos)) {
         context += "iload ";
     } else {
         context += "aload ";

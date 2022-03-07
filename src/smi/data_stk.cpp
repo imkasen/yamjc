@@ -16,11 +16,8 @@ std::optional<DataTypes> DataStk::top() const {
     return std::nullopt;
 }
 
-std::optional<DataTypes> DataStk::pop() {
+void DataStk::pop() {
     if (!this->stk.empty()) {
-        const auto &dst = this->stk.top();
         this->stk.pop();
-        return dst;
     }
-    return std::nullopt;
 }
