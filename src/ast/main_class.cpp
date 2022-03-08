@@ -99,7 +99,7 @@ std::optional<IRReturnVal> MainClass::generateIR() {
     for (size_t i = 2; i < this->children.size(); ++i) {
         this->children.at(i)->generateIR();
     }
-    MainClass::bb_list.back()->addInstruction(std::make_shared<cfg::IRReturn>(""));
+    MainClass::bb_list.back()->addInstruction(std::make_shared<cfg::IRReturn>("", 0));
     MainClass::st.exitScope();  // Exit "Method" scope
     return std::nullopt;
 }

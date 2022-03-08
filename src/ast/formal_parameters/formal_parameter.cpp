@@ -52,7 +52,7 @@ std::optional<IRReturnVal> FormalParameter::generateIR() {
     std::shared_ptr<cfg::BasicBlock> cur_bb = FormalParameter::bb_list.back();
     // 2.
     string lhs;
-    char type;
+    char type = 0;
     const auto t_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
     if (auto ptr = std::get_if<string>(&t_vrt)) {
         if (*ptr == "int") {

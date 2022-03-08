@@ -13,9 +13,11 @@ namespace cfg {
  *          op     lhs
  */
 class IRReturn : public Tac {
+private:
+    char para_type; // i-int, b-boolean, a-int[], r-self-defined class
 public:
     IRReturn();
-    explicit IRReturn(std::string lhs);
+    IRReturn(std::string lhs, char t);
     ~IRReturn() override = default;
 
     [[nodiscard]] std::string printInfo() const final;

@@ -22,16 +22,19 @@ namespace smi {
 class Interpreter {
 private:
     inline static DataStk data_stk = DataStk();  // NOLINT
-    inline static ActivationStk act_stk = ActivationStk();
+    inline static ActivationStk act_stk = ActivationStk(); // NOLINT
 
     [[maybe_unused]] inline static BlkLinksType blk_links = {};
     inline static BlkPosType blk_pos_links = {};
 
     std::shared_ptr<Activation> cur_act_ptr;
+    std::ifstream input_stream;
 
-    static std::tuple<std::string, std::string> lineSplit(const std::string &str, const char &delimiter = ' ');
+    static std::tuple<std::string, std::string> strSplit(const std::string &str, const char &delimiter);
     static void arithOrLogicCmd(const char &c);
     static void compareCmd(int i);
+    void methodCallCmd(const std::string &rhs);
+    void gotoCmd(const std::string &block_name);
     void executeCmd(const std::string &lhs, const std::string &rhs);
 
 public:
@@ -39,7 +42,7 @@ public:
     explicit Interpreter(const BlkLinksType &links);
     ~Interpreter() = default;
 
-    void run(const std::string &filename = "rbc.class");
+    void run(const std::string &filename);
 };
 
 }  // namespace smi

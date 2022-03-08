@@ -44,12 +44,23 @@ std::optional<string> Return::checkSemantics() {
  */
 std::optional<IRReturnVal> Return::generateIR() {
     string lhs;
+    char type = 0;
     std::shared_ptr<cfg::BasicBlock> cur_bb = Return::bb_list.back();
     const auto vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
     if (auto ptr = std::get_if<string>(&vrt)) {
         lhs = *ptr;
     }
-    cur_bb->addInstruction(std::make_shared<cfg::IRReturn>(lhs));
+    const auto record_ptr = Return::st.lookupRecord(lhs).value_or(nullptr);
+    if (record_ptr && record_ptr->getType() == "int") {
+        type = 'i';
+    } else if (record_ptr && record_ptr->getType() == "boolean") {
+        type = 'b';
+    } else if (record_ptr && record_ptr->getType() == "int[]") {
+        type = 'a';
+    } else if (record_ptr) {
+        type = 'r';
+    }
+    cur_bb->addInstruction(std::make_shared<cfg::IRReturn>(lhs, type));
 
     return std::nullopt;
 }

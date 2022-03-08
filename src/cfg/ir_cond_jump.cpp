@@ -22,6 +22,7 @@ string IRCondJump::printBC() const {
     string context;
     context += Tac::isNum(this->getLHS()) ? ("iconst " + this->getLHS()) : ("iload " + this->getLHS());
     context += "\n";
+    context += "ifeq\n";
     context += "goto " + this->getResult() + "\n";
     return context;
 }

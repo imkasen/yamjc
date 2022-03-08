@@ -2,8 +2,12 @@
 using cfg::IRReturn;
 using std::string;
 
-IRReturn::IRReturn() : Tac() {}
-IRReturn::IRReturn(string lhs) : Tac("return", std::move(lhs), "", "") {}
+IRReturn::IRReturn() : Tac() {
+    this->para_type = 0;
+}
+IRReturn::IRReturn(string lhs, char t) : Tac("return", std::move(lhs), "", "") {
+    this->para_type = t;
+}
 
 string IRReturn::printInfo() const {
     return this->getOP() + " " + this->getLHS();
@@ -13,9 +17,15 @@ string IRReturn::printInfo() const {
  * TAC:
  *   return y
  * ByteCode:
- *   "y":
- *     iconst || iload y
+ *   "0":
+ *     iconst y
  *     ireturn
+ *   "num" || "boolean":
+ *     iload y
+ *     ireturn
+ *   "array" || "class":
+ *     aload y
+ *     areturn
  *   "":
  *     return
  */
@@ -25,13 +35,20 @@ string IRReturn::printBC() const {
         if (Tac::isNum(this->getLHS())) {
             context += "iconst " + this->getLHS() + "\n";
             context += "ireturn\n";
-        } else if ((this->getLHS().find("_i") != string::npos) ||
-                   (this->getLHS().find("_r") != string::npos)) {
-            context += "iload " + this->getLHS() + "\n";
-            context += "ireturn\n";
         } else {
-            context += "aload " + this->getLHS() + "\n";
-            context += "areturn\n";
+            switch (this->para_type) {
+                case 'i':
+                case 'b':
+                    context += "iload " + this->getLHS() + "\n";
+                    context += "ireturn\n";
+                    break;
+                case 'a':
+                case 'r':
+                default:
+                    context += "aload " + this->getLHS() + "\n";
+                    context += "areturn\n";
+                    break;
+            }
         }
     } else {
         context += "return\n";
