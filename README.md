@@ -27,8 +27,8 @@ There are four types only, which are `int`, `boolean`, `int[]`, and user-defined
 ## Compiler Phases
 
 <div align="center">
-    <img src="resource/phases.png"
-        width="800" height="auto" alt="Compiler Phases">
+  <img src="resource/phases-light.png#gh-light-mode-only" width="800" height="auto" alt="Compiler Phases">
+  <img src="resource/phases-dark.png#gh-dark-mode-only" width="800" height="auto" alt="Compiler Phases">
 </div>
 
 ## File structure
@@ -59,7 +59,7 @@ $ make  # or: cmake --build .
 
 # Run:
 $ ./compiler <file_path>  # e.g. "../resource/tests/Minimal.java"
-# output result
+# output result,
 # generated files:
 # ast.dot, st.dot, cfg.dot
 # rbc.class
