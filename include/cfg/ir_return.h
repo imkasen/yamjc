@@ -1,4 +1,4 @@
- #ifndef CFG_IR_RETURN_H
+#ifndef CFG_IR_RETURN_H
 #define CFG_IR_RETURN_H
 
 #include "tac.h"
@@ -14,7 +14,7 @@ namespace cfg {
  */
 class IRReturn : public Tac {
 private:
-    char para_type; // i-int, b-boolean, a-int[], r-self-defined class
+    char para_type;  // i-int, b-boolean, a-int[], r-self-defined class
 public:
     IRReturn();
     IRReturn(std::string lhs, char t);

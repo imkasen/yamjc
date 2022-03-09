@@ -20,10 +20,10 @@ string IRReturn::printInfo() const {
  *   "0":
  *     iconst y
  *     ireturn
- *   "num" || "boolean":
+ *   "_i" || "_b" || "num" || "boolean":
  *     iload y
  *     ireturn
- *   "array" || "class":
+ *   "_a" || "_r" || "array" || "class":
  *     aload y
  *     areturn
  *   "":
@@ -35,6 +35,14 @@ string IRReturn::printBC() const {
         if (Tac::isNum(this->getLHS())) {
             context += "iconst " + this->getLHS() + "\n";
             context += "ireturn\n";
+        } else if ((this->getLHS().find("_i") != string::npos) ||
+                   (this->getLHS().find("_b") != string::npos)) {
+            context += "iload " + this->getLHS() + "\n";
+            context += "ireturn\n";
+        } else if ((this->getLHS().find("_a") != string::npos) ||
+                   (this->getLHS().find("_r") != string::npos)) {
+            context += "aload " + this->getLHS() + "\n";
+            context += "areturn\n";
         } else {
             switch (this->para_type) {
                 case 'i':

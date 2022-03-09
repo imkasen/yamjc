@@ -32,11 +32,22 @@ std::optional<IRReturnVal> ExpressionList::generateIR() {
     // 2.
     for (const auto &child : this->children) {
         string lhs;
+        char type = 0;
         const auto lhs_vrt = child->generateIR().value_or(std::monostate{});
         if (auto s_vrt = std::get_if<string>(&lhs_vrt)) {
             lhs = *s_vrt;
         }
-        std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRArgument>(lhs);
+        const auto &record_ptr = ExpressionList::st.lookupRecord(lhs).value_or(nullptr);
+        if (record_ptr && record_ptr->getType() == "int") {
+            type = 'i';
+        } else if (record_ptr && record_ptr->getType() == "boolean") {
+            type = 'b';
+        } else if (record_ptr && record_ptr->getType() == "int[]") {
+            type = 'a';
+        } else if (record_ptr) {
+            type = 'r';
+        }
+        std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRArgument>(lhs, type);
         cur_bb->addInstruction(instruction);
     }
     // 3.
