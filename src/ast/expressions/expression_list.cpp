@@ -30,7 +30,8 @@ std::optional<IRReturnVal> ExpressionList::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = ExpressionList::bb_list.back();
     // 2.
-    for (const auto &child : this->children) {
+    for (int i = static_cast<int>(this->children.size()) - 1; i >= 0; --i) {  // using a reverse loop to match stack popping in the next few parts
+        const auto &child = this->children.at(i);
         string lhs;
         char type = 0;
         const auto lhs_vrt = child->generateIR().value_or(std::monostate{});
