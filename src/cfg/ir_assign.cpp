@@ -2,8 +2,12 @@
 using cfg::IRAssign;
 using std::string;
 
-IRAssign::IRAssign() : Tac() {}
-IRAssign::IRAssign(string lhs, string result) : Tac("", std::move(lhs), "", std::move(result)) {}
+IRAssign::IRAssign() : Tac() {
+    this->para_type = 0;
+}
+IRAssign::IRAssign(string lhs, string result, char t) : Tac("", std::move(lhs), "", std::move(result)) {
+    this->para_type = t;
+}
 
 string IRAssign::printInfo() const {
     return this->getResult() + " := " + this->getLHS();
@@ -16,10 +20,10 @@ string IRAssign::printInfo() const {
  *   "_i0 := 1" || "_b0 := 1":
  *     iconst y
  *     istore x
- *   "x := _i0" || "x := _b0":
+ *   "x := _i0" || "x := _b0" || "x = num" || "x = boolean":
  *     iload y
  *     istore x
- *   "x := _a0" || "x := _r0" || "x := null":
+ *   "x := _a0" || "x := _r0" || "x := null" || "x := xxx":
  *     aload y
  *     astore x
  */
@@ -34,9 +38,24 @@ string IRAssign::printBC() const {
                (lhs.find("_b") != string::npos)) {
         context += "iload " + lhs + "\n";
         context += "istore " + rst + "\n";
-    } else {
+    } else if ((lhs.find("_a") != string::npos) ||
+               (lhs.find("_r") != string::npos)) {
         context += "aload " + lhs + "\n";
         context += "astore " + rst + "\n";
+    } else {
+        switch (this->para_type) {
+            case 'i':
+            case 'b':
+                context += "iload " + lhs + "\n";
+                context += "istore " + rst + "\n";
+                break;
+            case 'a':
+            case 'r':
+            default:
+                context += "aload " + lhs + "\n";
+                context += "astore " + rst + "\n";
+                break;
+        }
     }
     return context;
 }

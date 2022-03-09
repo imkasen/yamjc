@@ -44,7 +44,7 @@ std::optional<string> AssignStatement::checkSemantics() {
 /*
  * @brief:
  *   1. Obtain current "BasicBlock"
- *   2. Create an instruction "IRExpression"
+ *   2. Create an instruction "IRAssign"
  * @return: std::nullopt
  */
 std::optional<IRReturnVal> AssignStatement::generateIR() {
@@ -52,6 +52,7 @@ std::optional<IRReturnVal> AssignStatement::generateIR() {
     std::shared_ptr<cfg::BasicBlock> cur_bb = AssignStatement::bb_list.back();
     // 2.
     string result, lhs;
+    char type = 0;
     const auto r_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
     if (auto s_ptr = std::get_if<string>(&r_vrt)) {
         result = *s_ptr;
@@ -60,7 +61,17 @@ std::optional<IRReturnVal> AssignStatement::generateIR() {
     if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
         lhs = *s_ptr;
     }
-    std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRAssign>(lhs, result);
+    const auto &record_ptr = AssignStatement::st.lookupRecord(lhs).value_or(nullptr);
+    if (record_ptr && record_ptr->getType() == "int") {
+        type = 'i';
+    } else if (record_ptr && record_ptr->getType() == "boolean") {
+        type = 'b';
+    } else if (record_ptr && record_ptr->getType() == "int[]") {
+        type = 'a';
+    } else if (record_ptr) {
+        type = 'r';
+    }
+    std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRAssign>(lhs, result, type);
     cur_bb->addInstruction(instruction);
 
     return std::nullopt;

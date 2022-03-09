@@ -83,10 +83,15 @@ std::optional<IRReturnVal> VarDeclaration::generateIR() {
     }
     // initialize local variables
     std::shared_ptr<cfg::Tac> instruction;
-    if (type == "int" || type == "boolean") {
-        instruction = std::make_shared<cfg::IRAssign>("0", lhs);
-    } else {  // self-defined class, int[]
-        instruction = std::make_shared<cfg::IRAssign>("null", lhs);
+    if (type == "int") {
+        instruction = std::make_shared<cfg::IRAssign>("0", lhs, 'i');
+    } else if (type == "boolean") {
+        instruction = std::make_shared<cfg::IRAssign>("0", lhs, 'b');
+    } else if (type == "int[]") {
+        instruction = std::make_shared<cfg::IRAssign>("null", lhs, 'a');
+    }
+    else {  // self-defined class
+        instruction = std::make_shared<cfg::IRAssign>("null", lhs, 'r');
     }
     cur_bb->addInstruction(instruction);
 

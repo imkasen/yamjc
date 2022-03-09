@@ -13,9 +13,11 @@ namespace cfg {
  *        result lhs
  */
 class IRAssign : public Tac {
+private:
+    char para_type;  // y, i-int, b-boolean, a-int[], r-self-defined class
 public:
     IRAssign();
-    IRAssign(std::string lhs, std::string result);
+    IRAssign(std::string lhs, std::string result, char t);
     ~IRAssign() override = default;
 
     [[nodiscard]] std::string printInfo() const final;
