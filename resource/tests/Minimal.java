@@ -4,3 +4,9 @@ class Minimal {
         System.out.println(true == (!true && false) || 10 > 1 && 1 < 10);
     }
 }
+
+/*
+ * result:
+ * 9
+ * 1(true)
+ */

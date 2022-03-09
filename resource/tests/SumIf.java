@@ -14,3 +14,8 @@ class Test {
         return sum;
     }
 }
+
+/*
+ * result:
+ * 50005000
+ */

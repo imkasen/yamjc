@@ -18,3 +18,8 @@ class Fac {
         return num_aux;
     }
 }
+
+/*
+ * result:
+ * 3628800
+ */

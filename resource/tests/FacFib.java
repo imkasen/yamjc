@@ -53,3 +53,10 @@ class FacFib2 {
         return fib;
     }
 }
+
+/*
+ * result:
+ * 120
+ * 55
+ * 1
+ */

@@ -16,3 +16,7 @@ class Test {
     }
 }
 
+/*
+ * result:
+ * 5050
+ */

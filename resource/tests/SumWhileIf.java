@@ -19,3 +19,7 @@ class Test {
     }
 }
 
+/*
+ * result:
+ * 100
+ */
