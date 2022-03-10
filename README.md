@@ -49,7 +49,7 @@ There are four types only, which are `int`, `boolean`, `int[]`, and user-defined
 
 ## Usage
 
-``` shell
+``` Bash
 # Build:
 $ mkdir build/ && cd build/
 $ cmake ..
@@ -71,6 +71,29 @@ $ sh graph.sh
 
 # Clean:
 $ make clean  # or: cd .. && rm -rf build/
+```
+
+### Docker
+
+``` Bash
+# Build:
+$ docker build -t mjc .
+$ docker image prune
+
+# Run:
+$ docker run -it --rm --mount type=bind,source=<your_path>/mini-java-compiler/build,target=/home/build mjc
+$ cd build/
+$ ../compiler ../tests/<file_name>.java
+
+# Visualize
+$ bash ../graph.sh
+
+# Quit:
+$ exit
+# generated files still will be found in the "build" folder
+
+# Clean:
+$ docker image rm mjc
 ```
 
 ## LICENSE

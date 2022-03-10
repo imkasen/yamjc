@@ -1,0 +1,12 @@
+.git/
+.idea/
+.vscode/
+build/
+resource/
+!resource/tests/
+.clang-format
+.dockerignore
+.gitignore
+Dockerfile
+LICENSE
+README.md
