@@ -18,11 +18,11 @@ There are four types only, which are `int`, `boolean`, `int[]`, and user-defined
 ## System Requirements
 
 * Ubuntu 20.04 LTS x86_64
-* CMake 3.16.3
 * g++ 9.3.0
-* Graphviz 2.43.0
-* flex 2.6.4
-* Bison 3.5.1
+* [CMake](https://cmake.org/) 3.16.3
+* [Graphviz](https://graphviz.org/) 2.43.0
+* [flex](https://github.com/westes/flex) 2.6.4
+* [Bison](https://www.gnu.org/software/bison/bison.html) 3.5.1
 
 ## Compiler Phases
 
@@ -59,7 +59,7 @@ $ make  # or: cmake --build .
 
 # Run:
 $ ./compiler <file_path>  # e.g. "../resource/tests/Minimal.java"
-# output result,
+# output results,
 # generated files:
 # ast.dot, st.dot, cfg.dot
 # rbc.class
