@@ -10,12 +10,12 @@ A compiler practice implemented in C++ with poor structure and bad design.
 
 There are four types only, which are `int`, `boolean`, `int[]`, and user-defined class. There is no `for` loop or `do {} while ()` in MiniJava, `if` statement must be followed by `else` statement, etc... Please refer to the _Grammar_ section below for the detailed grammar.
 
-## Grammar
+## Backus Normal Form
 
 * [BNF for MiniJava](https://www.cambridge.org/us/features/052182060X/grammar.html)
 * [BNF for MiniJava](https://web.cs.ucla.edu/classes/spring11/cs132/cs132/mj/minijava.html)
 
-## System Requirements
+## Tech Stack
 
 * Ubuntu 20.04 LTS x86_64
 * g++ 9.3.0
@@ -47,7 +47,7 @@ There are four types only, which are `int`, `boolean`, `int[]`, and user-defined
   * `lexer.ll` : flex file
   * `parser.yy` : Bison file
 
-## Usage
+## Run Locally
 
 ``` Bash
 # Build:
@@ -96,6 +96,12 @@ $ exit
 $ docker image rm mjc
 ```
 
+## Known Issues
+
+TLDR: The interpreter phase currently only supports processing `int` and `boolean` type variables declared in method scopes.
+
+All phases except the interpreter work well for all provided Java cases. The interpreter only works well for Java cases in the `resource/tests` folder but crashes when executing cases in the `resource/examples` folder, which means it does not yet support variable declarations in class scopes and support for arrays.
+
 ## LICENSE
 
-GNU GPL v3
+[GNU GPL v3](https://choosealicense.com/licenses/gpl-3.0/)
