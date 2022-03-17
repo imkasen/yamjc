@@ -11,7 +11,6 @@ using std::string;
      "Type"  "Identifier"  ["FormalParameterList"]  "MethodBody"
  */
 
-MethodDeclaration::MethodDeclaration() : Node() {}
 MethodDeclaration::MethodDeclaration(std::string t, std::string v) : Node(std::move(t), std::move(v)) {}
 
 /*

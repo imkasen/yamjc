@@ -8,7 +8,7 @@ namespace ast {
 
 class MainClass : public Node {
 public:
-    MainClass();
+    MainClass() = delete;
     MainClass(std::string t, std::string v);
     ~MainClass() override = default;
 

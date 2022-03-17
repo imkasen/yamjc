@@ -8,7 +8,7 @@ namespace st {
 // formal parameters in "Method"
 class Parameter : public Variable {
 public:
-    Parameter();
+    Parameter() = delete;
     Parameter(std::string name, std::string type);
     Parameter(std::string name, std::string type, std::string record);
     ~Parameter() override = default;

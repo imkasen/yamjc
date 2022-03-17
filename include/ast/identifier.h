@@ -7,7 +7,7 @@ namespace ast {
 
 class Identifier : public Node {
 public:
-    Identifier();
+    Identifier() = delete;
     Identifier(std::string t, std::string v);
     ~Identifier() override = default;
 

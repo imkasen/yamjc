@@ -40,7 +40,7 @@ public:
     // "<class_name, <method_name, entry_block_name>>"
     inline static std::unordered_map<std::string, std::unordered_map<std::string, std::string>> blk_links = {};
 
-    Node();
+    Node() = delete;
     Node(std::string t, std::string v);
     virtual ~Node() = default;
 

@@ -9,7 +9,7 @@ namespace ast {
 
 class WhileStatement : public Statement {
 public:
-    WhileStatement();
+    WhileStatement() = delete;
     WhileStatement(std::string t, std::string v);
     ~WhileStatement() override = default;
 

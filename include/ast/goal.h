@@ -7,7 +7,7 @@ namespace ast {
 
 class Goal : public Node {
 public:
-    Goal();
+    Goal() = delete;
     Goal(std::string t, std::string v);
     ~Goal() override = default;
 

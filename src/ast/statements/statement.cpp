@@ -2,7 +2,6 @@
 using ast::Statement;
 using std::string;
 
-Statement::Statement() : Node() {}
 Statement::Statement(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*

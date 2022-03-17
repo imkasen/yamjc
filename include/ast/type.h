@@ -7,7 +7,7 @@ namespace ast {
 
 class Type : public Node {
 public:
-    Type();
+    Type() = delete;
     Type(std::string t, std::string v);
     ~Type() override = default;
 

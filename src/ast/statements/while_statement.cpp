@@ -2,7 +2,6 @@
 using ast::WhileStatement;
 using std::string;
 
-WhileStatement::WhileStatement() : Statement() {}
 WhileStatement::WhileStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
 
 /*

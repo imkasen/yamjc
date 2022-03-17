@@ -7,7 +7,7 @@ namespace ast {
 
 class ClassExtendsDeclaration : public Node {
 public:
-    ClassExtendsDeclaration();
+    ClassExtendsDeclaration() = delete;
     ClassExtendsDeclaration(std::string t, std::string v);
     ~ClassExtendsDeclaration() override = default;
 

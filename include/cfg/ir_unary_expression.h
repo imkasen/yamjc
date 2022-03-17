@@ -14,7 +14,7 @@ namespace cfg {
  */
 class IRUnaryExpression : public Tac {
 public:
-    IRUnaryExpression();
+    IRUnaryExpression() = delete;
     IRUnaryExpression(std::string op, std::string lhs, std::string result);
     ~IRUnaryExpression() override = default;
 

@@ -7,7 +7,7 @@ namespace ast {
 
 class FormalParameterList : public Node {
 public:
-    FormalParameterList();
+    FormalParameterList() = delete;
     FormalParameterList(std::string t, std::string v);
     ~FormalParameterList() override = default;
 };

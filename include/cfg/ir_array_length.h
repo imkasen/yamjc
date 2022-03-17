@@ -14,7 +14,7 @@ namespace cfg {
  */
 class IRArrayLength : public Tac {
 public:
-    IRArrayLength();
+    IRArrayLength() = delete;
     IRArrayLength(std::string lhs, std::string result);
     ~IRArrayLength() override = default;
 

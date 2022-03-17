@@ -8,7 +8,6 @@ using std::string;
      "Expression"  "Expression"
  */
 
-LogicExpression::LogicExpression() : Expression() {}
 LogicExpression::LogicExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
 
 /*

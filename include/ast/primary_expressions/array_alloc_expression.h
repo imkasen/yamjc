@@ -8,7 +8,7 @@ namespace ast {
 
 class ArrayAllocExpression : public PrimaryExpression {
 public:
-    ArrayAllocExpression();
+    ArrayAllocExpression() = delete;
     ArrayAllocExpression(std::string t, std::string v);
     ~ArrayAllocExpression() override = default;
 

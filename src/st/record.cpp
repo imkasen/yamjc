@@ -2,12 +2,6 @@
 using st::Record;
 using std::string;
 
-Record::Record() {
-    this->name = "uninitialised";
-    this->type = "uninitialised";
-    this->record = "Record";
-}
-
 Record::Record(string name, string type, string record)
     : name(std::move(name)), type(std::move(type)), record(std::move(record)) {}
 

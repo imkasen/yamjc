@@ -14,7 +14,7 @@ namespace cfg {
  */
 class IRArrayAssign : public Tac {
 public:
-    IRArrayAssign();
+    IRArrayAssign() = delete;
     IRArrayAssign(std::string lhs, std::string rhs, std::string result);
     ~IRArrayAssign() override = default;
 

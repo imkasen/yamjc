@@ -8,7 +8,7 @@ namespace ast {
 
 class ArrayAccessExpression : public Expression {
 public:
-    ArrayAccessExpression();
+    ArrayAccessExpression() = delete;
     ArrayAccessExpression(std::string t, std::string v);
     ~ArrayAccessExpression() override = default;
 

@@ -8,7 +8,7 @@ namespace ast {
 
 class ArrayAssignStatement : public Statement {
 public:
-    ArrayAssignStatement();
+    ArrayAssignStatement() = delete;
     ArrayAssignStatement(std::string t, std::string v);
     ~ArrayAssignStatement() override = default;
 

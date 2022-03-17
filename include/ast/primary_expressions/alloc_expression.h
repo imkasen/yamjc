@@ -8,7 +8,7 @@ namespace ast {
 
 class AllocExpression : public PrimaryExpression {
 public:
-    AllocExpression();
+    AllocExpression() = delete;
     AllocExpression(std::string t, std::string v);
     ~AllocExpression() override = default;
 

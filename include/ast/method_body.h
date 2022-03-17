@@ -7,7 +7,7 @@ namespace ast {
 
 class MethodBody : public Node {
 public:
-    MethodBody();
+    MethodBody() = delete;
     MethodBody(std::string t, std::string v);
     ~MethodBody() override = default;
 

@@ -12,7 +12,6 @@ using std::string;
     "Identifier"  "Identifier"  ["Declarations"]
  */
 
-ClassExtendsDeclaration::ClassExtendsDeclaration() : Node() {}
 ClassExtendsDeclaration::ClassExtendsDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*

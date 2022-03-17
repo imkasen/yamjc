@@ -12,7 +12,7 @@ private:
     std::deque<std::shared_ptr<Parameter>> parameters;
 
 public:
-    Method();
+    Method() = delete;
     Method(std::string name, std::string type);
     ~Method() override = default;
 

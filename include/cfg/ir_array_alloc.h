@@ -16,7 +16,7 @@ namespace cfg {
  */
 class IRArrayAlloc : public Tac {
 public:
-    IRArrayAlloc();
+    IRArrayAlloc() = delete;
     IRArrayAlloc(std::string rhs, std::string result);
     ~IRArrayAlloc() override = default;
 

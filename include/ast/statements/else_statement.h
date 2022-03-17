@@ -7,7 +7,7 @@ namespace ast {
 
 class ElseStatement : public Node {
 public:
-    ElseStatement();
+    ElseStatement() = delete;
     ElseStatement(std::string t, std::string v);
     ~ElseStatement() override = default;
 

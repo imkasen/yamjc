@@ -2,7 +2,6 @@
 using cfg::IRArrayAlloc;
 using std::string;
 
-IRArrayAlloc::IRArrayAlloc() : Tac() {}
 IRArrayAlloc::IRArrayAlloc(string rhs, string result)
     : Tac("new", "int[]", std::move(rhs), std::move(result)) {}
 

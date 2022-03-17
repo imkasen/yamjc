@@ -8,7 +8,7 @@ namespace ast {
 
 class AssignStatement : public Statement {
 public:
-    AssignStatement();
+    AssignStatement() = delete;
     AssignStatement(std::string t, std::string v);
     ~AssignStatement() override = default;
 

@@ -14,7 +14,7 @@ namespace cfg {
  */
 class IRExpression : public Tac {
 public:
-    IRExpression();
+    IRExpression() = delete;
     IRExpression(std::string op, std::string lhs, std::string rhs, std::string result);
     ~IRExpression() override = default;
 

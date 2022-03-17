@@ -8,7 +8,6 @@ using std::string;
      "CompareExpression"  "Statement"  "ElseStatement"
  */
 
-IfStatement::IfStatement() : Statement() {}
 IfStatement::IfStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
 
 /*

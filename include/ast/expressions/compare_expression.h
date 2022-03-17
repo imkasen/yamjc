@@ -8,7 +8,7 @@ namespace ast {
 
 class CompareExpression : public Expression {
 public:
-    CompareExpression();
+    CompareExpression() = delete;
     CompareExpression(std::string t, std::string v);
     ~CompareExpression() override = default;
 

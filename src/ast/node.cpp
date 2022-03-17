@@ -5,12 +5,6 @@ using std::endl;
 using std::size_t;
 using std::string;
 
-Node::Node() {
-    // Bison needs this
-    this->type = "uninitialised";
-    this->value = "uninitialised";
-}
-
 Node::Node(string t, string v) : type(std::move(t)), value(std::move(v)) {}
 
 void Node::setId(size_t _id) {

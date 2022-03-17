@@ -8,7 +8,7 @@ namespace ast {
 
 class ExpressionList : public Node {
 public:
-    ExpressionList();
+    ExpressionList() = delete;
     ExpressionList(std::string t, std::string v);
     ~ExpressionList() override = default;
 

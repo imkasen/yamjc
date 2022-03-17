@@ -16,7 +16,7 @@ class IRReturn : public Tac {
 private:
     char para_type;  // i-int, b-boolean, a-int[], r-self-defined class
 public:
-    IRReturn();
+    IRReturn() = delete;
     IRReturn(std::string lhs, char t);
     ~IRReturn() override = default;
 

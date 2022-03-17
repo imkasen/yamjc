@@ -8,7 +8,7 @@ namespace ast {
 
 class ArrayLengthExpression : public Expression {
 public:
-    ArrayLengthExpression();
+    ArrayLengthExpression() = delete;
     ArrayLengthExpression(std::string t, std::string v);
     ~ArrayLengthExpression() override = default;
 

@@ -16,7 +16,7 @@ class IRArgument : public Tac {
 private:
     char para_type;  // i-int, b-boolean, a-int[], r-self-defined class
 public:
-    IRArgument();
+    IRArgument() = delete;
     IRArgument(std::string lhs, char t);
     ~IRArgument() override = default;
 

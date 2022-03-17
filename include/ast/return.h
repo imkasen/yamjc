@@ -8,7 +8,7 @@ namespace ast {
 
 class Return : public Node {
 public:
-    Return();
+    Return() = delete;
     Return(std::string t, std::string v);
     ~Return() override = default;
 

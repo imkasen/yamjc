@@ -7,7 +7,7 @@ namespace ast {
 
 class MethodDeclaration : public Node {
 public:
-    MethodDeclaration();
+    MethodDeclaration() = delete;
     MethodDeclaration(std::string t, std::string v);
     ~MethodDeclaration() override = default;
 

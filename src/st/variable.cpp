@@ -2,7 +2,6 @@
 using st::Variable;
 using std::string;
 
-Variable::Variable() : Record() {}
 Variable::Variable(string name, string type)
     : Record(std::move(name), std::move(type), "Variable") {}
 Variable::Variable(string name, string type, string record)

@@ -3,7 +3,6 @@ using st::Method;
 using st::Parameter;
 using std::string;
 
-Method::Method() : Parameter() {}
 Method::Method(string name, string type) : Parameter(std::move(name), std::move(type), "Method") {}
 
 std::deque<std::shared_ptr<Parameter>> Method::getParameters() const {

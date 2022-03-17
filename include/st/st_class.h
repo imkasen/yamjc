@@ -10,7 +10,7 @@ private:
     std::unordered_map<std::string, std::shared_ptr<Method>> methods;
 
 public:
-    STClass();
+    STClass() = delete;
     STClass(std::string name, std::string type);
     ~STClass() override = default;
 

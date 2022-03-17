@@ -2,13 +2,6 @@
 using cfg::Tac;
 using std::string;
 
-Tac::Tac() {
-    this->op = "uninitialized";
-    this->lhs = "uninitialized";
-    this->rhs = "uninitialized";
-    this->result = "uninitialized";
-}
-
 Tac::Tac(string op, string lhs, string rhs, string result)
     : op(std::move(op)), lhs(std::move(lhs)), rhs(std::move(rhs)), result(std::move(result)) {}
 

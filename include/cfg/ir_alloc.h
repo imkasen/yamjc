@@ -14,7 +14,7 @@ namespace cfg {
  */
 class IRAlloc : public Tac {
 public:
-    IRAlloc();
+    IRAlloc() = delete;
     IRAlloc(std::string lhs, std::string result);
     ~IRAlloc() override = default;
 

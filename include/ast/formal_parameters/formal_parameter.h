@@ -8,7 +8,7 @@ namespace ast {
 
 class FormalParameter : public FormalParameterList {
 public:
-    FormalParameter();
+    FormalParameter() = delete;
     FormalParameter(std::string t, std::string v);
     ~FormalParameter() override = default;
 

@@ -8,7 +8,7 @@ namespace ast {
 
 class UnaryExpression : public PrimaryExpression {
 public:
-    UnaryExpression();
+    UnaryExpression() = delete;
     UnaryExpression(std::string t, std::string v);
     ~UnaryExpression() override = default;
 

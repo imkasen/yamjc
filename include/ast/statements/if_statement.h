@@ -9,7 +9,7 @@ namespace ast {
 
 class IfStatement : public Statement {
 public:
-    IfStatement();
+    IfStatement() = delete;
     IfStatement(std::string t, std::string v);
     ~IfStatement() override = default;
 

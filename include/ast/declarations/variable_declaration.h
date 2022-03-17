@@ -8,7 +8,7 @@ namespace ast {
 
 class VarDeclaration : public Node {
 public:
-    VarDeclaration();
+    VarDeclaration() = delete;
     VarDeclaration(std::string t, std::string v);
     ~VarDeclaration() override = default;
 

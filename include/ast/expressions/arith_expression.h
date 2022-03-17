@@ -8,7 +8,7 @@ namespace ast {
 
 class ArithExpression : public Expression {
 public:
-    ArithExpression();
+    ArithExpression() = delete;
     ArithExpression(std::string t, std::string v);
     ~ArithExpression() override = default;
 

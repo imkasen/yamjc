@@ -8,7 +8,6 @@ using std::string;
      "Expression"  "Expression"
  */
 
-ArithExpression::ArithExpression() : Expression() {}
 ArithExpression::ArithExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
 
 /*

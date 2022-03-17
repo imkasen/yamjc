@@ -7,7 +7,7 @@ namespace ast {
 
 class Declarations : public Node {
 public:
-    Declarations();
+    Declarations() = delete;
     Declarations(std::string t, std::string v);
     ~Declarations() override = default;
 

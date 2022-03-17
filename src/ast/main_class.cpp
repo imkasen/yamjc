@@ -13,7 +13,6 @@ using std::string;
      "Identifier"  "Identifier"  ["MethodBody"]
  */
 
-MainClass::MainClass() : Node() {}
 MainClass::MainClass(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*

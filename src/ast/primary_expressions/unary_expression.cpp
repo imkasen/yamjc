@@ -8,7 +8,6 @@ using std::string;
      "Expression"
  */
 
-UnaryExpression::UnaryExpression() : PrimaryExpression() {}
 UnaryExpression::UnaryExpression(string t, string v) : PrimaryExpression(std::move(t), std::move(v)) {}
 
 /*

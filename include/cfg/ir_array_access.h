@@ -14,7 +14,7 @@ namespace cfg {
  */
 class IRArrayAccess : public Tac {
 public:
-    IRArrayAccess();
+    IRArrayAccess() = delete;
     IRArrayAccess(std::string lhs, std::string rhs, std::string result);
     ~IRArrayAccess() override = default;
 

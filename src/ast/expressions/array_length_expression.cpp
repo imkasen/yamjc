@@ -8,7 +8,6 @@ using std::string;
         "Expression"
  */
 
-ArrayLengthExpression::ArrayLengthExpression() : Expression() {}
 ArrayLengthExpression::ArrayLengthExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
 
 /*

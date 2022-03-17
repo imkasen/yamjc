@@ -22,7 +22,7 @@ private:
     std::string type;
     std::string record;
 public:
-    Record();
+    Record() = delete;
     Record(std::string name, std::string type, std::string record);
     virtual ~Record() = default;
 

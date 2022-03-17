@@ -14,7 +14,7 @@ namespace cfg {
  */
 class IRMethodCall : public Tac {
 public:
-    IRMethodCall();
+    IRMethodCall() = delete;
     IRMethodCall(std::string lhs, std::string rhs, std::string result);
     ~IRMethodCall() override = default;
 

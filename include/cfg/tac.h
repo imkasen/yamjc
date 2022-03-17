@@ -31,7 +31,7 @@ private:
     std::string result;
 
 public:
-    Tac();
+    Tac() = delete;
     Tac(std::string op, std::string lhs, std::string rhs, std::string result);
     virtual ~Tac() = default;
 

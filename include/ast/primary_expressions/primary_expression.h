@@ -7,7 +7,7 @@ namespace ast {
 
 class PrimaryExpression : public Node {
 public:
-    PrimaryExpression();
+    PrimaryExpression() = delete;
     PrimaryExpression(std::string t, std::string v);
     ~PrimaryExpression() override = default;
 

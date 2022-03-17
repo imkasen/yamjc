@@ -13,7 +13,7 @@ namespace cfg {
  */
 class IRCondJump : public Tac {
 public:
-    IRCondJump();
+    IRCondJump() = delete;
     IRCondJump(std::string lhs, std::string label);
     ~IRCondJump() override = default;
 

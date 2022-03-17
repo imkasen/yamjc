@@ -8,7 +8,6 @@ using std::string;
       "Expression"
  */
 
-ArrayAllocExpression::ArrayAllocExpression() : PrimaryExpression() {}
 ArrayAllocExpression::ArrayAllocExpression(string t, string v) : PrimaryExpression(std::move(t), std::move(v)) {}
 
 /*

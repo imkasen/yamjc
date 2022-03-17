@@ -2,7 +2,6 @@
 using cfg::IRArrayAccess;
 using std::string;
 
-IRArrayAccess::IRArrayAccess() : Tac() {}
 IRArrayAccess::IRArrayAccess(string lhs, string rhs, string result)
     : Tac("", std::move(lhs), std::move(rhs), std::move(result)) {}
 

@@ -2,9 +2,6 @@
 using cfg::IRAssign;
 using std::string;
 
-IRAssign::IRAssign() : Tac() {
-    this->para_type = 0;
-}
 IRAssign::IRAssign(string lhs, string result, char t) : Tac("", std::move(lhs), "", std::move(result)) {
     this->para_type = t;
 }

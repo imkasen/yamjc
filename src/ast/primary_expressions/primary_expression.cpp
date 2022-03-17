@@ -10,7 +10,6 @@ using std::string;
       "int:xxx" or "boolean:xxx" or "keyword:this"
  */
 
-PrimaryExpression::PrimaryExpression() : Node() {}
 PrimaryExpression::PrimaryExpression(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*

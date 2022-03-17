@@ -8,7 +8,7 @@ namespace ast {
 
 class LogicExpression : public Expression {
 public:
-    LogicExpression();
+    LogicExpression() = delete;
     LogicExpression(std::string t, std::string v);
     ~LogicExpression() override = default;
 

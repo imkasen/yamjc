@@ -8,7 +8,6 @@ using std::string;
       "Expression"  "Expression"
  */
 
-CompareExpression::CompareExpression() : Expression() {}
 CompareExpression::CompareExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
 
 /*

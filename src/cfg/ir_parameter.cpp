@@ -4,9 +4,6 @@
 using cfg::IRParameter;
 using std::string;
 
-IRParameter::IRParameter() : Tac() {
-    this->para_type = 0;
-}
 IRParameter::IRParameter(string lhs, char t) : Tac("param", std::move(lhs), "", "") {
     this->para_type = t;
 }

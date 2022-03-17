@@ -13,7 +13,7 @@ private:
     std::unordered_map<std::string, std::shared_ptr<Variable>> variables;
 
 public:
-    Variable();
+    Variable() = delete;
     Variable(std::string name, std::string type);
     Variable(std::string name, std::string type, std::string record);
     ~Variable() override = default;

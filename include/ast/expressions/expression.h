@@ -12,7 +12,7 @@ private:
     static void strSplit(std::deque<std::string> &deque, std::string &text, const std::string &delimiter);
 
 public:
-    Expression();
+    Expression() = delete;
     Expression(std::string t, std::string v);
     ~Expression() override = default;
 

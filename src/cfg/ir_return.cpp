@@ -2,9 +2,6 @@
 using cfg::IRReturn;
 using std::string;
 
-IRReturn::IRReturn() : Tac() {
-    this->para_type = 0;
-}
 IRReturn::IRReturn(string lhs, char t) : Tac("return", std::move(lhs), "", "") {
     this->para_type = t;
 }

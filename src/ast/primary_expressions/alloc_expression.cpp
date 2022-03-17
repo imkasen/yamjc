@@ -9,7 +9,6 @@ using std::string;
  *        "Identifier"
  */
 
-AllocExpression::AllocExpression() : PrimaryExpression() {}
 AllocExpression::AllocExpression(string t, string v) : PrimaryExpression(std::move(t), std::move(v)) {}
 
 /*

@@ -8,7 +8,6 @@ using std::string;
      "Identifier" "Expression"
  */
 
-AssignStatement::AssignStatement() : Statement() {}
 AssignStatement::AssignStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
 
 /*

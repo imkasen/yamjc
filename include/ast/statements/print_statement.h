@@ -9,7 +9,7 @@ namespace ast {
 
 class PrintStatement : public Statement {
 public:
-    PrintStatement();
+    PrintStatement() = delete;
     PrintStatement(std::string t, std::string v);
     ~PrintStatement() override = default;
 

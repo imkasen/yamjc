@@ -2,9 +2,6 @@
 using cfg::IRArgument;
 using std::string;
 
-IRArgument::IRArgument() : Tac() {
-    this->para_type = 0;
-}
 IRArgument::IRArgument(string lhs, char t) : Tac("arg", std::move(lhs), "", "") {
     this->para_type = t;
 }

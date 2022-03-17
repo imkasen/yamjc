@@ -2,7 +2,6 @@
 using ast::PrintStatement;
 using std::string;
 
-PrintStatement::PrintStatement() : Statement() {}
 PrintStatement::PrintStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
 
 /*

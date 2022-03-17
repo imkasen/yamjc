@@ -32,7 +32,6 @@ using std::string;
       "keyword:this"  "Identifier"  ["ExpressionList"]
  */
 
-Expression::Expression() : Node() {}
 Expression::Expression(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*

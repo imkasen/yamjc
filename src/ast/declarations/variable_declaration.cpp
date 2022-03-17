@@ -11,7 +11,6 @@ using std::string;
       "Type"  "Identifier"
  */
 
-VarDeclaration::VarDeclaration() : Node() {}
 VarDeclaration::VarDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*

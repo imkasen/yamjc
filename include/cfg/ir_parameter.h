@@ -16,7 +16,7 @@ class IRParameter : public Tac {
 private:
     char para_type; // i-int, b-boolean, a-int[], r-self-defined class
 public:
-    IRParameter();
+    IRParameter() = delete;
     IRParameter(std::string lhs, char t);
     ~IRParameter() override = default;
 
