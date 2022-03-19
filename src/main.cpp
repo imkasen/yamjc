@@ -1,5 +1,6 @@
 #include "main.h"
 using std::cout;
+using std::cerr;
 using std::endl;
 using std::size_t;
 using std::string;
@@ -7,25 +8,25 @@ using std::string;
 extern std::shared_ptr<ast::Node> root;
 
 void yy::parser::error(const string &err) {
-    std::cerr << "Cannot generate a syntax tree for this input: " << err << endl;
+    cerr << "Cannot generate a syntax tree for this input: " << err << endl;
 }
 
+// compiler [-i] /path/file
 int main(int argc, char* argv[]) {
     // Read file from cmd
     if (argc > 1) {
-        FILE* file = std::fopen(argv[1], "r");
-        if (file) {
-            yyin = file;
-        } else {
-            std::cerr << "The file path is wrong." << endl;
+        FILE* file = std::fopen(argv[argc - 1], "r");
+        if (!file) {
+            cerr << "The file path is wrong." << endl;
             return EXIT_FAILURE;
         }
+        yyin = file;
 
         yy::parser parser;
         parser.parse();
         std::fclose(file);
     } else {
-        std::cerr << "No input file." << endl;
+        cerr << "No input file." << endl;
         return EXIT_FAILURE;
     }
 
@@ -86,8 +87,10 @@ int main(int argc, char* argv[]) {
     rbc_stream.close();
 
     // Stack machine interpreter
-    smi::Interpreter interpreter = smi::Interpreter(root->blk_links);
-    interpreter.run("rbc.class");
+    if (argc == 3 && std::string(argv[1]) == "-i") {
+        smi::Interpreter interpreter = smi::Interpreter(root->blk_links);
+        interpreter.run("rbc.class");
+    }
 
     return EXIT_SUCCESS;
 }

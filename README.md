@@ -58,14 +58,15 @@ $ make  # or: cmake --build .
 # compiler
 
 # Run:
-$ ./compiler <file_path>  # e.g. "../resource/tests/Minimal.java"
-# output results,
+# '-i': use the interpreter
+$ ./compiler [-i] <file_path>  # e.g. "../resource/tests/Minimal.java"
+# output results if use '-i',
 # generated files:
 # ast.dot, st.dot, cfg.dot
 # rbc.class
 
 # Visualize:
-$ sh graph.sh
+$ bash graph.sh
 # generated files:
 # ast.svg, st.svg, cfg.svg
 
@@ -83,14 +84,14 @@ $ docker image prune
 # Run:
 $ docker run -it --rm --mount type=bind,source=<your_path>/mini-java-compiler/build,target=/home/build mjc
 $ cd build/
-$ ../compiler ../tests/<file_name>.java
+$ ../compiler [-i] ../tests/<file_name>.java  # '-i': use the interpreter
 
 # Visualize
 $ bash ../graph.sh
 
 # Quit:
 $ exit
-# generated files still will be found in the "build" folder
+# generated files still can be found in "build" folder
 
 # Clean:
 $ docker image rm mjc
@@ -100,7 +101,7 @@ $ docker image rm mjc
 
 TLDR: The interpreter phase currently only supports processing `int` and `boolean` type variables declared in method scopes.
 
-All phases except the interpreter work well for all provided Java cases. The interpreter only works well for Java cases in the `resource/tests` folder but crashes when executing cases in the `resource/examples` folder, which means it does not yet support variable declarations in class scopes and support for arrays.
+All phases except the interpreter work well for all provided Java cases. The interpreter only works well for Java cases in the `resource/tests` folder but crashes when executing cases in the `resource/examples` folder because it does not yet support variable declarations in class scopes and support for arrays.
 
 ## LICENSE
 
