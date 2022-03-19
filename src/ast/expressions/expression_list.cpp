@@ -2,7 +2,7 @@
 using ast::ExpressionList;
 using std::string;
 
-[[maybe_unused]] ExpressionList::ExpressionList(string t, string v) : Node(std::move(t), std::move(v)) {}
+[[maybe_unused]] ExpressionList::ExpressionList(string t, string v) : Expression(std::move(t), std::move(v)) {}
 
 /*
  * @return: string

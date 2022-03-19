@@ -10,6 +10,10 @@ public:
     FormalParameterList() = delete;
     FormalParameterList(std::string t, std::string v);
     ~FormalParameterList() override = default;
+
+    std::optional<std::string> generateST() override;
+    std::optional<std::string> checkSemantics() final;
+    std::optional<IRReturnVal> generateIR() override;
 };
 
 }  // namespace ast

@@ -5,6 +5,10 @@ using std::endl;
 using std::size_t;
 using std::string;
 
+Scope::Scope() {
+    this->next = 0;
+}
+
 Scope::Scope(const std::shared_ptr<Scope> &parent) {
     this->next = 0;
     this->parentScope = parent;

@@ -19,7 +19,7 @@ private:
     std::unordered_map<std::string, std::shared_ptr<Record>> records;  // Symbol to record map
 
 public:
-    Scope() = default;
+    Scope();
     explicit Scope(const std::shared_ptr<Scope> &parent);
     virtual ~Scope() = default;
 

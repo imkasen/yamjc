@@ -74,27 +74,11 @@ void Node::generateAST(std::ofstream &ostream, size_t &count) {  // NOLINT
 
 // Generate the symbol table
 void Node::buildST(std::ofstream &ostream) {
-    this->generateST();
+    // AST starts with node "Goal", review "parser.yy" for more details.
+    this->generateST();  // Goal->generateST()...
     Node::st.resetTable();
     // Generate "st.dot"
     Node::st.printST(ostream);
-}
-
-/*
- * Default behavior for nodes:
- * "Declarations", "FormalParameterList"
- *
- * All abstract syntax trees start with node "Goal",
- * review "parser.yy" for more details.
- *
- * @brief: Traverse children nodes.
- * @return: std::nullopt
- */
-std::optional<string> Node::generateST() {  // NOLINT
-    for (const auto &child : this->children) {
-        child->generateST();
-    }
-    return std::nullopt;
 }
 
 // Check semantic analysis
@@ -103,46 +87,14 @@ void Node::semanticAnalysis() {
     Node::st.resetTable();
 }
 
-/*
- * Default behavior,
- * this behavior is used by following nodes:
- * "MethodBody", "Declarations", "Statement", "ElseStatement"
- *
- * @brief: Traverse children nodes.
- * @return: std::nullopt
- */
-std::optional<string> Node::checkSemantics() {  // NOLINT
-    for (const auto &child : this->children) {
-        child->checkSemantics();
-    }
-    return std::nullopt;
-}
-
 // Generate CFG
 void Node::buildCFG(std::ofstream &ostream) {
-    this->generateIR();
+    this->generateIR();  // Goal->generateIR()...
     Node::st.resetTable();
     // Generate "cfg.dot"
     for (const auto &cfg_ptr : Node::bb_list) {
         ostream << cfg_ptr->printInfo() << endl;
     }
-}
-
-/*
- * Default behavior for nodes:
- * "FormalParameterList", "Type"
- *
- * All abstract syntax trees start with node "Goal",
- * review "parser.yy" for more details.
- *
- * @brief: Traverse children nodes.
- * @return: std::nullopt
- */
-std::optional<IRReturnVal> Node::generateIR() {  // NOLINT
-    for (const auto &child : this->children) {
-        child->generateIR();
-    }
-    return std::nullopt;
 }
 
 /*

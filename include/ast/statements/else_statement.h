@@ -1,11 +1,11 @@
 #ifndef AST_STATEMENTS_ELSE_STATEMENT_H
 #define AST_STATEMENTS_ELSE_STATEMENT_H
 
-#include "ast/node.h"
+#include "statement.h"
 
 namespace ast {
 
-class ElseStatement : public Node {
+class ElseStatement : public Statement {
 public:
     ElseStatement() = delete;
     [[maybe_unused]] ElseStatement(std::string t, std::string v);

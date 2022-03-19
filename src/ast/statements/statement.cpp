@@ -13,6 +13,17 @@ std::optional<string> Statement::generateST() {
 }
 
 /*
+ * @brief: Traverse children nodes, also used by "ElseStatement".
+ * @return: std::nullopt
+ */
+std::optional<string> Statement::checkSemantics() {
+    for (const auto &child : this->children) {
+        child->checkSemantics();
+    }
+    return std::nullopt;
+}
+
+/*
  * @brief:
  *   1. "Statement": Traverse child nodes
  *   2. "Statements":

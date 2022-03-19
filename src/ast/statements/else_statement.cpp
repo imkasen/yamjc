@@ -2,10 +2,10 @@
 using ast::ElseStatement;
 using std::string;
 
-[[maybe_unused]] ElseStatement::ElseStatement(string t, string v) : Node(std::move(t), std::move(v)) {}
+[[maybe_unused]] ElseStatement::ElseStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
 
 /*
- * @brief:
+ * @brief: Create an Else condition "BasicBlock", add into instruction
  * @return: IRReturnVal
  */
 std::optional<IRReturnVal> ElseStatement::generateIR() {

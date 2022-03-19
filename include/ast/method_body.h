@@ -12,6 +12,7 @@ public:
     ~MethodBody() override = default;
 
     std::optional<std::string> generateST() final;
+    std::optional<std::string> checkSemantics() final;
     std::optional<IRReturnVal> generateIR() final;
 };
 

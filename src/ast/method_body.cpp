@@ -24,6 +24,17 @@ std::optional<string> MethodBody::generateST() {
 }
 
 /*
+ * @brief: Traverse children nodes.
+ * @return: std::nullopt
+ */
+std::optional<string> MethodBody::checkSemantics() {
+    for (const auto &child : this->children) {
+        child->checkSemantics();
+    }
+    return std::nullopt;
+}
+
+/*
  * @brief:
  *   1. Obtain current "BasicBlock".
  *   2. Traverse nodes.

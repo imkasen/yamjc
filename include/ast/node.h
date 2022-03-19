@@ -45,7 +45,7 @@ public:
     virtual ~Node() = default;
 
     void setId(std::size_t _id);
-    [[maybe_unused]] void setType([[maybe_unused]] std::string _type);
+    [[maybe_unused]] void setType(std::string _type);
     [[maybe_unused]] void setValue(std::string _value);
     [[nodiscard]] std::size_t getId() const;
     [[nodiscard]] std::string getType() const;
@@ -58,15 +58,15 @@ public:
 
     // Functions related to the symbol table
     void buildST(std::ofstream &ostream);
-    virtual std::optional<std::string> generateST();
+    virtual std::optional<std::string> generateST() = 0;
 
     // Functions related to the semantic analysis
     void semanticAnalysis();
-    virtual std::optional<std::string> checkSemantics();
+    virtual std::optional<std::string> checkSemantics() = 0;
 
     // Functions related to the control flow graph
     void buildCFG(std::ofstream &ostream);
-    virtual std::optional<IRReturnVal> generateIR();
+    virtual std::optional<IRReturnVal> generateIR() = 0;
     static std::shared_ptr<cfg::BasicBlock> createBB();
 
     // Functions related to the bytecode generation
