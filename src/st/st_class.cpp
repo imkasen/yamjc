@@ -10,10 +10,8 @@ std::unordered_map<std::string, std::shared_ptr<Method>> STClass::getMethods() c
 }
 
 void STClass::addMethod(const std::shared_ptr<Method> &method) {
-    // ret: std::pair<std::unordered_map<string, std::shared_ptr<Method>>::iterator, bool>
-    // == insert(std::pair<string, std::shared_ptr<Method>>(method->getName(), method))
-    auto method_pair = this->methods.insert({method->getName(), method});
-    if (!method_pair.second) {  // false
+    const auto &[itr, ret] = this->methods.emplace(method->getName(), method);
+    if (!ret) {  // false
         std::cerr << "The method " << method->getName() << " already exists in the class!" << std::endl;
     }
 }

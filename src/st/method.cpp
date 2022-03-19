@@ -24,6 +24,5 @@ std::optional<std::shared_ptr<Parameter>> Method::lookupParameter(const std::str
             return parameter_ptr;
         }
     }
-
     return std::nullopt;
 }

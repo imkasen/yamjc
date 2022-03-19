@@ -12,10 +12,8 @@ std::unordered_map<std::string, std::shared_ptr<Variable>> Variable::getVariable
 }
 
 void Variable::addVariable(const std::shared_ptr<Variable> &variable) {
-    // ret: std::pair<std::unordered_map<string, std::shared_ptr<Variable>>::iterator, bool>
-    // == insert(std::pair<string, std::shared_ptr<Variable>>(variable->getName(), variable))
-    auto variable_pair = this->variables.insert({variable->getName(), variable});
-    if (!variable_pair.second) {  // false
+    const auto &[itr, ret] = this->variables.emplace(variable->getName(), variable);
+    if (!ret) {  // false
         std::cerr << "The variable " << variable->getName() << " already exists!" << std::endl;
     }
 }

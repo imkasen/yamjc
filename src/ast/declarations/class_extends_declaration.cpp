@@ -63,33 +63,32 @@ std::optional<string> ClassExtendsDeclaration::generateST() {
         std::shared_ptr<STClass> parent_class_ptr = std::dynamic_pointer_cast<STClass>(c_record_ptr);
 
         // Deep copy "Variables" in "Class"
-        for (const auto &pair : parent_class_ptr->getVariables()) {
-            // "Variables" that need to be inherited but not overwritten
-            if (pair.first != "this" && !ClassExtendsDeclaration::st.lookupRecord(pair.first).has_value()) {
-                std::shared_ptr<Variable> variable_ptr = std::make_shared<Variable>(*(pair.second));
+        for (const auto &[var_name, var_ptr] : parent_class_ptr->getVariables()) {
+            if (var_name != "this" && !ClassExtendsDeclaration::st.lookupRecord(var_name).has_value()) {
+                std::shared_ptr<Variable> variable_ptr = std::make_shared<Variable>(*(var_ptr));
                 ClassExtendsDeclaration::st.addRecord(variable_ptr->getName(), variable_ptr);
                 class_ptr->addVariable(variable_ptr);
             }
         }
 
         // Deep copy "Methods" in "Class"
-        for (const auto &pair : parent_class_ptr->getMethods()) {
+        for (const auto &[mtd_name, mtd_ptr] : parent_class_ptr->getMethods()) {
             // "Methods" that need to be inherited but not overwritten
-            if (!ClassExtendsDeclaration::st.lookupChildScope(pair.first).value_or(nullptr)) {
+            if (!ClassExtendsDeclaration::st.lookupChildScope(mtd_name).value_or(nullptr)) {
                 std::shared_ptr<Method> method_ptr =
-                    std::make_shared<Method>(pair.first, pair.second->getType());
+                    std::make_shared<Method>(mtd_name, mtd_ptr->getType());
                 ClassExtendsDeclaration::st.addRecord(method_ptr->getName(), method_ptr);
                 class_ptr->addMethod(method_ptr);
                 // Enter "Method" scope, deep copy variables and parameters
                 ClassExtendsDeclaration::st.enterScope();
                 ClassExtendsDeclaration::st.setScopeTitle("Method: " + method_ptr->getName());
-                for (const auto &var_pair : pair.second->getVariables()) {
+                for (const auto &[var_name, var_ptr] : mtd_ptr->getVariables()) {
                     std::shared_ptr<Variable> v_ptr =
-                        std::make_shared<Variable>(var_pair.first, var_pair.second->getType());
+                        std::make_shared<Variable>(var_name, var_ptr->getType());
                     method_ptr->addVariable(v_ptr);
                     ClassExtendsDeclaration::st.addRecord(v_ptr->getName(), v_ptr);
                 }
-                for (const auto &par_ptr : pair.second->getParameters()) {
+                for (const auto &par_ptr : mtd_ptr->getParameters()) {
                     std::shared_ptr<Parameter> p_ptr =
                         std::make_shared<Parameter>(par_ptr->getName(), par_ptr->getType());
                     method_ptr->addParameter(p_ptr);

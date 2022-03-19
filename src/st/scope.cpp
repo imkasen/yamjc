@@ -73,10 +73,8 @@ std::optional<std::shared_ptr<Record>> Scope::lookupRecord(const string &key) co
 }
 
 void Scope::addRecord(const string &key, const std::shared_ptr<Record> &item) {
-    // ret: std::pair<std::unordered_map<string, std::shared_ptr<Record>>::iterator, bool>
-    // == insert(std::pair<string, std::shared_ptr<Record>>(key, item))
-    auto ret = this->records.insert({key, item});
-    if (!ret.second) {  // false
+    const auto &[itr, ret] = this->records.emplace(key, item);
+    if (!ret) {  // false
         std::cerr << "The record " << key << " already exists in the scope!" << endl;
     }
 }
@@ -107,8 +105,8 @@ void Scope::resetScope() {  // NOLINT
 void Scope::printST(std::size_t index, std::ofstream &ostream) {  // NOLINT
     static size_t count = index;
     string content = "<U><B>" + this->scope_title + "</B></U><BR/><BR/>\n";
-    for (const auto &record_pair : this->records) {
-        content += record_pair.second->printRecord() + "<BR/>\n";
+    for (const auto &[name, ptr] : this->records) {
+        content += ptr->printRecord() + "<BR/>\n";
     }
 
     // Draw
