@@ -8,14 +8,14 @@ A compiler practice implemented in C++ with poor structure and bad design.
 >
 > Overloading is not allowed in MiniJava. The MiniJava statement `System.out.println( ... );` can only print integers. The MiniJava expression `e.length` only applies to expressions of type `int []`.
 
-There are four types only, which are `int`, `boolean`, `int[]`, and user-defined class. There is no `for` loop or `do {} while ()` in MiniJava, `if` statement must be followed by `else` statement, etc... Please refer to the _Grammar_ section below for the detailed grammar.
+There are four types only, which are `int`, `boolean`, `int[]`, and user-defined class. There is no `for` loop or `do while` statement in MiniJava, `if` statement must be followed by `else` statement, etc... Please refer to the *BNF* section below for more specific grammar.
 
 ## Backus Normal Form
 
 * [BNF for MiniJava](https://www.cambridge.org/us/features/052182060X/grammar.html)
 * [BNF for MiniJava](https://web.cs.ucla.edu/classes/spring11/cs132/cs132/mj/minijava.html)
 
-## Tech Stack
+## Tech Stacks
 
 * Ubuntu 20.04 LTS x86_64
 * g++ 9.3.0
@@ -24,14 +24,14 @@ There are four types only, which are `int`, `boolean`, `int[]`, and user-defined
 * [flex](https://github.com/westes/flex) 2.6.4
 * [Bison](https://www.gnu.org/software/bison/bison.html) 3.5.1
 
-## Compiler Phases
+## Compile Phases
 
 <div align="center">
   <img src="resource/phases-light.png#gh-light-mode-only" width="800" height="auto" alt="Compiler Phases">
   <img src="resource/phases-dark.png#gh-dark-mode-only" width="800" height="auto" alt="Compiler Phases">
 </div>
 
-## File structure
+## File Structures
 
 * `include/` : header files
 * `resource/`
@@ -103,6 +103,6 @@ TLDR: The interpreter phase currently only supports processing `int` and `boolea
 
 All phases except the interpreter work well for all provided Java cases. The interpreter only works well for Java cases in the `resource/tests` folder but crashes when executing cases in the `resource/examples` folder because it does not yet support variable declarations in class scopes and support for arrays.
 
-## LICENSE
+## License
 
 [GNU GPL v3](https://choosealicense.com/licenses/gpl-3.0/)
