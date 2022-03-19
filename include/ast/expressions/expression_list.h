@@ -9,7 +9,7 @@ namespace ast {
 class ExpressionList : public Node {
 public:
     ExpressionList() = delete;
-    ExpressionList(std::string t, std::string v);
+    [[maybe_unused]] ExpressionList(std::string t, std::string v);
     ~ExpressionList() override = default;
 
     std::optional<std::string> checkSemantics() final;

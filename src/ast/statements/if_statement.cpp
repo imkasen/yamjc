@@ -8,7 +8,7 @@ using std::string;
      "CompareExpression"  "Statement"  "ElseStatement"
  */
 
-IfStatement::IfStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
+[[maybe_unused]] IfStatement::IfStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
 
 /*
  * @return: std::nullopt

@@ -8,7 +8,7 @@ namespace ast {
 class ClassExtendsDeclaration : public Node {
 public:
     ClassExtendsDeclaration() = delete;
-    ClassExtendsDeclaration(std::string t, std::string v);
+    [[maybe_unused]] ClassExtendsDeclaration(std::string t, std::string v);
     ~ClassExtendsDeclaration() override = default;
 
     std::optional<std::string> generateST() final;

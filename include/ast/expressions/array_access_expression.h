@@ -9,7 +9,7 @@ namespace ast {
 class ArrayAccessExpression : public Expression {
 public:
     ArrayAccessExpression() = delete;
-    ArrayAccessExpression(std::string t, std::string v);
+    [[maybe_unused]] ArrayAccessExpression(std::string t, std::string v);
     ~ArrayAccessExpression() override = default;
 
     std::optional<std::string> checkSemantics() final;

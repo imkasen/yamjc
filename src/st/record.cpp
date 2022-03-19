@@ -5,11 +5,11 @@ using std::string;
 Record::Record(string name, string type, string record)
     : name(std::move(name)), type(std::move(type)), record(std::move(record)) {}
 
-void Record::setName(std::string _name) {
+[[maybe_unused]] void Record::setName(std::string _name) {
     this->name = std::move(_name);
 }
 
-void Record::setRecord(std::string _record) {
+[[maybe_unused]] void Record::setRecord(std::string _record) {
     this->record = std::move(_record);
 }
 

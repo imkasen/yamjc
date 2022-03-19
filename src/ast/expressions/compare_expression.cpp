@@ -8,7 +8,7 @@ using std::string;
       "Expression"  "Expression"
  */
 
-CompareExpression::CompareExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
+[[maybe_unused]] CompareExpression::CompareExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
 
 /*
  * @brief: Compare lhs and rhs

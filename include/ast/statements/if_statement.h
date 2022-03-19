@@ -10,7 +10,7 @@ namespace ast {
 class IfStatement : public Statement {
 public:
     IfStatement() = delete;
-    IfStatement(std::string t, std::string v);
+    [[maybe_unused]] IfStatement(std::string t, std::string v);
     ~IfStatement() override = default;
 
     std::optional<std::string> checkSemantics() final;

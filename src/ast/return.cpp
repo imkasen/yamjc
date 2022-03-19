@@ -2,7 +2,7 @@
 using ast::Return;
 using std::string;
 
-Return::Return(string t, string v) : Node(std::move(t), std::move(v)) {}
+[[maybe_unused]] Return::Return(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * @brief: It will not be called at all, do nothing.

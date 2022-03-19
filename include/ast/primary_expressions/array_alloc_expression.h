@@ -9,7 +9,7 @@ namespace ast {
 class ArrayAllocExpression : public PrimaryExpression {
 public:
     ArrayAllocExpression() = delete;
-    ArrayAllocExpression(std::string t, std::string v);
+    [[maybe_unused]] ArrayAllocExpression(std::string t, std::string v);
     ~ArrayAllocExpression() override = default;
 
     std::optional<std::string> checkSemantics() final;

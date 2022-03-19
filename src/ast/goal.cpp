@@ -8,7 +8,7 @@ using std::string;
      "MainClass"   ["ClassDeclaration"]  ["ClassExtendsDeclaration"]
  */
 
-Goal::Goal(string t, string v) : Node(std::move(t), std::move(v)) {}
+[[maybe_unused]] Goal::Goal(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * Note: Records in the current "Program" scope are added

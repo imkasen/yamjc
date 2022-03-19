@@ -10,7 +10,7 @@ namespace ast {
 class WhileStatement : public Statement {
 public:
     WhileStatement() = delete;
-    WhileStatement(std::string t, std::string v);
+    [[maybe_unused]] WhileStatement(std::string t, std::string v);
     ~WhileStatement() override = default;
 
     std::optional<std::string> checkSemantics() final;

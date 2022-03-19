@@ -26,8 +26,8 @@ public:
     Record(std::string name, std::string type, std::string record);
     virtual ~Record() = default;
 
-    void setName(std::string _name);
-    void setRecord(std::string _record);
+    [[maybe_unused]] void setName(std::string _name);
+    [[maybe_unused]] void setRecord(std::string _record);
     void setType(std::string _type);
 
     [[nodiscard]] std::string getName() const;

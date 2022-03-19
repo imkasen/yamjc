@@ -8,7 +8,7 @@ using std::string;
     "Expression"  "Expression"
  */
 
-ArrayAccessExpression::ArrayAccessExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
+[[maybe_unused]] ArrayAccessExpression::ArrayAccessExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
 
 /*
  * @return: std::nullopt | string

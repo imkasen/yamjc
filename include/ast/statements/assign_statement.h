@@ -9,7 +9,7 @@ namespace ast {
 class AssignStatement : public Statement {
 public:
     AssignStatement() = delete;
-    AssignStatement(std::string t, std::string v);
+    [[maybe_unused]] AssignStatement(std::string t, std::string v);
     ~AssignStatement() override = default;
 
     std::optional<std::string> checkSemantics() final;

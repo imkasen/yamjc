@@ -9,7 +9,7 @@ namespace ast {
 class AllocExpression : public PrimaryExpression {
 public:
     AllocExpression() = delete;
-    AllocExpression(std::string t, std::string v);
+    [[maybe_unused]] AllocExpression(std::string t, std::string v);
     ~AllocExpression() override = default;
 
     std::optional<std::string> checkSemantics() final;

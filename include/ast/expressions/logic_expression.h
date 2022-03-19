@@ -9,7 +9,7 @@ namespace ast {
 class LogicExpression : public Expression {
 public:
     LogicExpression() = delete;
-    LogicExpression(std::string t, std::string v);
+    [[maybe_unused]] LogicExpression(std::string t, std::string v);
     ~LogicExpression() override = default;
 
     std::optional<std::string> checkSemantics() final;

@@ -9,7 +9,7 @@ namespace ast {
 class VarDeclaration : public Node {
 public:
     VarDeclaration() = delete;
-    VarDeclaration(std::string t, std::string v);
+    [[maybe_unused]] VarDeclaration(std::string t, std::string v);
     ~VarDeclaration() override = default;
 
     std::optional<std::string> generateST() final;

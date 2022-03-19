@@ -8,7 +8,7 @@ using std::string;
      "Expression"  "Expression"
  */
 
-LogicExpression::LogicExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
+[[maybe_unused]] LogicExpression::LogicExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
 
 /*
  * @brief: Compare lhs and rhs

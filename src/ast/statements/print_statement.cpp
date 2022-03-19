@@ -2,7 +2,7 @@
 using ast::PrintStatement;
 using std::string;
 
-PrintStatement::PrintStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
+[[maybe_unused]] PrintStatement::PrintStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
 
 /*
  * Node: "PrintStatement: System.out.println"

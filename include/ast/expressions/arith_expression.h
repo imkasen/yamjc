@@ -9,7 +9,7 @@ namespace ast {
 class ArithExpression : public Expression {
 public:
     ArithExpression() = delete;
-    ArithExpression(std::string t, std::string v);
+    [[maybe_unused]] ArithExpression(std::string t, std::string v);
     ~ArithExpression() override = default;
 
     std::optional<std::string> checkSemantics() final;

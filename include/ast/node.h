@@ -45,8 +45,8 @@ public:
     virtual ~Node() = default;
 
     void setId(std::size_t _id);
-    void setType(std::string _type);
-    void setValue(std::string _value);
+    [[maybe_unused]] void setType([[maybe_unused]] std::string _type);
+    [[maybe_unused]] void setValue(std::string _value);
     [[nodiscard]] std::size_t getId() const;
     [[nodiscard]] std::string getType() const;
     [[nodiscard]] std::string getValue() const;

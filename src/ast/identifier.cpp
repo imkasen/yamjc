@@ -2,7 +2,7 @@
 using ast::Identifier;
 using std::string;
 
-Identifier::Identifier(string t, string v) : Node(std::move(t), std::move(v)) {}
+[[maybe_unused]] Identifier::Identifier(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 std::optional<string> Identifier::generateST() {
     return this->getValue();

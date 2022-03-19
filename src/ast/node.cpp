@@ -11,11 +11,11 @@ void Node::setId(size_t _id) {
     this->id = _id;
 }
 
-void Node::setType(string _type) {
+[[maybe_unused]] void Node::setType(string _type) {
     this->type = std::move(_type);
 }
 
-void Node::setValue(string _value) {
+[[maybe_unused]] void Node::setValue(string _value) {
     this->value = std::move(_value);
 }
 

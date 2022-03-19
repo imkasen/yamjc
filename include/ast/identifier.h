@@ -8,7 +8,7 @@ namespace ast {
 class Identifier : public Node {
 public:
     Identifier() = delete;
-    Identifier(std::string t, std::string v);
+    [[maybe_unused]] Identifier(std::string t, std::string v);
     ~Identifier() override = default;
 
     std::optional<std::string> generateST() final;

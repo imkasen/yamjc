@@ -8,7 +8,7 @@ namespace ast {
 class MethodDeclaration : public Node {
 public:
     MethodDeclaration() = delete;
-    MethodDeclaration(std::string t, std::string v);
+    [[maybe_unused]] MethodDeclaration(std::string t, std::string v);
     ~MethodDeclaration() override = default;
 
     std::optional<std::string> generateST() final;

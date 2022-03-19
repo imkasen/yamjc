@@ -8,7 +8,7 @@ using std::string;
         "Expression"
  */
 
-ArrayLengthExpression::ArrayLengthExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
+[[maybe_unused]] ArrayLengthExpression::ArrayLengthExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
 
 /*
  * @return: std::nullopt | string

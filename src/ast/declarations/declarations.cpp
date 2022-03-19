@@ -2,7 +2,7 @@
 using ast::Declarations;
 using std::string;
 
-Declarations::Declarations(string t, string v) : Node(std::move(t), std::move(v)) {}
+[[maybe_unused]] Declarations::Declarations(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * @brief:

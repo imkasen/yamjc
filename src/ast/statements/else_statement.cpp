@@ -2,7 +2,7 @@
 using ast::ElseStatement;
 using std::string;
 
-ElseStatement::ElseStatement(string t, string v) : Node(std::move(t), std::move(v)) {}
+[[maybe_unused]] ElseStatement::ElseStatement(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * @brief:

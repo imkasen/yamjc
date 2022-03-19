@@ -8,7 +8,7 @@ using std::string;
     "Identifier" "Expression"   "Expression"
  */
 
-ArrayAssignStatement::ArrayAssignStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
+[[maybe_unused]] ArrayAssignStatement::ArrayAssignStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
 
 /*
  * @brief: Compare types of lhs and rhs.

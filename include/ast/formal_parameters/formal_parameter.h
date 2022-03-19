@@ -9,7 +9,7 @@ namespace ast {
 class FormalParameter : public FormalParameterList {
 public:
     FormalParameter() = delete;
-    FormalParameter(std::string t, std::string v);
+    [[maybe_unused]] FormalParameter(std::string t, std::string v);
     ~FormalParameter() override = default;
 
     std::optional<std::string> generateST() final;

@@ -12,7 +12,7 @@ using std::string;
     "Identifier"  "Identifier"  ["Declarations"]
  */
 
-ClassExtendsDeclaration::ClassExtendsDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
+[[maybe_unused]] ClassExtendsDeclaration::ClassExtendsDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * @brief:

@@ -5,19 +5,19 @@ using std::string;
 Tac::Tac(string op, string lhs, string rhs, string result)
     : op(std::move(op)), lhs(std::move(lhs)), rhs(std::move(rhs)), result(std::move(result)) {}
 
-void Tac::setOP(std::string _op) {
+[[maybe_unused]] void Tac::setOP(std::string _op) {
     this->op = std::move(_op);
 }
 
-void Tac::setLHS(std::string _lhs) {
+[[maybe_unused]] void Tac::setLHS(std::string _lhs) {
     this->lhs = std::move(_lhs);
 }
 
-void Tac::setRHS(std::string _rhs) {
+[[maybe_unused]] void Tac::setRHS(std::string _rhs) {
     this->rhs = std::move(_rhs);
 }
 
-void Tac::setResult(std::string _result) {
+[[maybe_unused]] void Tac::setResult(std::string _result) {
     this->result = std::move(_result);
 }
 

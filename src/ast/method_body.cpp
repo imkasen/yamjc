@@ -8,7 +8,7 @@ using std::string;
       "VarDeclaration"  ...     "PrintStatement"
  */
 
-MethodBody::MethodBody(string t, string v) : Node(std::move(t), std::move(v)) {}
+[[maybe_unused]] MethodBody::MethodBody(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * @brief: Traverse nodes.

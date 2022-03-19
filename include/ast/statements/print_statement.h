@@ -10,7 +10,7 @@ namespace ast {
 class PrintStatement : public Statement {
 public:
     PrintStatement() = delete;
-    PrintStatement(std::string t, std::string v);
+    [[maybe_unused]] PrintStatement(std::string t, std::string v);
     ~PrintStatement() override = default;
 
     std::optional<std::string> checkSemantics() final;

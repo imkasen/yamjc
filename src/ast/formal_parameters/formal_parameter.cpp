@@ -10,7 +10,7 @@ using std::string;
     "Type"  "Identifier"
  */
 
-FormalParameter::FormalParameter(string t, string v) : FormalParameterList(std::move(t), std::move(v)) {}
+[[maybe_unused]] FormalParameter::FormalParameter(string t, string v) : FormalParameterList(std::move(t), std::move(v)) {}
 
 /*
  *@brief:

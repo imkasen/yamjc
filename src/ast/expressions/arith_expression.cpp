@@ -8,7 +8,7 @@ using std::string;
      "Expression"  "Expression"
  */
 
-ArithExpression::ArithExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
+[[maybe_unused]] ArithExpression::ArithExpression(string t, string v) : Expression(std::move(t), std::move(v)) {}
 
 /*
  * @brief: Compare lhs and rhs

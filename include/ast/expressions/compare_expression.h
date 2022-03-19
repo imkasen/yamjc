@@ -9,7 +9,7 @@ namespace ast {
 class CompareExpression : public Expression {
 public:
     CompareExpression() = delete;
-    CompareExpression(std::string t, std::string v);
+    [[maybe_unused]] CompareExpression(std::string t, std::string v);
     ~CompareExpression() override = default;
 
     std::optional<std::string> checkSemantics() final;

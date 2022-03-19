@@ -2,7 +2,7 @@
 using ast::WhileStatement;
 using std::string;
 
-WhileStatement::WhileStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
+[[maybe_unused]] WhileStatement::WhileStatement(string t, string v) : Statement(std::move(t), std::move(v)) {}
 
 /*
  *  Node: "WhileStatement"

@@ -35,10 +35,10 @@ public:
     Tac(std::string op, std::string lhs, std::string rhs, std::string result);
     virtual ~Tac() = default;
 
-    void setOP(std::string _op);
-    void setLHS(std::string _lhs);
-    void setRHS(std::string _rhs);
-    void setResult(std::string _result);
+    [[maybe_unused]] void setOP(std::string _op);
+    [[maybe_unused]] void setLHS(std::string _lhs);
+    [[maybe_unused]] void setRHS(std::string _rhs);
+    [[maybe_unused]] void setResult(std::string _result);
     static void resetID();
 
     [[nodiscard]] std::string getOP() const;

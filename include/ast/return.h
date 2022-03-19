@@ -9,7 +9,7 @@ namespace ast {
 class Return : public Node {
 public:
     Return() = delete;
-    Return(std::string t, std::string v);
+    [[maybe_unused]] Return(std::string t, std::string v);
     ~Return() override = default;
 
     std::optional<std::string> generateST() final;

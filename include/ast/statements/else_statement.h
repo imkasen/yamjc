@@ -8,7 +8,7 @@ namespace ast {
 class ElseStatement : public Node {
 public:
     ElseStatement() = delete;
-    ElseStatement(std::string t, std::string v);
+    [[maybe_unused]] ElseStatement(std::string t, std::string v);
     ~ElseStatement() override = default;
 
     std::optional<IRReturnVal> generateIR() final;

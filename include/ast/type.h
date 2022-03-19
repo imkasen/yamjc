@@ -8,7 +8,7 @@ namespace ast {
 class Type : public Node {
 public:
     Type() = delete;
-    Type(std::string t, std::string v);
+    [[maybe_unused]] Type(std::string t, std::string v);
     ~Type() override = default;
 
     std::optional<std::string> generateST() final;

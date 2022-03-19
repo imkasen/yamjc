@@ -10,7 +10,7 @@ using std::string;
     "Type:int" or "Type:boolean" or "Type:int[]"
  */
 
-Type::Type(string t, string v) : Node(std::move(t), std::move(v)) {}
+[[maybe_unused]] Type::Type(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * @return: std::nullopt || string

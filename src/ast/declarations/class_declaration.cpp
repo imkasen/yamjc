@@ -11,7 +11,7 @@ using std::string;
     "Identifier"  ["Declarations"]
  */
 
-ClassDeclaration::ClassDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
+[[maybe_unused]] ClassDeclaration::ClassDeclaration(string t, string v) : Node(std::move(t), std::move(v)) {}
 
 /*
  * @brief:

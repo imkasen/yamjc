@@ -9,7 +9,7 @@ namespace ast {
 class MainClass : public Node {
 public:
     MainClass() = delete;
-    MainClass(std::string t, std::string v);
+    [[maybe_unused]] MainClass(std::string t, std::string v);
     ~MainClass() override = default;
 
     std::optional<std::string> generateST() final;

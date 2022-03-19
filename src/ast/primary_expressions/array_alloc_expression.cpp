@@ -8,7 +8,7 @@ using std::string;
       "Expression"
  */
 
-ArrayAllocExpression::ArrayAllocExpression(string t, string v) : PrimaryExpression(std::move(t), std::move(v)) {}
+[[maybe_unused]] ArrayAllocExpression::ArrayAllocExpression(string t, string v) : PrimaryExpression(std::move(t), std::move(v)) {}
 
 /*
  * @return: string

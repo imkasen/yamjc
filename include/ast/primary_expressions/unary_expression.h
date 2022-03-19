@@ -9,7 +9,7 @@ namespace ast {
 class UnaryExpression : public PrimaryExpression {
 public:
     UnaryExpression() = delete;
-    UnaryExpression(std::string t, std::string v);
+    [[maybe_unused]] UnaryExpression(std::string t, std::string v);
     ~UnaryExpression() override = default;
 
     std::optional<std::string> checkSemantics() final;

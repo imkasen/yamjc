@@ -9,7 +9,7 @@ namespace ast {
 class ArrayLengthExpression : public Expression {
 public:
     ArrayLengthExpression() = delete;
-    ArrayLengthExpression(std::string t, std::string v);
+    [[maybe_unused]] ArrayLengthExpression(std::string t, std::string v);
     ~ArrayLengthExpression() override = default;
 
     std::optional<std::string> checkSemantics() final;

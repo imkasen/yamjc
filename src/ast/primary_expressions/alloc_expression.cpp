@@ -9,7 +9,7 @@ using std::string;
  *        "Identifier"
  */
 
-AllocExpression::AllocExpression(string t, string v) : PrimaryExpression(std::move(t), std::move(v)) {}
+[[maybe_unused]] AllocExpression::AllocExpression(string t, string v) : PrimaryExpression(std::move(t), std::move(v)) {}
 
 /*
  * @return: std::nullopt | string

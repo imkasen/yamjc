@@ -8,7 +8,7 @@ namespace ast {
 class Goal : public Node {
 public:
     Goal() = delete;
-    Goal(std::string t, std::string v);
+    [[maybe_unused]] Goal(std::string t, std::string v);
     ~Goal() override = default;
 
     std::optional<std::string> generateST() final;

@@ -8,7 +8,7 @@ namespace ast {
 class MethodBody : public Node {
 public:
     MethodBody() = delete;
-    MethodBody(std::string t, std::string v);
+    [[maybe_unused]] MethodBody(std::string t, std::string v);
     ~MethodBody() override = default;
 
     std::optional<std::string> generateST() final;
