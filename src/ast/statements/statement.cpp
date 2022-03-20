@@ -30,9 +30,9 @@ std::optional<string> Statement::checkSemantics() {
  *       (mainly used for "If-While" nested structure)
  *       Get the returned "BasicBlock" from recursive call.
  *       Set the returned "BasicBlock" as the true exit of last "BasicBlock".
- * @return: std::nulopt
+ * @return: std::monostate
  */
-std::optional<IRReturnVal> Statement::generateIR() {
+IRReturnVal Statement::generateIR() {
     string type = this->getType();
     // 1.
     if (type == "Statement") {
@@ -44,12 +44,12 @@ std::optional<IRReturnVal> Statement::generateIR() {
     else {  // "Statements"
         std::shared_ptr<cfg::BasicBlock> cur_bb = Statement::bb_list.back();
         for (const auto &child : this->children) {
-            const auto vrt = child->generateIR().value_or(std::monostate{});
+            const auto vrt = child->generateIR();
             if (auto ptr = std::get_if<std::shared_ptr<cfg::BasicBlock>>(&vrt)) {
                 cur_bb->setTrueExit(*ptr);
                 cur_bb = Statement::bb_list.back();
             }
         }
     }
-    return std::nullopt;
+    return std::monostate {};
 }

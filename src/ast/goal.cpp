@@ -48,13 +48,13 @@ std::optional<string> Goal::checkSemantics() {
 
 /*
  * @brief: Traverse children nodes.
- * @return: std::nullopt
+ * @return: std::monostate
  */
-std::optional<IRReturnVal> Goal::generateIR() {
+IRReturnVal Goal::generateIR() {
     for (const auto &child : this->children) {
         Goal::st.enterScope();  // Enter "Class" scope
         child->generateIR();
         Goal::st.exitScope();   // Exit "Class" scope
     }
-    return std::nullopt;
+    return std::monostate {};
 }

@@ -11,7 +11,7 @@ public:
     [[maybe_unused]] ElseStatement(std::string t, std::string v);
     ~ElseStatement() override = default;
 
-    std::optional<IRReturnVal> generateIR() final;
+    IRReturnVal generateIR() final;
 };
 
 }  // namespace ast

@@ -27,14 +27,14 @@ std::optional<string> UnaryExpression::checkSemantics() {
  * @brief:
  *   1. Get current "BasicBlock"
  *   2. Create an instruction "IRUnaryExpression"
- * @return: IRReturnVal
+ * @return: string
  */
-std::optional<IRReturnVal> UnaryExpression::generateIR() {
+IRReturnVal UnaryExpression::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = UnaryExpression::bb_list.back();
     // 2.
     string tmp_name, lhs, op = this->getValue();
-    const auto vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    const auto vrt = this->children.at(0)->generateIR();
     if (auto s_ptr = std::get_if<string>(&vrt)) {
         lhs = *s_ptr;
     }

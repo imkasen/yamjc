@@ -6,14 +6,14 @@ using std::string;
 
 /*
  * @brief: Create an Else condition "BasicBlock", add into instruction
- * @return: IRReturnVal
+ * @return: block_ptr
  */
-std::optional<IRReturnVal> ElseStatement::generateIR() {
+IRReturnVal ElseStatement::generateIR() {
     std::shared_ptr<cfg::BasicBlock> false_bb = ElseStatement::createBB();
     ElseStatement::bb_list.push_back(false_bb);
 
     for (const auto &child : this->children) {
-        const auto vrt = child->generateIR().value_or(std::monostate{});
+        const auto vrt = child->generateIR();
         // "... else if () {} ..."
         if (auto ptr = std::get_if<std::shared_ptr<cfg::BasicBlock>>(&vrt)) {
             false_bb->setTrueExit(*ptr);

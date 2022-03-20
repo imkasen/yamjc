@@ -26,11 +26,11 @@ std::optional<string> FormalParameterList::checkSemantics() {
 
 /*
  * @brief: Traverse children nodes.
- * @return: std::nullopt
+ * @return: std::monostate
  */
-std::optional<IRReturnVal> FormalParameterList::generateIR() {
+IRReturnVal FormalParameterList::generateIR() {
     for (const auto &child : this->children) {
         child->generateIR();
     }
-    return std::nullopt;
+    return std::monostate {};
 }

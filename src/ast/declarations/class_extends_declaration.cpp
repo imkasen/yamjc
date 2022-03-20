@@ -123,9 +123,9 @@ std::optional<string> ClassExtendsDeclaration::checkSemantics() {
 
 /*
  * @brief: Traverse child nodes.
- * @return: std::nullopt
+ * @return: std::monostate
  */
-std::optional<IRReturnVal> ClassExtendsDeclaration::generateIR() {
+IRReturnVal ClassExtendsDeclaration::generateIR() {
     //   if "Class" contains nothing
     //      `this->children.size() == 2`
     //   else
@@ -137,5 +137,5 @@ std::optional<IRReturnVal> ClassExtendsDeclaration::generateIR() {
         }
     }
 
-    return std::nullopt;
+    return std::monostate {};
 }

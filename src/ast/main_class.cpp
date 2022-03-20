@@ -90,7 +90,7 @@ std::optional<string> MainClass::checkSemantics() {
  *   3. Create an instruction "IRReturn"
  * @return: std::nullopt
  */
-std::optional<IRReturnVal> MainClass::generateIR() {
+IRReturnVal MainClass::generateIR() {
     MainClass::st.enterScope();  // Enter "Method" scope
     // 1.
     MainClass::bb_list.push_back(MainClass::createBB());
@@ -100,5 +100,6 @@ std::optional<IRReturnVal> MainClass::generateIR() {
     }
     MainClass::bb_list.back()->addInstruction(std::make_shared<cfg::IRReturn>("", 0));
     MainClass::st.exitScope();  // Exit "Method" scope
-    return std::nullopt;
+
+    return std::monostate {};
 }

@@ -33,12 +33,12 @@ std::optional<string> AllocExpression::checkSemantics() {
  *   2. Get the return value of lhs, create an instruction "IRAlloc"
  * @return: string
  */
-std::optional<IRReturnVal> AllocExpression::generateIR() {
+IRReturnVal AllocExpression::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = AllocExpression::bb_list.back();
     // 2.
     string lhs, tmp_name;
-    const auto lhs_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    const auto lhs_vrt = this->children.at(0)->generateIR();
     if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
         lhs = *s_ptr;
     }

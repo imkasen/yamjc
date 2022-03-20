@@ -31,9 +31,9 @@ std::optional<string> Declarations::checkSemantics() {
  *   1. reset id before traverse every class
  *   2. Create a BasicBlock ptr as the entry for class, used to store class variable IR.
  *   3. Traverse child nodes
- * @return: std::nullopt
+ * @return: std::monostate
  */
-std::optional<IRReturnVal> Declarations::generateIR() {
+IRReturnVal Declarations::generateIR() {
     // 1.
     cfg::Tac::resetID();
     // 2.
@@ -43,5 +43,5 @@ std::optional<IRReturnVal> Declarations::generateIR() {
         child->generateIR();
     }
 
-    return std::nullopt;
+    return std::monostate {};
 }

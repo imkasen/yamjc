@@ -34,17 +34,17 @@ std::optional<string> LogicExpression::checkSemantics() {
  *   2. Create an instruction "IRExpression"
  * @return: string
  */
-std::optional<IRReturnVal> LogicExpression::generateIR() {
+IRReturnVal LogicExpression::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = LogicExpression::bb_list.back();
     // 2.
     std::string op = this->getValue();
     std::string lhs, rhs;
-    const auto lhs_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    const auto lhs_vrt = this->children.at(0)->generateIR();
     if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
         lhs = *s_ptr;
     }
-    const auto rhs_vrt = this->children.at(1)->generateIR().value_or(std::monostate{});
+    const auto rhs_vrt = this->children.at(1)->generateIR();
     if (auto s_ptr = std::get_if<string>(&rhs_vrt)) {
         rhs = *s_ptr;
     }

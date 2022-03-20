@@ -28,14 +28,14 @@ std::optional<string> ArrayAllocExpression::checkSemantics() {
  * @brief:
  *   1. Get current "BasicBlock"
  *   2. Create an instruction "IRArrayAlloc"
- * @return: IRReturnVal
+ * @return: string
  */
-std::optional<IRReturnVal> ArrayAllocExpression::generateIR() {
+IRReturnVal ArrayAllocExpression::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = ArrayAllocExpression::bb_list.back();
     // 2.
     string tmp_name, n = "0";
-    const auto vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    const auto vrt = this->children.at(0)->generateIR();
     if (auto s_ptr = std::get_if<string>(&vrt)) {
         n = *s_ptr;
     }

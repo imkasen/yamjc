@@ -13,7 +13,7 @@ public:
 
     std::optional<std::string> generateST() override;
     std::optional<std::string> checkSemantics() final;
-    std::optional<IRReturnVal> generateIR() override;
+    IRReturnVal generateIR() override;
 };
 
 }  // namespace ast

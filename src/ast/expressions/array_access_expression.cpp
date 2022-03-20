@@ -35,18 +35,18 @@ std::optional<string> ArrayAccessExpression::checkSemantics() {
  * @brief:
  *   1. Get current "BasicBlock"
  *   2. Create an instruction "IRArrayAccess"
- * @return: IRReturnVal
+ * @return: string
  */
-std::optional<IRReturnVal> ArrayAccessExpression::generateIR() {
+IRReturnVal ArrayAccessExpression::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = ArrayAccessExpression::bb_list.back();
     // 2.
     string arr_name, idx, tmp_name;
-    const auto arr_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    const auto arr_vrt = this->children.at(0)->generateIR();
     if (auto s_ptr = std::get_if<string>(&arr_vrt)) {
         arr_name = *s_ptr;
     }
-    const auto idx_vrt = this->children.at(1)->generateIR().value_or(std::monostate{});
+    const auto idx_vrt = this->children.at(1)->generateIR();
     if (auto s_ptr = std::get_if<string>(&idx_vrt)) {
         idx = *s_ptr;
     }

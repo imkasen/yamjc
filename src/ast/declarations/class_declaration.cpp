@@ -74,9 +74,9 @@ std::optional<string> ClassDeclaration::checkSemantics() {
 
 /*
  * @brief: Traverse child nodes.
- * @return: std::nullopt
+ * @return: std::monostate
  */
-std::optional<IRReturnVal> ClassDeclaration::generateIR() {
+IRReturnVal ClassDeclaration::generateIR() {
     //   if "Class" contains nothing,
     //      `this->children.size() == 1`
     //   else
@@ -86,6 +86,5 @@ std::optional<IRReturnVal> ClassDeclaration::generateIR() {
     for (size_t i = 1; i < this->children.size(); ++i) {
         this->children.at(i)->generateIR();
     }
-
-    return std::nullopt;
+    return std::monostate {};
 }

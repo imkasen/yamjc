@@ -39,13 +39,13 @@ std::optional<string> Return::checkSemantics() {
  * @brief:
  *   1. Get the current "BasicBlock"
  *   2. Create an instruction "IRReturn"
- * @return: std::nullopt
+ * @return: std::monostate
  */
-std::optional<IRReturnVal> Return::generateIR() {
+IRReturnVal Return::generateIR() {
     string lhs;
     char type = 0;
     std::shared_ptr<cfg::BasicBlock> cur_bb = Return::bb_list.back();
-    const auto vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    const auto vrt = this->children.at(0)->generateIR();
     if (auto ptr = std::get_if<string>(&vrt)) {
         lhs = *ptr;
     }
@@ -61,5 +61,5 @@ std::optional<IRReturnVal> Return::generateIR() {
     }
     cur_bb->addInstruction(std::make_shared<cfg::IRReturn>(lhs, type));
 
-    return std::nullopt;
+    return std::monostate {};
 }

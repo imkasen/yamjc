@@ -74,9 +74,9 @@ std::optional<string> MethodDeclaration::checkSemantics() {
  *   1. Reset id before traverse every method
  *   2. Create a BasicBlock ptr as the entry.
  *   3. Traverse child nodes
- * @return: std::nullopt
+ * @return: std::monostate
  */
-std::optional<IRReturnVal> MethodDeclaration::generateIR() {
+IRReturnVal MethodDeclaration::generateIR() {
     MethodDeclaration::st.enterScope();  // Enter "Method" scope
 
     // 1.
@@ -90,5 +90,5 @@ std::optional<IRReturnVal> MethodDeclaration::generateIR() {
 
     MethodDeclaration::st.exitScope();  // Exit "Method" scope
 
-    return std::nullopt;
+    return std::monostate {};
 }

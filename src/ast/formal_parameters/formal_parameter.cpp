@@ -44,15 +44,15 @@ std::optional<string> FormalParameter::generateST() {
  * @brief:
  *   1. Get current "BasicBlock"
  *   2. Create an instruction "IRParameter"
- * @return: std::nullopt
+ * @return: std::monostate
  */
-std::optional<IRReturnVal> FormalParameter::generateIR() {
+IRReturnVal FormalParameter::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = FormalParameter::bb_list.back();
     // 2.
     string lhs;
     char type = 0;
-    const auto t_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    const auto t_vrt = this->children.at(0)->generateIR();
     if (auto ptr = std::get_if<string>(&t_vrt)) {
         if (*ptr == "int") {
             type = 'i';
@@ -64,7 +64,7 @@ std::optional<IRReturnVal> FormalParameter::generateIR() {
             type = 'r';
         }
     }
-    const auto vrt = this->children.at(1)->generateIR().value_or(std::monostate{});
+    const auto vrt = this->children.at(1)->generateIR();
     if (auto ptr = std::get_if<string>(&vrt)) {
         lhs = *ptr;
     }
@@ -72,5 +72,5 @@ std::optional<IRReturnVal> FormalParameter::generateIR() {
     std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRParameter>(lhs, type);
     cur_bb->addInstruction(instruction);
 
-    return std::nullopt;
+    return std::monostate {};
 }

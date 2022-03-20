@@ -66,7 +66,7 @@ public:
 
     // Functions related to the control flow graph
     void buildCFG(std::ofstream &ostream);
-    virtual std::optional<IRReturnVal> generateIR() = 0;
+    virtual IRReturnVal generateIR() = 0;
     static std::shared_ptr<cfg::BasicBlock> createBB();
 
     // Functions related to the bytecode generation

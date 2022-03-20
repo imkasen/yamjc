@@ -30,14 +30,14 @@ std::optional<string> ArrayLengthExpression::checkSemantics() {
  * @brief:
  *   1. Get current "BasicBlock"
  *   2. Create an instruction "IRArrayLength"
- * @return: IRReturnVal
+ * @return: string
  */
-std::optional<IRReturnVal> ArrayLengthExpression::generateIR() {
+IRReturnVal ArrayLengthExpression::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = ArrayLengthExpression::bb_list.back();
     // 2.
     string lhs, tmp_name;
-    const auto vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    const auto vrt = this->children.at(0)->generateIR();
     if (auto s_ptr = std::get_if<string>(&vrt)) {
         lhs = *s_ptr;
     }

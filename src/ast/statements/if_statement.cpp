@@ -35,13 +35,13 @@ std::optional<string> IfStatement::checkSemantics() {
  *   3. Create a false branch "BasicBlock", add into instruction
  *   4. Add an instruction "IRCondJump" into boolean condition "BasicBlock"
  *   5. Create a rejoinder "BasicBlock"
- * @return: IRReturnVal
+ * @return: block_ptr
  */
-std::optional<IRReturnVal> IfStatement::generateIR() {
+IRReturnVal IfStatement::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> bl_bb_ptr = IfStatement::createBB();
     IfStatement::bb_list.push_back(bl_bb_ptr);
-    const auto tmp_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    const auto tmp_vrt = this->children.at(0)->generateIR();
     std::string cdi_tmp_name, label_name;
     if (auto s_ptr = std::get_if<string>(&tmp_vrt)) {
         cdi_tmp_name = *s_ptr;
@@ -54,7 +54,7 @@ std::optional<IRReturnVal> IfStatement::generateIR() {
     true_bb_ptr = IfStatement::bb_list.back();
     // 3.
     std::shared_ptr<cfg::BasicBlock> false_bb_ptr;
-    const auto false_vrt = this->children.at(2)->generateIR().value_or(std::monostate{});
+    const auto false_vrt = this->children.at(2)->generateIR();
     if (auto ptr = std::get_if<std::shared_ptr<cfg::BasicBlock>>(&false_vrt)) {
         false_bb_ptr = *ptr;
     }

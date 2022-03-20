@@ -25,7 +25,7 @@ std::optional<string> ExpressionList::checkSemantics() {
  *   3. return the size of "Expression"
  * @return: string
  */
-std::optional<IRReturnVal> ExpressionList::generateIR() {
+IRReturnVal ExpressionList::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = ExpressionList::bb_list.back();
     // 2.
@@ -33,7 +33,7 @@ std::optional<IRReturnVal> ExpressionList::generateIR() {
         const auto &child = this->children.at(i);
         string lhs;
         char type = 0;
-        const auto lhs_vrt = child->generateIR().value_or(std::monostate{});
+        const auto lhs_vrt = child->generateIR();
         if (auto s_vrt = std::get_if<string>(&lhs_vrt)) {
             lhs = *s_vrt;
         }

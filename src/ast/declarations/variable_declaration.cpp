@@ -65,18 +65,18 @@ std::optional<string> VarDeclaration::checkSemantics() {
  * @brief:
  *   1. Get current "BasicBlock"
  *   2. Create an instruction "IRAssign"
- * @return: std::nullopt
+ * @return: std::monosate
  */
-std::optional<IRReturnVal> VarDeclaration::generateIR() {
+IRReturnVal VarDeclaration::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = VarDeclaration::bb_list.back();
     // 2.
     string type, lhs;
-    const auto tp_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    const auto tp_vrt = this->children.at(0)->generateIR();
     if (auto ptr = std::get_if<string>(&tp_vrt)) {
         type = *ptr;
     }
-    const auto vrt = this->children.at(1)->generateIR().value_or(std::monostate{});
+    const auto vrt = this->children.at(1)->generateIR();
     if (auto ptr = std::get_if<string>(&vrt)) {
         lhs = *ptr;
     }
@@ -94,5 +94,5 @@ std::optional<IRReturnVal> VarDeclaration::generateIR() {
     }
     cur_bb->addInstruction(instruction);
 
-    return std::nullopt;
+    return std::monostate {};
 }

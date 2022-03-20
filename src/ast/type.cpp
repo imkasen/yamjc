@@ -47,7 +47,7 @@ std::optional<string> Type::checkSemantics() {
 /*
  * @return: IRReturnVal
  */
-std::optional<IRReturnVal> Type::generateIR() {
+IRReturnVal Type::generateIR() {
     // 1. "Type" -> "Identifier"
     if (this->children.size() == 1 && this->getValue().empty()) {
         return this->children.at(0)->generateIR();
@@ -56,5 +56,5 @@ std::optional<IRReturnVal> Type::generateIR() {
     else if (this->children.empty() && !this->getValue().empty()) {
         return this->getValue();
     }
-    return std::nullopt;
+    return std::monostate {};
 }

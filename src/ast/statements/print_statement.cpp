@@ -27,15 +27,15 @@ std::optional<string> PrintStatement::checkSemantics() {
  *   2. Traverse the child node, obtain the return value.
  *      Add an instruction "IRArgument".
  *      Add an instruction "IRMethodCall".
- * @return: std::nullopt
+ * @return: std::monosate
  */
-std::optional<IRReturnVal> PrintStatement::generateIR() {
+IRReturnVal PrintStatement::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = PrintStatement::bb_list.back();
     // 2.
     string tmp_name;
     char type = 0;
-    const auto vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    const auto vrt = this->children.at(0)->generateIR();
     if (auto s_ptr = std::get_if<string>(&vrt)) {
         tmp_name = *s_ptr;
     }
@@ -54,5 +54,6 @@ std::optional<IRReturnVal> PrintStatement::generateIR() {
         std::make_shared<cfg::IRMethodCall>("__PRINT__", "1", cfg::Tac::generateTmpVarName('v'));
     cur_bb->addInstruction(arg_ptr);
     cur_bb->addInstruction(call_ptr);
-    return std::nullopt;
+
+    return std::monostate {};
 }

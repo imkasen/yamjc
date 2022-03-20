@@ -29,13 +29,13 @@ std::optional<string> WhileStatement::checkSemantics() {
  *   2. Create a true branch "BasicBlock", add into instruction
  *   3. Create a rejoinder "BasicBlock"
  *   4. Add an instruction "IRCondJump" into boolean condition "BasicBlock"
- * @return: IRReturnVal
+ * @return: block_ptr
  */
-std::optional<IRReturnVal> WhileStatement::generateIR() {
+IRReturnVal WhileStatement::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> bl_bb_ptr = WhileStatement::createBB();
     WhileStatement::bb_list.push_back(bl_bb_ptr);
-    const auto tmp_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    const auto tmp_vrt = this->children.at(0)->generateIR();
     std::string cdi_tmp_name, label_name;
     if (auto s_ptr = std::get_if<string>(&tmp_vrt)) {
         cdi_tmp_name = *s_ptr;

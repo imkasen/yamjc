@@ -35,17 +35,17 @@ std::optional<std::string> ArithExpression::checkSemantics() {
  *      Add an instruction "IRExpression"
  * @return: string
  */
-std::optional<IRReturnVal> ArithExpression::generateIR() {
+IRReturnVal ArithExpression::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = ArithExpression::bb_list.back();
     // 2.
     string lhs_name, rhs_name, tmp_name;
     string op = this->getValue();
-    const auto lhs_vrt = this->children.at(0)->generateIR().value_or(std::monostate {});
+    const auto lhs_vrt = this->children.at(0)->generateIR();
     if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
         lhs_name = *s_ptr;
     }
-    const auto rhs_vrt = this->children.at(1)->generateIR().value_or(std::monostate {});
+    const auto rhs_vrt = this->children.at(1)->generateIR();
     if (auto s_ptr = std::get_if<string>(&rhs_vrt)) {
         rhs_name = *s_ptr;
     }

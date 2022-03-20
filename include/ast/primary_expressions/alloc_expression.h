@@ -13,7 +13,7 @@ public:
     ~AllocExpression() override = default;
 
     std::optional<std::string> checkSemantics() final;
-    std::optional<IRReturnVal> generateIR() final;
+    IRReturnVal generateIR() final;
 };
 
 }  // namespace ast

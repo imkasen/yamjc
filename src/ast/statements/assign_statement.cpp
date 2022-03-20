@@ -44,19 +44,19 @@ std::optional<string> AssignStatement::checkSemantics() {
  * @brief:
  *   1. Obtain current "BasicBlock"
  *   2. Create an instruction "IRAssign"
- * @return: std::nullopt
+ * @return: std::monostate
  */
-std::optional<IRReturnVal> AssignStatement::generateIR() {
+IRReturnVal AssignStatement::generateIR() {
     // 1.
     std::shared_ptr<cfg::BasicBlock> cur_bb = AssignStatement::bb_list.back();
     // 2.
     string result, lhs;
     char type = 0;
-    const auto r_vrt = this->children.at(0)->generateIR().value_or(std::monostate{});
+    const auto r_vrt = this->children.at(0)->generateIR();
     if (auto s_ptr = std::get_if<string>(&r_vrt)) {
         result = *s_ptr;
     }
-    const auto lhs_vrt = this->children.at(1)->generateIR().value_or(std::monostate{});
+    const auto lhs_vrt = this->children.at(1)->generateIR();
     if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
         lhs = *s_ptr;
     }
@@ -73,5 +73,5 @@ std::optional<IRReturnVal> AssignStatement::generateIR() {
     std::shared_ptr<cfg::Tac> instruction = std::make_shared<cfg::IRAssign>(lhs, result, type);
     cur_bb->addInstruction(instruction);
 
-    return std::nullopt;
+    return std::monostate {};
 }

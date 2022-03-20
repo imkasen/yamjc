@@ -33,9 +33,9 @@ std::optional<string> PrimaryExpression::checkSemantics() {
 }
 
 /*
- * @return: string || IRReturnVal
+ * @return: IRReturnVal
  */
-std::optional<IRReturnVal> PrimaryExpression::generateIR() {
+IRReturnVal PrimaryExpression::generateIR() {
     // "int:xxx", "boolean:xxx"
     if (this->children.empty()) {
         // "boolean"

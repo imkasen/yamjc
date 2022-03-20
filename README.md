@@ -15,7 +15,7 @@ There are four types only, which are `int`, `boolean`, `int[]`, and user-defined
 * [BNF for MiniJava](https://www.cambridge.org/us/features/052182060X/grammar.html)
 * [BNF for MiniJava](https://web.cs.ucla.edu/classes/spring11/cs132/cs132/mj/minijava.html)
 
-## Tech Stacks
+## Dependencies
 
 * Ubuntu 20.04 LTS x86_64
 * g++ 9.3.0

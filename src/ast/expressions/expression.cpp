@@ -238,9 +238,9 @@ void Expression::strSplit(std::deque<std::string> &deque, std::string &text, con
 }
 
 /*
- * @return: std::nullopt || IRReturnVal
+ * @return: std::monostate || IRReturnVal
  */
-std::optional<IRReturnVal> Expression::generateIR() {
+IRReturnVal Expression::generateIR() {
     size_t size = this->children.size();
     string type = this->children.at(0)->getType();
     std::shared_ptr<cfg::BasicBlock> cur_bb = Expression::bb_list.back();
@@ -263,20 +263,20 @@ std::optional<IRReturnVal> Expression::generateIR() {
             }
         } else {  // "AllocExpression", "PrimaryExpression"
             // Get the return value of tmp name
-            const auto par_vrt = this->children.at(0)->generateIR().value_or(std::monostate {});
+            const auto par_vrt = this->children.at(0)->generateIR();
             if (auto s_ptr = std::get_if<string>(&par_vrt)) {
                 tmp_name = *s_ptr;
             }
         }
         // "Identifier"
-        const auto lhs_vrt = this->children.at(1)->generateIR().value_or(std::monostate {});
+        const auto lhs_vrt = this->children.at(1)->generateIR();
         if (auto s_ptr = std::get_if<string>(&lhs_vrt)) {
             lhs = tmp_name + "." + *s_ptr;  // "class_name.method_name"
         }
         if (size == 3) {
             // "ExpressionList"
             // Create an instruction "IRMethodCall"
-            const auto n_vrt = this->children.at(2)->generateIR().value_or(std::monostate {});
+            const auto n_vrt = this->children.at(2)->generateIR();
             if (auto szt_ptr = std::get_if<string>(&n_vrt)) {
                 n = *szt_ptr;
             }
@@ -287,5 +287,5 @@ std::optional<IRReturnVal> Expression::generateIR() {
 
         return tmp_name;
     }
-    return std::nullopt;
+    return std::monostate {};
 }
