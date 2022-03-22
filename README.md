@@ -58,12 +58,11 @@ $ make  # or: cmake --build .
 # compiler
 
 # Run:
-# '-i': use the interpreter
 $ ./compiler [-i] <file_path>  # e.g. "../resource/tests/Minimal.java"
-# output results if use '-i',
 # generated files:
 # ast.dot, st.dot, cfg.dot
-# rbc.class
+# if using '-i', 
+# generate 'rbc.class' and output results
 
 # Visualize:
 $ bash graph.sh
@@ -82,9 +81,9 @@ $ docker build -t mjc .
 $ docker image prune
 
 # Run:
-$ docker run -it --rm --mount type=bind,source=<your_path>/mini-java-compiler/build,target=/home/build mjc
+$ docker run -it --rm --mount type=bind,source=<your_path>/build,target=/home/build mjc
 $ cd build/
-$ ../compiler [-i] ../tests/<file_name>.java  # '-i': use the interpreter
+$ ../compiler [-i] ../tests/<file_name>.java
 
 # Visualize
 $ bash ../graph.sh
@@ -99,7 +98,7 @@ $ docker image rm mjc
 
 ## Known Issues
 
-TLDR: The interpreter phase currently only supports processing `int` and `boolean` type variables declared in method scopes.
+TLDR: The interpreter phase *(use `-i` to enable)* currently only supports processing `int` and `boolean` type variables declared in *method* scopes.
 
 All phases except the interpreter work well for all provided Java cases. The interpreter only works well for Java cases in the `resource/tests` folder but crashes when executing cases in the `resource/examples` folder because it does not yet support variable declarations in class scopes and support for arrays.
 
