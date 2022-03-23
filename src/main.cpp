@@ -80,13 +80,13 @@ int main(int argc, char* argv[]) {
     cfg_dot_stream << "}" << endl;
     cfg_dot_stream.close();
 
-    if (argc == 3 && std::string(argv[1]) == "-i") {
-        // Generate "rbc.class", a simplified readable Java bytecode file
-        std::ofstream rbc_stream;
-        rbc_stream.open("rbc.class", std::ios::out);
-        root->buildRBC(rbc_stream);
-        rbc_stream.close();
+    // Generate "rbc.class", a simplified readable Java bytecode file
+    std::ofstream rbc_stream;
+    rbc_stream.open("rbc.class", std::ios::out);
+    root->buildRBC(rbc_stream);
+    rbc_stream.close();
 
+    if (argc == 3 && std::string(argv[1]) == "-i") {
         // Stack machine interpreter
         smi::Interpreter interpreter = smi::Interpreter(root->blk_links);
         interpreter.run("rbc.class");

@@ -60,9 +60,8 @@ $ make  # or: cmake --build .
 # Run:
 $ ./compiler [-i] <file_path>  # e.g. "../resource/tests/Minimal.java"
 # generated files:
-# ast.dot, st.dot, cfg.dot
-# if using '-i', 
-# generate 'rbc.class' and output results
+# ast.dot, st.dot, cfg.dot, rbc.class
+# output results if using '-i'
 
 # Visualize:
 $ bash graph.sh
