@@ -2,6 +2,8 @@
 
 /*build*/
 *.bak
+*.dot
+*.class
 
 # Created macos,linux,windows,vim,visualstudiocode,cmake,jetbrains+all
 
